@@ -392,6 +392,37 @@ struct TypeToolTests {
         #expect(session.textDraft?.style.content == "abc真美")
     }
 
+    /// A selection stays see-through once the text loses the focus — to the font size field, say — rather than
+    /// AppKit's solid gray over the letters the canvas draws beneath it.
+    @Test(arguments: [false, true])
+    func anUnfocusedSelectionStaysSeeThrough(vertical: Bool) throws {
+        let session = makeSession()
+        let view = CanvasView(session: session)
+        let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: 800, height: 600), styleMask: [.titled], backing: .buffered, defer: false)
+        window.contentView = view
+        session.viewport.resize(to: view.bounds.size, backingScale: 1, documentSize: CGSize(width: 800, height: 600))
+        session.beginText(at: CGPoint(x: 100, y: 300))
+        session.textDraft?.style.content = "Hello"
+        session.textDraft?.style.fontSize = 48
+        if vertical { session.textDraft?.style.orientation = .vertical }
+        view.synchronizeDisplay()
+        let textView = try #require(view.inlineTextEditor?.textView)
+        #expect(window.makeFirstResponder(textView))
+        textView.setSelectedRange(NSRange(location: 0, length: 5))
+        let field = NSTextField(frame: CGRect(x: 0, y: 0, width: 80, height: 22))
+        view.addSubview(field)
+        #expect(window.makeFirstResponder(field))
+        #expect(textView.selectedRange().length == 5)
+
+        let rep = try #require(textView.bitmapImageRepForCachingDisplay(in: textView.bounds))
+        textView.cacheDisplay(in: textView.bounds, to: rep)
+        var opaque = 0
+        for y in 0..<rep.pixelsHigh {
+            for x in 0..<rep.pixelsWide where (rep.colorAt(x: x, y: y)?.alphaComponent ?? 0) > 0.8 { opaque += 1 }
+        }
+        #expect(opaque == 0, "the unfocused selection was painted solid over \(opaque) pixels")
+    }
+
     /// Esc while an input method is composing is the input method's: it gives up the conversion, and the text box
     /// stays open. Only an Esc with nothing being composed closes the box.
     @Test func escapeWhileComposingGivesUpTheCompositionNotTheTextBox() throws {

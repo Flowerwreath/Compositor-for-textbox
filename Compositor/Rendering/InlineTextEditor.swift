@@ -83,7 +83,11 @@ private nonisolated final class SeeThroughSelectionLayout: VerticalEmLayoutManag
         return rects
     }
 
+    /// What `drawSelection` last painted, which AppKit's own selection fill then leaves alone.
+    private var paintedSelection: [NSRange] = []
+
     func drawSelection(_ ranges: [NSRange], origin: CGPoint, typingFont: NSFont?, color: NSColor) {
+        paintedSelection = ranges.filter { $0.length > 0 }
         guard let context = NSGraphicsContext.current?.cgContext else { return }
         let rects = selectionRects(ranges, origin: origin, typingFont: typingFont)
         context.saveGState()
@@ -92,6 +96,16 @@ private nonisolated final class SeeThroughSelectionLayout: VerticalEmLayoutManag
         // One nonzero-winding fill keeps overlapping lines at the same opacity.
         context.addRects(rects)
         context.fillPath()
+    }
+
+    // The selection is painted above, focused or not. AppKit would paint it again, as tall as the leading, and once
+    // the text loses the focus — to the font size field, or the color picker — in solid gray over the letters.
+    // Any other background stays see-through to the letters too.
+    override func fillBackgroundRectArray(_ rectArray: UnsafePointer<NSRect>, count rectCount: Int,
+                                          forCharacterRange charRange: NSRange, color: NSColor) {
+        if paintedSelection.contains(where: { NSIntersectionRange($0, charRange).length > 0 }) { return }
+        color.withAlphaComponent(min(color.alphaComponent, 0.45)).setFill()
+        super.fillBackgroundRectArray(rectArray, count: rectCount, forCharacterRange: charRange, color: color)
     }
 }
 
