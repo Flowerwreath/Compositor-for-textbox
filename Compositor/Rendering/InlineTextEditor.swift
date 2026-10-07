@@ -145,6 +145,12 @@ final class CanvasTextView: NSTextView {
         // Text views hide the pointer while typing; on the canvas it stays, so you can see where you'll click next.
         NSCursor.setHiddenUntilMouseMoves(false)
     }
+    // What an input method is still composing isn't reported as a change until it is committed, and the letters here
+    // are clear: the canvas draws only what the draft holds, so kanji and kana stayed invisible until Return.
+    override func setMarkedText(_ string: Any, selectedRange: NSRange, replacementRange: NSRange) {
+        super.setMarkedText(string, selectedRange: selectedRange, replacementRange: replacementRange)
+        editor?.takeText()
+    }
     override func mouseExited(with event: NSEvent) { NSCursor.setHiddenUntilMouseMoves(false) }
     override func paste(_ sender: Any?) { pasteAsPlainText(sender) }
     // The editor sets the cursor for the whole box — the I-beam over the text, resize arrows over the edges.
@@ -315,7 +321,10 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         }
     }
 
-    func textDidChange(_ notification: Notification) {
+    func textDidChange(_ notification: Notification) { takeText() }
+    /// Puts what the text view holds into the draft, which is what the canvas draws: what has been typed, and what an
+    /// input method is still composing.
+    func takeText() {
         guard !synchronizing, let session = canvas?.session, var draft = session.textDraft else { return }
         if let pendingStyle, pendingStyle.content == textView.string {
             draft.style.colorRuns = pendingStyle.colorRuns

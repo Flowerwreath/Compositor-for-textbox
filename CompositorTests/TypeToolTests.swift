@@ -349,6 +349,45 @@ struct TypeToolTests {
         #expect(largest <= 2, "the canvas changed by up to \(largest) when the text was committed")
     }
 
+    /// Kanji, kana and whatever else an input method is still composing show on the canvas as they are typed, not
+    /// only once Return commits them: the editor's own letters are clear, so the draft has to hold them.
+    @Test func textBeingComposedShowsOnTheCanvas() throws {
+        let session = makeSession()
+        let view = CanvasView(session: session)
+        let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: 800, height: 600), styleMask: [.titled], backing: .buffered, defer: false)
+        window.contentView = view
+        session.viewport.resize(to: view.bounds.size, backingScale: 1, documentSize: CGSize(width: 800, height: 600))
+        func snapshot() throws -> [UInt8] {
+            view.synchronizeDisplay()
+            view.subviews.forEach { $0.isHidden = true }
+            defer { view.subviews.forEach { $0.isHidden = false } }
+            let rep = try #require(view.bitmapImageRepForCachingDisplay(in: view.bounds))
+            view.cacheDisplay(in: view.bounds, to: rep)
+            let data = try #require(rep.bitmapData)
+            return Array(UnsafeBufferPointer(start: data, count: rep.bytesPerRow * rep.pixelsHigh))
+        }
+        session.beginText(at: CGPoint(x: 100, y: 300))
+        session.textDraft?.style.content = "abc"
+        view.synchronizeDisplay()
+        let textView = try #require(view.inlineTextEditor?.textView)
+        textView.setSelectedRange(NSRange(location: 3, length: 0))
+        let typed = try snapshot()
+        let none = NSRange(location: NSNotFound, length: 0)
+
+        textView.setMarkedText("まみ", selectedRange: NSRange(location: 2, length: 0), replacementRange: none)
+        #expect(textView.hasMarkedText())
+        #expect(session.textDraft?.style.content == "abcまみ")
+        #expect(try snapshot() != typed, "the letters being composed weren't drawn on the canvas")
+
+        textView.setMarkedText("", selectedRange: NSRange(location: 0, length: 0), replacementRange: none)
+        #expect(session.textDraft?.style.content == "abc", "a composition given up leaves nothing behind")
+
+        textView.setMarkedText("まみ", selectedRange: NSRange(location: 2, length: 0), replacementRange: none)
+        textView.insertText("真美", replacementRange: none)
+        #expect(!textView.hasMarkedText())
+        #expect(session.textDraft?.style.content == "abc真美")
+    }
+
     private let red = PaletteColor(red: 1, green: 0, blue: 0)
 
     @Test func colorAppliesToSelectionAndFollowsEdits() {
