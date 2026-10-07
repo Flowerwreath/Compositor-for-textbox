@@ -392,6 +392,36 @@ struct TypeToolTests {
         #expect(session.textDraft?.style.content == "abc真美")
     }
 
+    /// Esc while an input method is composing is the input method's: it gives up the conversion, and the text box
+    /// stays open. Only an Esc with nothing being composed closes the box.
+    @Test func escapeWhileComposingGivesUpTheCompositionNotTheTextBox() throws {
+        let session = makeSession()
+        let view = CanvasView(session: session)
+        let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: 800, height: 600), styleMask: [.titled], backing: .buffered, defer: false)
+        window.contentView = view
+        session.viewport.resize(to: view.bounds.size, backingScale: 1, documentSize: CGSize(width: 800, height: 600))
+        session.beginText(at: CGPoint(x: 100, y: 300))
+        session.textDraft?.style.content = "abc"
+        view.synchronizeDisplay()
+        let textView = try #require(view.inlineTextEditor?.textView)
+        // Keys reach the input method only from the text being edited.
+        #expect(window.makeFirstResponder(textView))
+        textView.setSelectedRange(NSRange(location: 3, length: 0))
+        let escape = try #require(NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: 0,
+                                                   windowNumber: window.windowNumber, context: nil, characters: "\u{1b}",
+                                                   charactersIgnoringModifiers: "\u{1b}", isARepeat: false, keyCode: 53))
+
+        textView.setMarkedText("まみ", selectedRange: NSRange(location: 2, length: 0), replacementRange: NSRange(location: NSNotFound, length: 0))
+        #expect(textView.hasMarkedText())
+        textView.keyDown(with: escape)
+        #expect(session.textDraft != nil, "Esc while composing closed the text box")
+        #expect(session.textDraft?.style.content == "abc", "what was being composed wasn't given up")
+        #expect(!textView.hasMarkedText())
+
+        textView.keyDown(with: escape)
+        #expect(session.textDraft == nil, "with nothing being composed, Esc closes the text box")
+    }
+
     private let red = PaletteColor(red: 1, green: 0, blue: 0)
 
     @Test func colorAppliesToSelectionAndFollowsEdits() {

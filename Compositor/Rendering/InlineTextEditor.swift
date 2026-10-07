@@ -155,7 +155,8 @@ final class CanvasTextView: NSTextView {
     }
     override func keyDown(with event: NSEvent) {
         guard let event = ShortcutSettings.shared.textEvent(event) else { return }
-        if event.keyCode == 53 { editor?.canvas?.session.cancelText(); return }
+        // While an input method is composing, Esc is its own: it gives up the conversion, not the whole text box.
+        if event.keyCode == 53, !hasMarkedText() { editor?.canvas?.session.cancelText(); return }
         // Option with the arrows sets spacing, as in Photoshop: left and right the tracking, up and down the
         // leading. Shift makes each step ten.
         if event.modifierFlags.contains(.option), [123, 124, 125, 126].contains(event.keyCode),
@@ -184,6 +185,13 @@ final class CanvasTextView: NSTextView {
     override func setMarkedText(_ string: Any, selectedRange: NSRange, replacementRange: NSRange) {
         super.setMarkedText(string, selectedRange: selectedRange, replacementRange: replacementRange)
         editor?.takeText()
+    }
+    // Esc an input method passed back while it was composing gives up what it was composing, and the text box stays
+    // open. With nothing being composed, it closes the box, as Esc does.
+    override func cancelOperation(_ sender: Any?) {
+        guard hasMarkedText() else { editor?.canvas?.session.cancelText(); return }
+        inputContext?.discardMarkedText()
+        if hasMarkedText() { insertText("", replacementRange: markedRange()) }
     }
     override func mouseExited(with event: NSEvent) { NSCursor.setHiddenUntilMouseMoves(false) }
     override func paste(_ sender: Any?) { pasteAsPlainText(sender) }
