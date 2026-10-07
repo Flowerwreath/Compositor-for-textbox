@@ -1345,4 +1345,83 @@ struct TypeToolTests {
         #expect(session.activeLayer?.transform == before)
     }
 
+    @Test func horizontalFlipsKeepInputAndSelectionOnTheRenderedLetters() throws {
+        for (rotation, flipX, flipY) in [(0.0, false, false), (0.0, true, false), (0.0, false, true),
+                                       (30.0, true, false), (30.0, false, true)] {
+            let session = makeSession()
+            var style = LayerTextStyle()
+            style.fontName = "AppleSDGothicNeo-Regular"
+            style.fontSize = 200
+            style.content = flipY ? "가\n나" : "가나"
+            style.boxSize = CGSize(width: 480, height: 560)
+            style.red = 1; style.green = 0; style.blue = 0
+            let second = flipY ? 2 : 1
+            style.colorRuns = [LayerTextColorRun(location: second, length: 1, red: 0, green: 0, blue: 1)]
+            session.textDefaults = style
+            session.beginText(in: CGRect(origin: CGPoint(x: 100, y: 20), size: style.boxSize!))
+            session.textDraft?.style = style
+            #expect(session.finishText())
+            let index = try #require(session.document?.layers.firstIndex { $0.id == session.activeLayerID })
+            session.document?.layers[index].transform.rotation = rotation
+            session.document?.layers[index].transform.flipX = flipX
+            session.document?.layers[index].transform.flipY = flipY
+            session.editActiveText()
+            let canvas = CanvasView(session: session)
+            canvas.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+            session.viewport.resize(to: canvas.bounds.size, backingScale: 1, documentSize: nil)
+            let window = TextEditingWindow(contentRect: canvas.frame, styleMask: .borderless, backing: .buffered, defer: false)
+            window.contentView = canvas
+            defer { window.contentView = nil }
+            canvas.synchronizeDisplay()
+            let editor = try #require(canvas.inlineTextEditor), view = editor.textView
+            let transform = try #require(editor.shownTransform)
+            let documentSize = try #require(session.document?.size)
+            let image = try EditorSession.textImage(style)
+            func canvasPoint(_ pixel: CGPoint) -> CGPoint {
+                let unit = CGPoint(x: pixel.x / CGFloat(image.width), y: pixel.y / CGFloat(image.height))
+                return session.viewport.viewPoint(from: unit.applying(transform.unitToDocument), documentSize: documentSize)
+            }
+            // Before any layout/display pass, the native coordinate system must already reflect the layer.
+            let native = CGPoint(x: 53, y: 71)
+            let expected = canvasPoint(CGPoint(x: view.frame.minX + native.x, y: view.frame.minY + native.y))
+            let beforeLayout = view.convert(native, to: canvas)
+            expectPoint(beforeLayout, expected, tolerance: 0.001)
+            // The surrounding editor, its border and its handles keep their unmirrored logical order.
+            for corner in [CGPoint.zero, CGPoint(x: 1, y: 0), CGPoint(x: 1, y: 1), CGPoint(x: 0, y: 1)] {
+                let point = editor.convert(CGPoint(x: corner.x * editor.bounds.width, y: corner.y * editor.bounds.height), to: canvas)
+                expectPoint(point, session.viewport.viewPoint(from: transform.point(corner), documentSize: documentSize), tolerance: 0.001)
+            }
+            editor.layoutSubtreeIfNeeded()
+            expectPoint(view.convert(native, to: canvas), beforeLayout, tolerance: 0.001)
+            for (character, red) in [(0, true), (second, false)] {
+                let ink = try #require(try inkBounds(image, red: red))
+                let center = canvasPoint(CGPoint(x: ink.midX, y: ink.midY))
+                let screenRect = view.firstRect(forCharacterRange: NSRange(location: character, length: 1), actualRange: nil)
+                let onCanvas = canvas.convert(window.convertFromScreen(screenRect), from: nil)
+                #expect(onCanvas.contains(center), "firstRect at rotation \(rotation), flipX \(flipX), flipY \(flipY), character \(character)")
+                let insertion = view.characterIndexForInsertion(at: view.convert(center, from: canvas))
+                #expect(insertion == character || insertion == character + 1)
+                view.setSelectedRange(NSRange(location: character, length: 1))
+                let selection = try #require(view.selectionRects.first)
+                #expect(view.convert(selection, to: canvas).contains(center))
+                view.setSelectedRange(NSRange(location: character, length: 0))
+                window.makeFirstResponder(view)
+                let manager = try #require(view.layoutManager)
+                let glyph = manager.glyphIndexForCharacter(at: character)
+                let fragment = manager.lineFragmentRect(forGlyphAt: glyph, effectiveRange: nil)
+                let location = manager.location(forGlyphAt: glyph)
+                view.drawInsertionPoint(in: CGRect(x: fragment.minX + location.x + view.textContainerOrigin.x,
+                    y: fragment.minY + view.textContainerOrigin.y, width: 1, height: fragment.height), color: .black, turnedOn: true)
+                let caret = try #require(view.subviews.first { $0.identifier?.rawValue == "canvasTextCaret" })
+                let caretOnCanvas = view.convert(caret.frame, to: canvas)
+                let caretCenter = CGPoint(x: caretOnCanvas.midX, y: caretOnCanvas.midY)
+                let caretDocument = session.viewport.documentPoint(from: caretCenter, documentSize: documentSize)
+                let unit = caretDocument.applying(transform.unitToDocument.inverted())
+                let caretPixel = CGPoint(x: unit.x * CGFloat(image.width), y: unit.y * CGFloat(image.height))
+                #expect(caretPixel.y >= ink.minY && caretPixel.y <= ink.maxY)
+                #expect(caretPixel.x <= ink.minX + 1 && ink.minX - caretPixel.x < style.fontSize * 0.2)
+            }
+        }
+    }
+
 }

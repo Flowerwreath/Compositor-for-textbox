@@ -302,12 +302,10 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         textView.selectedTextAttributes = [.backgroundColor: NSColor.clear]
         textView.textContainer?.replaceLayoutManager(SeeThroughSelectionLayout())
         textView.setAccessibilityLabel("Canvas text")
-        // Both backed by layers from the start. Left to AppKit, the text surface's layer is first placed in the
-        // canvas's own layer tree and only moved inside this view a frame later; with a flipped layer, whose
-        // mirroring hangs off that placement, the move is visible as a jump.
+        // Create backing layers before attachment so the text starts in its final layer hierarchy.
+        // synchronize reflects the view coordinates before the editor becomes visible.
         wantsLayer = true
         textView.wantsLayer = true
-        textView.layer?.anchorPoint = .zero
         addSubview(textSurface)
         textSurface.addSubview(textView)
         textSurface.clipsToBounds = false
@@ -378,11 +376,9 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
             if textView.textContainerInset != inset { textView.textContainerInset = inset }
             if textView.frame != textFrame { textView.frame = textFrame }
             if let container = textView.textContainer, container.size != containerSize { container.size = containerSize }
-            textSurface.place(size: logicalSize, flipX: style.isVertical && transform.flipX,
-                              flipY: style.isVertical && transform.flipY)
-            // Mirroring belongs to the text surface, leaving resize handles in their logical order.
-            mirror = (transform.flipX, transform.flipY)
-            applyMirror()
+            // Reflect input and drawing together, before the first layout or visible frame. The surrounding
+            // editor keeps its border and resize handles in their unmirrored logical order.
+            textSurface.place(size: logicalSize, flipX: transform.flipX, flipY: transform.flipY)
             handleSize = max(2, 6 / max(0.01, scale * transform.size.width / logicalSize.width))
             shownGeometry = geometry
             needsDisplay = true
@@ -481,44 +477,6 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     }
 
     private var handleTracking: NSTrackingArea?
-    /// Mirrors the text surface for a flipped layer, about the middle of the box, as the layer itself is. A layer
-    /// transform turns about its anchor point, and AppKit sets that (and the layer's position) when it lays the view
-    /// out, so this runs again after every layout and once more before drawing.
-    private var mirror: (x: Bool, y: Bool) = (false, false)
-    private func applyMirror() {
-        guard let layer = textView.layer else { return }
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        defer { CATransaction.commit() }
-        // Vertical text already rotates its backing layer. Its surface mirrors in view coordinates instead.
-        if textView.layoutOrientation == .vertical { return }
-        guard mirror.x || mirror.y else {
-            if !layer.affineTransform().isIdentity { layer.setAffineTransform(.identity) }
-            return
-        }
-        // Placed by hand: until AppKit has laid this view out, the text surface's layer is still positioned in the
-        // canvas's coordinates, and mirroring about a layer that is somewhere else is a jump on the first frame.
-        layer.anchorPoint = .zero
-        layer.bounds = CGRect(origin: .zero, size: textView.bounds.size)
-        layer.position = textView.frame.origin
-        // The surface runs past the bottom of the box when a short leading sets the text lower (see `synchronize`), so
-        // the middle of the box isn't the middle of the surface.
-        let shift = CGPoint(x: mirror.x ? bounds.width - 2 * textView.frame.minX : 0,
-                            y: mirror.y ? bounds.height - 2 * textView.frame.minY : 0)
-        layer.setAffineTransform(CGAffineTransform(translationX: shift.x, y: shift.y)
-            .scaledBy(x: mirror.x ? -1 : 1, y: mirror.y ? -1 : 1))
-    }
-    override func layout() {
-        super.layout()
-        applyMirror()
-    }
-    override func viewWillDraw() {
-        super.viewWillDraw()
-        // Attaching the text surface's layer into this view's layer tree clears its transform, and that happens
-        // after everything else: without this, a flipped layer's first frame is drawn unmirrored.
-        applyMirror()
-    }
-
     /// The cursor follows the same test the mouse does: arrows over the edges and corners, the I-beam over the
     /// text. Cursor rects are no use here — the box can be rotated, and AppKit does not map them through a
     /// view's rotation — so this view watches the pointer itself.
