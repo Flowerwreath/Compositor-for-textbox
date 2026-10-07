@@ -233,10 +233,12 @@ nonisolated enum PSDText {
 
     private static func baseline(_ style: LayerTextStyle, image: CGSize) -> CGFloat {
         let padding = LayerTextStyle.padding
+        // Laid out as `EditorSession.textImage` draws it: a short leading sets the first line lower.
+        let overflow = EditorSession.firstLine(style).overflow
         let sample = style.content.isEmpty ? " " : style.content
         let storage = NSTextStorage(attributedString: NSAttributedString(string: sample, attributes: EditorSession.textAttributes(style)))
         let layout = NSLayoutManager()
-        let container = NSTextContainer(size: CGSize(width: max(1, image.width - 2 * padding), height: max(1, image.height - 2 * padding)))
+        let container = NSTextContainer(size: CGSize(width: max(1, image.width - 2 * padding), height: max(1, image.height - 2 * padding - overflow)))
         container.lineFragmentPadding = 0
         storage.addLayoutManager(layout)
         layout.addTextContainer(container)
@@ -244,7 +246,7 @@ nonisolated enum PSDText {
         guard glyphs.length > 0 else { return padding + style.fontSize * 0.8 }
         let fragment = layout.lineFragmentRect(forGlyphAt: glyphs.location, effectiveRange: nil)
         let location = layout.location(forGlyphAt: glyphs.location)
-        return padding + fragment.minY + location.y
+        return padding + overflow + fragment.minY + location.y
     }
 
     /// Matches `BrushRaster.pixelToDocument`: flip, then clockwise rotation about the center.

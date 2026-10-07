@@ -487,6 +487,137 @@ struct TypeToolTests {
         #expect(text.style.fontName == "Helvetica")
     }
 
+    /// The top and bottom rows of `image` with any ink in them, across `columns` or the whole width.
+    private func inkRows(_ image: CGImage, columns: Range<Int>? = nil) throws -> (top: Int, bottom: Int)? {
+        let bytes = try #require(image.dataProvider?.data) as Data
+        let columns = columns ?? 0..<image.width
+        var top: Int?, bottom: Int?
+        for y in 0..<image.height {
+            for x in columns where bytes[y * image.bytesPerRow + x * 4 + 3] > 0 {
+                if top == nil { top = y }
+                bottom = y
+                break
+            }
+        }
+        guard let top, let bottom else { return nil }
+        return (top, bottom)
+    }
+
+    /// The runs of columns of `image` with any ink in them, left to right.
+    private func inkedColumns(_ image: CGImage) throws -> [Range<Int>] {
+        let bytes = try #require(image.dataProvider?.data) as Data
+        var runs: [Range<Int>] = [], start: Int?
+        for x in 0...image.width {
+            let inked = x < image.width && (0..<image.height).contains { bytes[$0 * image.bytesPerRow + x * 4 + 3] > 0 }
+            if inked, start == nil { start = x }
+            if !inked, let first = start { runs.append(first..<x); start = nil }
+        }
+        return runs
+    }
+
+    private func tallLetters(leading: CGFloat, content: String) -> LayerTextStyle {
+        var style = LayerTextStyle()
+        style.fontName = "Helvetica"
+        style.fontSize = 200
+        style.leading = leading
+        style.content = content
+        return style
+    }
+
+    /// Leading shorter than the letters are tall closes the lines up over each other, but the first line has no line
+    /// above to stand over: it stays whole, inside the box, rather than being cut off at the top of it.
+    @Test func aShortLeadingKeepsTheFirstLineInTheBox() throws {
+        let autoImage = try EditorSession.textImage(tallLetters(leading: 0, content: "H"))
+        let auto = try #require(try inkRows(autoImage))
+        let style = tallLetters(leading: 60, content: "H")
+        #expect(EditorSession.firstLine(style).overflow > 0)
+        let image = try EditorSession.textImage(style)
+        let tight = try #require(try inkRows(image))
+        #expect(tight.top >= Int(LayerTextStyle.padding) - 1, "the first line was cut off at the top of the box")
+        #expect(abs((tight.bottom - tight.top) - (auto.bottom - auto.top)) <= 1)
+    }
+
+    @Test func linesAreTheLeadingApartWhenItIsShorterThanTheLetters() throws {
+        // Each line's letter further right than the one above's, so lines that overlap can still be told apart.
+        let image = try EditorSession.textImage(tallLetters(leading: 60, content: "H\n     H\n          H"))
+        let columns = try inkedColumns(image)
+        #expect(columns.count == 3)
+        var baselines: [Int] = []
+        for column in columns {
+            let rows = try #require(try inkRows(image, columns: column))
+            baselines.append(rows.bottom)
+        }
+        for (above, below) in zip(baselines, baselines.dropFirst()) {
+            #expect(abs(below - above - 60) <= 1)
+        }
+        let whole = try #require(try inkRows(image))
+        #expect(whole.top >= Int(LayerTextStyle.padding) - 1)
+    }
+
+    /// Leading as tall as the letters, Auto included, leaves text where it always was: the same size, and a click
+    /// puts it in the same place.
+    @Test(arguments: [0, 300] as [CGFloat])
+    func leadingAsTallAsTheLettersChangesNothing(leading: CGFloat) throws {
+        let style = tallLetters(leading: leading, content: "Two\nlines")
+        let padding = LayerTextStyle.padding
+        let descent = abs((EditorSession.textAttributes(style)[.font] as? NSFont)?.descender ?? 0)
+        #expect(EditorSession.firstLine(style).overflow == 0)
+        #expect(EditorSession.firstLine(style).baseline == padding + style.lineHeight - descent)
+        let measured = EditorSession.attributedText(style).boundingRect(with: CGSize(width: 100_000, height: 100_000),
+                                                                        options: [.usesLineFragmentOrigin, .usesFontLeading])
+        #expect(EditorSession.textBoxSize(style) == CGSize(width: max(16, ceil(measured.width + padding * 2 + style.fontSize * 0.1)),
+                                                           height: max(16, ceil(max(measured.height, ceil(style.lineHeight)) + padding * 2))))
+        let session = makeSession()
+        session.textDefaults = style
+        session.beginText(at: CGPoint(x: 300, y: 400))
+        #expect(session.textDraft?.origin == CGPoint(x: 300 - padding, y: 400 - (padding + style.lineHeight - descent)))
+    }
+
+    /// A click puts the first baseline on the pointer however short the leading, the letters standing on it.
+    @Test func aClickPutsTheFirstBaselineOnThePointerWithAShortLeading() throws {
+        let session = makeSession()
+        session.textDefaults = tallLetters(leading: 60, content: "")
+        let click = CGPoint(x: 300, y: 400)
+        session.beginText(at: click)
+        session.textDraft?.style.content = "H"
+        let draft = try #require(session.textDraft)
+        #expect(abs(draft.origin.y + EditorSession.firstLine(draft.style).baseline - click.y) < 0.001)
+        let image = try EditorSession.textImage(draft.style)
+        let ink = try #require(try inkRows(image))
+        #expect(abs(draft.origin.y + CGFloat(ink.bottom + 1) - click.y) <= 1)
+    }
+
+    /// Photoshop point text set tighter than its letters are tall still stands on its baseline, its first line whole.
+    @Test func photoshopTextWithAShortLeadingKeepsItsBaselineAndFirstLine() throws {
+        let parsed = try #require(PSDText.parse(extra: ["TySh": PSDFixture.tySh(text: "H", fontSize: 100, leading: 30, tx: 40, ty: 150)]))
+        #expect(parsed.style.leading == 30)
+        #expect(EditorSession.firstLine(parsed.style).overflow > 0)
+        let rendered = try PSDText.render(parsed)
+        let ink = try #require(try inkRows(rendered.image))
+        #expect(ink.top >= Int(LayerTextStyle.padding) - 1)
+        #expect(abs(rendered.transform.origin.y + CGFloat(ink.bottom + 1) - 150) <= 1)
+    }
+
+    /// The editor lays the text out where the canvas draws it, so its caret and highlight fall on the letters, and
+    /// keeps room above the first line for them to reach up into.
+    @Test func theEditorSetsAShortLeadingsFirstLineWhereTheCanvasDoes() throws {
+        let session = makeSession()
+        session.textDefaults = tallLetters(leading: 60, content: "")
+        session.beginText(at: CGPoint(x: 300, y: 300))
+        session.textDraft?.style.content = "H\nH"
+        let view = CanvasView(session: session)
+        view.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+        view.synchronizeDisplay()
+        let textView = try #require(view.inlineTextEditor?.textView)
+        let style = try #require(session.textDraft?.style)
+        let padding = LayerTextStyle.padding, overflow = EditorSession.firstLine(style).overflow
+        #expect(textView.frame.minY == padding)
+        #expect(abs(textView.textContainerOrigin.y - overflow) < 0.001)
+        let room = EditorSession.textBoxSize(style).height - padding * 2 - overflow
+        #expect(abs((textView.textContainer?.size.height ?? 0) - room) < 0.001)
+        #expect(textView.letterReach == overflow)
+    }
+
     @Test func cancelingPickerRestoresSelectionColors() throws {
         let session = makeSession()
         session.beginText(at: CGPoint(x: 30, y: 40))

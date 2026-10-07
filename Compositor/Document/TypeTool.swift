@@ -253,11 +253,8 @@ extension EditorSession {
             style.boxSize = nil
         }
         tool = .type
-        // A click puts new text's first baseline on the pointer, starting at it, as Photoshop's does. A fixed line height leaves its
-        // extra room above the letters, so the baseline sits the font's descent up from the bottom of the line.
-        let descent = abs((Self.textAttributes(style)[.font] as? NSFont)?.descender ?? 0)
-        let baseline = LayerTextStyle.padding + style.lineHeight - descent
-        let origin = target?.origin ?? CGPoint(x: point.x - LayerTextStyle.padding, y: point.y - baseline)
+        // A click puts new text's first baseline on the pointer, starting at it, as Photoshop's does.
+        let origin = target?.origin ?? CGPoint(x: point.x - LayerTextStyle.padding, y: point.y - Self.firstLine(style).baseline)
         textDraft = TextDraft(documentID: document.id, layerID: target?.id, origin: origin, transform: target?.transform, style: style)
     }
 
@@ -415,8 +412,40 @@ extension EditorSession {
                 .paragraphStyle: paragraph, .kern: style.tracking]
     }
 
-    /// How big point text is: what it measures, plus its padding. A caret's worth of width so an empty line still
-    /// has somewhere to type.
+    /// The tallest ascent and the deepest descent among the faces `range` of the text is set in (the text's own face
+    /// where it has no letters), and how far those letters stand out of the top of their line. A fixed line height
+    /// keeps its baseline the descent up from the bottom of the line, so leading shorter than the letters are tall
+    /// leaves their tops above it, over the line before. Leading as tall as the letters, Auto included, leaves none.
+    nonisolated static func letterMetrics(_ style: LayerTextStyle, in range: NSRange) -> (ascent: CGFloat, descent: CGFloat, overflow: CGFloat) {
+        let count = style.content.utf16.count
+        let start = max(0, min(range.location, count)), end = max(start, min(range.location + range.length, count))
+        var faces: Set<String> = []
+        var covered = start
+        for run in style.fontRuns ?? [] where run.location < end && run.location + run.length > start {
+            if run.location > covered { faces.insert(style.fontName) }
+            faces.insert(run.fontName)
+            covered = max(covered, run.location + run.length)
+        }
+        if covered < end || start == end { faces.insert(style.fontName) }
+        var ascent: CGFloat = 0, descent: CGFloat = 0
+        for face in faces {
+            let font = NSFont(name: face, size: style.fontSize) ?? NSFont.systemFont(ofSize: style.fontSize)
+            ascent = max(ascent, font.ascender)
+            descent = max(descent, abs(font.descender))
+        }
+        return (ascent, descent, max(0, ascent + descent - style.lineHeight))
+    }
+
+    /// Where the first line sits in the text's box. There is no line above for its letters to stand over, so the text
+    /// is set `overflow` lower, below the padding, to keep them in the box; `baseline` is then the first baseline's
+    /// height from the top of the box. Leading as tall as the letters leaves the text where it always was.
+    nonisolated static func firstLine(_ style: LayerTextStyle) -> (overflow: CGFloat, baseline: CGFloat) {
+        let letters = letterMetrics(style, in: (style.content as NSString).paragraphRange(for: NSRange(location: 0, length: 0)))
+        return (letters.overflow, LayerTextStyle.padding + letters.overflow + style.lineHeight - letters.descent)
+    }
+
+    /// How big point text is: what it measures, plus its padding and whatever its first line's letters need above
+    /// it. A caret's worth of width so an empty line still has somewhere to type.
     static func textBoxSize(_ style: LayerTextStyle) -> CGSize {
         if let boxSize = style.boxSize { return boxSize }
         let string = attributedText(style)
@@ -425,7 +454,7 @@ extension EditorSession {
                                            options: [.usesLineFragmentOrigin, .usesFontLeading])
         let line = ceil(style.lineHeight)
         return CGSize(width: max(16, ceil(measured.width + padding * 2 + style.fontSize * 0.1)),
-                      height: max(16, ceil(max(measured.height, line) + padding * 2)))
+                      height: max(16, ceil(max(measured.height, line) + firstLine(style).overflow + padding * 2)))
     }
 
     /// The text as it is drawn and measured, with each letter's own face and color.
@@ -458,14 +487,17 @@ extension EditorSession {
         NSGraphicsContext.saveGraphicsState()
         defer { NSGraphicsContext.restoreGraphicsState() }
         NSGraphicsContext.current = NSGraphicsContext(cgContext: context, flipped: true)
+        // A short leading's first line is set lower, keeping its letters in the box; a fixed box has that much less
+        // room for lines.
+        let overflow = firstLine(style).overflow
         let storage = NSTextStorage(attributedString: string)
         let layout = NSLayoutManager()
-        let container = NSTextContainer(size: CGSize(width: max(1, width - 2 * padding), height: max(1, height - 2 * padding)))
+        let container = NSTextContainer(size: CGSize(width: max(1, width - 2 * padding), height: max(1, height - 2 * padding - overflow)))
         container.lineFragmentPadding = 0
         storage.addLayoutManager(layout)
         layout.addTextContainer(container)
         let glyphs = layout.glyphRange(for: container)
-        layout.drawGlyphs(forGlyphRange: glyphs, at: CGPoint(x: padding, y: padding))
+        layout.drawGlyphs(forGlyphRange: glyphs, at: CGPoint(x: padding, y: padding + overflow))
         guard let image = context.makeImage() else { throw ExportError.render }
         return image
     }
