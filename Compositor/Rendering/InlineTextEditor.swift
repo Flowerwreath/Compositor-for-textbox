@@ -4,78 +4,85 @@ import AppKit
 /// stay with NSTextView. Its logical bounds are layer pixels; the containing view supplies zoom.
 /// Its glyphs are clear: the canvas draws the text as the layer's own pixels underneath, as Photoshop does, so
 /// what is typed looks the same at any zoom as it will once it is committed.
-/// Draws text selections translucent, focused or not. A leading shorter than the letters are tall leaves them standing
-/// out of the top of their line, over the line before, as the canvas draws them; the highlight and the caret reach
-/// up over them there.
+/// Selection and insertion geometry use the letters' ascent and descent, independent of leading.
 private nonisolated final class SeeThroughSelectionLayout: NSLayoutManager {
-    /// How far letters stand out of the top of their line, at most. The text view keeps it.
-    var reach: CGFloat = 0
-    /// The highlights being drawn, by color. The lines' highlights overlap where their letters do, so they are filled
-    /// together, as one shape, rather than darkening where they meet.
-    private var highlights: [(color: NSColor, rects: [CGRect])]?
-    private var containerOrigin = CGPoint.zero
-
-    override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: NSPoint) {
-        guard reach > 0, let container = textContainers.first, let context = NSGraphicsContext.current?.cgContext else {
-            super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
-            return
+    /// The letters on a laid-out line, including all its faces. A blank line uses the typing face.
+    private func letters(on line: NSRange, fragment: CGRect, typingFont: NSFont?) -> CGRect? {
+        guard let storage = textStorage else { return nil }
+        let characters = characterRange(forGlyphRange: line, actualGlyphRange: nil)
+        let content = (storage.string as NSString).substring(with: characters)
+        var ascent: CGFloat = 0, descent: CGFloat = 0
+        if content.trimmingCharacters(in: .newlines).isEmpty, let font = typingFont {
+            ascent = font.ascender
+            descent = abs(font.descender)
+        } else {
+            storage.enumerateAttribute(.font, in: characters, options: []) { value, _, _ in
+                if let font = value as? NSFont {
+                    ascent = max(ascent, font.ascender)
+                    descent = max(descent, abs(font.descender))
+                }
+            }
         }
-        var glyphs = glyphsToShow
-        // The lines below reach up into these with their letters, and with their highlights.
-        if glyphs.length > 0, NSMaxRange(glyphs) < numberOfGlyphs {
-            let last = lineFragmentRect(forGlyphAt: NSMaxRange(glyphs) - 1, effectiveRange: nil, withoutAdditionalLayout: true)
-            let below = CGRect(x: 0, y: last.maxY, width: container.size.width, height: reach)
-            glyphs = NSUnionRange(glyphs, glyphRange(forBoundingRectWithoutAdditionalLayout: below, in: container))
-        }
-        containerOrigin = origin
-        highlights = []
-        super.drawBackground(forGlyphRange: glyphs, at: origin)
-        for highlight in highlights ?? [] {
-            highlight.color.withAlphaComponent(min(highlight.color.alphaComponent, 0.45)).setFill()
-            context.addRects(highlight.rects)
-            context.fillPath()
-        }
-        highlights = nil
+        guard ascent + descent > 0 else { return nil }
+        let baseline = fragment.minY + location(forGlyphAt: line.location).y
+        return CGRect(x: fragment.minX, y: baseline - ascent, width: fragment.width, height: ascent + descent)
     }
 
-    override func fillBackgroundRectArray(_ rectArray: UnsafePointer<NSRect>, count rectCount: Int,
-                                          forCharacterRange charRange: NSRange, color: NSColor) {
-        guard highlights != nil else {
-            color.withAlphaComponent(min(color.alphaComponent, 0.45)).setFill()
-            super.fillBackgroundRectArray(rectArray, count: rectCount, forCharacterRange: charRange, color: color)
-            return
-        }
-        let rects = (0..<rectCount).map { coveringLetters(rectArray[$0], origin: containerOrigin, typingFont: nil) }
-        if let index = highlights?.firstIndex(where: { $0.color == color }) { highlights?[index].rects += rects }
-        else { highlights?.append((color, rects)) }
-    }
-
-    /// `rect`, a caret's or a highlight's in a view whose text container sits at `origin`, reaching up over the
-    /// letters that stand out of the top of its first line. It already covers the rest of them.
-    func coveringLetters(_ rect: CGRect, origin: CGPoint, typingFont: NSFont?) -> CGRect {
-        guard reach > 0, let top = lettersTop(atY: rect.minY + min(1, rect.height / 2) - origin.y, typingFont: typingFont) else { return rect }
-        let raised = max(top + origin.y, rect.minY - reach)
-        guard raised < rect.minY else { return rect }
-        return CGRect(x: rect.minX, y: raised, width: rect.width, height: rect.maxY - raised)
-    }
-
-    /// The top of the letters on the line at `y` in the text container: its baseline, less the tallest ascent among
-    /// the faces it is set in. The line after a final Return has no letters yet, and is measured in `typingFont`.
-    private func lettersTop(atY y: CGFloat, typingFont: NSFont?) -> CGFloat? {
-        guard let container = textContainers.first, let storage = textStorage else { return nil }
+    private func letterBounds(atY y: CGFloat, typingFont: NSFont?) -> CGRect? {
+        guard let container = textContainers.first else { return nil }
+        ensureLayout(for: container)
         if extraLineFragmentTextContainer === container, numberOfGlyphs == 0 || y >= extraLineFragmentRect.minY {
-            // A line of fixed height keeps its baseline the descent up from its bottom.
-            return typingFont.map { extraLineFragmentRect.maxY - abs($0.descender) - $0.ascender }
+            guard let font = typingFont else { return nil }
+            let fragment = extraLineFragmentRect
+            return CGRect(x: fragment.minX, y: fragment.maxY - abs(font.descender) - font.ascender,
+                          width: fragment.width, height: font.ascender + abs(font.descender))
         }
         guard numberOfGlyphs > 0 else { return nil }
         var line = NSRange()
-        let fragment = lineFragmentRect(forGlyphAt: glyphIndex(for: CGPoint(x: 0, y: y), in: container), effectiveRange: &line)
-        var ascent: CGFloat = 0
-        storage.enumerateAttribute(.font, in: characterRange(forGlyphRange: line, actualGlyphRange: nil), options: []) { value, _, _ in
-            if let font = value as? NSFont { ascent = max(ascent, font.ascender) }
-        }
-        return fragment.minY + location(forGlyphAt: line.location).y - ascent
+        let glyph = glyphIndex(for: CGPoint(x: 0, y: y), in: container)
+        let fragment = lineFragmentRect(forGlyphAt: glyph, effectiveRange: &line)
+        return letters(on: line, fragment: fragment, typingFont: typingFont)
     }
+
+    func coveringLetters(_ rect: CGRect, origin: CGPoint, typingFont: NSFont?) -> CGRect {
+        // AppKit's caret position distinguishes both sides of a soft wrap at the same character index.
+        let y = rect.minY + min(1, rect.height / 2) - origin.y
+        guard let letters = letterBounds(atY: y, typingFont: typingFont) else { return rect }
+        return CGRect(x: rect.minX, y: letters.minY + origin.y, width: rect.width, height: letters.height)
+    }
+
+    /// NSTextView clips its layout manager's background drawing to the line fragments. A short leading's letters
+    /// stand above that clip, so the selection is painted by the text view before it enters that drawing stage.
+    func drawSelection(_ ranges: [NSRange], origin: CGPoint, typingFont: NSFont?, color: NSColor) {
+        guard let container = textContainers.first, let context = NSGraphicsContext.current?.cgContext else { return }
+        ensureLayout(for: container)
+        var rects: [CGRect] = []
+        for range in ranges where range.length > 0 {
+            let selected = glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+            enumerateLineFragments(forGlyphRange: selected) { fragment, _, _, line, _ in
+                guard let letters = self.letters(on: line, fragment: fragment, typingFont: typingFont) else { return }
+                self.enumerateEnclosingRects(forGlyphRange: NSIntersectionRange(line, selected),
+                    withinSelectedGlyphRange: selected, in: container) { rect, _ in
+                    rects.append(CGRect(x: rect.minX + origin.x, y: letters.minY + origin.y,
+                                        width: rect.width, height: letters.height))
+                }
+            }
+        }
+        context.saveGState()
+        defer { context.restoreGState() }
+        color.withAlphaComponent(min(color.alphaComponent, 0.45)).setFill()
+        // One nonzero-winding fill keeps overlapping lines at the same opacity.
+        context.addRects(rects)
+        context.fillPath()
+    }
+}
+
+/// The native insertion callback supplies position and blinking, but its graphics clip is only as tall as leading.
+/// A separate view can cover the letters outside that clip, and lets clicks reach the text beneath it.
+private final class CanvasTextCaret: NSView {
+    var color = NSColor.textColor { didSet { needsDisplay = true } }
+    override func draw(_ dirtyRect: NSRect) { color.setFill(); bounds.fill() }
+    override func hitTest(_ point: NSPoint) -> NSView? { nil }
 }
 
 final class CanvasTextView: NSTextView {
@@ -85,14 +92,40 @@ final class CanvasTextView: NSTextView {
     var holdsSelection = false
     /// How far letters stand out of the top of their line, at most, which a leading shorter than they are tall leaves
     /// them doing. The caret and the highlight reach up over them, so whatever is redrawn reaches up as far.
-    var letterReach: CGFloat = 0 {
-        didSet { (layoutManager as? SeeThroughSelectionLayout)?.reach = letterReach }
+    var letterReach: CGFloat = 0
+    private let caretView = CanvasTextCaret(frame: .zero)
+    private func installCaret() {
+        guard caretView.superview == nil else { return }
+        caretView.wantsLayer = true
+        caretView.isHidden = true
+        caretView.setAccessibilityElement(false)
+        caretView.identifier = NSUserInterfaceItemIdentifier("canvasTextCaret")
+        addSubview(caretView)
     }
-    // The caret is as tall as its line's letters, not only the line, when the leading is shorter than they are.
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        if window != nil { installCaret() }
+    }
+    override func draw(_ dirtyRect: NSRect) {
+        (layoutManager as? SeeThroughSelectionLayout)?.drawSelection(selectedRanges.map(\.rangeValue),
+            origin: textContainerOrigin, typingFont: typingAttributes[.font] as? NSFont,
+            color: NSColor.selectedTextBackgroundColor)
+        super.draw(dirtyRect)
+    }
     override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn flag: Bool) {
-        let layout = layoutManager as? SeeThroughSelectionLayout
-        let caret = layout?.coveringLetters(rect, origin: textContainerOrigin, typingFont: typingAttributes[.font] as? NSFont)
-        super.drawInsertionPoint(in: caret ?? rect, color: color, turnedOn: flag)
+        installCaret()
+        let caret = (layoutManager as? SeeThroughSelectionLayout)?.coveringLetters(rect, origin: textContainerOrigin,
+            typingFont: typingAttributes[.font] as? NSFont) ?? rect
+        if caretView.frame != caret { caretView.frame = caret }
+        caretView.color = color
+        // AppKit owns the on/off clock. Paint in a child view instead of its line-height graphics clip.
+        caretView.isHidden = !flag || selectedRange().length > 0 || window?.firstResponder !== self || window?.isKeyWindow != true
+    }
+    override func setSelectedRanges(_ ranges: [NSValue], affinity: NSSelectionAffinity, stillSelecting flag: Bool) {
+        super.setSelectedRanges(ranges, affinity: affinity, stillSelecting: flag)
+        if selectedRange().length > 0 { caretView.isHidden = true }
+        // A native selection invalidates only its line fragments, leaving a short leading's highlights above them.
+        needsDisplay = true
     }
     override func setNeedsDisplay(_ rect: NSRect, avoidAdditionalLayout flag: Bool) {
         var rect = rect
@@ -109,6 +142,7 @@ final class CanvasTextView: NSTextView {
         // applies to them.
         let range = selectedRange()
         let resigned = super.resignFirstResponder()
+        if resigned { caretView.isHidden = true; needsDisplay = true }
         if range.length > 0 {
             holdsSelection = true
             editor?.keepSelection(range)
@@ -204,7 +238,7 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         textView.isAutomaticDashSubstitutionEnabled = false
         // The selection shows through to the text the canvas draws beneath it, also while another window (the color
         // picker previewing the selected letters) has focus, where AppKit would otherwise paint it solid gray.
-        textView.selectedTextAttributes = [.backgroundColor: NSColor.selectedTextBackgroundColor.withAlphaComponent(0.45)]
+        textView.selectedTextAttributes = [.backgroundColor: NSColor.clear]
         textView.textContainer?.replaceLayoutManager(SeeThroughSelectionLayout())
         textView.setAccessibilityLabel("Canvas text")
         // Both backed by layers from the start. Left to AppKit, the text surface's layer is first placed in the

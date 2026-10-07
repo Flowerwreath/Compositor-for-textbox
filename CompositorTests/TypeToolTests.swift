@@ -5,6 +5,10 @@ import Testing
 
 @MainActor
 struct TypeToolTests {
+    private final class TextEditingWindow: NSWindow {
+        // The test host runs in the background. Give AppKit a key-window condition without stealing user focus.
+        override var isKeyWindow: Bool { true }
+    }
     private func makeSession() -> EditorSession {
         let session = EditorSession()
         session.createDocument(width: 800, height: 600, emptyLayer: true)
@@ -561,6 +565,233 @@ struct TypeToolTests {
         style.leading = leading
         style.content = content
         return style
+    }
+
+    private func textEditor(leading: CGFloat, content: String) throws -> (CanvasView, CanvasTextView) {
+        let session = makeSession()
+        session.textDefaults = tallLetters(leading: leading, content: "")
+        session.beginText(at: CGPoint(x: 300, y: 300))
+        session.textDraft?.style.content = content
+        let canvas = CanvasView(session: session)
+        canvas.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+        canvas.synchronizeDisplay()
+        return (canvas, try #require(canvas.inlineTextEditor?.textView))
+    }
+
+    /// Capture the native editor at one pixel per text point; its clear letters leave only selection and caret.
+    private func editorBitmap(_ view: NSView) throws -> NSBitmapImageRep {
+        // AppKit places its insertion view after drawing the text; let that display pass finish before capture.
+        view.displayIfNeeded()
+        let bitmap = try #require(NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(ceil(view.bounds.width)),
+            pixelsHigh: Int(ceil(view.bounds.height)), bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true,
+            isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0))
+        bitmap.size = view.bounds.size
+        // A transparent view need not overwrite every pixel; never reuse uninitialized capture memory.
+        try #require(bitmap.bitmapData).initialize(repeating: 0, count: bitmap.bytesPerRow * bitmap.pixelsHigh)
+        view.cacheDisplay(in: view.bounds, to: bitmap)
+        return bitmap
+    }
+
+    private func highlightedRows(_ bitmap: NSBitmapImageRep, x: Int) -> [Int] {
+        (0..<bitmap.pixelsHigh).filter { (bitmap.colorAt(x: x, y: $0)?.alphaComponent ?? 0) > 0.05 }
+    }
+
+    private func caretRows(_ bitmap: NSBitmapImageRep) -> [Int] {
+        (0..<bitmap.pixelsHigh).filter { y in
+            (0..<bitmap.pixelsWide).contains { (bitmap.colorAt(x: $0, y: y)?.alphaComponent ?? 0) > 0.05 }
+        }
+    }
+
+    @Test func selectionCoversTheLettersRegardlessOfLeading() throws {
+        for leading: CGFloat in [10, 200, 0, 300] {
+            let (canvas, textView) = try textEditor(leading: leading, content: "Hg\nHg")
+            defer { withExtendedLifetime(canvas) {} }
+            let layout = try #require(textView.layoutManager)
+            layout.ensureLayout(for: try #require(textView.textContainer))
+            let font = try #require(textView.textStorage?.attribute(.font, at: 0, effectiveRange: nil) as? NSFont)
+            textView.setSelectedRange(NSRange(location: 0, length: textView.string.utf16.count))
+            let bitmap = try editorBitmap(textView)
+            let rows = highlightedRows(bitmap, x: 10)
+            let baseline = textView.textContainerOrigin.y + layout.lineFragmentRect(forGlyphAt: 0, effectiveRange: nil).minY
+                + layout.location(forGlyphAt: 0).y
+            let bottom = baseline + leadingValue(leading) + abs(font.descender)
+            #expect(abs(CGFloat(try #require(rows.first)) - (baseline - font.ascender)) <= 1, "leading \(leading): highlight top")
+            #expect(abs(CGFloat(try #require(rows.last)) + 1 - bottom) <= 1, "leading \(leading): highlight bottom")
+            let alphas = rows.compactMap { bitmap.colorAt(x: 10, y: $0)?.alphaComponent }
+            #expect((alphas.max() ?? 0) - (alphas.min() ?? 0) < 0.02, "overlapping lines must not darken the selection")
+            if leadingValue(leading) > font.ascender + abs(font.descender) {
+                let gap = Int(baseline + abs(font.descender) + 2)
+                #expect(!rows.contains(gap), "the space between lines must stay clear")
+            }
+        }
+    }
+
+    private func leadingValue(_ leading: CGFloat) -> CGFloat { leading == 0 ? 240 : leading }
+
+    @Test func caretCoversTheLettersRegardlessOfLeading() throws {
+        for leading: CGFloat in [10, 200, 0] {
+            let (canvas, textView) = try textEditor(leading: leading, content: "Hg\nHg")
+            let window = TextEditingWindow(contentRect: canvas.frame, styleMask: [.titled], backing: .buffered, defer: false)
+            window.contentView = try #require(canvas.inlineTextEditor)
+            defer { window.orderOut(nil) }
+            #expect(window.makeFirstResponder(textView))
+            for location in [1, 4, 5] {
+                textView.setSelectedRange(NSRange(location: location, length: 0))
+                textView.updateInsertionPointStateAndRestartTimer(true)
+                let bitmap = try editorBitmap(textView)
+                let layout = try #require(textView.layoutManager)
+                let font = try #require(textView.typingAttributes[.font] as? NSFont)
+                let glyph = layout.glyphIndexForCharacter(at: min(location, 4))
+                let baseline = textView.textContainerOrigin.y + layout.lineFragmentRect(forGlyphAt: glyph, effectiveRange: nil).minY
+                    + layout.location(forGlyphAt: glyph).y
+                let rows = caretRows(bitmap)
+                #expect(abs(CGFloat(try #require(rows.first)) - (baseline - font.ascender)) <= 1)
+                #expect(abs(CGFloat(try #require(rows.last)) + 1 - (baseline + abs(font.descender))) <= 1)
+            }
+        }
+    }
+
+    @Test func anEmptyLinesCaretUsesTheTypingFont() throws {
+        for leading: CGFloat in [10, 200, 0] {
+            for content in ["", "Hg\n", "Hg\n\n", "Hg\r", "Hg\r\n", "Hg\u{2028}", "Hg\u{2029}"] {
+                let (canvas, textView) = try textEditor(leading: leading, content: content)
+                let window = TextEditingWindow(contentRect: canvas.frame, styleMask: [.titled], backing: .buffered, defer: false)
+                window.contentView = try #require(canvas.inlineTextEditor)
+                defer { window.orderOut(nil) }
+                #expect(window.makeFirstResponder(textView))
+                let font = try #require(NSFont(name: "Courier", size: 160))
+                textView.setSelectedRange(NSRange(location: content.utf16.count, length: 0))
+                textView.typingAttributes[.font] = font
+                textView.updateInsertionPointStateAndRestartTimer(true)
+                let bitmap = try editorBitmap(textView)
+                let layout = try #require(textView.layoutManager)
+                let bottom = textView.textContainerOrigin.y + layout.extraLineFragmentRect.maxY
+                let rows = caretRows(bitmap)
+                #expect(abs(CGFloat(try #require(rows.first)) - (bottom - font.ascender - abs(font.descender))) <= 1,
+                        "leading \(leading), content \(content.debugDescription): empty line top")
+                #expect(abs(CGFloat(try #require(rows.last)) + 1 - bottom) <= 1,
+                        "leading \(leading), content \(content.debugDescription): empty line bottom")
+            }
+        }
+    }
+
+    @Test func selectionAndCaretFollowWrappedLinesAndFontRuns() throws {
+        for leading: CGFloat in [10, 0, 120] {
+            let (canvas, textView) = try textEditor(leading: leading, content: "HHHH HHHH HHHH")
+            canvas.session.changeTextStyle {
+                $0.fontSize = 48
+                $0.boxSize = CGSize(width: 180, height: 400)
+                $0.fontRuns = [LayerTextFontRun(location: 5, length: 4, fontName: "Courier")]
+            }
+            canvas.synchronizeDisplay()
+            let window = TextEditingWindow(contentRect: canvas.frame, styleMask: [.titled], backing: .buffered, defer: false)
+            window.contentView = try #require(canvas.inlineTextEditor)
+            defer { window.orderOut(nil) }
+            #expect(window.makeFirstResponder(textView))
+            let layout = try #require(textView.layoutManager)
+            layout.ensureLayout(for: try #require(textView.textContainer))
+            let helvetica = try #require(NSFont(name: "Helvetica", size: 48))
+            let courier = try #require(NSFont(name: "Courier", size: 48))
+            var lines: [(range: NSRange, top: CGFloat, bottom: CGFloat)] = []
+            layout.enumerateLineFragments(forGlyphRange: NSRange(location: 0, length: layout.numberOfGlyphs)) { fragment, _, _, glyphs, _ in
+                let range = layout.characterRange(forGlyphRange: glyphs, actualGlyphRange: nil)
+                let containsCourier = NSIntersectionRange(range, NSRange(location: 5, length: 4)).length > 0
+                let containsHelvetica = range.length > NSIntersectionRange(range, NSRange(location: 5, length: 4)).length
+                let faces = (containsCourier ? [courier] : []) + (containsHelvetica ? [helvetica] : [])
+                let baseline = textView.textContainerOrigin.y + fragment.minY + layout.location(forGlyphAt: glyphs.location).y
+                lines.append((range, baseline - (faces.map(\.ascender).max() ?? 0),
+                              baseline + (faces.map { abs($0.descender) }.max() ?? 0)))
+            }
+            #expect(lines.count >= 3, "this exercises soft wrapping, not just explicit newlines")
+            for line in lines {
+                textView.setSelectedRange(line.range)
+                let rows = highlightedRows(try editorBitmap(textView), x: 10)
+                #expect(abs(CGFloat(try #require(rows.first)) - line.top) <= 1)
+                #expect(abs(CGFloat(try #require(rows.last)) + 1 - line.bottom) <= 1)
+                textView.setSelectedRange(NSRange(location: line.range.location + 1, length: 0))
+                textView.updateInsertionPointStateAndRestartTimer(true)
+                let caret = caretRows(try editorBitmap(textView))
+                #expect(abs(CGFloat(try #require(caret.first)) - line.top) <= 1)
+                #expect(abs(CGFloat(try #require(caret.last)) + 1 - line.bottom) <= 1)
+            }
+        }
+    }
+
+    @Test func caretRespectsAffinityAtLineBoundaries() throws {
+        for leading: CGFloat in [10, 200, 0] {
+            for content in ["HHHH HHHH HHHH", "HHHH\nHHHH"] {
+                let (canvas, textView) = try textEditor(leading: leading, content: content)
+                canvas.session.changeTextStyle {
+                    $0.fontSize = 48
+                    $0.boxSize = CGSize(width: 180, height: 700)
+                }
+                canvas.synchronizeDisplay()
+                let window = TextEditingWindow(contentRect: canvas.frame, styleMask: [.titled], backing: .buffered, defer: false)
+                window.contentView = try #require(canvas.inlineTextEditor)
+                defer { window.orderOut(nil) }
+                #expect(window.makeFirstResponder(textView))
+                let layout = try #require(textView.layoutManager)
+                layout.ensureLayout(for: try #require(textView.textContainer))
+                let font = try #require(NSFont(name: "Helvetica", size: 48))
+                var lines: [NSRange] = []
+                layout.enumerateLineFragments(forGlyphRange: NSRange(location: 0, length: layout.numberOfGlyphs)) { _, _, _, glyphs, _ in
+                    lines.append(glyphs)
+                }
+                #expect(lines.count >= 2)
+                for index in 1..<lines.count {
+                    let boundary = layout.characterIndexForGlyph(at: lines[index].location)
+                    for affinity: NSSelectionAffinity in [.upstream, .downstream] {
+                        textView.setSelectedRange(NSRange(location: boundary, length: 0), affinity: affinity, stillSelecting: false)
+                        textView.updateInsertionPointStateAndRestartTimer(true)
+                        let rows = caretRows(try editorBitmap(textView))
+                        // Only a soft wrap has two visual positions for the same insertion index.
+                        let line = lines[affinity == .upstream && !content.contains("\n") ? index - 1 : index]
+                        let baseline = textView.textContainerOrigin.y
+                            + layout.lineFragmentRect(forGlyphAt: line.location, effectiveRange: nil).minY
+                            + layout.location(forGlyphAt: line.location).y
+                        #expect(abs(CGFloat(try #require(rows.first)) - (baseline - font.ascender)) <= 1,
+                                "leading \(leading), affinity \(affinity), content \(content.debugDescription): caret top")
+                        #expect(abs(CGFloat(try #require(rows.last)) + 1 - (baseline + abs(font.descender))) <= 1,
+                                "leading \(leading), affinity \(affinity), content \(content.debugDescription): caret bottom")
+                    }
+                }
+            }
+        }
+    }
+
+    @Test func theCaretDisappearsWhenTheEditorLosesFocus() throws {
+        let (canvas, textView) = try textEditor(leading: 10, content: "Hg")
+        let window = TextEditingWindow(contentRect: canvas.frame, styleMask: [.titled], backing: .buffered, defer: false)
+        window.contentView = try #require(canvas.inlineTextEditor)
+        defer { window.orderOut(nil) }
+        #expect(window.makeFirstResponder(textView))
+        textView.setSelectedRange(NSRange(location: 1, length: 0))
+        textView.updateInsertionPointStateAndRestartTimer(true)
+        #expect(!caretRows(try editorBitmap(textView)).isEmpty)
+        #expect(window.makeFirstResponder(nil))
+        #expect(caretRows(try editorBitmap(textView)).isEmpty, "a font-height caret must be erased when focus leaves")
+    }
+
+    @Test func caretBlinkCallbacksRepaintTheFullHeight() throws {
+        let (canvas, textView) = try textEditor(leading: 10, content: "Hg")
+        let window = TextEditingWindow(contentRect: canvas.frame, styleMask: [.titled], backing: .buffered, defer: false)
+        window.contentView = try #require(canvas.inlineTextEditor)
+        defer { window.orderOut(nil) }
+        #expect(window.makeFirstResponder(textView))
+        textView.setSelectedRange(NSRange(location: 1, length: 0))
+        textView.updateInsertionPointStateAndRestartTimer(true)
+        let on = caretRows(try editorBitmap(textView))
+        #expect(on.count == 200)
+        let native = CGRect(x: 143.5, y: 190, width: 1, height: 10)
+        // Deliver the timer's off/on requests outside a display pass, then render the requested redraw.
+        textView.drawInsertionPoint(in: native, color: .black, turnedOn: false)
+        let caret = try #require(textView.subviews.first { $0.identifier?.rawValue == "canvasTextCaret" })
+        #expect(caret.isHidden)
+        #expect(caret.frame.height == 200)
+        #expect(caret.hitTest(CGPoint(x: caret.bounds.midX, y: caret.bounds.midY)) == nil)
+        textView.drawInsertionPoint(in: native, color: .black, turnedOn: true)
+        #expect(!caret.isHidden)
+        #expect(caretRows(try editorBitmap(textView)) == on)
     }
 
     /// Leading shorter than the letters are tall closes the lines up over each other, but the first line has no line
