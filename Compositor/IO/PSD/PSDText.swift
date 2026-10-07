@@ -7,7 +7,7 @@ import Foundation
 /// version, a 2×3 transform, a text descriptor, and a warp descriptor.
 /// The engine dictionary inside `EngineData` supplies the font, size, color,
 /// tracking, leading and alignment. Anything this model cannot represent
-/// (vertical text, shear, uneven scale) stays a raster.
+/// (vertical point text, shear, uneven scale) stays a raster.
 nonisolated enum PSDText {
     struct Source: Sendable {
         var style: LayerTextStyle
@@ -39,7 +39,6 @@ nonisolated enum PSDText {
               let yy = reader.f64(), let tx = reader.f64(), let ty = reader.f64(),
               [xx, xy, yx, yy, tx, ty].allSatisfy(\.isFinite) else { return nil }
         guard reader.u16() == 50, let text = reader.descriptor(versioned: true) else { return nil }
-        if let orientation = text.enumeration("Ornt"), orientation == "Vrtc" { return nil }
         guard let placed = placement(xx: xx, xy: xy, yx: yx, yy: yy, tx: tx, ty: ty) else { return nil }
 
         var notes: [String] = []
@@ -54,6 +53,7 @@ nonisolated enum PSDText {
         guard let content, !content.isEmpty, content.utf16.count <= 100_000 else { return nil }
 
         var style = LayerTextStyle()
+        style.orientation = text.enumeration("Ornt") == "Vrtc" ? .vertical : nil
         style.content = content
         if let engine {
             applyStyle(&style, engine: engine, pixelScale: placed.pixelScale, notes: &notes)
@@ -72,13 +72,14 @@ nonisolated enum PSDText {
             var boxed = style
             boxed.boxSize = CGSize(width: frame.width + pad * 2, height: frame.height + pad * 2)
             // A paragraph frame the model cannot store is dropped entirely: importing as point
-            // text would lose the wrap without saying so. Vertical text already falls back the same way.
+            // text would lose the wrap without saying so, in either orientation.
             guard boxed.isValid else { return nil }
             style = boxed
             anchor = placed.map(CGPoint(x: bounds.minX, y: bounds.minY))
             anchorIsFrame = true
         }
-        guard style.isValid else { return nil }
+        // A vertical point-text anchor is not yet verified against Photoshop; keep its saved pixels.
+        guard !style.isVertical || anchorIsFrame, style.isValid else { return nil }
         return Source(style: style, notes: notes, documentAnchor: anchor, rotation: placed.rotation,
                       flipY: placed.flipY, anchorIsFrame: anchorIsFrame)
     }

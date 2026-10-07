@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 import CoreGraphics
 import UniformTypeIdentifiers
@@ -646,6 +647,53 @@ struct PSDRoundTripTests {
         #expect(parsed?.documentAnchor == CGPoint(x: 10, y: 30))
     }
 
+    @Test func verticalPhotoshopParagraphsKeepTheirFramesAndFirstColumns() throws {
+        let samples: [(String, Double, Double?, Int, Double, Double,
+                       (CGFloat, CGFloat, CGFloat, CGFloat), (CGFloat, CGFloat, CGFloat, CGFloat))] = [
+            ("우왁", 200, nil, 0, -127.0323, 266.1304,
+             (0, 0, 430.1314, 597.5056), (240.5383, 3.7020, 422.9289, 388.8895)),
+            ("향수", 100, 75, 2, 865.1927, 885.9565,
+             (-16.4665, 0, 83.5335, 212.8416), (6.1870, 14.4686, 65.8902, 191.4686))
+        ]
+        for (text, size, leading, justification, tx, ty, bounds, glyphs) in samples {
+            let data = PSDFixture.tySh(text: text, font: "AppleSDGothicNeo-Regular", fontSize: size,
+                                      justification: justification, leading: leading, vertical: true,
+                                      tx: tx, ty: ty, bounds: bounds, glyphBounds: glyphs)
+            let parsed = try #require(PSDText.parse(extra: ["TySh": data]))
+            #expect(parsed.style.orientation == .vertical)
+            #expect(parsed.anchorIsFrame)
+            #expect(parsed.style.leading == CGFloat(leading ?? 0))
+            #expect(parsed.style.alignment == (justification == 0 ? .left : .center))
+            let padding = LayerTextStyle.padding
+            let box = try #require(parsed.style.boxSize)
+            #expect(abs(box.width - (bounds.2 - bounds.0 + padding * 2)) < 0.001)
+            #expect(abs(box.height - (bounds.3 - bounds.1 + padding * 2)) < 0.001)
+
+            var record = PSDRecord(id: UUID(), parentID: nil, name: text)
+            record.image = try colorImage(width: 4, height: 4, red: 0, green: 0, blue: 0)
+            record.bounds = CGRect(x: 1, y: 2, width: 4, height: 4)
+            let file = try PSDFixture.data(PSDDocument(width: 1200, height: 1500, resolution: 72, layers: [record]),
+                                           composite: try colorImage(width: 1200, height: 1500, red: 1, green: 1, blue: 1),
+                                           extras: [record.id: ["TySh": data]])
+            let document = try PSDReader.read(file)
+            #expect(document.layers.first?.kind == .text)
+            let imported = try PSDDocumentBuilder.makeImport(document)
+            let layer = try #require(imported.layers.first)
+            let live = try #require(layer.liveText)
+            #expect(live.style == parsed.style)
+            #expect(abs(layer.transform.origin.x - (tx + bounds.0 - padding)) < 0.001)
+            #expect(abs(layer.transform.origin.y - (ty + bounds.1 - padding)) < 0.001)
+            #expect(!imported.conversions.contains { $0.message == PSDText.rasterizedNote })
+
+            let imageSize = CGSize(width: live.image.width, height: live.image.height)
+            let vertical = EditorSession.verticalLayout(live.style, size: imageSize)
+            let layout = vertical.layoutManager
+            let center = imageSize.width - vertical.drawingOrigin.y
+                - layout.lineFragmentRect(forGlyphAt: 0, effectiveRange: nil).minY - layout.location(forGlyphAt: 0).y
+            #expect(abs(layer.transform.origin.x + center - (tx + bounds.2 - size / 2)) <= 1)
+        }
+    }
+
     @Test func oversizedPhotoshopParagraphFrameStaysPixels() throws {
         #expect(PSDText.parse(extra: ["TySh": PSDFixture.tySh(text: "Hello", bounds: (0, 0, 40_000, 100), glyphBounds: (0, 0, 40, 10))]) == nil)
         let image = try colorImage(width: 4, height: 4, red: 0, green: 1, blue: 0)
@@ -669,7 +717,7 @@ struct PSDRoundTripTests {
         #expect(parsed?.notes.contains(PSDText.fauxNote) == true)
     }
 
-    @Test func verticalOrBrokenPhotoshopTextStaysPixels() throws {
+    @Test func verticalPointOrBrokenPhotoshopTextStaysPixels() throws {
         #expect(PSDText.parse(extra: ["TySh": PSDFixture.tySh(text: "Hello", vertical: true)]) == nil)
         #expect(PSDText.parse(extra: ["TySh": Data([0, 1])]) == nil)
         #expect(PSDText.parse(extra: ["TySh": PSDFixture.tySh(text: "Hello", xx: 2, yy: 1)]) == nil)

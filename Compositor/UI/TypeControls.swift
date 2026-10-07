@@ -13,6 +13,16 @@ struct TypeControls: View {
             session.changeTextStyle { $0[keyPath: key] = CGFloat(value) }
         })
     }
+    func toggleOrientation() {
+        session.changeTextStyle { $0.orientation = $0.isVertical ? nil : .vertical }
+    }
+
+    static func alignmentLabel(_ alignment: TextAlignment, vertical: Bool) -> String {
+        let position = vertical ? (alignment == .left ? "top" : alignment == .center ? "center" : "bottom")
+            : alignment.rawValue.lowercased()
+        return "Align " + position
+    }
+
     var body: some View {
         HStack(spacing: 12) {
             Text("Type").font(ToolHeaderStyle.titleFont)
@@ -50,12 +60,27 @@ struct TypeControls: View {
                     }
                     .buttonStyle(.plain).help("Text color").accessibilityLabel("Text color")
                     HStack(spacing: 2) {
+                        let vertical = session.currentTextStyle.isVertical
+                        Button { toggleOrientation() } label: {
+                            Image(systemName: "arrow.up.and.down.text.horizontal")
+                                .frame(width: 30, height: 26)
+                                .background(vertical ? Color.white.opacity(0.14) : .clear,
+                                            in: RoundedRectangle(cornerRadius: 4))
+                                .contentShape(RoundedRectangle(cornerRadius: 4))
+                        }
+                        .buttonStyle(.plain)
+                        .help("Toggle text orientation")
+                        .accessibilityLabel("Toggle text orientation")
+                        .accessibilityAddTraits(vertical ? .isSelected : [])
                         ForEach(TextAlignment.allCases, id: \.self) { alignment in
                             let selected = session.currentTextStyle.alignment == alignment
                             Button {
                                 session.changeTextStyle { $0.alignment = alignment }
                             } label: {
-                                Image(systemName: alignment == .left ? "text.alignleft" : alignment == .center ? "text.aligncenter" : "text.alignright")
+                                let symbol = vertical
+                                    ? (alignment == .left ? "align.vertical.top" : alignment == .center ? "align.vertical.center" : "align.vertical.bottom")
+                                    : (alignment == .left ? "text.alignleft" : alignment == .center ? "text.aligncenter" : "text.alignright")
+                                Image(systemName: symbol)
                                     .frame(width: 30, height: 26)
                                     .background(selected ? Color.white.opacity(0.14) : .clear,
                                                 in: RoundedRectangle(cornerRadius: 4))
@@ -63,8 +88,8 @@ struct TypeControls: View {
                                     .contentShape(RoundedRectangle(cornerRadius: 4))
                             }
                             .buttonStyle(.plain)
-                            .help("Align " + alignment.rawValue.lowercased())
-                            .accessibilityLabel("Align " + alignment.rawValue.lowercased())
+                            .help(Self.alignmentLabel(alignment, vertical: vertical))
+                            .accessibilityLabel(Self.alignmentLabel(alignment, vertical: vertical))
                             .accessibilityAddTraits(selected ? .isSelected : [])
                         }
                     }

@@ -488,7 +488,7 @@ struct TypeToolTests {
         #expect(pixels.red > 50 && pixels.dark > 50)
 
         let snapshot = try #require(session.projectSnapshot())
-        #expect(snapshot.manifest.version == 11)
+        #expect(snapshot.manifest.version == 12)
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("TextColors-\(UUID()).comp")
         defer { try? FileManager.default.removeItem(at: url) }
         try await ProjectStore.shared.save(snapshot, to: url)
@@ -933,4 +933,385 @@ struct TypeToolTests {
         session.closeColorPicker(commit: false)
         #expect(session.textDraft?.style == colored)
     }
+
+    private func verticalStyle(_ content: String = "가", font: String = "AppleSDGothicNeo-Regular",
+                               leading: CGFloat = 0) throws -> LayerTextStyle {
+        var style = tallLetters(leading: leading, content: content)
+        style.fontName = font
+        // Decode the new field so these tests exercise behavior even before the model supports it.
+        var json = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(style)) as? [String: Any])
+        json["orientation"] = "Vertical"
+        return try JSONDecoder().decode(LayerTextStyle.self, from: JSONSerialization.data(withJSONObject: json))
+    }
+
+    private func inkBounds(_ image: CGImage, red: Bool? = nil) throws -> CGRect {
+        let bytes = try #require(image.dataProvider?.data) as Data
+        var left = image.width, top = image.height, right = -1, bottom = -1
+        for y in 0..<image.height { for x in 0..<image.width {
+            let offset = y * image.bytesPerRow + x * 4
+            guard bytes[offset + 3] > 0 else { continue }
+            if let red, red ? bytes[offset] <= bytes[offset + 2] : bytes[offset + 2] <= bytes[offset] { continue }
+            left = min(left, x); right = max(right, x); top = min(top, y); bottom = max(bottom, y)
+        } }
+        try #require(right >= left && bottom >= top)
+        return CGRect(x: left, y: top, width: right - left + 1, height: bottom - top + 1)
+    }
+
+    @Test func missingOrientationKeepsLegacyHorizontalJSON() throws {
+        let style = LayerTextStyle()
+        let data = try JSONEncoder().encode(style)
+        let restored = try JSONDecoder().decode(LayerTextStyle.self, from: data)
+        #expect(restored == style)
+        #expect(restored.orientation == nil && !restored.isVertical)
+        let json = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        #expect(json["orientation"] == nil)
+    }
+
+    @Test func horizontalOrientationIsOmittedWhenEncoded() throws {
+        var style = try verticalStyle()
+        #expect(style.isVertical)
+        style.orientation = .horizontal
+        #expect(!style.isVertical)
+        let json = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(style)) as? [String: Any])
+        #expect(json["orientation"] == nil)
+    }
+
+    @Test func verticalOrientationSurvivesSavingAndRejectsVersionEleven() async throws {
+        let session = makeSession()
+        session.beginText(at: .zero)
+        session.textDraft?.style = try verticalStyle()
+        #expect(session.finishText())
+        let snapshot = try #require(session.projectSnapshot())
+        #expect(snapshot.manifest.version == 12)
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("Vertical-\(UUID()).comp")
+        defer { try? FileManager.default.removeItem(at: url) }
+        try await ProjectStore.shared.save(snapshot, to: url)
+        let reopened = makeSession()
+        reopened.installProject(try await ProjectStore.shared.load(from: url), from: url)
+        let style = try #require(reopened.activeLayer?.liveText?.style)
+        let json = try #require(JSONSerialization.jsonObject(with: JSONEncoder().encode(style)) as? [String: Any])
+        #expect(json["orientation"] as? String == "Vertical")
+        var legacy = snapshot.manifest
+        legacy.version = 11
+        try JSONEncoder().encode(legacy).write(to: url.appendingPathComponent("manifest.json"))
+        do {
+            _ = try await ProjectStore.shared.load(from: url)
+            Issue.record("Version 11 with orientation should be rejected")
+        } catch ProjectError.invalid {}
+    }
+
+    @Test func verticalCJKStaysUprightAndLatinRotates() throws {
+        for (text, name) in [("가", "AppleSDGothicNeo-Regular"), ("あ", "HiraginoSans-W3"), ("A", "Helvetica")] {
+            var horizontal = tallLetters(leading: 0, content: text)
+            horizontal.fontName = name
+            let upright = try inkBounds(EditorSession.textImage(horizontal))
+            let vertical = try inkBounds(EditorSession.textImage(verticalStyle(text, font: name)))
+            #expect(abs(vertical.width - (text == "A" ? upright.height : upright.width)) <= 1, "\(name) width")
+            #expect(abs(vertical.height - (text == "A" ? upright.width : upright.height)) <= 1, "\(name) height")
+        }
+    }
+
+    @Test func verticalColumnsProgressFromRightToLeft() throws {
+        var style = try verticalStyle("가\n나")
+        style.red = 1
+        style.colorRuns = [LayerTextColorRun(location: 2, length: 1, red: 0, green: 0, blue: 1)]
+        let image = try EditorSession.textImage(style)
+        // Color isolates the two ink columns even when one Hangul glyph has gaps within it.
+        let first = try inkBounds(image, red: true), second = try inkBounds(image, red: false)
+        #expect(first.minX > second.maxX)
+        #expect(abs(first.minY - second.minY) <= 1)
+    }
+
+    @Test func verticalColumnSpacingFollowsLeading() throws {
+        for leading: CGFloat in [60, 200, 0] {
+            var style = try verticalStyle("가\n　　　가", leading: leading)
+            style.boxSize = CGSize(width: 700, height: 1200)
+            style.red = 1
+            style.colorRuns = [LayerTextColorRun(location: 2, length: 4, red: 0, green: 0, blue: 1)]
+            let image = try EditorSession.textImage(style)
+            let first = try inkBounds(image, red: true), second = try inkBounds(image, red: false)
+            #expect(abs(first.midX - second.midX - style.lineHeight) <= 1, "leading \(leading)")
+        }
+    }
+
+    @Test func verticalFirstEmBoxMeetsRightPaddingWithAnyLeading() throws {
+        for (text, name) in [("가", "AppleSDGothicNeo-Regular"), ("あ", "HiraginoSans-W3")] {
+            for leading: CGFloat in [60, 200, 0] {
+                var style = try verticalStyle(text, font: name, leading: leading)
+                style.boxSize = CGSize(width: 700, height: 700)
+                let font = try #require(NSFont(name: name, size: style.fontSize))
+                var character = try #require(text.utf16.first), glyph: CGGlyph = 0
+                #expect(CTFontGetGlyphsForCharacters(font, &character, &glyph, 1))
+                var translation = CGSize.zero
+                CTFontGetVerticalTranslationsForGlyphs(font, &glyph, &translation, 1)
+                let ink = try inkBounds(EditorSession.textImage(style))
+                let expectedRight = 700 - LayerTextStyle.padding - style.fontSize / 2
+                    + translation.width + font.boundingRect(forGlyph: NSGlyph(glyph)).maxX
+                #expect(abs(ink.maxX - expectedRight) <= 1, "\(name), leading \(leading)")
+                #expect(ink.maxX <= 700 - LayerTextStyle.padding + 1)
+            }
+        }
+    }
+
+    @Test func verticalAlignmentMovesAlongTheColumn() throws {
+        for (text, name) in [("가", "AppleSDGothicNeo-Regular"), ("あ", "HiraginoSans-W3")] {
+            var style = try verticalStyle(text, font: name)
+            style.boxSize = CGSize(width: 700, height: 800)
+            let font = try #require(NSFont(name: name, size: style.fontSize))
+            var character = try #require(text.utf16.first), glyph: CGGlyph = 0
+            #expect(CTFontGetGlyphsForCharacters(font, &character, &glyph, 1))
+            var advance = CGSize.zero, translation = CGSize.zero
+            CTFontGetAdvancesForGlyphs(font, .vertical, &glyph, &advance, 1)
+            CTFontGetVerticalTranslationsForGlyphs(font, &glyph, &translation, 1)
+            let top = LayerTextStyle.padding - translation.height - font.boundingRect(forGlyph: NSGlyph(glyph)).maxY
+            for (alignment, fraction): (Compositor.TextAlignment, CGFloat) in [(.left, 0), (.center, 0.5), (.right, 1)] {
+                style.alignment = alignment
+                let ink = try inkBounds(EditorSession.textImage(style))
+                let expected = top + (800 - 2 * LayerTextStyle.padding - advance.width) * fraction
+                #expect(abs(ink.minY - floor(expected)) <= 1, "\(name), \(alignment)")
+                let vertical = EditorSession.verticalLayout(style, size: try #require(style.boxSize))
+                let position = vertical.layoutManager.location(forGlyphAt: 0).x + vertical.drawingOrigin.x
+                let emStart = LayerTextStyle.padding + (800 - 2 * LayerTextStyle.padding - advance.width) * fraction
+                #expect(abs(position - emStart) <= 1, "the em advance, before raster rounding")
+            }
+        }
+    }
+
+    @Test func verticalPointSizeMeasuresColumnsAndEmptyText() throws {
+        for leading: CGFloat in [60, 200, 0] {
+            var style = try verticalStyle("あ\nああ", font: "HiraginoSans-W3", leading: leading)
+            let size = EditorSession.textBoxSize(style)
+            #expect(abs(size.width - (200 + style.lineHeight + 24)) <= 1)
+            #expect(abs(size.height - 424) <= 1)
+            style.content = ""
+            #expect(abs(EditorSession.textBoxSize(style).width - 224) <= 1)
+            style.content = "あ\n"
+            #expect(abs(EditorSession.textBoxSize(style).width - (200 + style.lineHeight + 24)) <= 1)
+        }
+    }
+
+
+    @Test func orientationButtonChangesDefaultsAndReturnsToHorizontal() throws {
+        let session = makeSession()
+        let controls = TypeControls(session: session)
+        controls.toggleOrientation()
+        #expect(session.textDefaults.isVertical)
+        #expect(session.textDraft == nil)
+        controls.toggleOrientation()
+        #expect(session.textDefaults.orientation == nil)
+    }
+
+    @Test func orientationButtonEditsSelectedOrDraftTextWithOneUndo() throws {
+        for editing in [false, true] {
+            let session = makeSession()
+            session.beginText(at: .zero)
+            session.textDraft?.style.content = "가나"
+            session.textDraft?.style.fontName = "AppleSDGothicNeo-Regular"
+            #expect(session.finishText())
+            let old = try #require(session.activeLayer?.liveText?.style)
+            let undoCount = session.history.undoCount
+            if editing { session.editActiveText() }
+            TypeControls(session: session).toggleOrientation()
+            #expect(session.textDraft?.style.isVertical == true)
+            #expect(session.history.undoCount == undoCount)
+            #expect(session.finishText())
+            #expect(session.activeLayer?.liveText?.style.isVertical == true)
+            #expect(session.history.undoCount == undoCount + 1)
+            session.undo()
+            #expect(session.activeLayer?.liveText?.style == old)
+        }
+    }
+
+    @Test func verticalAlignmentButtonsUseTopCenterAndBottomLabels() {
+        for (alignment, horizontal, vertical): (Compositor.TextAlignment, String, String) in [
+            (.left, "Align left", "Align top"), (.center, "Align center", "Align center"), (.right, "Align right", "Align bottom")
+        ] {
+            #expect(TypeControls.alignmentLabel(alignment, vertical: false) == horizontal)
+            #expect(TypeControls.alignmentLabel(alignment, vertical: true) == vertical)
+        }
+    }
+
+    private func expectPoint(_ actual: CGPoint, _ expected: CGPoint, tolerance: CGFloat = 1) {
+        #expect(abs(actual.x - expected.x) <= tolerance)
+        #expect(abs(actual.y - expected.y) <= tolerance)
+    }
+
+    @Test func verticalPointClickAndGrowthKeepTheUpperRight() throws {
+        for rotation: CGFloat in [0, 30] {
+            let session = makeSession()
+            session.textDefaults = try verticalStyle("", leading: 10)
+            let click = CGPoint(x: 400, y: 180)
+            session.beginText(at: click, newLayer: true)
+            let canvas = CanvasView(session: session)
+            canvas.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+            session.textDraft?.style.content = "가"
+            canvas.synchronizeDisplay()
+            let first = try #require(canvas.inlineTextEditor?.shownTransform)
+            expectPoint(CGPoint(x: first.origin.x + first.size.width - LayerTextStyle.padding - 100,
+                                y: first.origin.y + LayerTextStyle.padding), click)
+            session.textDraft?.style.content = "가\n나"
+            canvas.synchronizeDisplay()
+            let newGrowth = try #require(canvas.inlineTextEditor?.shownTransform)
+            expectPoint(newGrowth.point(CGPoint(x: 1, y: 0)), first.point(CGPoint(x: 1, y: 0)))
+            #expect(session.finishText())
+            #expect(session.activeLayer?.transform == newGrowth)
+            let index = try #require(session.document?.layers.firstIndex { $0.id == session.activeLayerID })
+            session.document?.layers[index].transform.rotation = rotation
+            session.editActiveText()
+            canvas.synchronizeDisplay()
+            let before = try #require(canvas.inlineTextEditor?.shownTransform)
+            session.textDraft?.style.content += "\n다"
+            canvas.synchronizeDisplay()
+            let after = try #require(canvas.inlineTextEditor?.shownTransform)
+            expectPoint(after.point(CGPoint(x: 1, y: 0)), before.point(CGPoint(x: 1, y: 0)))
+            #expect(after.size.width > before.size.width)
+            #expect(session.finishText())
+            let committed = try #require(session.activeLayer?.transform)
+            expectPoint(committed.point(CGPoint(x: 1, y: 0)), before.point(CGPoint(x: 1, y: 0)))
+            #expect(committed == after)
+        }
+    }
+
+    @Test func orientationSwitchPinsThePreviousCornerThenUsesTheNewDirection() throws {
+        let session = makeSession()
+        session.textDefaults = try verticalStyle("")
+        session.textDefaults.orientation = nil
+        session.beginText(at: CGPoint(x: 300, y: 300))
+        session.textDraft?.style.content = "가나"
+        #expect(session.finishText())
+        let index = try #require(session.document?.layers.firstIndex { $0.id == session.activeLayerID })
+        session.document?.layers[index].transform.rotation = 30
+        session.editActiveText()
+        let canvas = CanvasView(session: session)
+        canvas.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+        canvas.synchronizeDisplay()
+        let horizontal = try #require(canvas.inlineTextEditor?.shownTransform)
+        session.changeTextStyle { $0.orientation = .vertical }
+        canvas.synchronizeDisplay()
+        let vertical = try #require(canvas.inlineTextEditor?.shownTransform)
+        expectPoint(vertical.point(.zero), horizontal.point(.zero))
+        session.textDraft?.style.content += "\n다"
+        canvas.synchronizeDisplay()
+        let grown = try #require(canvas.inlineTextEditor?.shownTransform)
+        expectPoint(grown.point(CGPoint(x: 1, y: 0)), vertical.point(CGPoint(x: 1, y: 0)))
+        session.changeTextStyle { $0.orientation = nil }
+        canvas.synchronizeDisplay()
+        let back = try #require(canvas.inlineTextEditor?.shownTransform)
+        expectPoint(back.point(CGPoint(x: 1, y: 0)), grown.point(CGPoint(x: 1, y: 0)))
+        session.textDraft?.style.content += "라마"
+        canvas.synchronizeDisplay()
+        let final = try #require(canvas.inlineTextEditor?.shownTransform)
+        expectPoint(final.point(.zero), back.point(.zero))
+        #expect(session.finishText())
+        #expect(session.activeLayer?.transform == final)
+    }
+
+    @Test func verticalEditorCoordinatesMatchInkAndHitTestingThroughTransforms() throws {
+        for (rotation, flipX, flipY) in [(0.0, false, false), (30.0, false, false),
+                                       (30.0, true, false), (30.0, false, true)] {
+            let session = makeSession()
+            var style = try verticalStyle("가\n나", leading: 200)
+            style.boxSize = CGSize(width: 480, height: 500)
+            style.red = 1; style.green = 0; style.blue = 0
+            style.colorRuns = [LayerTextColorRun(location: 2, length: 1, red: 0, green: 0, blue: 1)]
+            session.textDefaults = style
+            session.beginText(in: CGRect(origin: CGPoint(x: 100, y: 50), size: style.boxSize!))
+            session.textDraft?.style = style
+            #expect(session.finishText())
+            let index = try #require(session.document?.layers.firstIndex { $0.id == session.activeLayerID })
+            session.document?.layers[index].transform.rotation = rotation
+            session.document?.layers[index].transform.flipX = flipX
+            session.document?.layers[index].transform.flipY = flipY
+            session.editActiveText()
+            let canvas = CanvasView(session: session)
+            canvas.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+            session.viewport.resize(to: canvas.bounds.size, backingScale: 1, documentSize: nil)
+            let window = TextEditingWindow(contentRect: canvas.frame, styleMask: .borderless, backing: .buffered, defer: false)
+            window.contentView = canvas
+            canvas.synchronizeDisplay()
+            let editor = try #require(canvas.inlineTextEditor), view = editor.textView
+            #expect(view.layoutOrientation == .vertical)
+            let transform = try #require(editor.shownTransform)
+            let image = try EditorSession.textImage(style)
+            for (character, red) in [(0, true), (2, false)] {
+                let ink = try #require(try inkBounds(image, red: red))
+                let center = CGPoint(x: ink.midX / CGFloat(image.width), y: ink.midY / CGFloat(image.height))
+                    .applying(transform.unitToDocument)
+                let canvasPoint = session.viewport.viewPoint(from: center, documentSize: try #require(session.document?.size))
+                let rect = view.firstRect(forCharacterRange: NSRange(location: character, length: 1), actualRange: nil)
+                let onCanvas = canvas.convert(window.convertFromScreen(rect), from: nil)
+                #expect(onCanvas.contains(canvasPoint), "firstRect must cover its rendered glyph")
+                let insertion = view.characterIndexForInsertion(at: view.convert(canvasPoint, from: canvas))
+                #expect(insertion == character || insertion == character + 1)
+            }
+            window.contentView = nil
+        }
+    }
+
+    @Test func verticalSelectionAndCaretCoverEmInsteadOfLeading() throws {
+        for leading: CGFloat in [10, 200, 0] {
+            let session = makeSession()
+            session.textDefaults = try verticalStyle("", leading: leading)
+            session.beginText(at: CGPoint(x: 400, y: 200))
+            session.textDraft?.style.content = "가\n나\n"
+            let canvas = CanvasView(session: session)
+            canvas.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+            session.viewport.resize(to: canvas.bounds.size, backingScale: 1, documentSize: nil)
+            let window = TextEditingWindow(contentRect: canvas.frame, styleMask: .borderless, backing: .buffered, defer: false)
+            window.contentView = canvas
+            canvas.synchronizeDisplay()
+            let editor = try #require(canvas.inlineTextEditor), view = editor.textView
+            let style = try #require(session.textDraft?.style)
+            let layout = EditorSession.verticalLayout(style, size: EditorSession.textBoxSize(style))
+            #expect(abs(view.textContainerOrigin.y - layout.columnOffset) <= 1)
+            let manager = try #require(view.layoutManager), container = try #require(view.textContainer)
+            manager.ensureLayout(for: container)
+            for character in [0, 2] {
+                view.setSelectedRange(NSRange(location: character, length: 1))
+                let rect = try #require(view.selectionRects.first)
+                #expect(abs(rect.height - 200) <= 1)
+                let projected = view.convert(rect, to: editor)
+                #expect(abs(projected.width - 200) <= 1)
+                #expect(abs(projected.maxX - (editor.bounds.width - LayerTextStyle.padding - CGFloat(character / 2) * style.lineHeight)) <= 1)
+            }
+            for character in [0, 2, 4] {
+                view.setSelectedRange(NSRange(location: character, length: 0))
+                window.makeFirstResponder(view)
+                let fragment = character == 4 ? manager.extraLineFragmentRect
+                    : manager.lineFragmentRect(forGlyphAt: character, effectiveRange: nil)
+                view.drawInsertionPoint(in: CGRect(x: view.textContainerOrigin.x, y: fragment.minY + view.textContainerOrigin.y,
+                                                   width: 1, height: style.lineHeight), color: .black, turnedOn: true)
+                let caret = try #require(view.subviews.first { $0.identifier?.rawValue == "canvasTextCaret" })
+                #expect(abs(caret.frame.height - 200) <= 1)
+                let projected = view.convert(caret.frame, to: editor)
+                #expect(abs(projected.maxX - (editor.bounds.width - LayerTextStyle.padding - CGFloat(character / 2) * style.lineHeight)) <= 1)
+            }
+            window.contentView = nil
+        }
+    }
+
+    @Test func orientationRoundTripCommitsItsChangedAnchor() throws {
+        let session = makeSession()
+        session.textDefaults = try verticalStyle("")
+        session.textDefaults.orientation = nil
+        session.beginText(at: CGPoint(x: 300, y: 300))
+        session.textDraft?.style.content = "가나"
+        #expect(session.finishText())
+        let before = try #require(session.activeLayer?.transform)
+        session.editActiveText()
+        let canvas = CanvasView(session: session)
+        canvas.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+        canvas.synchronizeDisplay()
+        session.changeTextStyle { $0.orientation = .vertical }
+        canvas.synchronizeDisplay()
+        session.changeTextStyle { $0.orientation = nil }
+        canvas.synchronizeDisplay()
+        let shown = try #require(canvas.inlineTextEditor?.shownTransform)
+        #expect(shown != before)
+        #expect(session.finishText())
+        #expect(session.activeLayer?.transform == shown)
+        session.undo()
+        #expect(session.activeLayer?.transform == before)
+    }
+
 }

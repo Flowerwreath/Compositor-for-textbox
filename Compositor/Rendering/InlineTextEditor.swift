@@ -5,12 +5,20 @@ import AppKit
 /// Its glyphs are clear: the canvas draws the text as the layer's own pixels underneath, as Photoshop does, so
 /// what is typed looks the same at any zoom as it will once it is committed.
 /// Selection and insertion geometry use the letters' ascent and descent, independent of leading.
-private nonisolated final class SeeThroughSelectionLayout: NSLayoutManager {
+private nonisolated final class SeeThroughSelectionLayout: VerticalEmLayoutManager {
+    var columnSpacing: CGFloat = 0
     /// The letters on a laid-out line, including all its faces. A blank line uses the typing face.
     private func letters(on line: NSRange, fragment: CGRect, typingFont: NSFont?) -> CGRect? {
         guard let storage = textStorage else { return nil }
         let characters = characterRange(forGlyphRange: line, actualGlyphRange: nil)
         let content = (storage.string as NSString).substring(with: characters)
+        if textContainers.first?.layoutOrientation == .vertical {
+            let measured = measureEmBounds(for: line)
+            if !measured.isNull { return measured }
+            guard let font = typingFont else { return nil }
+            return CGRect(x: fragment.minX, y: fragment.minY + columnSpacing - font.pointSize,
+                          width: fragment.width, height: font.pointSize)
+        }
         var ascent: CGFloat = 0, descent: CGFloat = 0
         if content.trimmingCharacters(in: .newlines).isEmpty, let font = typingFont {
             ascent = font.ascender
@@ -34,6 +42,10 @@ private nonisolated final class SeeThroughSelectionLayout: NSLayoutManager {
         if extraLineFragmentTextContainer === container, numberOfGlyphs == 0 || y >= extraLineFragmentRect.minY {
             guard let font = typingFont else { return nil }
             let fragment = extraLineFragmentRect
+            if container.layoutOrientation == .vertical {
+                return CGRect(x: fragment.minX, y: fragment.minY + columnSpacing - font.pointSize,
+                              width: fragment.width, height: font.pointSize)
+            }
             return CGRect(x: fragment.minX, y: fragment.maxY - abs(font.descender) - font.ascender,
                           width: fragment.width, height: font.ascender + abs(font.descender))
         }
@@ -53,8 +65,8 @@ private nonisolated final class SeeThroughSelectionLayout: NSLayoutManager {
 
     /// NSTextView clips its layout manager's background drawing to the line fragments. A short leading's letters
     /// stand above that clip, so the selection is painted by the text view before it enters that drawing stage.
-    func drawSelection(_ ranges: [NSRange], origin: CGPoint, typingFont: NSFont?, color: NSColor) {
-        guard let container = textContainers.first, let context = NSGraphicsContext.current?.cgContext else { return }
+    func selectionRects(_ ranges: [NSRange], origin: CGPoint, typingFont: NSFont?) -> [CGRect] {
+        guard let container = textContainers.first else { return [] }
         ensureLayout(for: container)
         var rects: [CGRect] = []
         for range in ranges where range.length > 0 {
@@ -68,6 +80,12 @@ private nonisolated final class SeeThroughSelectionLayout: NSLayoutManager {
                 }
             }
         }
+        return rects
+    }
+
+    func drawSelection(_ ranges: [NSRange], origin: CGPoint, typingFont: NSFont?, color: NSColor) {
+        guard let context = NSGraphicsContext.current?.cgContext else { return }
+        let rects = selectionRects(ranges, origin: origin, typingFont: typingFont)
         context.saveGState()
         defer { context.restoreGState() }
         color.withAlphaComponent(min(color.alphaComponent, 0.45)).setFill()
@@ -91,7 +109,7 @@ final class CanvasTextView: NSTextView {
     /// Set when the font menu takes the focus, so a collapsed caret does not replace the letters that were selected.
     var holdsSelection = false
     /// How far letters stand out of the top of their line, at most, which a leading shorter than they are tall leaves
-    /// them doing. The caret and the highlight reach up over them, so whatever is redrawn reaches up as far.
+    /// them doing. In a vertical view native y points left, so this same reach extends toward the right.
     var letterReach: CGFloat = 0
     private let caretView = CanvasTextCaret(frame: .zero)
     private func installCaret() {
@@ -105,6 +123,10 @@ final class CanvasTextView: NSTextView {
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
         if window != nil { installCaret() }
+    }
+    var selectionRects: [CGRect] {
+        (layoutManager as? SeeThroughSelectionLayout)?.selectionRects(selectedRanges.map(\.rangeValue),
+            origin: textContainerOrigin, typingFont: typingAttributes[.font] as? NSFont) ?? []
     }
     override func draw(_ dirtyRect: NSRect) {
         (layoutManager as? SeeThroughSelectionLayout)?.drawSelection(selectedRanges.map(\.rangeValue),
@@ -199,9 +221,24 @@ final class CanvasTextView: NSTextView {
     override func resetCursorRects() {}
 }
 
+/// A view transform, unlike a layer-only mirror, also maps native text hit tests and IME rectangles.
+private final class CanvasTextSurface: NSView {
+    override var isFlipped: Bool { true }
+    private var mirror = CGSize(width: 1, height: 1)
+    func place(size: CGSize, flipX: Bool, flipY: Bool) {
+        scaleUnitSquare(to: mirror)
+        frame = CGRect(origin: .zero, size: size)
+        bounds = CGRect(origin: .zero, size: size)
+        mirror = CGSize(width: flipX ? -1 : 1, height: flipY ? -1 : 1)
+        scaleUnitSquare(to: mirror)
+        translateOrigin(to: CGPoint(x: flipX ? -size.width : 0, y: flipY ? -size.height : 0))
+    }
+}
+
 final class InlineTextEditor: NSView, NSTextViewDelegate {
     weak var canvas: CanvasView?
     let textView = CanvasTextView(frame: .zero)
+    private let textSurface = CanvasTextSurface(frame: .zero)
     fileprivate var draftID: UUID?
     private var shownStyle: LayerTextStyle?
     /// The style after an edit NSTextView has accepted but not yet made, with its color and font runs moved to fit.
@@ -216,12 +253,14 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         let anchor: CGPoint
         let scale: CGFloat
         let overflow: CGFloat
+        let vertical: Bool
     }
     private var shownGeometry: Geometry?
     private var measuredStyle: LayerTextStyle?
     private var measuredSize: CGSize = .zero
     /// How much lower than its padding the first line is set, as the canvas draws it (see `EditorSession.firstLine`).
     private var measuredOverflow: CGFloat = 0
+    private var verticalLayout: VerticalTextLayout?
     private var resize: (handle: Int, draft: TextDraft, transform: LayerTransform, start: CGPoint)?
     /// The transform the editor is actually showing. Point text grows as it is typed, so this is not always the
     /// draft's own transform, and a resize has to start from what is on screen or the text jumps.
@@ -255,7 +294,9 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         wantsLayer = true
         textView.wantsLayer = true
         textView.layer?.anchorPoint = .zero
-        addSubview(textView)
+        addSubview(textSurface)
+        textSurface.addSubview(textView)
+        textSurface.clipsToBounds = false
         clipsToBounds = false
         // Shown once it has been placed, so a flipped layer never appears for a frame at the unmirrored spot.
         isHidden = true
@@ -271,27 +312,25 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         if measuredStyle != style {
             // Point text has no box: it is as big as what has been typed, growing as it is typed. A box is its own size.
             measuredSize = EditorSession.textBoxSize(style)
-            measuredOverflow = EditorSession.firstLine(style).overflow
-            textView.letterReach = EditorSession.letterMetrics(style, in: NSRange(location: 0, length: style.content.utf16.count)).overflow
+            verticalLayout = style.isVertical ? EditorSession.verticalLayout(style, size: measuredSize) : nil
+            measuredOverflow = verticalLayout?.columnOffset ?? EditorSession.firstLine(style).overflow
+            textView.letterReach = style.isVertical ? max(0, measuredOverflow)
+                : EditorSession.letterMetrics(style, in: NSRange(location: 0, length: style.content.utf16.count)).overflow
             measuredStyle = style
         }
         logicalSize = measuredSize
-        var transform = draft.transform ?? LayerTransform(origin: draft.origin, size: logicalSize)
-        // Point text already on a layer grows as it is typed too, keeping whatever scale the layer was given.
-        if style.boxSize == nil, draft.transform != nil, let asset = layer?.asset, asset.image.width > 0 {
-            let factor = transform.size.width / CGFloat(asset.image.width)
-            // A rotated layer turns about its center, so growing it swings its corner away and the text drifts as it
-            // is typed. The top-left corner is put back where it was, which is where the commit leaves it too.
-            let anchor = transform.point(.zero)
-            transform.size = CGSize(width: logicalSize.width * factor, height: logicalSize.height * factor)
-            let moved = transform.point(.zero)
-            transform.origin.x += anchor.x - moved.x
-            transform.origin.y += anchor.y - moved.y
+        var placed = draft
+        let transform = placed.textTransform(size: logicalSize, layer: layer)
+        if canvas.session.textDraft?.pointPlacement != placed.pointPlacement {
+            canvas.session.textDraft?.pointPlacement = placed.pointPlacement
         }
+        let orientation: NSLayoutManager.TextLayoutOrientation = style.isVertical ? .vertical : .horizontal
+        if textView.layoutOrientation != orientation { textView.setLayoutOrientation(orientation) }
+        (textView.layoutManager as? SeeThroughSelectionLayout)?.columnSpacing = style.lineHeight
         shownTransform = transform
         let scale = canvas.session.viewport.pointsPerPixel
         let anchor = canvas.session.viewport.viewPoint(from: transform.point(.zero), documentSize: document.size)
-        let geometry = Geometry(transform: transform, logicalSize: logicalSize, anchor: anchor, scale: scale, overflow: measuredOverflow)
+        let geometry = Geometry(transform: transform, logicalSize: logicalSize, anchor: anchor, scale: scale, overflow: measuredOverflow, vertical: style.isVertical)
         if fresh || shownGeometry != geometry {
             // AppKit's frame rotation participates in both drawing and event-coordinate conversion.
             frameRotation = 0
@@ -308,13 +347,25 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
             // text container moves down rather than the text view, which keeps the room above that line where its
             // letters stand, and its caret and highlight with them; the inset leaves as much again past the bottom.
             let padding = LayerTextStyle.padding, overflow = measuredOverflow
-            let room = max(0, bounds.height - padding * 2 - overflow)
-            let textFrame = CGRect(x: padding, y: padding, width: max(0, bounds.width - padding * 2), height: room + overflow * 2)
-            let inset = NSSize(width: 0, height: overflow)
+            let textFrame: CGRect, inset: CGSize, containerSize: CGSize
+            if let verticalLayout {
+                textFrame = CGRect(x: padding, y: padding, width: max(0, bounds.width - padding * 2),
+                                   height: max(0, bounds.height - padding * 2))
+                inset = CGSize(width: 0, height: verticalLayout.columnOffset)
+                containerSize = verticalLayout.container.size
+            } else {
+                let room = max(0, bounds.height - padding * 2 - overflow)
+                textFrame = CGRect(x: padding, y: padding, width: max(0, bounds.width - padding * 2), height: room + overflow * 2)
+                inset = CGSize(width: 0, height: overflow)
+                containerSize = CGSize(width: textFrame.width, height: room)
+            }
+            textView.textContainer?.widthTracksTextView = !style.isVertical
+            textView.textContainer?.heightTracksTextView = !style.isVertical
             if textView.textContainerInset != inset { textView.textContainerInset = inset }
             if textView.frame != textFrame { textView.frame = textFrame }
-            let containerSize = CGSize(width: textFrame.width, height: room)
             if let container = textView.textContainer, container.size != containerSize { container.size = containerSize }
+            textSurface.place(size: logicalSize, flipX: style.isVertical && transform.flipX,
+                              flipY: style.isVertical && transform.flipY)
             // Mirroring belongs to the text surface, leaving resize handles in their logical order.
             mirror = (transform.flipX, transform.flipY)
             applyMirror()
@@ -425,6 +476,8 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         defer { CATransaction.commit() }
+        // Vertical text already rotates its backing layer. Its surface mirrors in view coordinates instead.
+        if textView.layoutOrientation == .vertical { return }
         guard mirror.x || mirror.y else {
             if !layer.affineTransform().isIdentity { layer.setAffineTransform(.identity) }
             return

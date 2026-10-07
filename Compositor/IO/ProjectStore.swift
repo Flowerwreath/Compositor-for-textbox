@@ -12,7 +12,7 @@ extension UTType {
 
 nonisolated struct ProjectManifest: Codable, Sendable {
     /// The format version new saves write.
-    static let current = 11
+    static let current = 12
     /// Every version `load` accepts. The package-header check, the manifest check and the error
     /// message all read this, so they cannot drift apart when `current` is bumped.
     static let supported = 1...ProjectManifest.current
@@ -206,10 +206,11 @@ actor ProjectStore {
               manifest.layers.count <= 10_000 else { throw ProjectError.tooLarge }
         for layer in manifest.layers {
             if let text = layer.text {
-                // Per-letter colors arrived in version 10, per-letter faces in version 11.
+                // Per-letter colors arrived in version 10, faces in version 11, orientation in version 12.
                 guard text.isValid,
                       text.colorRuns == nil || manifest.version >= 10,
                       text.fontRuns == nil || manifest.version >= 11,
+                      text.orientation == nil || manifest.version >= 12,
                       layer.imageFile != nil, layer.isGroup != true, layer.adjustment == nil else { throw ProjectError.invalid }
             }
             if let adjustment = layer.adjustment {
