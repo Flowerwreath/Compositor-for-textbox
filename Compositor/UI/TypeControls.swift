@@ -23,9 +23,11 @@ struct TypeControls: View {
     }
 
     static func alignmentLabel(_ alignment: TextAlignment, vertical: Bool) -> String {
-        let position = vertical ? (alignment == .left ? "top" : alignment == .center ? "center" : "bottom")
-            : alignment.rawValue.lowercased()
-        return "Align " + position
+        switch alignment {
+        case .left: return vertical ? String(localized: "Align top") : String(localized: "Align left")
+        case .center: return String(localized: "Align center")
+        case .right: return vertical ? String(localized: "Align bottom") : String(localized: "Align right")
+        }
     }
 
     var body: some View {

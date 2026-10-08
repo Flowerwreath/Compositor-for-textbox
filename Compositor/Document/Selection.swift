@@ -294,6 +294,15 @@ extension EditorSession {
 
     enum SelectionAmountOperation: String {
         case expand = "Expand", contract = "Contract", feather = "Feather"
+
+        /// The amount panel's title, "Expand Selection".
+        var panelTitle: String {
+            switch self {
+            case .expand: String(localized: "Expand Selection")
+            case .contract: String(localized: "Contract Selection")
+            case .feather: String(localized: "Feather Selection")
+            }
+        }
     }
 
     /// Menu commands ask for an amount; the tool header applies its input directly.

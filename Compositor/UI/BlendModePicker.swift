@@ -10,7 +10,10 @@ struct BlendModePicker: NSViewRepresentable {
         // with a line between, so a long list stays readable.
         for (index, group) in LayerBlendMode.groups.enumerated() {
             if index > 0 { button.menu?.addItem(.separator()) }
-            for mode in group { button.addItem(withTitle: mode.rawValue) }
+            for mode in group {
+                button.addItem(withTitle: mode.displayName)
+                button.lastItem?.representedObject = mode.rawValue
+            }
         }
         button.menu?.delegate = context.coordinator
         button.target = context.coordinator
@@ -23,7 +26,7 @@ struct BlendModePicker: NSViewRepresentable {
     func updateNSView(_ button: NSPopUpButton, context: Context) {
         button.isEnabled = session.canEditAppearance
         if !context.coordinator.tracking {
-            button.selectItem(withTitle: (session.activeLayer?.blendMode ?? .normal).rawValue)
+            button.selectItem(at: button.indexOfItem(withRepresentedObject: (session.activeLayer?.blendMode ?? .normal).rawValue))
         }
     }
     static func dismantleNSView(_ button: NSPopUpButton, coordinator: Coordinator) {
@@ -36,6 +39,10 @@ struct BlendModePicker: NSViewRepresentable {
         private var layerID: UUID?
         private var highlightedMode: LayerBlendMode?
         init(session: EditorSession) { self.session = session }
+        /// Items carry their mode's raw value; their titles are translated.
+        private func blendMode(of item: NSMenuItem?) -> LayerBlendMode? {
+            (item?.representedObject as? String).flatMap(LayerBlendMode.init(rawValue:))
+        }
         func menuWillOpen(_ menu: NSMenu) {
             tracking = true
             layerID = session.activeLayerID
@@ -45,7 +52,7 @@ struct BlendModePicker: NSViewRepresentable {
             // AppKit briefly reports no highlighted item while dismissing the menu.
             // Keep the last preview alive until the selection action has committed so
             // the canvas never flashes back to the layer's previous mode.
-            guard let mode = item.flatMap({ LayerBlendMode(rawValue: $0.title) }) else { return }
+            guard let mode = blendMode(of: item) else { return }
             highlightedMode = mode
             session.previewBlendMode(mode, for: layerID)
         }
@@ -61,9 +68,9 @@ struct BlendModePicker: NSViewRepresentable {
         }
         @objc func choose(_ button: NSPopUpButton) {
             guard session.activeLayerID == layerID,
-                  let mode = highlightedMode ?? button.selectedItem.flatMap({ LayerBlendMode(rawValue: $0.title) }) else { return }
+                  let mode = highlightedMode ?? blendMode(of: button.selectedItem) else { return }
             session.setLayerBlendMode(mode)
-            button.selectItem(withTitle: mode.rawValue)
+            button.selectItem(at: button.indexOfItem(withRepresentedObject: mode.rawValue))
             highlightedMode = nil
             session.refreshCanvasPreview?()
         }

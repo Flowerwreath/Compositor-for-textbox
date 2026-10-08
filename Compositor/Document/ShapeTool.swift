@@ -143,17 +143,14 @@ extension EditorSession {
             let style = LayerShapeStyle(kind: draft.kind, red: foregroundColor.red, green: foregroundColor.green,
                                         blue: foregroundColor.blue, cornerRadius: draft.cornerRadius,
                                         lineWidth: draft.kind == .line ? thickness : nil, start: start, end: finish)
-            addPixelLayer(image, at: rect.origin, name: nextShapeName(draft.kind), editName: draft.kind.rawValue,
+            addPixelLayer(image, at: rect.origin, name: nextShapeName(draft.kind), editName: draft.kind.displayName,
                           dropsSelection: false, shape: LayerShape(style: style, image: image))
         } catch { brushError = error.localizedDescription }
     }
 
     /// "Rectangle 1", "Ellipse 2", … skipping names already in the document.
     func nextShapeName(_ kind: ShapeKind) -> String {
-        let names = Set(document?.layers.map(\.name) ?? [])
-        var number = 1
-        while names.contains("\(kind.rawValue) \(number)") { number += 1 }
-        return "\(kind.rawValue) \(number)"
+        L10n.firstFreeName({ "\(kind.displayName) \($0)" }, avoiding: Set(document?.layers.map(\.name) ?? []))
     }
 
     /// A shape layer scaled to a new size draws its shape again at that size, so a rounded corner keeps its radius
