@@ -69,16 +69,22 @@ struct TypeControls: View {
                         Button { toggleOrientation() } label: {
                             Group {
                                 if vertical {
-                                    VStack(spacing: 0) {
-                                        Text("A").frame(height: 8)
-                                        Text("B").frame(height: 8)
-                                        Text("C").frame(height: 8)
+                                    HStack(spacing: 1) {
+                                        VStack(spacing: 0) {
+                                            ForEach(["A", "B", "C"], id: \.self) { Text($0).frame(height: 7.5) }
+                                        }
+                                        VStack(spacing: 0) {
+                                            ForEach(["가", "나", "다"], id: \.self) { Text($0).frame(height: 7.5) }
+                                        }
                                     }
                                 } else {
-                                    Text("ABC")
+                                    VStack(spacing: 0) {
+                                        Text("ABC")
+                                        Text("가나다")
+                                    }
                                 }
                             }
-                            .font(.system(size: 9, weight: .semibold))
+                            .font(.system(size: 8, weight: .semibold))
                             .frame(width: 30, height: 26)
                             .contentShape(RoundedRectangle(cornerRadius: 4))
                         }
