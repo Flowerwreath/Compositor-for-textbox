@@ -193,7 +193,7 @@ final class CanvasTextView: NSTextView {
     override func menu(for event: NSEvent) -> NSMenu? {
         let menu = super.menu(for: event) ?? NSMenu()
         menu.addItem(.separator())
-        for (title, horizontal) in [("Flip Horizontal", true), ("Flip Vertical", false)] {
+        for (title, horizontal) in [(String(localized: "Flip Horizontal"), true), (String(localized: "Flip Vertical"), false)] {
             let item = NSMenuItem(title: title, action: #selector(flipTextFromMenu(_:)), keyEquivalent: "")
             item.target = self
             item.tag = horizontal ? 1 : 0
@@ -318,7 +318,7 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         // picker previewing the selected letters) has focus, where AppKit would otherwise paint it solid gray.
         textView.selectedTextAttributes = [.backgroundColor: NSColor.clear]
         textView.textContainer?.replaceLayoutManager(SeeThroughSelectionLayout())
-        textView.setAccessibilityLabel("Canvas text")
+        textView.setAccessibilityLabel(String(localized: "Canvas text"))
         // Create backing layers before attachment so the text starts in its final layer hierarchy.
         // synchronize reflects the view coordinates before the editor becomes visible.
         wantsLayer = true

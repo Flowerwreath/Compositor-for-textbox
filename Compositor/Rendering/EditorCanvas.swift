@@ -663,7 +663,7 @@ final class CanvasView: NSView {
         clipsToBounds = true
         setAccessibilityElement(true)
         setAccessibilityRole(.image)
-        setAccessibilityLabel("Canvas")
+        setAccessibilityLabel(String(localized: "Canvas"))
         setAccessibilityIdentifier("editorCanvas")
     }
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -1716,7 +1716,7 @@ final class CanvasView: NSView {
             visible.contains($0.id) && $0.liveText != nil && $0.transform.contains(pixel)
         }) else { return super.menu(for: event) }
         let menu = NSMenu()
-        for (title, horizontal) in [("Flip Horizontal", true), ("Flip Vertical", false)] {
+        for (title, horizontal) in [(String(localized: "Flip Horizontal"), true), (String(localized: "Flip Vertical"), false)] {
             let item = NSMenuItem(title: title, action: #selector(flipTextLayerFromMenu(_:)), keyEquivalent: "")
             item.target = self
             item.representedObject = layer.id
