@@ -182,9 +182,7 @@ extension EditorSession {
             ancestors(first).first { candidate in ordered.allSatisfy { ancestors($0).contains(candidate) } } ?? nil
         }
         let names = Set(document.layers.map(\.name))
-        var number = 1
-        while names.contains("Folder \(number)") { number += 1 }
-        var group = ImageLayer(name: "Folder \(number)", blankSize: document.size)
+        var group = ImageLayer(name: L10n.firstFreeName({ String(localized: "Folder \($0)") }, avoiding: names), blankSize: document.size)
         group.isGroup = true
         group.parentID = parent
         // Put the wrapper at the topmost selected branch in the common parent.
@@ -252,9 +250,7 @@ extension EditorSession {
     func addGroup() {
         guard canEditLayers, let document, document.layers.count < 10_000 else { return }
         let names = Set(document.layers.map(\.name))
-        var number = 1
-        while names.contains("Folder \(number)") { number += 1 }
-        var group = ImageLayer(name: "Folder \(number)", blankSize: document.size)
+        var group = ImageLayer(name: L10n.firstFreeName({ String(localized: "Folder \($0)") }, avoiding: names), blankSize: document.size)
         group.isGroup = true
         group.parentID = activeLayer?.isGroup == true ? activeLayerID : activeLayer?.parentID
         var layers = document.layers

@@ -269,7 +269,7 @@ struct CameraRawControls: View {
         }
     }
 
-    private func eye(shown: Bool, name: String, group: PanelEye) -> some View {
+    private func eye(shown: Bool, name: LocalizedStringResource, group: PanelEye) -> some View {
         Button {
             switch group {
             case .light: session.filterEdit?.showsCameraRawLight.toggle()
@@ -288,8 +288,8 @@ struct CameraRawControls: View {
             Image(systemName: shown ? "eye" : "eye.slash")
         }
         .buttonStyle(.borderless)
-        .help(shown ? "Hide \(name) in the preview" : "Show \(name) in the preview")
-        .accessibilityLabel(shown ? "Hide \(name)" : "Show \(name)")
+        .help(shown ? "Hide \(String(localized: name)) in the preview" : "Show \(String(localized: name)) in the preview")
+        .accessibilityLabel(shown ? "Hide \(String(localized: name))" : "Show \(String(localized: name))")
     }
 
     private func slider(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawSettings, Double>, range: ClosedRange<Double>,

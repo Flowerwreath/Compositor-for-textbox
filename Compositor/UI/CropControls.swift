@@ -3,13 +3,15 @@ import SwiftUI
 /// The Crop tool's header. A view of its own because dragging the crop frame changes `cropRect` on
 /// every mouse move: read here, only this bar re-renders, not the whole editor and its Layers panel.
 struct CropControls: View {
+    /// The ratio picker's choices. These English names are what `cropRatioChoice` holds and `Crop` switches on.
+    static let ratioChoices = ["Free", "Original", "1:1", "4:3", "3:4", "16:9", "9:16"]
     @Bindable var session: EditorSession
 
     var body: some View {
         HStack(spacing: 14) {
             Text("Crop").font(ToolHeaderStyle.titleFont)
             Picker("Ratio", selection: $session.cropRatioChoice) {
-                ForEach(["Free", "Original", "1:1", "4:3", "3:4", "16:9", "9:16"], id: \.self) { Text($0) }
+                ForEach(Self.ratioChoices, id: \.self) { Text(L10n.text($0)) }
             }.frame(width: 170)
                 .onChange(of: session.cropRatioChoice) { _, _ in session.changeCropRatio() }
             if let rect = session.cropRect {

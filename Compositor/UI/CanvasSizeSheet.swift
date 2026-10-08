@@ -9,7 +9,7 @@ struct CanvasSizeSheet: View {
     @State private var anchor = 4
     @State private var extensionChoice = "Transparent"
     @State private var customColor = PaletteColor.white
-    private let anchorNames = ["Top left", "Top center", "Top right", "Middle left", "Center", "Middle right", "Bottom left", "Bottom center", "Bottom right"]
+    private let anchorNames: [LocalizedStringResource] = ["Top left", "Top center", "Top right", "Middle left", "Center", "Middle right", "Bottom left", "Bottom center", "Bottom right"]
 
     init(document: CanvasDocument, session: EditorSession, finish: @escaping (CanvasSizeOptions?) -> Void) {
         self.foreground = session.foregroundColor
@@ -111,7 +111,7 @@ struct CanvasSizeSheet: View {
                                             .frame(width: 25, height: 25)
                                     }
                                     .tint(index == anchor ? .accentColor : .secondary)
-                                    .help(anchorNames[index]).accessibilityLabel(anchorNames[index])
+                                    .help(Text(anchorNames[index])).accessibilityLabel(Text(anchorNames[index]))
                                     .accessibilityValue(index == anchor ? "Selected" : "")
                                 }
                             }

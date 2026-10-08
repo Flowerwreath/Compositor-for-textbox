@@ -117,7 +117,7 @@ struct LevelsSheet: View {
             let gammaPosition = current.black + (current.white - current.black) * pow(0.5, current.gamma)
             let positions = output ? [current.outputBlack, current.outputWhite] : [current.black, gammaPosition, current.white]
             ForEach(positions.indices, id: \.self) { index in
-                let names = output ? ["Output black", "Output white"] : ["Input black", "Gamma", "Input white"]
+                let names: [LocalizedStringResource] = output ? ["Output black", "Output white"] : ["Input black", "Gamma", "Input white"]
                 Image(systemName: "triangle.fill").font(.system(size: 12))
                     .foregroundStyle(index == 0 ? Color.black : index == positions.count - 1 ? .white : .gray)
                     .shadow(color: .gray, radius: 0.5)
@@ -139,7 +139,7 @@ struct LevelsSheet: View {
                                 $0.current = range
                             }
                         })
-                    .accessibilityLabel(names[index])
+                    .accessibilityLabel(Text(names[index]))
             }
         }.coordinateSpace(name: output ? "levelsOutput" : "levelsInput")
     }

@@ -65,6 +65,11 @@ nonisolated enum ManualKeys {
 
     @MainActor static var canvasExtensionChoices: [String] { CanvasSizeSheet.extensionChoices }
 
+    @MainActor static var cropRatioChoices: [String] { CropControls.ratioChoices }
+
+    /// New Canvas presets whose names are words rather than product names.
+    static let canvasPresetWords = ["Instagram Square", "Instagram Portrait", "Instagram Story", "YouTube Thumb"]
+
     /// Camera Raw's color mixer rows, named from a static list.
     static var cameraRawMixerNames: [String] { CameraRawMixerSettings.names }
 }

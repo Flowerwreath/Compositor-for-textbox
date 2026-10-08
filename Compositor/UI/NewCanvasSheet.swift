@@ -9,10 +9,10 @@ nonisolated enum NewCanvasUnit: String, CaseIterable, Sendable {
     /// The unit written out, for the summary line's pill.
     var name: String {
         switch self {
-        case .pixels: "Pixels"
-        case .inches: "Inches"
-        case .centimeters: "Centimeters"
-        case .millimeters: "Millimeters"
+        case .pixels: String(localized: "Pixels")
+        case .inches: String(localized: "Inches")
+        case .centimeters: String(localized: "Centimeters")
+        case .millimeters: String(localized: "Millimeters")
         }
     }
     /// The next unit, for the pill: px → in → cm → mm → px.
@@ -107,7 +107,7 @@ struct NewCanvasSheet: View {
                             Text("Custom").tag(CanvasPreset?.none)
                             ForEach(CanvasPreset.groups.indices, id: \.self) { group in
                                 Divider()
-                                ForEach(CanvasPreset.groups[group]) { Text($0.title).tag(CanvasPreset?.some($0)) }
+                                ForEach(CanvasPreset.groups[group]) { Text(L10n.text($0.title)).tag(CanvasPreset?.some($0)) }
                             }
                         }
                         .pickerStyle(.inline).labelsHidden()

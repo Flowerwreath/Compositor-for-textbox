@@ -4,6 +4,12 @@
     "" : {
       "shouldTranslate" : false
     },
+    " · [ ] size · Shift-[ ] hardness · 1–0 opacity · Escape cancel · Space to pan" : {
+
+    },
+    " · [ ] size · Shift-[ ] hardness · 1–0 strength · Space to pan" : {
+
+    },
     " · %lld DPI: %lld × %lld pixels" : {
       "localizations" : {
         "en" : {
@@ -16,6 +22,21 @@
     },
     "·" : {
       "shouldTranslate" : false
+    },
+    "“%@” is a folder, which has no pixels of its own. Paint on a layer inside it, or on the folder’s mask." : {
+
+    },
+    "“%@” is an adjustment layer, with no pixels to paint. Paint on its mask instead." : {
+
+    },
+    "“%@” is hidden, or inside a hidden folder. Show it to paint on it." : {
+
+    },
+    "“%@” was changed on disk." : {
+
+    },
+    "(Multiple)" : {
+
     },
     "#" : {
       "shouldTranslate" : false
@@ -37,6 +58,19 @@
 
     },
     "%@ effect" : {
+
+    },
+    "%@ is assigned to both %@ and %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ is assigned to both %2$@ and %3$@."
+          }
+        }
+      }
+    },
+    "%@ is reserved by macOS." : {
 
     },
     "%@ of %@." : {
@@ -77,6 +111,9 @@
     "%lld degrees" : {
 
     },
+    "%lld more tabs" : {
+
+    },
     "%lld%%" : {
       "shouldTranslate" : false
     },
@@ -91,8 +128,20 @@
       },
       "shouldTranslate" : false
     },
+    "1 more tab" : {
+
+    },
+    "3 by 3 Average" : {
+
+    },
+    "5 by 5 Average" : {
+
+    },
     "100%" : {
       "shouldTranslate" : false
+    },
+    "A little stronger than Version 1. The sliders below still fall well short of the current look." : {
+
     },
     "A subdivision every %@ pixels." : {
 
@@ -118,13 +167,31 @@
     "Add layer mask" : {
 
     },
+    "Add Layer Mask" : {
+
+    },
+    "Add Layer Mask (Hide All)" : {
+
+    },
     "Add layer mask (Option-click for a black mask)" : {
+
+    },
+    "Add Layer Mask from Selection" : {
+
+    },
+    "Add Layer Mask Hiding Selection" : {
 
     },
     "Add layer mask revealing the selection (Option-click to hide it)" : {
 
     },
+    "Add Mask" : {
+
+    },
     "Add Reveal-All Mask" : {
+
+    },
+    "Add to %@" : {
 
     },
     "Adds film grain, strongest in the middle tones." : {
@@ -137,6 +204,12 @@
 
     },
     "Adds or softens small detail." : {
+
+    },
+    "Adjustment · Double-click to edit" : {
+
+    },
+    "Adjustment parameters may not match Photoshop exactly." : {
 
     },
     "Adjusts the bright parts of the picture. Hold Option to see clipped highlights." : {
@@ -172,6 +245,12 @@
     "Amount" : {
 
     },
+    "An image could not be saved. The previous project has not been replaced." : {
+
+    },
+    "An image inside the project is missing or damaged. The current document has not been replaced." : {
+
+    },
     "Analyze the active layer only, or every visible layer as shown" : {
 
     },
@@ -179,6 +258,9 @@
 
     },
     "Angle" : {
+
+    },
+    "Another app changed this project. You can revert to the version on disk, losing your unsaved changes, or keep what you have." : {
 
     },
     "Anti-alias" : {
@@ -214,7 +296,19 @@
     "B" : {
 
     },
+    "Background" : {
+
+    },
+    "Background color" : {
+
+    },
     "Background for transparency" : {
+
+    },
+    "Bake and Delete" : {
+
+    },
+    "Bake keeps the current masked appearance in the dependent layers’ pixels. Remove Links reveals their pixels. You can undo either choice." : {
 
     },
     "Balance" : {
@@ -236,6 +330,12 @@
 
     },
     "Blend" : {
+
+    },
+    "Blend mode" : {
+
+    },
+    "Blend mode “%@” isn’t supported and will be applied as Normal." : {
 
     },
     "Blend the chosen color into the edges while keeping the center unchanged" : {
@@ -262,6 +362,15 @@
     "Bottom" : {
 
     },
+    "Bottom center" : {
+
+    },
+    "Bottom left" : {
+
+    },
+    "Bottom right" : {
+
+    },
     "Break the lines into glowing beads" : {
 
     },
@@ -277,7 +386,13 @@
     "Brush" : {
 
     },
+    "Brush (B) · Eraser (E)" : {
+
+    },
     "Brush Stroke" : {
+
+    },
+    "Calibration" : {
 
     },
     "Cancel" : {
@@ -293,7 +408,13 @@
     "Cancel %@" : {
 
     },
+    "Canvas" : {
+
+    },
     "Canvas extension" : {
+
+    },
+    "Canvas Extension" : {
 
     },
     "Canvas Size" : {
@@ -302,7 +423,16 @@
     "Canvas Size…" : {
 
     },
+    "Canvas text" : {
+
+    },
     "Cell Size" : {
+
+    },
+    "Center" : {
+
+    },
+    "Centimeters" : {
 
     },
     "Channel" : {
@@ -315,6 +445,12 @@
 
     },
     "Choose a custom grid color" : {
+
+    },
+    "Choose a JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) file." : {
+
+    },
+    "Choose a single key with optional modifiers." : {
 
     },
     "Choose the %@ color" : {
@@ -333,6 +469,9 @@
 
     },
     "Chooses how strongly the calibration sliders below are applied. Version 6 is the current default." : {
+
+    },
+    "circle" : {
 
     },
     "Clarity" : {
@@ -365,13 +504,37 @@
     "Click a shortcut, then press its new key combination. Changes apply when you save." : {
 
     },
+    "Click an object to select its outline · Tab for Wand · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {
+
+    },
+    "Click corners · Click start, double-click or Enter to close · Delete removes corner · Escape cancel" : {
+
+    },
     "Click the canvas to sample" : {
 
     },
     "Click the fringe on the layer. Click the eyedropper again to stop." : {
 
     },
+    "Click the image to add that color to the selection" : {
+
+    },
+    "Click the image to center this range on that color" : {
+
+    },
+    "Click the image to narrow this range to exclude that color" : {
+
+    },
     "Click the image to pick the color to select." : {
+
+    },
+    "Click the image to select that color" : {
+
+    },
+    "Click the image to take that color out of the selection" : {
+
+    },
+    "Click the image to widen this range to include that color" : {
 
     },
     "Click the original layer to set %@. Click the eyedropper again to stop." : {
@@ -386,16 +549,34 @@
     "Click to add a point. Drag to adjust." : {
 
     },
+    "Click to select similar colors · Tab for Object · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {
+
+    },
     "Click to select; double-click to edit; Option-drag to copy %@" : {
 
     },
+    "Click to zoom in · Option-click to zoom out · Drag right or left to zoom smoothly · Space to pan" : {
+
+    },
+    "Clipped to %@" : {
+
+    },
+    "Clipping mask based on %@. Option-click the bottom of its row to release." : {
+
+    },
     "Clone Stamp" : {
+
+    },
+    "Clone Stamp (S) · Option-click sets the source" : {
 
     },
     "Close %@" : {
 
     },
     "Close Project" : {
+
+    },
+    "Close to the current process, with slightly softer primary and shadow shifts." : {
 
     },
     "Color" : {
@@ -405,6 +586,12 @@
 
     },
     "Color for the added canvas" : {
+
+    },
+    "Color Grading" : {
+
+    },
+    "Color Mixer" : {
 
     },
     "Color Overlay" : {
@@ -551,13 +738,25 @@
     "Create canvas" : {
 
     },
+    "Create clipping mask" : {
+
+    },
     "Create Clipping Mask" : {
 
     },
     "Crop" : {
 
     },
+    "Crop (C)" : {
+
+    },
+    "Cropped to the canvas so the file fits in memory. Pixels outside the canvas weren't imported." : {
+
+    },
     "Crops empty edges after the transform and fits the result back into the frame." : {
+
+    },
+    "Current default. The calibration sliders below apply at full strength." : {
 
     },
     "Current: %lld × %lld pixels" : {
@@ -627,6 +826,9 @@
     "Delete Layers" : {
 
     },
+    "Delete Mask" : {
+
+    },
     "Delete selected effect" : {
 
     },
@@ -634,6 +836,9 @@
 
     },
     "Delete selected layers" : {
+
+    },
+    "Delete Selected Layers" : {
 
     },
     "Density" : {
@@ -660,6 +865,9 @@
     "Disable Layer Mask" : {
 
     },
+    "Disable Mask" : {
+
+    },
     "Distance" : {
 
     },
@@ -681,6 +889,9 @@
     "Document Bounds" : {
 
     },
+    "Don’t Save" : {
+
+    },
     "Done" : {
 
     },
@@ -691,6 +902,15 @@
 
     },
     "Drag a point. Click to add one. Double-click a point to remove it." : {
+
+    },
+    "Drag a rectangle · Shift add · Option subtract · Shift again mid-drag square · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {
+
+    },
+    "Drag a text box · Click text to edit · Drag box handles to resize · ⌘Return finish · Escape cancel" : {
+
+    },
+    "Drag an ellipse · Shift add · Option subtract · Shift again mid-drag circle · Drag inside to move · Delete clears · ⌘D deselect" : {
 
     },
     "Drag inside the wheel. Angle sets hue, distance sets saturation." : {
@@ -705,10 +925,46 @@
     "Drag or scroll to move around; double-click switches between Fit and 100%" : {
 
     },
+    "Drag over blemishes to heal · [ ] size · Shift-[ ] hardness · Escape cancel · Space to pan" : {
+
+    },
+    "Drag to crop · Enter apply · Escape cancel · Space to pan" : {
+
+    },
+    "Drag to draw · Drag ends to adjust · Shift 45° · 1–0 opacity · Enter apply · Escape cancel" : {
+
+    },
+    "Drag to draw a shape on a new layer · Shift %@ · Option from center · Shift-U or Tab for the next shape · Escape cancel · Space to pan" : {
+
+    },
+    "Drag to erase" : {
+
+    },
+    "Drag to move · Handles to resize · Circle to rotate · 1–0 layer opacity · Space to pan" : {
+
+    },
+    "Drag to paint" : {
+
+    },
+    "Drag to pan · Pinch to zoom" : {
+
+    },
+    "Drag to push pixels" : {
+
+    },
     "Drag to resize the panel" : {
 
     },
+    "Drag to select · Drag inside to move · Shift add · Option subtract · Delete clears · ⌥⌫/⌘⌫ fill · ⌘D deselect" : {
+
+    },
     "Drag to set hue and saturation. Double-click to reset this wheel." : {
+
+    },
+    "Drag to smudge" : {
+
+    },
+    "Drag to soften" : {
 
     },
     "Drag up or down to lift or lower those tones. Drag a divider along the bottom to change which tones each region covers." : {
@@ -744,6 +1000,9 @@
     "Duplicate Pixels" : {
 
     },
+    "Earliest response. Hue, saturation, and shadow tint move about half as far as Version 6." : {
+
+    },
     "Edge" : {
 
     },
@@ -762,6 +1021,21 @@
     "Edit Text" : {
 
     },
+    "Editable Photoshop text becomes pixels and can’t be retyped." : {
+
+    },
+    "Editable text" : {
+
+    },
+    "Editable text layer" : {
+
+    },
+    "Effects" : {
+
+    },
+    "Ellipse" : {
+
+    },
     "Elliptical Marquee" : {
 
     },
@@ -775,6 +1049,9 @@
 
     },
     "Enable Lens Profile Corrections" : {
+
+    },
+    "Enable Mask" : {
 
     },
     "End of the hue range, in degrees." : {
@@ -798,6 +1075,9 @@
     "Expand" : {
 
     },
+    "Expand or collapse folder" : {
+
+    },
     "Expand Selection" : {
 
     },
@@ -808,6 +1088,9 @@
 
     },
     "Export JPEG…" : {
+
+    },
+    "Export PNG" : {
 
     },
     "Export PNG…" : {
@@ -825,7 +1108,13 @@
     "Eyedropper" : {
 
     },
+    "Eyedropper (I)" : {
+
+    },
     "Fade the edge of the selection by this many pixels" : {
+
+    },
+    "Faux bold or faux italic was omitted." : {
 
     },
     "Feather" : {
@@ -861,6 +1150,9 @@
     "Final dimensions must be 1–%@ pixels per side." : {
 
     },
+    "Firmer color than Version 2. Primary shifts stay gentler than the current process." : {
+
+    },
     "Fit" : {
 
     },
@@ -894,10 +1186,28 @@
     "Flip Vertical" : {
 
     },
+    "Floating Selection" : {
+
+    },
+    "Folder" : {
+
+    },
+    "Folder %lld" : {
+
+    },
+    "Folder blend mode “%@” isn’t supported. The folder will be pass-through." : {
+
+    },
+    "Font" : {
+
+    },
     "Font face, including bold and italic variants" : {
 
     },
     "Foreground color" : {
+
+    },
+    "Full justification was imported as left alignment." : {
 
     },
     "Fuzziness" : {
@@ -912,10 +1222,16 @@
     "Gaussian" : {
 
     },
+    "Geometry" : {
+
+    },
     "Glow" : {
 
     },
     "Gradient" : {
+
+    },
+    "Gradient (G)" : {
 
     },
     "Gradient Mask" : {
@@ -963,6 +1279,12 @@
     "Guides" : {
 
     },
+    "Hand" : {
+
+    },
+    "Hand (H)" : {
+
+    },
     "Hardness" : {
 
     },
@@ -979,6 +1301,9 @@
 
     },
     "Hide %@ in the preview" : {
+
+    },
+    "Hide All (Black)" : {
 
     },
     "Hide Compositor" : {
@@ -1015,6 +1340,9 @@
 
     },
     "Horizontal" : {
+
+    },
+    "Horizontal ruler" : {
 
     },
     "How far a color may be from the picked ones and still be selected" : {
@@ -1089,6 +1417,16 @@
     "Image" : {
 
     },
+    "Image export supports canvases up to %lld megapixels and %@ pixels per side." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Image export supports canvases up to %1$lld megapixels and %2$@ pixels per side."
+          }
+        }
+      }
+    },
     "Image Size" : {
 
     },
@@ -1135,6 +1473,9 @@
         }
       }
     },
+    "Inches" : {
+
+    },
     "Inner Glow" : {
 
     },
@@ -1172,6 +1513,9 @@
     "Invert Mask" : {
 
     },
+    "Keep Mine" : {
+
+    },
     "Keep the source moving with the brush between strokes; off starts every stroke at the source point" : {
 
     },
@@ -1190,6 +1534,9 @@
     "Lasso" : {
 
     },
+    "Lasso (L)" : {
+
+    },
     "Last Filter" : {
 
     },
@@ -1199,6 +1546,9 @@
     "Layer" : {
 
     },
+    "Layer %lld" : {
+
+    },
     "Layer Blend Mode" : {
 
     },
@@ -1206,6 +1556,12 @@
 
     },
     "Layer Effects" : {
+
+    },
+    "Layer effects were discarded, so the appearance may differ." : {
+
+    },
+    "Layer Mask" : {
 
     },
     "Layer Opacity" : {
@@ -1265,6 +1621,9 @@
     "Limits sharpening to stronger edges. Hold Option to see the mask." : {
 
     },
+    "Line" : {
+
+    },
     "Line height, baseline to baseline. Empty or 0 is Auto: 120% of the font size." : {
 
     },
@@ -1280,7 +1639,22 @@
     "Linear runs along the line; Radial spreads out from the start point" : {
 
     },
+    "Link layer and mask so they move together" : {
+
+    },
     "Link Layer Mask" : {
+
+    },
+    "Link Mask" : {
+
+    },
+    "Link mask: %@" : {
+
+    },
+    "Linked" : {
+
+    },
+    "Liquify" : {
 
     },
     "Liquify pushes pixels · Blur softens · Smudge drags color along" : {
@@ -1334,6 +1708,9 @@
     "Magic" : {
 
     },
+    "Magic (W) · Tab switches Wand and Object" : {
+
+    },
     "Magic Wand" : {
 
     },
@@ -1376,6 +1753,9 @@
     "Marquee" : {
 
     },
+    "Marquee (M)" : {
+
+    },
     "Mask" : {
 
     },
@@ -1406,10 +1786,22 @@
     "Merge Layers" : {
 
     },
+    "Middle left" : {
+
+    },
+    "Middle right" : {
+
+    },
     "Midpoint" : {
 
     },
     "Midtones" : {
+
+    },
+    "Millimeters" : {
+
+    },
+    "Missing source" : {
 
     },
     "Mixer" : {
@@ -1422,6 +1814,12 @@
 
     },
     "More ink (darker) or less before dithering" : {
+
+    },
+    "Move / Transform" : {
+
+    },
+    "Move / Transform (V)" : {
 
     },
     "Move Guide" : {
@@ -1440,6 +1838,9 @@
 
     },
     "Move Out of Folder" : {
+
+    },
+    "Move pixels" : {
 
     },
     "Move Pixels" : {
@@ -1521,16 +1922,34 @@
     "No commands match" : {
 
     },
+    "No content remained after trimming." : {
+
+    },
+    "No foreground subject was detected in this layer. Try an image with a more distinct subject." : {
+
+    },
     "No layers yet" : {
 
     },
     "No lens metadata on this layer. Profile sliders set generic correction strength." : {
 
     },
+    "No tool selected · Press a tool's key to pick one · Space to pan" : {
+
+    },
     "Noise Reduction" : {
 
     },
+    "Not enough unselected, opaque image pixels to synthesize a fill. Use a smaller selection with some surrounding image." : {
+
+    },
+    "Nothing is selected, so there’s nowhere to paint. Choose Select › Deselect (⌘D) to paint anywhere." : {
+
+    },
     "Object Selection" : {
+
+    },
+    "Object Selection requires macOS 14 or later." : {
 
     },
     "Off leaves the picture as it is. Guided straightens from lines you draw on the picture." : {
@@ -1548,13 +1967,22 @@
     "OK" : {
 
     },
+    "Only 8-bit RGB Photoshop files can be imported." : {
+
+    },
     "Only print dimensions and resolution change. Pixels stay unchanged." : {
+
+    },
+    "Only the first text style was kept." : {
 
     },
     "Opacity" : {
 
     },
     "Opacity percent" : {
+
+    },
+    "Open “%@”?" : {
 
     },
     "Open in a new project tab" : {
@@ -1566,16 +1994,28 @@
     "Open project" : {
 
     },
+    "Open Project" : {
+
+    },
     "Open Project…" : {
 
     },
     "Open Recent" : {
 
     },
+    "Optics" : {
+
+    },
     "Option temporarily selects the eyedropper in painting tools. Shift constrains shapes/movement or adds to a selection; Option subtracts from selections or draws from center. Command-drag moves selected pixels; Command-Option-drag copies them. Option-drag duplicates layers/folders/effects; Option-click at a layer boundary toggles clipping. Command-click a thumbnail loads its selection. Control bypasses snapping. Right-drag adjusts brush size. Modifier-and-mouse gestures are fixed." : {
 
     },
     "Option-click to set the source" : {
+
+    },
+    "Option-click to set the source · Drag to clone · [ ] size · Shift-[ ] hardness · 1–0 opacity · Space to pan" : {
+
+    },
+    "Option-click where Clone Stamp should copy from first." : {
 
     },
     "Original %@ histogram" : {
@@ -1632,7 +2072,13 @@
     "pixels" : {
 
     },
+    "Pixels" : {
+
+    },
     "pixels/inch" : {
+
+    },
+    "Point Sample" : {
 
     },
     "Polygonal Lasso" : {
@@ -1666,6 +2112,12 @@
 
     },
     "Press 1–9 for 10–90%, 0 for 100%" : {
+
+    },
+    "Press a shortcut" : {
+
+    },
+    "Press keys…" : {
 
     },
     "Press L to switch between Freehand and Polygonal" : {
@@ -1737,6 +2189,9 @@
     "Ready when you are" : {
 
     },
+    "Rectangle" : {
+
+    },
     "Rectangular Marquee" : {
 
     },
@@ -1767,6 +2222,9 @@
     "Relative to current dimensions" : {
 
     },
+    "Release clipping mask" : {
+
+    },
     "Release Clipping Mask" : {
 
     },
@@ -1782,6 +2240,9 @@
     "Remove every guide line." : {
 
     },
+    "Remove Links and Delete" : {
+
+    },
     "Remove point" : {
 
     },
@@ -1789,6 +2250,9 @@
 
     },
     "Rename Layer…" : {
+
+    },
+    "Rename…" : {
 
     },
     "Reorder Layers" : {
@@ -1834,10 +2298,16 @@
         }
       }
     },
+    "Reveal All (White)" : {
+
+    },
     "Reveal Selection" : {
 
     },
     "Reverse" : {
+
+    },
+    "Revert" : {
 
     },
     "RGB changes brightness. Red, green, and blue also shift the color." : {
@@ -1879,6 +2349,9 @@
     "Sample" : {
 
     },
+    "Sample color" : {
+
+    },
     "Sample Ring" : {
 
     },
@@ -1904,6 +2377,15 @@
 
     },
     "Save As…" : {
+
+    },
+    "Save changes to %@?" : {
+
+    },
+    "Save Project" : {
+
+    },
+    "Save Project As" : {
 
     },
     "Scale" : {
@@ -1933,13 +2415,31 @@
     "Select everything except those colors, such as all but a green screen" : {
 
     },
+    "Select image pixels" : {
+
+    },
+    "Select image: %@" : {
+
+    },
+    "Select layer mask; Option-click to view it alone; Shift-click to enable/disable; Cmd-click to select its black areas (Cmd-Shift adds, Cmd-Option subtracts)" : {
+
+    },
+    "Select layer; Cmd-click to select its pixels (Cmd-Shift adds, Cmd-Option subtracts)" : {
+
+    },
     "Select layers by clicking the canvas. Hold Command to turn it the other way while you click." : {
+
+    },
+    "Select mask: %@" : {
 
     },
     "Select only similar pixels connected to the one you click; off selects them everywhere" : {
 
     },
     "Select Subject" : {
+
+    },
+    "Select text: %@" : {
 
     },
     "Select this picked color." : {
@@ -1960,6 +2460,9 @@
     "Sets where the vignette begins, from the center outward." : {
 
     },
+    "Several layers are selected. Select just one to paint on it." : {
+
+    },
     "Shadow Clipping Indicator" : {
 
     },
@@ -1967,6 +2470,9 @@
 
     },
     "Shape" : {
+
+    },
+    "Shape (U) · Shift-U switches Rectangle/Ellipse" : {
 
     },
     "Shapes fill with the foreground color; click to change it" : {
@@ -2035,6 +2541,12 @@
     "Show Layer" : {
 
     },
+    "Show mask alone" : {
+
+    },
+    "Show the image again (or Option-click the mask thumbnail)" : {
+
+    },
     "Show the transform box and handles (⌘H). When hidden, drag anywhere to move the layer." : {
 
     },
@@ -2053,6 +2565,9 @@
     "Smear" : {
 
     },
+    "Smear (R)" : {
+
+    },
     "Smooth selection edges; turn off for hard pixel edges" : {
 
     },
@@ -2068,6 +2583,12 @@
     "Smooths grain and noise in brightness." : {
 
     },
+    "Smudge" : {
+
+    },
+    "Smudge and Liquify work on a layer's pixels, not its mask." : {
+
+    },
     "Snap" : {
 
     },
@@ -2077,13 +2598,25 @@
     "Softens the edge of the vignette." : {
 
     },
+    "Some dropped items couldn’t be read. Drag JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) files from Finder." : {
+
+    },
     "Spot Healing" : {
+
+    },
+    "Spot Healing Brush" : {
+
+    },
+    "Spot Healing Brush (J)" : {
 
     },
     "Spread" : {
 
     },
     "Spreads a glow from the bright areas." : {
+
+    },
+    "square" : {
 
     },
     "sRGB · Transparent" : {
@@ -2093,6 +2626,9 @@
 
     },
     "Start see-through, or with a white or black Background layer. Click to switch." : {
+
+    },
+    "Stop viewing the mask" : {
 
     },
     "Straightens barrel or pincushion bending." : {
@@ -2161,6 +2697,12 @@
     "Temperature" : {
 
     },
+    "Text" : {
+
+    },
+    "Text · Double-click to edit" : {
+
+    },
     "Text color" : {
 
     },
@@ -2176,20 +2718,131 @@
     "Text Size" : {
 
     },
+    "Text-editing shortcuts need Command, Option, or Control so they do not replace normal typing." : {
+
+    },
     "Texture" : {
+
+    },
+    "That selection is too detailed to outline. Try a different Tolerance, or turn on Contiguous." : {
+
+    },
+    "That shape is too large. A shape can cover up to %lld megapixels." : {
+
+    },
+    "That text box exceeds the %@-pixel or %lld-megapixel limit." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "That text box exceeds the %1$@-pixel or %2$lld-megapixel limit."
+          }
+        }
+      }
+    },
+    "The 2012 response. Calibration reaches most of the strength used by Version 6." : {
 
     },
     "The brush trails the pointer on a string this long, so a shaky hand still draws a smooth line" : {
 
     },
+    "The canvas could not be rendered. Try a smaller canvas." : {
+
+    },
     "The characters to draw with, in any order: each spot gets the one whose ink best matches its tone" : {
+
+    },
+    "The copied layers exceed this project’s %lld-megapixel limit." : {
+
+    },
+    "The font “%@” isn’t installed, so the text was drawn with the system font." : {
 
     },
     "The height of each line of characters" : {
 
     },
+    "The image could not be encoded." : {
+
+    },
+    "The image could not be read. It may be damaged or unavailable." : {
+
+    },
+    "The layer mask couldn’t be converted to 8-bit grayscale and was skipped." : {
+
+    },
+    "The layer mask is turned off. Shift-click its thumbnail to turn it on, then paint." : {
+
+    },
+    "The object mask could not be rendered." : {
+
+    },
+    "The Photoshop file could not be read. It may be damaged or incomplete." : {
+
+    },
+    "The Photoshop stroke isn’t supported on shape layers and was omitted." : {
+
+    },
+    "The Photoshop text warp was omitted." : {
+
+    },
+    "The smart object was rasterized. Linked contents can’t be edited." : {
+
+    },
+    "The trimmed image dimensions are invalid." : {
+
+    },
+    "There isn’t enough memory to make that selection." : {
+
+    },
+    "These layers supply live masks" : {
+
+    },
+    "This adjustment type isn’t supported and was skipped." : {
+
+    },
+    "This clipping mask’s base isn’t supported, so clipping was skipped." : {
+
+    },
+    "This import exceeds the current %lld-megapixel document budget or %@-pixel side limit." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This import exceeds the current %1$lld-megapixel document budget or %2$@-pixel side limit."
+          }
+        }
+      }
+    },
+    "This is not a valid Compositor project, or its metadata is damaged." : {
+
+    },
     "This Layer" : {
 
+    },
+    "This layer supplies a live mask" : {
+
+    },
+    "This Photoshop file uses a format version Compositor can’t read." : {
+
+    },
+    "This Photoshop file uses a layer compression method that isn’t supported." : {
+
+    },
+    "This Photoshop layer type isn’t supported and was imported as pixels." : {
+
+    },
+    "This project exceeds the supported canvas, layer, file-size, or %lld-megapixel document limit." : {
+
+    },
+    "This project uses format version %lld. This app supports versions %lld–%lld." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This project uses format version %1$lld. This app supports versions %2$lld–%3$lld."
+          }
+        }
+      }
     },
     "Three-Way shows shadows, midtones, and highlights. The other choices show one wheel." : {
 
@@ -2212,7 +2865,19 @@
     "Tones per channel: 2 is pure black and white" : {
 
     },
+    "Tool" : {
+
+    },
     "Top" : {
+
+    },
+    "Top center" : {
+
+    },
+    "Top left" : {
+
+    },
+    "Top right" : {
 
     },
     "Tracking" : {
@@ -2251,6 +2916,9 @@
     "Type" : {
 
     },
+    "Type (T)" : {
+
+    },
     "Underlying pixels · alpha-weighted histogram" : {
 
     },
@@ -2272,10 +2940,25 @@
     "Units: pixels, inches, centimeters or millimeters. Click to switch." : {
 
     },
+    "Unlink layer and mask to move or transform them separately" : {
+
+    },
     "Unlink Layer Mask" : {
 
     },
+    "Unlink Mask" : {
+
+    },
+    "Unlink mask: %@" : {
+
+    },
     "Unsaved changes" : {
+
+    },
+    "Untitled" : {
+
+    },
+    "Untitled %lld" : {
 
     },
     "Updating…" : {
@@ -2304,10 +2987,16 @@
         }
       }
     },
+    "Vector shape was rasterized to pixels." : {
+
+    },
     "Vectorscope" : {
 
     },
     "Vertical" : {
+
+    },
+    "Vertical ruler" : {
 
     },
     "Vibrance" : {
@@ -2361,7 +3050,16 @@
     "Yellows" : {
 
     },
+    "Your changes will be lost if you don’t save them." : {
+
+    },
     "Zoom" : {
+
+    },
+    "Zoom (Z)" : {
+
+    },
+    "Zoom in" : {
 
     },
     "Zoom In" : {
@@ -2371,6 +3069,9 @@
 
     },
     "Zoom in (⌘+), now %@. At 100%% each pixel of the JPEG is one pixel of the screen, as on the canvas" : {
+
+    },
+    "Zoom out" : {
 
     },
     "Zoom Out" : {

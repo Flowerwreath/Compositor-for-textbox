@@ -903,10 +903,11 @@ final class EditorSession {
 
     /// Puts the sheet up before the file is read, so a big PSD doesn't leave the click unanswered.
     /// `finishPSDReading` fills it in, or takes it away when there is nothing to report.
-    func beginPSDReading(title: String, confirmTitle: String) {
+    func beginPSDReading(title: LocalizedStringResource, confirmTitle: LocalizedStringResource) {
         guard confirmConversions == nil else { return }
         conversionCancelled = false
-        conversionRequest = PSDConversionRequest(title: title, confirmTitle: confirmTitle, conversions: [], isReading: true)
+        conversionRequest = PSDConversionRequest(title: String(localized: title), confirmTitle: String(localized: confirmTitle),
+                                                 conversions: [], isReading: true)
         showsConversionSheet = true
     }
     func finishPSDReading(_ conversions: [PSDConversion]) async -> Bool {
@@ -928,11 +929,13 @@ final class EditorSession {
         showsConversionSheet = false
         conversionRequest = nil
     }
-    func confirmPSDConversions(_ conversions: [PSDConversion], title: String, confirmTitle: String) async -> Bool {
+    func confirmPSDConversions(_ conversions: [PSDConversion], title: LocalizedStringResource,
+                               confirmTitle: LocalizedStringResource) async -> Bool {
         if let confirmConversions { return await confirmConversions(conversions) }
         return await withCheckedContinuation { continuation in
             conversionContinuation = continuation
-            conversionRequest = PSDConversionRequest(title: title, confirmTitle: confirmTitle, conversions: conversions)
+            conversionRequest = PSDConversionRequest(title: String(localized: title), confirmTitle: String(localized: confirmTitle),
+                                                     conversions: conversions)
             showsConversionSheet = true
         }
     }

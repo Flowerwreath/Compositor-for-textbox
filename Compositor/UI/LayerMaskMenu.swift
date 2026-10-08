@@ -43,7 +43,7 @@ final class MaskAloneBadgeView: NSView {
         name.font = .systemFont(ofSize: 12)
         name.textColor = NSColor.white.withAlphaComponent(0.6)
         name.lineBreakMode = .byTruncatingTail
-        let button = NSButton(image: NSImage(systemSymbolName: "xmark", accessibilityDescription: "Stop viewing the mask") ?? NSImage(),
+        let button = NSButton(image: NSImage(systemSymbolName: "xmark", accessibilityDescription: String(localized: "Stop viewing the mask")) ?? NSImage(),
                               target: nil, action: nil)
         button.isBordered = false
         button.symbolConfiguration = .init(pointSize: 9, weight: .bold)
