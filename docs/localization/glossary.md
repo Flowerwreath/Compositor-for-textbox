@@ -169,7 +169,7 @@ Compositor를 한국어로 옮길 때의 기준이에요. 번역할 때 이 표�
 | Gradient | 그레이디언트 | PS |
 | Type | 문자 | PS |
 | Shape / Rectangle / Ellipse / Line | 모양 / 사각형 / 타원 / 선 | PS |
-| Hand / Pan | 손 / 이동 | PS / 자체(사용자 결정) |
+| Hand / Pan | 손 / 손바닥 | PS / 자체(사용자 결정: 이동 도구와 겹치지 않게). 안내 문구의 "Space to pan"은 "Space 손바닥" |
 | Zoom | 돋보기 | PS |
 | Size / Hardness / Strength | 크기 / 경도 / 강도 | PS |
 | Content-Aware / Create Texture / Proximity Match | 내용 인식 / 텍스처 만들기 / 근접 일치 | PS |
