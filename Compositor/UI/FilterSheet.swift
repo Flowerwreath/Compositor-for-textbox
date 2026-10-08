@@ -240,9 +240,9 @@ struct FilterSheet: View {
         .fixedSize()
         if dither.colors == .twoColors {
             HStack(spacing: 8) {
-                Text("Dark")
+                Text(String(localized: "Dither dark color", defaultValue: "Dark"))
                 swatch(dither.dark, help: "Choose the dark color") { session.openDitherColorPicker(light: false) }
-                Text("Light").padding(.leading, 10)
+                Text(String(localized: "Dither light color", defaultValue: "Light")).padding(.leading, 10)
                 swatch(dither.light, help: "Choose the light color") { session.openDitherColorPicker(light: true) }
                 Spacer()
             }
