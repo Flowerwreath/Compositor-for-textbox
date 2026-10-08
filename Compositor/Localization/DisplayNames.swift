@@ -63,7 +63,7 @@ nonisolated enum ManualKeys {
         Array(Set(ShortcutDefinition.all.flatMap { [$0.title, $0.group] } + ["Menus", "Canvas & Layers", "Text Editing"])).sorted()
     }
 
-    @MainActor static var canvasExtensionChoices: [String] { CanvasSizeSheet.extensionChoices }
+    @MainActor static var canvasExtensionChoices: [String] { CanvasSizeSheet.extensionChoices.map(CanvasSizeSheet.choiceKey) }
 
     @MainActor static var cropRatioChoices: [String] { CropControls.ratioChoices }
 

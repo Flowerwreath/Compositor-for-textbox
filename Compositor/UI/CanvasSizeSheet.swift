@@ -51,6 +51,11 @@ struct CanvasSizeSheet: View {
     }
     /// What fills the added canvas. These English names are the picker's tags and what `fill` switches on.
     static let extensionChoices = ["Transparent", "Foreground", "Background", "Black", "White", "Custom"]
+    /// The catalog key a choice shows as. The two colors read as colors ("Background color"), since a lone
+    /// "Background" is the Background layer's name.
+    static func choiceKey(_ choice: String) -> String {
+        choice == "Foreground" || choice == "Background" ? "\(choice) color" : choice
+    }
     private var fill: CanvasExtensionColor? {
         let color: NSColor
         switch extensionChoice {
@@ -125,7 +130,7 @@ struct CanvasSizeSheet: View {
                 }.padding(.top, 28)
             }
             Picker("Canvas extension", selection: $extensionChoice) {
-                ForEach(Self.extensionChoices, id: \.self) { Text(L10n.text($0)) }
+                ForEach(Self.extensionChoices, id: \.self) { Text(L10n.text(Self.choiceKey($0))) }
             }
             if extensionChoice == "Custom" {
                 HStack(spacing: 8) {

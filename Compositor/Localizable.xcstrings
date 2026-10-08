@@ -31,6 +31,12 @@
             "state" : "new",
             "value" : " · %1$lld DPI: %2$lld × %3$lld pixels"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " · %lld DPI: %lld × %lld 픽셀"
+          }
         }
       }
     },
@@ -40,7 +46,16 @@
     "“%@” is a folder, which has no pixels of its own. Paint on a layer inside it, or on the folder’s mask." : {},
     "“%@” is an adjustment layer, with no pixels to paint. Paint on its mask instead." : {},
     "“%@” is hidden, or inside a hidden folder. Show it to paint on it." : {},
-    "“%@” was changed on disk." : {},
+    "“%@” was changed on disk." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@”이(가) 디스크에서 변경되었습니다."
+          }
+        }
+      }
+    },
     "(Multiple)" : {
       "localizations" : {
         "ko" : {
@@ -65,7 +80,8 @@
             "value" : "%1$@ × %2$@ px · sRGB"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "%@ color" : {
       "localizations" : {
@@ -139,7 +155,16 @@
         }
       }
     },
-    "%@ uncompressed RGBA canvas" : {},
+    "%@ uncompressed RGBA canvas" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "압축하지 않은 RGBA 캔버스 %@"
+          }
+        }
+      }
+    },
     "%@. Double-click to reset." : {
       "localizations" : {
         "ko" : {
@@ -199,7 +224,16 @@
       "shouldTranslate" : false
     },
     "A little stronger than Version 1. The sliders below still fall well short of the current look." : {},
-    "A subdivision every %@ pixels." : {},
+    "A subdivision every %@ pixels." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "세분 간격: %@픽셀"
+          }
+        }
+      }
+    },
     "ABC" : {
       "shouldTranslate" : false
     },
@@ -377,7 +411,16 @@
         }
       }
     },
-    "Adjustment parameters may not match Photoshop exactly." : {},
+    "Adjustment parameters may not match Photoshop exactly." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "조정 매개 변수가 Photoshop과 정확히 일치하지 않을 수 있습니다."
+          }
+        }
+      }
+    },
     "Adjusts the bright parts of the picture. Hold Option to see clipped highlights." : {
       "localizations" : {
         "ko" : {
@@ -488,8 +531,26 @@
         }
       }
     },
-    "An image could not be saved. The previous project has not been replaced." : {},
-    "An image inside the project is missing or damaged. The current document has not been replaced." : {},
+    "An image could not be saved. The previous project has not been replaced." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지를 저장할 수 없습니다. 이전 프로젝트는 바뀌지 않았습니다."
+          }
+        }
+      }
+    },
+    "An image inside the project is missing or damaged. The current document has not been replaced." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트 안의 이미지가 없거나 손상되었습니다. 현재 문서는 바뀌지 않았습니다."
+          }
+        }
+      }
+    },
     "Analyze the active layer only, or every visible layer as shown" : {
       "localizations" : {
         "ko" : {
@@ -500,7 +561,16 @@
         }
       }
     },
-    "Anchor" : {},
+    "Anchor" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기준점"
+          }
+        }
+      }
+    },
     "Angle" : {
       "localizations" : {
         "ko" : {
@@ -511,7 +581,16 @@
         }
       }
     },
-    "Another app changed this project. You can revert to the version on disk, losing your unsaved changes, or keep what you have." : {},
+    "Another app changed this project. You can revert to the version on disk, losing your unsaved changes, or keep what you have." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다른 앱이 이 프로젝트를 변경했습니다. 저장하지 않은 변경 사항을 버리고 디스크의 버전으로 되돌리거나, 현재 상태를 유지할 수 있습니다."
+          }
+        }
+      }
+    },
     "Anti-alias" : {
       "localizations" : {
         "ko" : {
@@ -635,9 +714,19 @@
             "value" : "배경색"
           }
         }
+      },
+      "extractionState" : "manual"
+    },
+    "Background for transparency" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "투명 영역 배경"
+          }
+        }
       }
     },
-    "Background for transparency" : {},
     "Bake and Delete" : {},
     "Bake keeps the current masked appearance in the dependent layers’ pixels. Remove Links reveals their pixels. You can undo either choice." : {},
     "Balance" : {
@@ -680,7 +769,16 @@
         }
       }
     },
-    "Black canvas" : {},
+    "Black canvas" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "검정 캔버스"
+          }
+        }
+      }
+    },
     "Blacks" : {
       "localizations" : {
         "ko" : {
@@ -711,7 +809,16 @@
         }
       }
     },
-    "Blend mode “%@” isn’t supported and will be applied as Normal." : {},
+    "Blend mode “%@” isn’t supported and will be applied as Normal." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "혼합 모드 “%@”는 지원되지 않아 표준으로 적용됩니다."
+          }
+        }
+      }
+    },
     "Blend the chosen color into the edges while keeping the center unchanged" : {
       "localizations" : {
         "ko" : {
@@ -803,9 +910,36 @@
         }
       }
     },
-    "Bottom center" : {},
-    "Bottom left" : {},
-    "Bottom right" : {},
+    "Bottom center" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아래 가운데"
+          }
+        }
+      }
+    },
+    "Bottom left" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "왼쪽 아래"
+          }
+        }
+      }
+    },
+    "Bottom right" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오른쪽 아래"
+          }
+        }
+      }
+    },
     "Break the lines into glowing beads" : {
       "localizations" : {
         "ko" : {
@@ -913,8 +1047,26 @@
         }
       }
     },
-    "Canvas extension" : {},
-    "Canvas Extension" : {},
+    "Canvas extension" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 확장"
+          }
+        }
+      }
+    },
+    "Canvas Extension" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 확장"
+          }
+        }
+      }
+    },
     "Canvas Size" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -947,8 +1099,26 @@
         }
       }
     },
-    "Center" : {},
-    "Centimeters" : {},
+    "Center" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가운데"
+          }
+        }
+      }
+    },
+    "Centimeters" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "센티미터"
+          }
+        }
+      }
+    },
     "Channel" : {
       "localizations" : {
         "ko" : {
@@ -979,8 +1149,26 @@
         }
       }
     },
-    "Choose a custom grid color" : {},
-    "Choose a JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) file." : {},
+    "Choose a custom grid color" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용자 정의 격자 색상 선택"
+          }
+        }
+      }
+    },
+    "Choose a JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) file." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JPEG, PNG, HEIC, TIFF 또는 Photoshop(PSD) 파일을 선택하십시오."
+          }
+        }
+      }
+    },
     "Choose a single key with optional modifiers." : {
       "localizations" : {
         "ko" : {
@@ -1379,7 +1567,16 @@
         }
       }
     },
-    "Color for the added canvas" : {},
+    "Color for the added canvas" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "추가된 캔버스의 색상"
+          }
+        }
+      }
+    },
     "Color Grading" : {
       "localizations" : {
         "ko" : {
@@ -1450,7 +1647,16 @@
         }
       }
     },
-    "Color that fills transparent areas" : {},
+    "Color that fills transparent areas" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "투명한 영역을 채우는 색상"
+          }
+        }
+      }
+    },
     "Color the result while keeping its tones, for a sepia or a cyanotype" : {
       "localizations" : {
         "ko" : {
@@ -1494,7 +1700,16 @@
     "Compositor" : {
       "shouldTranslate" : false
     },
-    "Compositor will convert these Photoshop features. Nothing is applied until you continue." : {},
+    "Compositor will convert these Photoshop features. Nothing is applied until you continue." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compositor가 이 Photoshop 기능을 변환합니다. 계속하기 전에는 아무것도 적용되지 않습니다."
+          }
+        }
+      }
+    },
     "Constrain Crop" : {
       "localizations" : {
         "ko" : {
@@ -1632,7 +1847,16 @@
         }
       }
     },
-    "Couldn’t change canvas size" : {},
+    "Couldn’t change canvas size" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 크기를 변경할 수 없습니다"
+          }
+        }
+      }
+    },
     "Couldn’t crop" : {
       "localizations" : {
         "ko" : {
@@ -1643,9 +1867,36 @@
         }
       }
     },
-    "Couldn’t export JPEG" : {},
-    "Couldn’t export PNG" : {},
-    "Couldn’t open the project" : {},
+    "Couldn’t export JPEG" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JPEG로 내보낼 수 없습니다"
+          }
+        }
+      }
+    },
+    "Couldn’t export PNG" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PNG로 내보낼 수 없습니다"
+          }
+        }
+      }
+    },
+    "Couldn’t open the project" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트를 열 수 없습니다"
+          }
+        }
+      }
+    },
     "Couldn’t paint" : {
       "localizations" : {
         "ko" : {
@@ -1656,9 +1907,36 @@
         }
       }
     },
-    "Couldn’t resize the image" : {},
-    "Couldn’t save the project" : {},
-    "Couldn’t trim image" : {},
+    "Couldn’t resize the image" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 크기를 조정할 수 없습니다"
+          }
+        }
+      }
+    },
+    "Couldn’t save the project" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트를 저장할 수 없습니다"
+          }
+        }
+      }
+    },
+    "Couldn’t trim image" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지를 재단할 수 없습니다"
+          }
+        }
+      }
+    },
     "Create a canvas or import an image." : {
       "localizations" : {
         "ko" : {
@@ -1669,7 +1947,16 @@
         }
       }
     },
-    "Create canvas" : {},
+    "Create canvas" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 만들기"
+          }
+        }
+      }
+    },
     "Create clipping mask" : {
       "localizations" : {
         "ko" : {
@@ -1712,7 +1999,16 @@
         }
       }
     },
-    "Cropped to the canvas so the file fits in memory. Pixels outside the canvas weren't imported." : {},
+    "Cropped to the canvas so the file fits in memory. Pixels outside the canvas weren't imported." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "파일을 메모리에 맞추기 위해 캔버스 크기로 잘랐습니다. 캔버스 밖의 픽셀은 가져오지 않았습니다."
+          }
+        }
+      }
+    },
     "Crops empty edges after the transform and fits the result back into the frame." : {
       "localizations" : {
         "ko" : {
@@ -1730,6 +2026,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Current: %1$lld × %2$lld pixels"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재: %lld × %lld 픽셀"
           }
         }
       }
@@ -1773,7 +2075,8 @@
             "value" : "사용자 정의"
           }
         }
-      }
+      },
+      "extractionState" : "manual"
     },
     "Cut" : {
       "extractionState" : "manual",
@@ -2236,7 +2539,16 @@
         }
       }
     },
-    "Don’t Save" : {},
+    "Don’t Save" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장 안 함"
+          }
+        }
+      }
+    },
     "Done" : {
       "localizations" : {
         "ko" : {
@@ -2337,7 +2649,16 @@
         }
       }
     },
-    "Drag or scroll to move around; double-click switches between Fit and 100%" : {},
+    "Drag or scroll to move around; double-click switches between Fit and 100%" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "드래그하거나 스크롤하여 둘러보십시오. 두 번 클릭하면 맞춤과 100%가 전환됩니다"
+          }
+        }
+      }
+    },
     "Drag over blemishes to heal · [ ] size · Shift-[ ] hardness · Escape cancel · Space to pan" : {
       "localizations" : {
         "ko" : {
@@ -2633,7 +2954,16 @@
         }
       }
     },
-    "Editable Photoshop text becomes pixels and can’t be retyped." : {},
+    "Editable Photoshop text becomes pixels and can’t be retyped." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "편집 가능한 Photoshop 텍스트가 픽셀이 되어 다시 입력할 수 없습니다."
+          }
+        }
+      }
+    },
     "Editable text" : {
       "localizations" : {
         "ko" : {
@@ -2735,7 +3065,16 @@
         }
       }
     },
-    "Enter a size up to %@ pixels at this DPI." : {},
+    "Enter a size up to %@ pixels at this DPI." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 DPI에서 최대 %@ 픽셀까지 크기를 입력하십시오."
+          }
+        }
+      }
+    },
     "Enter a whole number from 1 to %lld px." : {
       "localizations" : {
         "ko" : {
@@ -2746,7 +3085,16 @@
         }
       }
     },
-    "Enter whole numbers from 1 to %@ pixels." : {},
+    "Enter whole numbers from 1 to %@ pixels." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1에서 %@ 픽셀 사이의 정수를 입력하십시오."
+          }
+        }
+      }
+    },
     "Erase" : {},
     "Eraser" : {
       "extractionState" : "manual",
@@ -2832,7 +3180,16 @@
         }
       }
     },
-    "Export…" : {},
+    "Export…" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내보내기…"
+          }
+        }
+      }
+    },
     "Exposure" : {
       "localizations" : {
         "ko" : {
@@ -2843,7 +3200,16 @@
         }
       }
     },
-    "Extension color" : {},
+    "Extension color" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확장 색상"
+          }
+        }
+      }
+    },
     "Eyedropper" : {
       "localizations" : {
         "ko" : {
@@ -2876,7 +3242,16 @@
         }
       }
     },
-    "Faux bold or faux italic was omitted." : {},
+    "Faux bold or faux italic was omitted." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가짜 굵게 또는 가짜 기울임꼴을 생략했습니다."
+          }
+        }
+      }
+    },
     "Feather" : {
       "localizations" : {
         "ko" : {
@@ -2972,7 +3347,16 @@
         }
       }
     },
-    "Final dimensions must be 1–%@ pixels per side." : {},
+    "Final dimensions must be 1–%@ pixels per side." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최종 크기는 한 변 1–%@ 픽셀이어야 합니다."
+          }
+        }
+      }
+    },
     "Finish editing text" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3090,7 +3474,16 @@
       }
     },
     "Folder %lld" : {},
-    "Folder blend mode “%@” isn’t supported. The folder will be pass-through." : {},
+    "Folder blend mode “%@” isn’t supported. The folder will be pass-through." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "폴더 혼합 모드 “%@”는 지원되지 않습니다. 폴더는 통과로 처리됩니다."
+          }
+        }
+      }
+    },
     "Font" : {
       "localizations" : {
         "ko" : {
@@ -3119,9 +3512,19 @@
             "value" : "전경색"
           }
         }
+      },
+      "extractionState" : "manual"
+    },
+    "Full justification was imported as left alignment." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "양쪽 정렬을 왼쪽 정렬로 가져왔습니다."
+          }
+        }
       }
     },
-    "Full justification was imported as left alignment." : {},
     "Fuzziness" : {
       "localizations" : {
         "ko" : {
@@ -3288,7 +3691,16 @@
         }
       }
     },
-    "Gridline every" : {},
+    "Gridline every" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "격자선 간격"
+          }
+        }
+      }
+    },
     "Group Layers" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3362,7 +3774,16 @@
         }
       }
     },
-    "Height" : {},
+    "Height" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "높이"
+          }
+        }
+      }
+    },
     "Hex" : {
       "localizations" : {
         "ko" : {
@@ -3525,7 +3946,16 @@
         }
       }
     },
-    "Horizontal ruler" : {},
+    "Horizontal ruler" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가로 눈금자"
+          }
+        }
+      }
+    },
     "How far a color may be from the picked ones and still be selected" : {
       "localizations" : {
         "ko" : {
@@ -3774,6 +4204,12 @@
             "state" : "new",
             "value" : "Image export supports canvases up to %1$lld megapixels and %2$@ pixels per side."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 내보내기는 최대 %lld메가픽셀, 한 변 %@픽셀까지의 캔버스를 지원합니다."
+          }
         }
       }
     },
@@ -3828,7 +4264,16 @@
         }
       }
     },
-    "Import image" : {},
+    "Import image" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 가져오기"
+          }
+        }
+      }
+    },
     "Import Image" : {},
     "Import Images" : {},
     "Import Images…" : {
@@ -3878,7 +4323,16 @@
         }
       }
     },
-    "Inches" : {},
+    "Inches" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인치"
+          }
+        }
+      }
+    },
     "Increase brush hardness" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4073,7 +4527,16 @@
         }
       }
     },
-    "Keep Mine" : {},
+    "Keep Mine" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 상태 유지"
+          }
+        }
+      }
+    },
     "Keep the source moving with the brush between strokes; off starts every stroke at the source point" : {
       "localizations" : {
         "ko" : {
@@ -4094,7 +4557,16 @@
         }
       }
     },
-    "Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas." : {},
+    "Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 점을 고정합니다. 아트워크는 확대·축소되지 않으며, 잘린 내용은 캔버스 밖에 남습니다."
+          }
+        }
+      }
+    },
     "Keyboard Shortcuts" : {
       "localizations" : {
         "ko" : {
@@ -4181,7 +4653,16 @@
       }
     },
     "Layer Effects" : {},
-    "Layer effects were discarded, so the appearance may differ." : {},
+    "Layer effects were discarded, so the appearance may differ." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 효과를 버렸으므로 모양이 다를 수 있습니다."
+          }
+        }
+      }
+    },
     "Layer Mask" : {
       "localizations" : {
         "ko" : {
@@ -4507,7 +4988,16 @@
         }
       }
     },
-    "Lock aspect ratio" : {},
+    "Lock aspect ratio" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "종횡비 고정"
+          }
+        }
+      }
+    },
     "Lock aspect ratio. Hold Shift while dragging a handle to turn it the other way." : {
       "localizations" : {
         "ko" : {
@@ -4529,7 +5019,16 @@
         }
       }
     },
-    "Lock original aspect ratio" : {},
+    "Lock original aspect ratio" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "원본 종횡비 고정"
+          }
+        }
+      }
+    },
     "Low" : {
       "localizations" : {
         "ko" : {
@@ -4868,8 +5367,26 @@
         }
       }
     },
-    "Middle left" : {},
-    "Middle right" : {},
+    "Middle left" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "왼쪽 가운데"
+          }
+        }
+      }
+    },
+    "Middle right" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오른쪽 가운데"
+          }
+        }
+      }
+    },
     "Midpoint" : {
       "localizations" : {
         "ko" : {
@@ -4890,7 +5407,16 @@
         }
       }
     },
-    "Millimeters" : {},
+    "Millimeters" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밀리미터"
+          }
+        }
+      }
+    },
     "Missing source" : {
       "localizations" : {
         "ko" : {
@@ -5280,6 +5806,12 @@
             "state" : "new",
             "value" : "New: %1$lld × %2$lld pixels · %3$@ uncompressed"
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 크기: %lld × %lld 픽셀 · 압축하지 않으면 %@"
+          }
         }
       }
     },
@@ -5497,9 +6029,36 @@
         }
       }
     },
-    "Only 8-bit RGB Photoshop files can be imported." : {},
-    "Only print dimensions and resolution change. Pixels stay unchanged." : {},
-    "Only the first text style was kept." : {},
+    "Only 8-bit RGB Photoshop files can be imported." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "8비트 RGB Photoshop 파일만 가져올 수 있습니다."
+          }
+        }
+      }
+    },
+    "Only print dimensions and resolution change. Pixels stay unchanged." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인쇄 크기와 해상도만 바뀝니다. 픽셀은 그대로입니다."
+          }
+        }
+      }
+    },
+    "Only the first text style was kept." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "첫 번째 텍스트 스타일만 유지했습니다."
+          }
+        }
+      }
+    },
     "Opacity" : {
       "localizations" : {
         "ko" : {
@@ -5641,8 +6200,26 @@
         }
       }
     },
-    "Open one project at a time" : {},
-    "Open project" : {},
+    "Open one project at a time" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "한 번에 하나의 프로젝트만 여십시오"
+          }
+        }
+      }
+    },
+    "Open project" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트 열기"
+          }
+        }
+      }
+    },
     "Open Project" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5877,9 +6454,36 @@
         }
       }
     },
-    "pixels" : {},
-    "Pixels" : {},
-    "pixels/inch" : {},
+    "pixels" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "픽셀"
+          }
+        }
+      }
+    },
+    "Pixels" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "픽셀"
+          }
+        }
+      }
+    },
+    "pixels/inch" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "픽셀/인치"
+          }
+        }
+      }
+    },
     "Point Sample" : {},
     "Polygonal Lasso" : {
       "localizations" : {
@@ -5961,8 +6565,26 @@
         }
       }
     },
-    "Preset sizes" : {},
-    "Preset sizes for screens and common formats" : {},
+    "Preset sizes" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사전 설정 크기"
+          }
+        }
+      }
+    },
+    "Preset sizes for screens and common formats" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "화면과 일반적인 형식의 사전 설정 크기"
+          }
+        }
+      }
+    },
     "Press 1–9 for 10–90%, 0 for 100%" : {
       "localizations" : {
         "ko" : {
@@ -6197,8 +6819,26 @@
         }
       }
     },
-    "Reading the file to see what needs converting." : {},
-    "Reading the Photoshop file…" : {},
+    "Reading the file to see what needs converting." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "변환이 필요한 항목을 확인하려고 파일을 읽는 중입니다."
+          }
+        }
+      }
+    },
+    "Reading the Photoshop file…" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photoshop 파일 읽는 중…"
+          }
+        }
+      }
+    },
     "Ready when you are" : {
       "localizations" : {
         "ko" : {
@@ -6310,7 +6950,16 @@
         }
       }
     },
-    "Relative to current dimensions" : {},
+    "Relative to current dimensions" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 크기 기준"
+          }
+        }
+      }
+    },
     "Release clipping mask" : {
       "localizations" : {
         "ko" : {
@@ -6406,7 +7055,16 @@
         }
       }
     },
-    "Resample" : {},
+    "Resample" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "리샘플링"
+          }
+        }
+      }
+    },
     "Reset" : {
       "localizations" : {
         "ko" : {
@@ -6438,10 +7096,46 @@
         }
       }
     },
-    "Resize" : {},
-    "Resizes layer pixels and applies existing transforms. Undo restores the originals." : {},
-    "Resolution" : {},
-    "Resolution: 72 for screens, 300 for print. Click to switch." : {},
+    "Resize" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "크기 조정"
+          }
+        }
+      }
+    },
+    "Resizes layer pixels and applies existing transforms. Undo restores the originals." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 픽셀의 크기를 조정하고 기존 변형을 적용합니다. 실행 취소하면 원본으로 돌아갑니다."
+          }
+        }
+      }
+    },
+    "Resolution" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "해상도"
+          }
+        }
+      }
+    },
+    "Resolution: 72 for screens, 300 for print. Click to switch." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "해상도: 화면용 72, 인쇄용 300. 클릭하면 전환됩니다."
+          }
+        }
+      }
+    },
     "Restore Defaults" : {
       "localizations" : {
         "ko" : {
@@ -6458,6 +7152,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Result: %1$lld × %2$lld pixels"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "결과: %lld × %lld 픽셀"
           }
         }
       }
@@ -6483,7 +7183,16 @@
         }
       }
     },
-    "Revert" : {},
+    "Revert" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "되돌리기"
+          }
+        }
+      }
+    },
     "RGB changes brightness. Red, green, and blue also shift the color." : {
       "localizations" : {
         "ko" : {
@@ -6717,9 +7426,36 @@
         }
       }
     },
-    "Save changes to %@?" : {},
-    "Save Project" : {},
-    "Save Project As" : {},
+    "Save changes to %@?" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@의 변경 사항을 저장하시겠습니까?"
+          }
+        }
+      }
+    },
+    "Save Project" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트 저장"
+          }
+        }
+      }
+    },
+    "Save Project As" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다른 이름으로 프로젝트 저장"
+          }
+        }
+      }
+    },
     "Scale" : {
       "localizations" : {
         "ko" : {
@@ -6934,7 +7670,16 @@
         }
       }
     },
-    "Selected" : {},
+    "Selected" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택됨"
+          }
+        }
+      }
+    },
     "Sets how far the glow reaches. Has no effect until Glow is raised." : {
       "localizations" : {
         "ko" : {
@@ -7301,7 +8046,16 @@
         }
       }
     },
-    "Show the whole image (⌘0)" : {},
+    "Show the whole image (⌘0)" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체 이미지 보기(⌘0)"
+          }
+        }
+      }
+    },
     "Show Transform Controls" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7436,7 +8190,16 @@
         }
       }
     },
-    "Some dropped items couldn’t be read. Drag JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) files from Finder." : {},
+    "Some dropped items couldn’t be read. Drag JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) files from Finder." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "놓은 항목 중 일부를 읽을 수 없습니다. Finder에서 JPEG, PNG, HEIC, TIFF 또는 Photoshop(PSD) 파일을 드래그하십시오."
+          }
+        }
+      }
+    },
     "Spot Healing" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -7509,7 +8272,16 @@
         }
       }
     },
-    "Start see-through, or with a white or black Background layer. Click to switch." : {},
+    "Start see-through, or with a white or black Background layer. Click to switch." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "투명하게 시작하거나 흰색 또는 검정 배경 레이어로 시작합니다. 클릭하면 전환됩니다."
+          }
+        }
+      }
+    },
     "Stop viewing the mask" : {
       "localizations" : {
         "ko" : {
@@ -7650,7 +8422,16 @@
         }
       }
     },
-    "Subdivisions" : {},
+    "Subdivisions" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "세분"
+          }
+        }
+      }
+    },
     "Subject" : {
       "localizations" : {
         "ko" : {
@@ -7868,7 +8649,16 @@
         }
       }
     },
-    "The canvas could not be rendered. Try a smaller canvas." : {},
+    "The canvas could not be rendered. Try a smaller canvas." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스를 렌더링할 수 없습니다. 더 작은 캔버스로 시도하십시오."
+          }
+        }
+      }
+    },
     "The characters to draw with, in any order: each spot gets the one whose ink best matches its tone" : {
       "localizations" : {
         "ko" : {
@@ -7880,7 +8670,16 @@
       }
     },
     "The copied layers exceed this project’s %lld-megapixel limit." : {},
-    "The font “%@” isn’t installed, so the text was drawn with the system font." : {},
+    "The font “%@” isn’t installed, so the text was drawn with the system font." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” 글꼴이 설치되어 있지 않아 시스템 글꼴로 텍스트를 그렸습니다."
+          }
+        }
+      }
+    },
     "The height of each line of characters" : {
       "localizations" : {
         "ko" : {
@@ -7891,20 +8690,101 @@
         }
       }
     },
-    "The image could not be encoded." : {},
-    "The image could not be read. It may be damaged or unavailable." : {},
-    "The layer mask couldn’t be converted to 8-bit grayscale and was skipped." : {},
+    "The image could not be encoded." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지를 인코딩할 수 없습니다."
+          }
+        }
+      }
+    },
+    "The image could not be read. It may be damaged or unavailable." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지를 읽을 수 없습니다. 손상되었거나 사용할 수 없습니다."
+          }
+        }
+      }
+    },
+    "The layer mask couldn’t be converted to 8-bit grayscale and was skipped." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 마스크를 8비트 회색 음영으로 변환할 수 없어 건너뛰었습니다."
+          }
+        }
+      }
+    },
     "The layer mask is turned off. Shift-click its thumbnail to turn it on, then paint." : {},
     "The object mask could not be rendered." : {},
-    "The Photoshop file could not be read. It may be damaged or incomplete." : {},
-    "The Photoshop stroke isn’t supported on shape layers and was omitted." : {},
-    "The Photoshop text warp was omitted." : {},
-    "The smart object was rasterized. Linked contents can’t be edited." : {},
+    "The Photoshop file could not be read. It may be damaged or incomplete." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photoshop 파일을 읽을 수 없습니다. 손상되었거나 불완전할 수 있습니다."
+          }
+        }
+      }
+    },
+    "The Photoshop stroke isn’t supported on shape layers and was omitted." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모양 레이어의 Photoshop 획은 지원되지 않아 생략했습니다."
+          }
+        }
+      }
+    },
+    "The Photoshop text warp was omitted." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photoshop 텍스트 뒤틀기를 생략했습니다."
+          }
+        }
+      }
+    },
+    "The smart object was rasterized. Linked contents can’t be edited." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "고급 개체를 래스터화했습니다. 연결된 내용은 편집할 수 없습니다."
+          }
+        }
+      }
+    },
     "The trimmed image dimensions are invalid." : {},
     "There isn’t enough memory to make that selection." : {},
     "These layers supply live masks" : {},
-    "This adjustment type isn’t supported and was skipped." : {},
-    "This clipping mask’s base isn’t supported, so clipping was skipped." : {},
+    "This adjustment type isn’t supported and was skipped." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "지원되지 않는 조정 유형이라 건너뛰었습니다."
+          }
+        }
+      }
+    },
+    "This clipping mask’s base isn’t supported, so clipping was skipped." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 클리핑 마스크의 기준 레이어가 지원되지 않아 클리핑을 건너뛰었습니다."
+          }
+        }
+      }
+    },
     "This import exceeds the current %lld-megapixel document budget or %@-pixel side limit." : {
       "localizations" : {
         "en" : {
@@ -7912,10 +8792,25 @@
             "state" : "new",
             "value" : "This import exceeds the current %1$lld-megapixel document budget or %2$@-pixel side limit."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 가져오기는 현재 문서 한도(%lld메가픽셀) 또는 한 변 %@픽셀 제한을 넘습니다."
+          }
         }
       }
     },
-    "This is not a valid Compositor project, or its metadata is damaged." : {},
+    "This is not a valid Compositor project, or its metadata is damaged." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "유효한 Compositor 프로젝트가 아니거나 메타데이터가 손상되었습니다."
+          }
+        }
+      }
+    },
     "This Layer" : {
       "localizations" : {
         "ko" : {
@@ -7927,16 +8822,58 @@
       }
     },
     "This layer supplies a live mask" : {},
-    "This Photoshop file uses a format version Compositor can’t read." : {},
-    "This Photoshop file uses a layer compression method that isn’t supported." : {},
-    "This Photoshop layer type isn’t supported and was imported as pixels." : {},
-    "This project exceeds the supported canvas, layer, file-size, or %lld-megapixel document limit." : {},
+    "This Photoshop file uses a format version Compositor can’t read." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 Photoshop 파일은 Compositor가 읽을 수 없는 형식 버전을 사용합니다."
+          }
+        }
+      }
+    },
+    "This Photoshop file uses a layer compression method that isn’t supported." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 Photoshop 파일은 지원되지 않는 레이어 압축 방식을 사용합니다."
+          }
+        }
+      }
+    },
+    "This Photoshop layer type isn’t supported and was imported as pixels." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "지원되지 않는 Photoshop 레이어 유형이라 픽셀로 가져왔습니다."
+          }
+        }
+      }
+    },
+    "This project exceeds the supported canvas, layer, file-size, or %lld-megapixel document limit." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 프로젝트는 지원되는 캔버스, 레이어, 파일 크기 또는 %lld메가픽셀 문서 한도를 넘습니다."
+          }
+        }
+      }
+    },
     "This project uses format version %lld. This app supports versions %lld–%lld." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "This project uses format version %1$lld. This app supports versions %2$lld–%3$lld."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 프로젝트는 형식 버전 %1$lld을(를) 사용합니다. 이 앱은 %2$lld–%3$lld 버전을 지원합니다."
           }
         }
       }
@@ -8064,9 +9001,36 @@
         }
       }
     },
-    "Top center" : {},
-    "Top left" : {},
-    "Top right" : {},
+    "Top center" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위 가운데"
+          }
+        }
+      }
+    },
+    "Top left" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "왼쪽 위"
+          }
+        }
+      }
+    },
+    "Top right" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오른쪽 위"
+          }
+        }
+      }
+    },
     "Tracking" : {
       "localizations" : {
         "ko" : {
@@ -8130,7 +9094,16 @@
         }
       }
     },
-    "Transparent canvas" : {},
+    "Transparent canvas" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "투명 캔버스"
+          }
+        }
+      }
+    },
     "Trim" : {
       "localizations" : {
         "ko" : {
@@ -8235,8 +9208,26 @@
         }
       }
     },
-    "Units" : {},
-    "Units: pixels, inches, centimeters or millimeters. Click to switch." : {},
+    "Units" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "단위"
+          }
+        }
+      }
+    },
+    "Units: pixels, inches, centimeters or millimeters. Click to switch." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "단위: 픽셀, 인치, 센티미터 또는 밀리미터. 클릭하면 전환됩니다."
+          }
+        }
+      }
+    },
     "Unlink layer and mask to move or transform them separately" : {
       "localizations" : {
         "ko" : {
@@ -8278,9 +9269,27 @@
         }
       }
     },
-    "Untitled" : {},
+    "Untitled" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "제목 없음"
+          }
+        }
+      }
+    },
     "Untitled %lld" : {},
-    "Updating…" : {},
+    "Updating…" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "업데이트 중…"
+          }
+        }
+      }
+    },
     "Upright" : {
       "localizations" : {
         "ko" : {
@@ -8298,6 +9307,12 @@
             "state" : "new",
             "value" : "Use 1–%1$@ pixels per side, up to %2$lld megapixels, and 1–9,600 pixels/inch."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "한 변 1–%@ 픽셀, 최대 %lld메가픽셀, 1–9,600 픽셀/인치를 사용하십시오."
+          }
         }
       }
     },
@@ -8308,10 +9323,25 @@
             "state" : "new",
             "value" : "Use gridlines every %1$lld–%2$@ pixels and %3$lld–%4$lld subdivisions, no more than the pixels between gridlines."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "격자선 간격은 %lld–%@픽셀, 세분은 %lld–%lld개로 하되 격자선 사이의 픽셀 수를 넘지 않게 하십시오."
+          }
         }
       }
     },
-    "Vector shape was rasterized to pixels." : {},
+    "Vector shape was rasterized to pixels." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "벡터 모양을 픽셀로 래스터화했습니다."
+          }
+        }
+      }
+    },
     "Vectorscope" : {
       "localizations" : {
         "ko" : {
@@ -8332,7 +9362,16 @@
         }
       }
     },
-    "Vertical ruler" : {},
+    "Vertical ruler" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "세로 눈금자"
+          }
+        }
+      }
+    },
     "Vibrance" : {
       "localizations" : {
         "ko" : {
@@ -8433,7 +9472,16 @@
         }
       }
     },
-    "White canvas" : {},
+    "White canvas" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "흰색 캔버스"
+          }
+        }
+      }
+    },
     "Whites" : {
       "localizations" : {
         "ko" : {
@@ -8494,7 +9542,16 @@
         }
       }
     },
-    "Your changes will be lost if you don’t save them." : {},
+    "Your changes will be lost if you don’t save them." : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장하지 않으면 변경 사항이 사라집니다."
+          }
+        }
+      }
+    },
     "Zoom" : {
       "localizations" : {
         "ko" : {
@@ -8528,7 +9585,16 @@
         }
       }
     },
-    "Zoom in (⌘+), now %@. At 100%% each pixel of the JPEG is one pixel of the screen, as on the canvas" : {},
+    "Zoom in (⌘+), now %@. At 100%% each pixel of the JPEG is one pixel of the screen, as on the canvas" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확대(⌘+), 현재 %@. 100%%에서는 JPEG의 한 픽셀이 캔버스에서처럼 화면의 한 픽셀입니다"
+          }
+        }
+      }
+    },
     "Zoom out" : {},
     "Zoom Out" : {
       "extractionState" : "manual",
@@ -8551,7 +9617,16 @@
         }
       }
     },
-    "Zoom out (⌘−), now %@" : {},
+    "Zoom out (⌘−), now %@" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "축소(⌘−), 현재 %@"
+          }
+        }
+      }
+    },
     "Zoom percentage" : {
       "localizations" : {
         "ko" : {
@@ -8595,6 +9670,39 @@
     },
     "가나다" : {
       "shouldTranslate" : false
+    },
+    "Transparent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "투명"
+          }
+        }
+      }
+    },
+    "Black" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "검정"
+          }
+        }
+      }
+    },
+    "White" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "흰색"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

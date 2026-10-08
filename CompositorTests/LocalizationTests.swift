@@ -29,4 +29,18 @@ struct LocalizationTests {
         let missing = ManualKeys.shortcutNames.filter { L10n.text($0, bundle: korean) == $0 }
         #expect(missing.isEmpty, "add with scripts/l10n.py manual, then translate: \(missing)")
     }
+
+    /// Canvas Size keeps its fill choices in English as tags; the picker shows them translated.
+    @MainActor @Test func everyCanvasFillChoiceHasKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        let missing = ManualKeys.canvasExtensionChoices.filter { L10n.text($0, bundle: korean) == $0 }
+        #expect(missing.isEmpty, "add with scripts/l10n.py manual, then translate: \(missing)")
+    }
+
+    /// The save panel's format menu and Finder's Kind column show the document types' names.
+    @Test func documentTypeNamesHaveKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        let name = korean.localizedString(forKey: "Compositor Project", value: nil, table: "InfoPlist")
+        #expect(name != "Compositor Project")
+    }
 }
