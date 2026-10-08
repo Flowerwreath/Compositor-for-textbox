@@ -330,6 +330,17 @@
         }
       }
     },
+    "Add" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "추가"
+          }
+        }
+      }
+    },
     "Add %@" : {
       "localizations" : {
         "ko" : {
@@ -440,6 +451,17 @@
         }
       }
     },
+    "Add Noise" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "노이즈 추가"
+          }
+        }
+      }
+    },
     "Add Reveal-All Mask" : {
       "localizations" : {
         "ko" : {
@@ -536,6 +558,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "사진의 어두운 부분을 조정합니다. Option을 누르고 있으면 클리핑된 어두운 영역이 보입니다."
+          }
+        }
+      }
+    },
+    "Advanced" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "고급"
           }
         }
       }
@@ -761,12 +794,34 @@
         }
       }
     },
+    "Aquas" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "바다색 계열"
+          }
+        }
+      }
+    },
     "Aspect" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "종횡비"
+          }
+        }
+      }
+    },
+    "Atkinson (Classic Mac)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atkinson(클래식 Mac)"
           }
         }
       }
@@ -815,6 +870,7 @@
       }
     },
     "Background color" : {
+      "extractionState" : "manual",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -822,8 +878,7 @@
             "value" : "배경색"
           }
         }
-      },
-      "extractionState" : "manual"
+      }
     },
     "Background for transparency" : {
       "localizations" : {
@@ -875,6 +930,17 @@
         }
       }
     },
+    "Basic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본"
+          }
+        }
+      }
+    },
     "Basic is quick; Advanced refines the mask against the layer's own detail, for hair and fur" : {
       "localizations" : {
         "ko" : {
@@ -885,12 +951,46 @@
         }
       }
     },
+    "Bayer 2 × 2" : {
+      "extractionState" : "manual",
+      "shouldTranslate" : false
+    },
+    "Bayer 4 × 4" : {
+      "extractionState" : "manual",
+      "shouldTranslate" : false
+    },
+    "Bayer 8 × 8" : {
+      "extractionState" : "manual",
+      "shouldTranslate" : false
+    },
+    "Black" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "검정"
+          }
+        }
+      }
+    },
     "Black · Hide" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "검정 · 숨기기"
+          }
+        }
+      }
+    },
+    "Black & White" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "흑백"
           }
         }
       }
@@ -961,6 +1061,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "혼합"
+          }
+        }
+      }
+    },
+    "Bloom" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "블룸"
+          }
+        }
+      }
+    },
+    "Bloom / Glow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "블룸 / 글로"
           }
         }
       }
@@ -1066,6 +1188,17 @@
         }
       }
     },
+    "Bottom Right Pixel Color" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오른쪽 아래 픽셀 색상"
+          }
+        }
+      }
+    },
     "Break the lines into glowing beads" : {
       "localizations" : {
         "ko" : {
@@ -1153,6 +1286,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "보정"
+          }
+        }
+      }
+    },
+    "Camera Raw Filter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera Raw 필터"
           }
         }
       }
@@ -1782,12 +1926,56 @@
         }
       }
     },
+    "Color + neutral midtones" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색상 + 중간 영역 중립화"
+          }
+        }
+      }
+    },
+    "Color Balance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색상 균형"
+          }
+        }
+      }
+    },
+    "Color Burn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색상 번"
+          }
+        }
+      }
+    },
     "Color Detail" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "색상 세부"
+          }
+        }
+      }
+    },
+    "Color Dodge" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색상 닷지"
           }
         }
       }
@@ -1932,6 +2120,17 @@
         }
       }
     },
+    "Color Priority" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색상 우선"
+          }
+        }
+      }
+    },
     "Color Range" : {
       "localizations" : {
         "ko" : {
@@ -2031,6 +2230,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "자르기 제한"
+          }
+        }
+      }
+    },
+    "Content-Aware" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내용 인식"
           }
         }
       }
@@ -2328,6 +2538,17 @@
         }
       }
     },
+    "Create Texture" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "텍스처 만들기"
+          }
+        }
+      }
+    },
     "Crop" : {
       "localizations" : {
         "ko" : {
@@ -2437,6 +2658,7 @@
       }
     },
     "Custom" : {
+      "extractionState" : "manual",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -2444,8 +2666,7 @@
             "value" : "사용자 정의"
           }
         }
-      },
-      "extractionState" : "manual"
+      }
     },
     "Cut" : {
       "extractionState" : "manual",
@@ -2454,6 +2675,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "잘라내기"
+          }
+        }
+      }
+    },
+    "Cyan" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "녹청"
           }
         }
       }
@@ -2511,6 +2743,17 @@
         }
       }
     },
+    "Darken" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "어둡게 하기"
+          }
+        }
+      }
+    },
     "Darkens or lightens the edges. The center does not change." : {
       "localizations" : {
         "ko" : {
@@ -2527,6 +2770,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "어두운 톤"
+          }
+        }
+      }
+    },
+    "Dashed Lines" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점선"
           }
         }
       }
@@ -2799,6 +3053,17 @@
         }
       }
     },
+    "Difference" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "차이"
+          }
+        }
+      }
+    },
     "Diffusion" : {
       "localizations" : {
         "ko" : {
@@ -2909,6 +3174,17 @@
         }
       }
     },
+    "Dither" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "디더"
+          }
+        }
+      }
+    },
     "Dither dark color" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -2943,6 +3219,17 @@
         }
       }
     },
+    "Divide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나누기"
+          }
+        }
+      }
+    },
     "Document Bounds" : {
       "localizations" : {
         "ko" : {
@@ -2969,6 +3256,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "완료"
+          }
+        }
+      }
+    },
+    "Dot" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "점"
           }
         }
       }
@@ -3576,6 +3874,17 @@
         }
       }
     },
+    "Exclusion" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "제외"
+          }
+        }
+      }
+    },
     "Expand" : {
       "localizations" : {
         "ko" : {
@@ -3679,6 +3988,16 @@
       }
     },
     "Extension color" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확장 색상"
+          }
+        }
+      }
+    },
+    "Extension Color" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -4013,6 +4332,10 @@
         }
       }
     },
+    "Floyd–Steinberg" : {
+      "extractionState" : "manual",
+      "shouldTranslate" : false
+    },
     "Folder" : {
       "localizations" : {
         "ko" : {
@@ -4064,6 +4387,7 @@
       }
     },
     "Foreground color" : {
+      "extractionState" : "manual",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -4071,8 +4395,51 @@
             "value" : "전경색"
           }
         }
-      },
-      "extractionState" : "manual"
+      }
+    },
+    "Foreground to Background" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전경색에서 배경색으로"
+          }
+        }
+      }
+    },
+    "Foreground to Transparent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전경색에서 투명으로"
+          }
+        }
+      }
+    },
+    "Free" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자유"
+          }
+        }
+      }
+    },
+    "Freehand" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자유형"
+          }
+        }
+      }
     },
     "Full justification was imported as left alignment." : {
       "localizations" : {
@@ -4117,12 +4484,34 @@
         }
       }
     },
+    "Gaussian Blur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가우시안 흐림 효과"
+          }
+        }
+      }
+    },
     "Geometry" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "기하학"
+          }
+        }
+      }
+    },
+    "Global" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체"
           }
         }
       }
@@ -4153,6 +4542,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "그레이디언트(G)"
+          }
+        }
+      }
+    },
+    "Gradient Map" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그레이디언트 맵"
           }
         }
       }
@@ -4194,6 +4594,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "그레인"
+          }
+        }
+      }
+    },
+    "Gray" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "회색"
           }
         }
       }
@@ -4258,6 +4669,16 @@
         }
       }
     },
+    "Grid Color" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "격자 색상"
+          }
+        }
+      }
+    },
     "Grid Settings…" : {
       "localizations" : {
         "ko" : {
@@ -4309,12 +4730,67 @@
         }
       }
     },
+    "Guided" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안내"
+          }
+        }
+      }
+    },
     "Guides" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "안내선"
+          }
+        }
+      }
+    },
+    "Halation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "헐레이션"
+          }
+        }
+      }
+    },
+    "Halftone Diamonds" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하프톤 다이아몬드"
+          }
+        }
+      }
+    },
+    "Halftone Dots" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하프톤 점"
+          }
+        }
+      }
+    },
+    "Halftone Lines" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하프톤 선"
           }
         }
       }
@@ -4346,6 +4822,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "손 도구"
+          }
+        }
+      }
+    },
+    "Hard Light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하드 라이트"
+          }
+        }
+      }
+    },
+    "Hard Mix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하드 혼합"
           }
         }
       }
@@ -4481,12 +4979,34 @@
         }
       }
     },
+    "High quality" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "고품질"
+          }
+        }
+      }
+    },
     "Highlight Clipping Indicator" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "밝은 영역 클리핑 경고"
+          }
+        }
+      }
+    },
+    "Highlight Priority" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밝은 영역 우선"
           }
         }
       }
@@ -5097,6 +5617,39 @@
         }
       }
     },
+    "Instagram Portrait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram 세로"
+          }
+        }
+      }
+    },
+    "Instagram Square" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram 정사각형"
+          }
+        }
+      }
+    },
+    "Instagram Story" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instagram 스토리"
+          }
+        }
+      }
+    },
     "Inverse" : {
       "localizations" : {
         "ko" : {
@@ -5145,6 +5698,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "픽셀 / 마스크 반전"
+          }
+        }
+      }
+    },
+    "JPEG Background" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JPEG 배경"
           }
         }
       }
@@ -5391,6 +5954,17 @@
         }
       }
     },
+    "Lens Correction" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "렌즈 교정"
+          }
+        }
+      }
+    },
     "Levels" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -5472,12 +6046,56 @@
         }
       }
     },
+    "Light Blue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밝은 파랑"
+          }
+        }
+      }
+    },
+    "Light Gray" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밝은 회색"
+          }
+        }
+      }
+    },
     "Light on Dark" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "어두운 배경에 밝게"
+          }
+        }
+      }
+    },
+    "Light Red" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밝은 빨강"
+          }
+        }
+      }
+    },
+    "Lighten" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "밝게 하기"
           }
         }
       }
@@ -5562,6 +6180,28 @@
         }
       }
     },
+    "Linear Burn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선형 번"
+          }
+        }
+      }
+    },
+    "Linear Dodge (Add)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선형 닷지(추가)"
+          }
+        }
+      }
+    },
     "Linear histogram with automatic vertical scaling. Tall spikes may extend beyond the graph; all tones from 0 to 255 remain included." : {
       "localizations" : {
         "ko" : {
@@ -5572,12 +6212,34 @@
         }
       }
     },
+    "Linear Light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선형 라이트"
+          }
+        }
+      }
+    },
     "Linear runs along the line; Radial spreads out from the start point" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "선형은 선을 따라 진행하고, 방사형은 시작점에서 퍼져 나갑니다"
+          }
+        }
+      }
+    },
+    "Lines" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선"
           }
         }
       }
@@ -5779,6 +6441,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "광도 이동"
+          }
+        }
+      }
+    },
+    "Luminosity" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "광도"
+          }
+        }
+      }
+    },
+    "Mac Patterns" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac 패턴"
+          }
+        }
+      }
+    },
+    "Magenta" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마젠타"
           }
         }
       }
@@ -6035,12 +6730,34 @@
         }
       }
     },
+    "Master" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마스터"
+          }
+        }
+      }
+    },
     "Match the clicked pixel, or the average of the pixels around it" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "클릭한 픽셀이나 주변 픽셀의 평균과 일치하는 색상을 찾습니다"
+          }
+        }
+      }
+    },
+    "Medium Blue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "중간 파랑"
           }
         }
       }
@@ -6193,6 +6910,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "디더링 전에 잉크를 늘리거나(더 어둡게) 줄입니다"
+          }
+        }
+      }
+    },
+    "Motion Blur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "동작 흐림 효과"
           }
         }
       }
@@ -6434,6 +7162,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "비네팅 교정을 안쪽이나 바깥쪽으로 이동합니다."
+          }
+        }
+      }
+    },
+    "Multiply" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곱하기"
+          }
+        }
+      }
+    },
+    "Nearest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최단입점"
           }
         }
       }
@@ -6707,6 +7457,17 @@
         }
       }
     },
+    "Normal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "표준"
+          }
+        }
+      }
+    },
     "Not enough unselected, opaque image pixels to synthesize a fill. Use a smaller selection with some surrounding image." : {
       "localizations" : {
         "ko" : {
@@ -6815,6 +7576,17 @@
         }
       }
     },
+    "Object" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개체 선택"
+          }
+        }
+      }
+    },
     "Object Selection" : {
       "localizations" : {
         "ko" : {
@@ -6831,6 +7603,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "개체 선택에는 macOS 14 이상이 필요합니다."
+          }
+        }
+      }
+    },
+    "Off" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "끔"
           }
         }
       }
@@ -7166,6 +7949,28 @@
         }
       }
     },
+    "Oranges" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주황 계열"
+          }
+        }
+      }
+    },
+    "Original" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "원본"
+          }
+        }
+      }
+    },
     "Original %@ histogram" : {
       "localizations" : {
         "ko" : {
@@ -7236,6 +8041,17 @@
         }
       }
     },
+    "Overlay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오버레이"
+          }
+        }
+      }
+    },
     "Paint" : {
       "localizations" : {
         "ko" : {
@@ -7256,6 +8072,17 @@
         }
       }
     },
+    "Paint Overlay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페인트 오버레이"
+          }
+        }
+      }
+    },
     "Paint with the foreground color (B), or erase pixels away (E)" : {
       "localizations" : {
         "ko" : {
@@ -7272,6 +8099,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "손바닥"
+          }
+        }
+      }
+    },
+    "Parametric" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매개 변수"
           }
         }
       }
@@ -7297,12 +8135,45 @@
         }
       }
     },
+    "Percent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "퍼센트"
+          }
+        }
+      }
+    },
+    "Perspective" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "원근"
+          }
+        }
+      }
+    },
     "Perspective allows stronger keystone. Rectilinear keeps the warp gentler." : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "원근은 더 강한 키스톤 보정을 허용합니다. 직선은 휘어짐을 더 부드럽게 유지합니다."
+          }
+        }
+      }
+    },
+    "Pin Light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "핀 라이트"
           }
         }
       }
@@ -7367,12 +8238,45 @@
         }
       }
     },
+    "Point" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "포인트"
+          }
+        }
+      }
+    },
+    "Point Color" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "포인트 색상"
+          }
+        }
+      }
+    },
     "Point Sample" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "포인트 샘플"
+          }
+        }
+      }
+    },
+    "Polygonal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다각형"
           }
         }
       }
@@ -7608,6 +8512,17 @@
         }
       }
     },
+    "Proximity Match" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "근접 일치"
+          }
+        }
+      }
+    },
     "Pull the mask onto the image's own edges, which recovers hair and fur" : {
       "localizations" : {
         "ko" : {
@@ -7648,6 +8563,17 @@
         }
       }
     },
+    "Purples" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자주 계열"
+          }
+        }
+      }
+    },
     "Put each pixel's brightness back afterwards, so only the color moves" : {
       "localizations" : {
         "ko" : {
@@ -7670,6 +8596,17 @@
     },
     "R" : {
       "shouldTranslate" : false
+    },
+    "Radial" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "방사형"
+          }
+        }
+      }
     },
     "Radius" : {
       "localizations" : {
@@ -7757,6 +8694,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "사각형 선택 윤곽"
+          }
+        }
+      }
+    },
+    "Rectilinear" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "직선"
           }
         }
       }
@@ -7872,12 +8820,34 @@
         }
       }
     },
+    "Remove" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "빼기"
+          }
+        }
+      }
+    },
     "Remove %@" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ 제거"
+          }
+        }
+      }
+    },
+    "Remove Background" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배경 제거"
           }
         }
       }
@@ -8427,6 +9397,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "중심을 기준으로 폭과 높이를 함께 조절합니다"
+          }
+        }
+      }
+    },
+    "Scanlines (CRT)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주사선(CRT)"
+          }
+        }
+      }
+    },
+    "Screen" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스크린"
           }
         }
       }
@@ -9080,6 +10072,17 @@
         }
       }
     },
+    "Smooth" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매끄럽게"
+          }
+        }
+      }
+    },
     "Smooth selection edges; turn off for hard pixel edges" : {
       "localizations" : {
         "ko" : {
@@ -9171,6 +10174,17 @@
         }
       }
     },
+    "Soft Light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "소프트 라이트"
+          }
+        }
+      }
+    },
     "Softens the edge of the vignette." : {
       "localizations" : {
         "ko" : {
@@ -9243,6 +10257,17 @@
       }
     },
     "square" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정사각형"
+          }
+        }
+      }
+    },
+    "Square" : {
+      "extractionState" : "manual",
       "localizations" : {
         "ko" : {
           "stringUnit" : {
@@ -9438,6 +10463,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "피사체"
+          }
+        }
+      }
+    },
+    "Subtract" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "빼기"
           }
         }
       }
@@ -9983,6 +11019,17 @@
         }
       }
     },
+    "Three-Way" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3방향"
+          }
+        }
+      }
+    },
     "Three-Way shows shadows, midtones, and highlights. The other choices show one wheel." : {
       "localizations" : {
         "ko" : {
@@ -10056,6 +11103,17 @@
         }
       }
     },
+    "Tonal Contrast" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색조 대비"
+          }
+        }
+      }
+    },
     "Tones" : {
       "localizations" : {
         "ko" : {
@@ -10122,6 +11180,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "왼쪽 위"
+          }
+        }
+      }
+    },
+    "Top Left Pixel Color" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "왼쪽 위 픽셀 색상"
           }
         }
       }
@@ -10217,12 +11286,34 @@
         }
       }
     },
+    "Transparent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "투명"
+          }
+        }
+      }
+    },
     "Transparent canvas" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "투명 캔버스"
+          }
+        }
+      }
+    },
+    "Transparent Pixels" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "투명 픽셀"
           }
         }
       }
@@ -10253,6 +11344,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "재단…"
+          }
+        }
+      }
+    },
+    "Two Colors" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "두 색상"
           }
         }
       }
@@ -10502,6 +11604,72 @@
         }
       }
     },
+    "Version 1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버전 1"
+          }
+        }
+      }
+    },
+    "Version 2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버전 2"
+          }
+        }
+      }
+    },
+    "Version 3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버전 3"
+          }
+        }
+      }
+    },
+    "Version 4" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버전 4"
+          }
+        }
+      }
+    },
+    "Version 5" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버전 5"
+          }
+        }
+      }
+    },
+    "Version 6" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "버전 6"
+          }
+        }
+      }
+    },
     "Vertical" : {
       "localizations" : {
         "ko" : {
@@ -10562,6 +11730,28 @@
         }
       }
     },
+    "Vivid Light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선명한 라이트"
+          }
+        }
+      }
+    },
+    "Wand" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동 선택"
+          }
+        }
+      }
+    },
     "Warmth" : {
       "localizations" : {
         "ko" : {
@@ -10588,6 +11778,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "자주 색조 범위 안의 자주 프린지를 약하게 합니다."
+          }
+        }
+      }
+    },
+    "White" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "흰색"
           }
         }
       }
@@ -10672,6 +11873,17 @@
         }
       }
     },
+    "Yellow" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "노랑"
+          }
+        }
+      }
+    },
     "Yellow / Blue" : {
       "localizations" : {
         "ko" : {
@@ -10698,6 +11910,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "저장하지 않으면 변경 사항이 사라집니다."
+          }
+        }
+      }
+    },
+    "YouTube Thumb" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "YouTube 썸네일"
           }
         }
       }
@@ -10847,1199 +12070,6 @@
     },
     "가나다" : {
       "shouldTranslate" : false
-    },
-    "Transparent" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "투명"
-          }
-        }
-      }
-    },
-    "Black" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "검정"
-          }
-        }
-      }
-    },
-    "White" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "흰색"
-          }
-        }
-      }
-    },
-    "Add" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "추가"
-          }
-        }
-      }
-    },
-    "Add Noise" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "노이즈 추가"
-          }
-        }
-      }
-    },
-    "Advanced" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "고급"
-          }
-        }
-      }
-    },
-    "Aquas" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "바다색 계열"
-          }
-        }
-      }
-    },
-    "Atkinson (Classic Mac)" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Atkinson(클래식 Mac)"
-          }
-        }
-      }
-    },
-    "Basic" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "기본"
-          }
-        }
-      }
-    },
-    "Bayer 2 × 2" : {
-      "extractionState" : "manual",
-      "shouldTranslate" : false
-    },
-    "Bayer 4 × 4" : {
-      "extractionState" : "manual",
-      "shouldTranslate" : false
-    },
-    "Bayer 8 × 8" : {
-      "extractionState" : "manual",
-      "shouldTranslate" : false
-    },
-    "Black & White" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "흑백"
-          }
-        }
-      }
-    },
-    "Bloom" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "블룸"
-          }
-        }
-      }
-    },
-    "Bloom / Glow" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "블룸 / 글로"
-          }
-        }
-      }
-    },
-    "Bottom Right Pixel Color" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "오른쪽 아래 픽셀 색상"
-          }
-        }
-      }
-    },
-    "Camera Raw Filter" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Camera Raw 필터"
-          }
-        }
-      }
-    },
-    "Color + neutral midtones" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "색상 + 중간 영역 중립화"
-          }
-        }
-      }
-    },
-    "Color Balance" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "색상 균형"
-          }
-        }
-      }
-    },
-    "Color Burn" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "색상 번"
-          }
-        }
-      }
-    },
-    "Color Dodge" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "색상 닷지"
-          }
-        }
-      }
-    },
-    "Color Priority" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "색상 우선"
-          }
-        }
-      }
-    },
-    "Content-Aware" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "내용 인식"
-          }
-        }
-      }
-    },
-    "Create Texture" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "텍스처 만들기"
-          }
-        }
-      }
-    },
-    "Cyan" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "녹청"
-          }
-        }
-      }
-    },
-    "Darken" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "어둡게 하기"
-          }
-        }
-      }
-    },
-    "Dashed Lines" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "점선"
-          }
-        }
-      }
-    },
-    "Difference" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "차이"
-          }
-        }
-      }
-    },
-    "Dither" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "디더"
-          }
-        }
-      }
-    },
-    "Divide" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "나누기"
-          }
-        }
-      }
-    },
-    "Dot" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "점"
-          }
-        }
-      }
-    },
-    "Exclusion" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "제외"
-          }
-        }
-      }
-    },
-    "Floyd–Steinberg" : {
-      "extractionState" : "manual",
-      "shouldTranslate" : false
-    },
-    "Foreground to Background" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "전경색에서 배경색으로"
-          }
-        }
-      }
-    },
-    "Foreground to Transparent" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "전경색에서 투명으로"
-          }
-        }
-      }
-    },
-    "Free" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "자유"
-          }
-        }
-      }
-    },
-    "Freehand" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "자유형"
-          }
-        }
-      }
-    },
-    "Gaussian Blur" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "가우시안 흐림 효과"
-          }
-        }
-      }
-    },
-    "Global" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "전체"
-          }
-        }
-      }
-    },
-    "Gradient Map" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "그레이디언트 맵"
-          }
-        }
-      }
-    },
-    "Gray" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "회색"
-          }
-        }
-      }
-    },
-    "Guided" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "안내"
-          }
-        }
-      }
-    },
-    "Halation" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "헐레이션"
-          }
-        }
-      }
-    },
-    "Halftone Diamonds" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "하프톤 다이아몬드"
-          }
-        }
-      }
-    },
-    "Halftone Dots" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "하프톤 점"
-          }
-        }
-      }
-    },
-    "Halftone Lines" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "하프톤 선"
-          }
-        }
-      }
-    },
-    "Hard Light" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "하드 라이트"
-          }
-        }
-      }
-    },
-    "Hard Mix" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "하드 혼합"
-          }
-        }
-      }
-    },
-    "High quality" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "고품질"
-          }
-        }
-      }
-    },
-    "Highlight Priority" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "밝은 영역 우선"
-          }
-        }
-      }
-    },
-    "Instagram Portrait" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instagram 세로"
-          }
-        }
-      }
-    },
-    "Instagram Square" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instagram 정사각형"
-          }
-        }
-      }
-    },
-    "Instagram Story" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instagram 스토리"
-          }
-        }
-      }
-    },
-    "Lens Correction" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "렌즈 교정"
-          }
-        }
-      }
-    },
-    "Light Blue" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "밝은 파랑"
-          }
-        }
-      }
-    },
-    "Light Gray" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "밝은 회색"
-          }
-        }
-      }
-    },
-    "Light Red" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "밝은 빨강"
-          }
-        }
-      }
-    },
-    "Lighten" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "밝게 하기"
-          }
-        }
-      }
-    },
-    "Linear Burn" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "선형 번"
-          }
-        }
-      }
-    },
-    "Linear Dodge (Add)" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "선형 닷지(추가)"
-          }
-        }
-      }
-    },
-    "Linear Light" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "선형 라이트"
-          }
-        }
-      }
-    },
-    "Lines" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "선"
-          }
-        }
-      }
-    },
-    "Luminosity" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "광도"
-          }
-        }
-      }
-    },
-    "Mac Patterns" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mac 패턴"
-          }
-        }
-      }
-    },
-    "Magenta" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "마젠타"
-          }
-        }
-      }
-    },
-    "Master" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "마스터"
-          }
-        }
-      }
-    },
-    "Medium Blue" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "중간 파랑"
-          }
-        }
-      }
-    },
-    "Motion Blur" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "동작 흐림 효과"
-          }
-        }
-      }
-    },
-    "Multiply" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "곱하기"
-          }
-        }
-      }
-    },
-    "Nearest" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "최단입점"
-          }
-        }
-      }
-    },
-    "Normal" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "표준"
-          }
-        }
-      }
-    },
-    "Object" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "개체 선택"
-          }
-        }
-      }
-    },
-    "Off" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "끔"
-          }
-        }
-      }
-    },
-    "Oranges" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "주황 계열"
-          }
-        }
-      }
-    },
-    "Original" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "원본"
-          }
-        }
-      }
-    },
-    "Overlay" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "오버레이"
-          }
-        }
-      }
-    },
-    "Paint Overlay" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "페인트 오버레이"
-          }
-        }
-      }
-    },
-    "Parametric" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "매개 변수"
-          }
-        }
-      }
-    },
-    "Percent" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "퍼센트"
-          }
-        }
-      }
-    },
-    "Perspective" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "원근"
-          }
-        }
-      }
-    },
-    "Pin Light" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "핀 라이트"
-          }
-        }
-      }
-    },
-    "Point" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "포인트"
-          }
-        }
-      }
-    },
-    "Point Color" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "포인트 색상"
-          }
-        }
-      }
-    },
-    "Polygonal" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "다각형"
-          }
-        }
-      }
-    },
-    "Proximity Match" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "근접 일치"
-          }
-        }
-      }
-    },
-    "Purples" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "자주 계열"
-          }
-        }
-      }
-    },
-    "Radial" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "방사형"
-          }
-        }
-      }
-    },
-    "Rectilinear" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "직선"
-          }
-        }
-      }
-    },
-    "Remove" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "빼기"
-          }
-        }
-      }
-    },
-    "Remove Background" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "배경 제거"
-          }
-        }
-      }
-    },
-    "Scanlines (CRT)" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "주사선(CRT)"
-          }
-        }
-      }
-    },
-    "Screen" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "스크린"
-          }
-        }
-      }
-    },
-    "Smooth" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "매끄럽게"
-          }
-        }
-      }
-    },
-    "Soft Light" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "소프트 라이트"
-          }
-        }
-      }
-    },
-    "Square" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "정사각형"
-          }
-        }
-      }
-    },
-    "Subtract" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "빼기"
-          }
-        }
-      }
-    },
-    "Three-Way" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3방향"
-          }
-        }
-      }
-    },
-    "Tonal Contrast" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "색조 대비"
-          }
-        }
-      }
-    },
-    "Top Left Pixel Color" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "왼쪽 위 픽셀 색상"
-          }
-        }
-      }
-    },
-    "Transparent Pixels" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "투명 픽셀"
-          }
-        }
-      }
-    },
-    "Two Colors" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "두 색상"
-          }
-        }
-      }
-    },
-    "Version 1" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "버전 1"
-          }
-        }
-      }
-    },
-    "Version 2" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "버전 2"
-          }
-        }
-      }
-    },
-    "Version 3" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "버전 3"
-          }
-        }
-      }
-    },
-    "Version 4" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "버전 4"
-          }
-        }
-      }
-    },
-    "Version 5" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "버전 5"
-          }
-        }
-      }
-    },
-    "Version 6" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "버전 6"
-          }
-        }
-      }
-    },
-    "Vivid Light" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "선명한 라이트"
-          }
-        }
-      }
-    },
-    "Wand" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "자동 선택"
-          }
-        }
-      }
-    },
-    "Yellow" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "노랑"
-          }
-        }
-      }
-    },
-    "YouTube Thumb" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "YouTube 썸네일"
-          }
-        }
-      }
     }
   },
   "version" : "1.0"

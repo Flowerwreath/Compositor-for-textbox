@@ -57,4 +57,11 @@ struct LocalizationTests {
         })).sorted()
         #expect(missing.isEmpty, "add with scripts/l10n.py manual, then translate: \(missing)")
     }
+
+    /// Dialog color swatches name their picker window and their accessibility label.
+    @Test func dialogSwatchTitlesHaveKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        let missing = ["Grid Color", "Extension Color", "JPEG Background"].filter { L10n.text($0, bundle: korean) == $0 }
+        #expect(missing.isEmpty, "\(missing)")
+    }
 }

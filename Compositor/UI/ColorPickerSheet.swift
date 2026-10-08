@@ -192,12 +192,12 @@ final class ColorPickerPanelController: NSObject {
 /// A dialog's color swatch, drawn as the brush's: clicking it opens the app's picker on `color`, which follows the
 /// working color as it moves and keeps the one chosen. `closePicker()` puts the picker away with the dialog.
 struct DialogColorSwatch: View {
-    let title: String
+    let title: LocalizedStringResource
     @Binding var color: PaletteColor
     let session: EditorSession
     var body: some View {
         Button {
-            session.openDialogColorPicker(title: title, color: color) { color = $0 }
+            session.openDialogColorPicker(title: String(localized: title), color: color) { color = $0 }
         } label: {
             let shape = RoundedRectangle(cornerRadius: 4, style: .continuous)
             shape.fill(color.swiftUI)
@@ -207,7 +207,7 @@ struct DialogColorSwatch: View {
                 .contentShape(shape)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(title)
+        .accessibilityLabel(Text(title))
         .onChange(of: session.colorPicker?.color) { _, _ in session.previewDialogColor() }
         .onDisappear { Self.closePicker(session) }
     }

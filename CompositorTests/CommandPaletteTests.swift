@@ -119,4 +119,18 @@ struct CommandPaletteTests {
         #expect(NSApp.windowsMenu != nil)
         #expect(NSApp.helpMenu != nil)
     }
+
+    /// Two English commands can share a translation (Zoom Out and Contract are both 축소); either English finds it.
+    @Test func sharedTranslationsKeepEveryEnglishName() throws {
+        let english = EnglishTitles(table: ["View": "보기", "Zoom Out": "축소", "Contract": "축소"])
+        let zoomOut = CommandPaletteEntry(id: "보기 › 축소", englishTitle: english.english(forPath: ["보기", "축소"]),
+                                          shortcut: nil, isEnabled: true, perform: {})
+        #expect(CommandPaletteSearch.rank([zoomOut], query: "zoom out").map(\.id) == [zoomOut.id])
+        #expect(CommandPaletteSearch.rank([zoomOut], query: "contract").map(\.id) == [zoomOut.id])
+        // The shipped Korean catalog has such pairs: Invert and Inverse are both 반전.
+        let korean = try #require(L10n.koreanBundle?.path(forResource: "Localizable", ofType: "strings"))
+        let table = try #require(NSDictionary(contentsOfFile: korean) as? [String: String])
+        let shipped = try #require(EnglishTitles(table: table).english(for: "반전"))
+        #expect(shipped.contains("Invert") && shipped.contains("Inverse"))
+    }
 }

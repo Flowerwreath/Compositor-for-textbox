@@ -2,8 +2,8 @@ import Foundation
 
 /// The English behind translated menu titles, so the command palette finds "필터 › 가우시안 흐림 효과…" by "blur" too.
 nonisolated struct EnglishTitles {
-    /// Translation → English key.
-    private let english: [String: String]
+    /// Translation → every English key with that translation ("축소" is both Zoom Out and Contract), sorted.
+    private let english: [String: [String]]
 
     /// From `bundle`'s `Localizable.strings` in its current language; empty when the app runs in English.
     init(bundle: Bundle = .main) {
@@ -17,21 +17,23 @@ nonisolated struct EnglishTitles {
         self.init(table: table)
     }
 
-    /// `table` maps English keys to translations, as a `.strings` file does. When two keys share a translation, the
-    /// first in sorted order wins, so the result doesn't depend on dictionary order.
+    /// `table` maps English keys to translations, as a `.strings` file does.
     init(table: [String: String]) {
-        var english: [String: String] = [:]
+        var english: [String: [String]] = [:]
         for key in table.keys.sorted() {
-            guard let value = table[key], value != key, english[value] == nil else { continue }
-            english[value] = key
+            guard let value = table[key], value != key else { continue }
+            english[value, default: []].append(key)
         }
         self.english = english
     }
 
-    /// One title in English: as it is, or without the trailing "…" a format such as "%@…" added.
+    /// One title in English: as it is, or without the trailing "…" a format such as "%@…" added. A translation
+    /// several English keys share gives all of them ("Contract / Zoom Out"), since this is only searched, never shown.
     func english(for title: String) -> String? {
-        if let key = english[title] { return key }
-        if title.hasSuffix("…"), let key = english[String(title.dropLast())] { return key + "…" }
+        if let keys = english[title] { return keys.joined(separator: " / ") }
+        if title.hasSuffix("…"), let keys = english[String(title.dropLast())] {
+            return keys.map { $0 + "…" }.joined(separator: " / ")
+        }
         return nil
     }
 
