@@ -105,7 +105,9 @@ macOS 언어가 한국어일 때 Compositor의 UI에서 **아이콘을 뺀, 글�
 - `Compositor.xcscheme`의 TestAction: 테스트 언어를 `en`, 지역을 `US`로 고정해요. Xcode에서 돌리든 `xcodebuild`로 돌리든, CI에서도 테스트는 영어로 돌아요.
   - **가설:** TestAction에 `language`와 `region` 속성을 쓰면 테스트 호스트에 적용돼요. 고친 뒤 테스트 안에서 `Bundle.main.preferredLocalizations.first == "en"`인지 확인해요. 안 되면 테스트 호스트 실행 인자로 `-AppleLanguages (en)`을 넘겨요.
 
-**upstream 병합 후의 흐름:** upstream이 문구를 바꾸거나 추가하면, 다음 빌드 때 카탈로그에 번역 없는 키로 들어가거나 "오래됨"으로 표시돼요. 화면에는 영어가 나오고 앱은 깨지지 않아요. §5.2의 스크립트로 미번역 목록을 보고 채워요.
+**upstream 병합 후의 흐름:** upstream이 문구를 바꾸거나 추가하면, 다음 동기화 때 카탈로그에 번역 없는 키로 들어가거나 "오래됨"으로 표시돼요. 화면에는 영어가 나오고 앱은 깨지지 않아요. §5.2의 스크립트로 미번역 목록을 보고 채워요.
+
+**병합할 때마다 빌드와 테스트를 한 번 돌려요.** §4.2의 ②는 공용 함수(`beginEdit`, 행 도우미)의 매개변수 타입을 `String`에서 `LocalizedStringResource`로 바꿔요. 그래서 upstream의 새 코드가 이 함수에 `String` 변수를 넘기면, git 충돌 없이 병합된 뒤에도 빌드 오류가 나요. 고치는 법은 §4.2의 규칙과 같아요. 오류가 난 줄에서 이미 번역된 이름이면 `beginEdit(named:)`로, 리터럴에서 온 변수면 그 변수의 타입을 바꿔요.
 
 ### 4.2 문자열 종류별 처리 규칙
 
