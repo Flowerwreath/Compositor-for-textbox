@@ -276,8 +276,8 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     private var measuredOverflow: CGFloat = 0
     private var verticalLayout: VerticalTextLayout?
     private var resize: (handle: Int, draft: TextDraft, transform: LayerTransform, start: CGPoint)?
-    /// A rotation under way: the drag as the Move tool does it, and the draft it started from.
-    private var turn: (drag: TransformDrag, draft: TextDraft)?
+    /// A rotation under way: the drag as the Move tool does it, its draft, and the corner its cursor follows.
+    private var turn: (drag: TransformDrag, draft: TextDraft, corner: CGPoint)?
     /// The transform the editor is actually showing. Point text grows as it is typed, so this is not always the
     /// draft's own transform, and a resize has to start from what is on screen or the text jumps.
     override var isFlipped: Bool { true }
@@ -503,7 +503,11 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
             return
         }
         guard canvas?.session.colorPicker == nil else { return }
-        if rotates(at: point) { CanvasView.rotationCursor.set(); return }
+        if let corner = rotationCorner(at: point) {
+            TextRotationCursor.cursor(degrees: TextRotationCursor.degrees(
+                corner: corner, boxRotation: shownTransform?.rotation ?? 0)).set()
+            return
+        }
         guard let index = handle(at: point) else { NSCursor.iBeam.set(); return }
         handleCursor(index).set()
     }
@@ -572,11 +576,17 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     /// Just outside a corner, past the resize band: where a drag turns the box instead of resizing it. Only the
     /// corners, so beside an edge's middle, or farther out, the pointer is on the canvas.
     private func rotates(at point: CGPoint) -> Bool {
-        guard handle(at: point) == nil, !bounds.contains(point) else { return false }
+        rotationCorner(at: point) != nil
+    }
+
+    /// Share the nearest unit corner between hit testing and the cursor so overlapping zones agree.
+    private func rotationCorner(at point: CGPoint) -> CGPoint? {
+        guard handle(at: point) == nil, !bounds.contains(point) else { return nil }
+        let corner = CGPoint(x: point.x < bounds.midX ? 0 : 1, y: point.y < bounds.midY ? 0 : 1)
+        let position = CGPoint(x: bounds.minX + corner.x * bounds.width,
+                               y: bounds.minY + corner.y * bounds.height)
         let reach = edgeReach + rotationReach
-        return [CGPoint(x: 0, y: 0), CGPoint(x: bounds.width, y: 0),
-                CGPoint(x: bounds.width, y: bounds.height), CGPoint(x: 0, y: bounds.height)]
-            .contains { hypot(point.x - $0.x, point.y - $0.y) <= reach }
+        return hypot(point.x - position.x, point.y - position.y) <= reach ? corner : nil
     }
 
     /// The edge or corner at a point, in handle order: a band along each edge, as the Move tool's box has, rather
@@ -639,9 +649,10 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         let transform = shownTransform ?? draft.transform ?? LayerTransform(origin: draft.origin, size: logicalSize)
         let pixel = canvas.session.viewport.documentPoint(from: canvas.convert(event.locationInWindow, from: nil), documentSize: document.size)
         guard let handle = handle(at: local) else {
-            if rotates(at: local) {
-                turn = (TransformDrag(original: transform, start: pixel, mode: .rotate), draft)
-                CanvasView.rotationCursor.set()
+            if let corner = rotationCorner(at: local) {
+                turn = (TransformDrag(original: transform, start: pixel, mode: .rotate), draft, corner)
+                TextRotationCursor.cursor(degrees: TextRotationCursor.degrees(
+                    corner: corner, boxRotation: shownTransform?.rotation ?? 0)).set()
             }
             return
         }
@@ -695,12 +706,17 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         guard let turn, let canvas, let document = canvas.session.document else { return }
         let point = canvas.session.viewport.documentPoint(from: canvas.convert(event.locationInWindow, from: nil), documentSize: document.size)
         var rotated = turn.drag.updated(to: point, lockRatio: false, shift: event.modifierFlags.contains(.shift))
+        let start = turn.drag.original.rotation
+        // Keep the shortest turn from the starting angle because the Type bar's angle field shows this value.
+        rotated.rotation = start + remainder(rotated.rotation - start, 360)
         rotated.rotation = rotated.rotation.rounded()
         guard rotated.isValid else { return }
         var draft = turn.draft
         draft.place(rotated, size: logicalSize)
         canvas.session.textDraft = draft
         canvas.synchronizeDisplay()
+        TextRotationCursor.cursor(degrees: TextRotationCursor.degrees(
+            corner: turn.corner, boxRotation: shownTransform?.rotation ?? rotated.rotation)).set()
     }
     override func mouseUp(with event: NSEvent) { resize = nil; turn = nil; window?.makeFirstResponder(textView) }
 }

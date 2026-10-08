@@ -276,20 +276,86 @@ struct TextBoxRotationTests {
         defer { rig.window.contentView = nil; NSCursor.arrow.set() }
         NSCursor.arrow.set()
         rig.editor.pointerMoved(rig.event(.mouseMoved, at: rig.zone()))
-        #expect(NSCursor.current === CanvasView.rotationCursor)
+        #expect(NSCursor.current === TextRotationCursor.cursor(degrees: 0))
         NSCursor.arrow.set()
         // Over the middle of the top edge: a resize band, not the rotation zone.
         rig.editor.pointerMoved(rig.event(.mouseMoved, at: rig.windowPoint(CGPoint(x: 0.5, y: 0))))
-        #expect(NSCursor.current !== CanvasView.rotationCursor)
+        #expect(NSCursor.current !== TextRotationCursor.cursor(degrees: 0))
         // Beside the middle of the right edge, just outside the band.
         NSCursor.arrow.set()
         let side = rig.windowPoint(CGPoint(x: 1 + 14 / (rig.shown.size.width * rig.scale), y: 0.5))
         rig.editor.pointerMoved(rig.event(.mouseMoved, at: side))
-        #expect(NSCursor.current !== CanvasView.rotationCursor)
+        #expect(NSCursor.current !== TextRotationCursor.cursor(degrees: 0))
         // Farther out, nothing changes.
         NSCursor.arrow.set()
         rig.editor.pointerMoved(rig.event(.mouseMoved, at: rig.zone(past: 60)))
-        #expect(NSCursor.current !== CanvasView.rotationCursor)
+        #expect(NSCursor.current !== TextRotationCursor.cursor(degrees: 0))
+    }
+
+    @Test func rotationCursorPointsAwayFromEachCorner() {
+        #expect(TextRotationCursor.degrees(corner: CGPoint(x: 1, y: 0), boxRotation: 0) == 0)
+        #expect(TextRotationCursor.degrees(corner: CGPoint(x: 1, y: 1), boxRotation: 0) == 90)
+        #expect(TextRotationCursor.degrees(corner: CGPoint(x: 0, y: 1), boxRotation: 0) == 180)
+        #expect(TextRotationCursor.degrees(corner: .zero, boxRotation: 0) == 270)
+        #expect(TextRotationCursor.degrees(corner: CGPoint(x: 1, y: 0), boxRotation: 30) == 30)
+        #expect(TextRotationCursor.degrees(corner: .zero, boxRotation: 120) == 30)
+    }
+
+    @Test func rotationCursorCachesNormalizedWholeDegrees() {
+        #expect(TextRotationCursor.cursor(degrees: 30) === TextRotationCursor.cursor(degrees: 390))
+        #expect(TextRotationCursor.cursor(degrees: 29.6) === TextRotationCursor.cursor(degrees: 30))
+        #expect(TextRotationCursor.cursor(degrees: -330) === TextRotationCursor.cursor(degrees: 30))
+        #expect(TextRotationCursor.cursor(degrees: 359.6) === TextRotationCursor.cursor(degrees: 0))
+        #expect(TextRotationCursor.cursor(degrees: 0) !== TextRotationCursor.cursor(degrees: 90))
+    }
+
+    @Test func bottomLeftZoneShowsItsRotationCursor() throws {
+        let rig = try makeRig()
+        defer { rig.window.contentView = nil; NSCursor.arrow.set() }
+        let unit = CGPoint(x: -14 / (rig.shown.size.width * rig.scale),
+                           y: 1 + 14 / (rig.shown.size.height * rig.scale))
+        NSCursor.arrow.set()
+        rig.editor.pointerMoved(rig.event(.mouseMoved, at: rig.windowPoint(unit)))
+        #expect(NSCursor.current === TextRotationCursor.cursor(degrees: 180))
+    }
+
+    @Test func topRightZoneTurnsWithTheBox() throws {
+        let rig = try makeRig()
+        defer { rig.window.contentView = nil; NSCursor.arrow.set() }
+        rig.session.setTextRotation(90)
+        rig.canvas.synchronizeDisplay()
+        #expect(rig.shown.rotation == 90)
+        NSCursor.arrow.set()
+        rig.editor.pointerMoved(rig.event(.mouseMoved, at: rig.zone()))
+        #expect(NSCursor.current === TextRotationCursor.cursor(degrees: 90))
+    }
+
+    /// A drag keeps the starting corner's cursor while its angle follows the live box rotation.
+    @Test func rotationDragTurnsTheStartingCornerCursor() throws {
+        let rig = try makeRig()
+        defer { rig.window.contentView = nil; NSCursor.arrow.set() }
+        let before = rig.shown
+        let unit = CGPoint(x: -14 / (before.size.width * rig.scale),
+                           y: 1 + 14 / (before.size.height * rig.scale))
+        let start = rig.windowPoint(unit)
+        let end = rig.windowPoint(forPixel: rig.turned(before.point(unit), by: 90, about: before.center))
+        NSCursor.arrow.set()
+        rig.editor.mouseDown(with: rig.event(.leftMouseDown, at: start))
+        #expect(NSCursor.current === TextRotationCursor.cursor(degrees: 180))
+        rig.editor.mouseDragged(with: rig.event(.leftMouseDragged, at: end))
+        #expect(rig.shown.rotation == 90)
+        #expect(NSCursor.current === TextRotationCursor.cursor(degrees: 270))
+        rig.editor.mouseUp(with: rig.event(.leftMouseUp, at: end))
+    }
+
+    @Test func counterclockwiseQuarterTurnKeepsANegativeAngle() throws {
+        let rig = try makeRig()
+        defer { rig.window.contentView = nil; NSCursor.arrow.set() }
+        let before = rig.shown
+        let unit = CGPoint(x: 1 + 14 / (before.size.width * rig.scale), y: -14 / (before.size.height * rig.scale))
+        let end = rig.windowPoint(forPixel: rig.turned(before.point(unit), by: -90, about: before.center))
+        rig.drag(from: rig.zone(), to: end)
+        #expect(rig.shown.rotation == -90)
     }
 
     @Test func aRotatedLayerRotatesFromItsRotatedCorner() throws {
@@ -313,7 +379,7 @@ struct TextBoxRotationTests {
         }
         #expect(hit(at: start) === rig.editor)
         rig.editor.pointerMoved(rig.event(.mouseMoved, at: start))
-        #expect(NSCursor.current === CanvasView.rotationCursor)
+        #expect(NSCursor.current === TextRotationCursor.cursor(degrees: 30))
         let unit = CGPoint(x: 1 + 14 / (before.size.width * rig.scale), y: -14 / (before.size.height * rig.scale))
         let end = rig.windowPoint(forPixel: rig.turned(before.point(unit), by: 45, about: before.center))
         rig.drag(from: start, to: end)
