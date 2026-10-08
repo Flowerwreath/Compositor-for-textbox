@@ -147,7 +147,7 @@ Compositor를 한국어로 옮길 때의 기준이에요. 번역할 때 이 표�
 | Contiguous | 인접 | PS |
 | Tolerance | 허용치 | PS |
 | Sample Size / Point Sample / 3 by 3 Average | 샘플 크기 / 포인트 샘플 / 3x3 평균 | PS |
-| New / Add / Subtract / Intersect (선택 모드) | 새 선택 영역 / 선택 영역에 추가 / 선택 영역에서 빼기 / 선택 영역과 교차 | PS, enum 값 확인 후 적용 |
+| New / Add / Subtract (선택 모드) | 새로 만들기 / 추가 / 빼기 | 도구 바의 좁은 분할 버튼이라 짧은 형태. Photoshop 툴팁의 긴 형태는 "새 선택 영역 / 선택 영역에 추가 / 선택 영역에서 빼기" |
 
 ## 도구
 

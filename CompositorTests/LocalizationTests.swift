@@ -43,4 +43,18 @@ struct LocalizationTests {
         let name = korean.localizedString(forKey: "Compositor Project", value: nil, table: "InfoPlist")
         #expect(name != "Compositor Project")
     }
+
+    /// Every enum the screen shows by name, and every name read from a static list, has Korean, so a case added
+    /// upstream fails here instead of showing up in English.
+    @MainActor @Test func everyDisplayNameHasKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        // Names that read the same in Korean (marked do-not-translate in the catalog).
+        let sameInKorean: Set<String> = ["RGB", "HSL", "ASCII", "Floyd–Steinberg", "Bayer 2 × 2", "Bayer 4 × 4", "Bayer 8 × 8"]
+        let keys = ManualKeys.displayNames + ManualKeys.cameraRawMixerNames + ManualKeys.cropRatioChoices
+            + ManualKeys.canvasPresetWords
+        let missing = Array(Set(keys.filter {
+            $0.contains(where: \.isLetter) && !sameInKorean.contains($0) && L10n.text($0, bundle: korean) == $0
+        })).sorted()
+        #expect(missing.isEmpty, "add with scripts/l10n.py manual, then translate: \(missing)")
+    }
 }
