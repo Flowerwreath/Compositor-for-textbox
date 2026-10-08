@@ -13,6 +13,11 @@ struct TypeControls: View {
             session.changeTextStyle { $0[keyPath: key] = CGFloat(value) }
         })
     }
+    private var rotation: Binding<Double> {
+        Binding(get: { Double(session.textRotation ?? 0) }, set: { value in
+            session.setTextRotation(CGFloat(value.truncatingRemainder(dividingBy: 360)))
+        })
+    }
     func toggleOrientation() {
         session.changeTextStyle { $0.orientation = $0.isVertical ? nil : .vertical }
     }
@@ -110,6 +115,13 @@ struct TypeControls: View {
                         .arrowSteps(value: { Double(session.currentTextStyle.lineHeight) },
                                     change: { stepped in session.changeTextStyle { $0.leading = CGFloat(max(0, stepped)) } })
                         .help("Line height, baseline to baseline. Empty or 0 is Auto: 120% of the font size.")
+                    TextField("Angle", value: rotation, format: .number).frame(width: 52)
+                        .unitSuffix("°", scrubValue: rotation, sensitivity: 1, range: -360...360, step: 1)
+                        .arrowSteps(value: { rotation.wrappedValue },
+                                    change: { rotation.wrappedValue = $0 })
+                        .disabled(session.textRotation == nil)
+                        .help("Rotation, in degrees clockwise")
+                        .accessibilityLabel("Angle")
                 }
             }.scrollIndicators(.hidden)
             if session.textDraft != nil {

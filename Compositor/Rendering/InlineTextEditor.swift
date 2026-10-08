@@ -698,15 +698,7 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         rotated.rotation = rotated.rotation.rounded()
         guard rotated.isValid else { return }
         var draft = turn.draft
-        if draft.style.boxSize == nil {
-            // Point text is placed by its pinned corner, which the draft reads before its transform, and stays point text.
-            var placement = draft.pointPlacement ?? TextPointPlacement(transform: rotated, size: logicalSize, vertical: draft.style.isVertical)
-            placement.transform = rotated
-            draft.pointPlacement = placement
-        } else {
-            draft.transform = rotated
-            draft.origin = rotated.origin
-        }
+        draft.place(rotated, size: logicalSize)
         canvas.session.textDraft = draft
         canvas.synchronizeDisplay()
     }

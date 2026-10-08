@@ -311,6 +311,19 @@ struct TextDraft: Identifiable {
     /// The last point-text placement, so a direction switch pins the old corner once, then grows in the new direction.
     var pointPlacement: TextPointPlacement? = nil
 
+    mutating func place(_ transform: LayerTransform, size: CGSize) {
+        if style.boxSize == nil {
+            // Point text reads its pinned placement first and keeps the size and direction it grew from.
+            var placement = pointPlacement ?? TextPointPlacement(
+                transform: transform, size: size, vertical: style.isVertical)
+            placement.transform = transform
+            pointPlacement = placement
+        } else {
+            self.transform = transform
+            origin = transform.origin
+        }
+    }
+
     mutating func textTransform(size: CGSize, layer: ImageLayer?) -> LayerTransform {
         guard style.boxSize == nil else {
             pointPlacement = nil
@@ -482,6 +495,34 @@ extension EditorSession {
     }
 
     var currentTextStyle: LayerTextStyle { textDraft?.style ?? activeLayer?.liveText?.style ?? textDefaults }
+
+    var textPlacement: LayerTransform? {
+        guard var draft = textDraft else { return nil }
+        return refreshTextPlacement(&draft).transform
+    }
+
+    private func refreshTextPlacement(_ draft: inout TextDraft) -> (transform: LayerTransform, size: CGSize) {
+        let size = Self.textBoxSize(draft.style)
+        let layer = document?.layers.first { $0.id == draft.layerID }
+        return (draft.textTransform(size: size, layer: layer), size)
+    }
+
+    var textRotation: CGFloat? {
+        if textDraft != nil { return textPlacement?.rotation }
+        guard let layer = activeLayer, layer.liveText != nil else { return nil }
+        return layer.transform.rotation
+    }
+
+    func setTextRotation(_ degrees: CGFloat) {
+        if textDraft == nil, activeLayer?.liveText != nil { editActiveText() }
+        guard var draft = textDraft else { return }
+        let placement = refreshTextPlacement(&draft)
+        var transform = placement.transform
+        transform.rotation = degrees
+        guard transform.isValid else { return }
+        draft.place(transform, size: placement.size)
+        textDraft = draft
+    }
 
     /// While the font menu is open, the text being edited shows the face under the pointer; `endFontPreview` puts it
     /// back. Only text already being edited: a selected text layer isn't opened for a preview.

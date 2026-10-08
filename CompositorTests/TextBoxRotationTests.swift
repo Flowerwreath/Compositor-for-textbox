@@ -76,6 +76,104 @@ struct TextBoxRotationTests {
         return Rig(session: session, canvas: canvas, window: window, editor: try #require(canvas.inlineTextEditor))
     }
 
+    @Test func settingBoxTextRotationKeepsItsCenterAndSize() throws {
+        let session = EditorSession()
+        session.createDocument(width: 800, height: 600, emptyLayer: true)
+        session.beginText(in: CGRect(x: 200, y: 150, width: 300, height: 160))
+        let before = try #require(session.textPlacement)
+        let size = try #require(session.textDraft?.style.boxSize)
+
+        session.setTextRotation(30)
+
+        let after = try #require(session.textPlacement)
+        #expect(after.rotation == 30)
+        #expect(abs(after.center.x - before.center.x) < 0.5 && abs(after.center.y - before.center.y) < 0.5)
+        #expect(session.textDraft?.style.boxSize == size)
+    }
+
+    @Test func settingPointTextRotationCommitsItsAngle() throws {
+        let session = EditorSession()
+        session.createDocument(width: 800, height: 600, emptyLayer: true)
+        session.beginText(at: CGPoint(x: 200, y: 150))
+        let initialSize = try #require(session.textDraft?.pointPlacement?.size)
+        session.textDraft?.style.content = "Hi"
+        let style = try #require(session.textDraft?.style)
+        let size = EditorSession.textBoxSize(style)
+        #expect(size != initialSize)
+        let before = try #require(session.textPlacement)
+
+        for degrees: CGFloat in [30, 60, 30] {
+            session.setTextRotation(degrees)
+            let placement = try #require(session.textPlacement)
+            #expect(placement.rotation == degrees)
+            #expect(abs(placement.size.width - size.width) < 0.5)
+            #expect(abs(placement.size.height - size.height) < 0.5)
+            #expect(abs(placement.center.x - before.center.x) < 0.5)
+            #expect(abs(placement.center.y - before.center.y) < 0.5)
+        }
+
+        let draft = try #require(session.textDraft)
+        #expect(draft.style.boxSize == nil)
+        #expect(session.textPlacement?.rotation == 30)
+        #expect(session.applyText(draft))
+        let layer = try #require(session.activeLayer)
+        #expect(layer.liveText != nil)
+        #expect(layer.transform.rotation == 30)
+        #expect(abs(layer.transform.center.x - before.center.x) < 0.5)
+        #expect(abs(layer.transform.center.y - before.center.y) < 0.5)
+    }
+
+    @Test func settingSelectedTextRotationOpensItsDraft() throws {
+        let session = EditorSession()
+        session.createDocument(width: 800, height: 600, emptyLayer: true)
+        session.beginText(in: CGRect(x: 200, y: 150, width: 300, height: 160))
+        session.textDraft?.style.content = "Hello"
+        #expect(session.applyText(try #require(session.textDraft)))
+        let layer = try #require(session.activeLayer)
+        #expect(layer.liveText != nil)
+        #expect(session.textDraft == nil)
+        #expect(session.textRotation == layer.transform.rotation)
+
+        session.setTextRotation(45)
+
+        let draft = try #require(session.textDraft)
+        #expect(draft.layerID == layer.id)
+        #expect(session.textRotation == 45)
+    }
+
+    @Test func settingRotationWithoutTextDoesNotStartADraft() {
+        let session = EditorSession()
+        session.createDocument(width: 800, height: 600, emptyLayer: true)
+        #expect(session.activeLayer != nil)
+        #expect(session.activeLayer?.liveText == nil)
+        #expect(session.textRotation == nil)
+
+        session.setTextRotation(45)
+
+        #expect(session.textDraft == nil)
+        #expect(session.textRotation == nil)
+    }
+
+    @Test func placingPointTextKeepsItsPreviousSizeAndDirection() throws {
+        let session = EditorSession()
+        session.createDocument(width: 800, height: 600, emptyLayer: true)
+        session.beginText(at: CGPoint(x: 200, y: 150))
+        var draft = try #require(session.textDraft)
+        draft.style.orientation = .horizontal
+        let previousSize = CGSize(width: 80, height: 120)
+        var transform = LayerTransform(origin: draft.origin, size: previousSize)
+        draft.pointPlacement = TextPointPlacement(transform: transform, size: previousSize, vertical: true)
+        transform.rotation = 30
+
+        draft.place(transform, size: CGSize(width: 200, height: 50))
+
+        let placement = try #require(draft.pointPlacement)
+        #expect(placement.transform == transform)
+        #expect(placement.size == previousSize)
+        #expect(placement.vertical)
+        #expect(draft.style.boxSize == nil)
+    }
+
     @Test func boxTextRotatesAroundItsCenter() throws {
         let rig = try makeRig()
         defer { rig.window.contentView = nil }
