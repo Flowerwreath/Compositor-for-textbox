@@ -429,7 +429,7 @@ extension EditorSession {
                 var placed = draft
                 let transform = placed.textTransform(size: CGSize(width: image.width, height: image.height), layer: nil)
                 addPixelLayer(image, at: transform.origin, name: Self.layerName(for: draft.style.content), editName: "New Text Layer",
-                              dropsSelection: false, text: text)
+                              dropsSelection: false, text: text, transform: transform)
             }
             succeeded = true
             textDefaults = draft.style

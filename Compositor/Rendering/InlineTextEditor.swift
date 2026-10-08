@@ -276,6 +276,8 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     private var measuredOverflow: CGFloat = 0
     private var verticalLayout: VerticalTextLayout?
     private var resize: (handle: Int, draft: TextDraft, transform: LayerTransform, start: CGPoint)?
+    /// A rotation under way: the drag as the Move tool does it, and the draft it started from.
+    private var turn: (drag: TransformDrag, draft: TextDraft)?
     /// The transform the editor is actually showing. Point text grows as it is typed, so this is not always the
     /// draft's own transform, and a resize has to start from what is on screen or the text jumps.
     override var isFlipped: Bool { true }
@@ -477,9 +479,9 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     }
 
     private var handleTracking: NSTrackingArea?
-    /// The cursor follows the same test the mouse does: arrows over the edges and corners, the I-beam over the
-    /// text. Cursor rects are no use here — the box can be rotated, and AppKit does not map them through a
-    /// view's rotation — so this view watches the pointer itself.
+    /// The cursor follows the same test the mouse does: arrows over the edges and corners, the rotation cursor just
+    /// outside a corner, the I-beam over the text. Cursor rects are no use here — the box can be rotated, and AppKit
+    /// does not map them through a view's rotation — so this view watches the pointer itself.
     private var cursorTracking: NSTrackingArea?
     override func updateTrackingAreas() {
         super.updateTrackingAreas()
@@ -494,20 +496,27 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     override func cursorUpdate(with event: NSEvent) { showCursor(at: convert(event.locationInWindow, from: nil)) }
     override func mouseExited(with event: NSEvent) { NSCursor.setHiddenUntilMouseMoves(false) }
     private func showCursor(at point: CGPoint) {
-        guard bounds.insetBy(dx: -edgeReach, dy: -edgeReach).contains(point) else {
+        guard resize == nil, turn == nil else { return }
+        guard atBox(point) else {
             NSCursor.setHiddenUntilMouseMoves(false)
             NSCursor.arrow.set()
             return
         }
-        guard resize == nil, canvas?.session.colorPicker == nil else { return }
+        guard canvas?.session.colorPicker == nil else { return }
+        if rotates(at: point) { CanvasView.rotationCursor.set(); return }
         guard let index = handle(at: point) else { NSCursor.iBeam.set(); return }
         handleCursor(index).set()
+    }
+    /// The box, its resize band, and the rotation zone around its corners.
+    private func atBox(_ point: CGPoint) -> Bool {
+        bounds.insetBy(dx: -edgeReach, dy: -edgeReach).contains(point) || rotates(at: point)
     }
 
     /// Every mouse move while the box is open, wherever the pointer is. Tracking areas stop arriving once the text
     /// surface has the mouse, which left the cursor stuck on whatever it was last set to. Inside the box it's the
-    /// I-beam or a resize arrow; over the rest of the canvas, the Type tool's I-beam; leaving the canvas, the arrow,
-    /// set once on the way out so the toolbar's own controls keep their cursors.
+    /// I-beam or a resize arrow, just outside a corner the rotation cursor; over the rest of the canvas, the Type
+    /// tool's I-beam; leaving the canvas, the arrow, set once on the way out so the toolbar's own controls keep
+    /// their cursors.
     private var moveMonitor: Any?
     private var pointerOnCanvas = true
     override func viewDidMoveToWindow() {
@@ -525,12 +534,12 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     }
     func pointerMoved(_ event: NSEvent) {
         let point = convert(event.locationInWindow, from: nil)
-        if bounds.insetBy(dx: -edgeReach, dy: -edgeReach).contains(point) {
+        if atBox(point) {
             pointerOnCanvas = true
             showCursor(at: point)
         } else if let canvas, canvas.bounds.contains(canvas.convert(event.locationInWindow, from: nil)) {
             pointerOnCanvas = true
-            guard resize == nil, canvas.session.colorPicker == nil else { return }
+            guard resize == nil, turn == nil, canvas.session.colorPicker == nil else { return }
             NSCursor.iBeam.set()
         } else if pointerOnCanvas {
             pointerOnCanvas = false
@@ -542,7 +551,8 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     /// The arrows for the edge or corner a handle resizes, turned with the text box.
     private func handleCursor(_ index: Int) -> NSCursor {
         let positions: [NSCursor.FrameResizePosition] = [.topLeft, .top, .topRight, .right, .topLeft, .top, .topRight, .right]
-        let rotation = canvas?.session.textDraft?.transform?.rotation ?? 0
+        // What is on screen: a new point text box has no transform in its draft until it is turned or resized.
+        let rotation = shownTransform?.rotation ?? 0
         let turns = (Int((rotation / 45).rounded()) % 8 + 8) % 8
         let ordered: [NSCursor.FrameResizePosition] = [.topLeft, .top, .topRight, .right]
         let position = ordered[(ordered.firstIndex(of: positions[index])! + turns) % 4]
@@ -554,6 +564,20 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     /// The Move tool's box grabs within 10 screen points of an edge; the handles here are drawn 6 points across, so
     /// the same reach is 10/6 of one.
     private var edgeReach: CGFloat { min(handleSize * 10 / 6, min(bounds.width, bounds.height) / 3) }
+
+    /// How far past the resize band a corner still turns the box: 20 screen points, in the box's own units like the
+    /// band's reach.
+    private var rotationReach: CGFloat { handleSize * 20 / 6 }
+
+    /// Just outside a corner, past the resize band: where a drag turns the box instead of resizing it. Only the
+    /// corners, so beside an edge's middle, or farther out, the pointer is on the canvas.
+    private func rotates(at point: CGPoint) -> Bool {
+        guard handle(at: point) == nil, !bounds.contains(point) else { return false }
+        let reach = edgeReach + rotationReach
+        return [CGPoint(x: 0, y: 0), CGPoint(x: bounds.width, y: 0),
+                CGPoint(x: bounds.width, y: bounds.height), CGPoint(x: 0, y: bounds.height)]
+            .contains { hypot(point.x - $0.x, point.y - $0.y) <= reach }
+    }
 
     /// The edge or corner at a point, in handle order: a band along each edge, as the Move tool's box has, rather
     /// than only the handle squares. Nil anywhere else, which is the text.
@@ -578,7 +602,7 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     override func hitTest(_ point: NSPoint) -> NSView? {
         if canvas?.session.colorPicker != nil { return nil }
         let local = convert(point, from: superview)
-        if handle(at: local) != nil { return self }
+        if handle(at: local) != nil || rotates(at: local) { return self }
         return super.hitTest(point)
     }
     override func draw(_ dirtyRect: NSRect) {
@@ -610,10 +634,17 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         }
     }
     override func mouseDown(with event: NSEvent) {
-        guard let canvas, let document = canvas.session.document, let draft = canvas.session.textDraft,
-              let handle = handle(at: convert(event.locationInWindow, from: nil)) else { return }
+        guard let canvas, let document = canvas.session.document, let draft = canvas.session.textDraft else { return }
+        let local = convert(event.locationInWindow, from: nil)
         let transform = shownTransform ?? draft.transform ?? LayerTransform(origin: draft.origin, size: logicalSize)
         let pixel = canvas.session.viewport.documentPoint(from: canvas.convert(event.locationInWindow, from: nil), documentSize: document.size)
+        guard let handle = handle(at: local) else {
+            if rotates(at: local) {
+                turn = (TransformDrag(original: transform, start: pixel, mode: .rotate), draft)
+                CanvasView.rotationCursor.set()
+            }
+            return
+        }
         // Dragging a handle turns point text into a box of the size it has right now, which then holds the text and
         // wraps it, rather than scaling the text. Its scale and rotation are whatever the layer already had.
         var fixed = draft
@@ -626,6 +657,7 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         resize = (handle, fixed, transform, pixel)
     }
     override func mouseDragged(with event: NSEvent) {
+        if turn != nil { turnBox(with: event); return }
         guard let resize, let canvas, let document = canvas.session.document else { return }
         let point = canvas.session.viewport.documentPoint(from: canvas.convert(event.locationInWindow, from: nil), documentSize: document.size)
         let old = resize.transform
@@ -657,7 +689,28 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         canvas.session.textDraft = draft
         canvas.synchronizeDisplay()
     }
-    override func mouseUp(with event: NSEvent) { resize = nil; window?.makeFirstResponder(textView) }
+    /// Turns the box about its center, whole degrees, Shift in steps of 15. The rotation lives in the draft like a
+    /// resize does, so it commits and cancels with the edit.
+    private func turnBox(with event: NSEvent) {
+        guard let turn, let canvas, let document = canvas.session.document else { return }
+        let point = canvas.session.viewport.documentPoint(from: canvas.convert(event.locationInWindow, from: nil), documentSize: document.size)
+        var rotated = turn.drag.updated(to: point, lockRatio: false, shift: event.modifierFlags.contains(.shift))
+        rotated.rotation = rotated.rotation.rounded()
+        guard rotated.isValid else { return }
+        var draft = turn.draft
+        if draft.style.boxSize == nil {
+            // Point text is placed by its pinned corner, which the draft reads before its transform, and stays point text.
+            var placement = draft.pointPlacement ?? TextPointPlacement(transform: rotated, size: logicalSize, vertical: draft.style.isVertical)
+            placement.transform = rotated
+            draft.pointPlacement = placement
+        } else {
+            draft.transform = rotated
+            draft.origin = rotated.origin
+        }
+        canvas.session.textDraft = draft
+        canvas.synchronizeDisplay()
+    }
+    override func mouseUp(with event: NSEvent) { resize = nil; turn = nil; window?.makeFirstResponder(textView) }
 }
 
 extension CanvasView {

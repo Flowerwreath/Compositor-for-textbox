@@ -405,7 +405,7 @@ final class CanvasView: NSView {
     private var displayedCropRect: CGRect?
     private var displayedTransformGeometry: TransformOverlayGeometry?
     private var hoverTrackingArea: NSTrackingArea?
-    private static let rotationCursor: NSCursor = {
+    static let rotationCursor: NSCursor = {
         let symbol = NSImage(systemSymbolName: "arrow.triangle.2.circlepath", accessibilityDescription: "Rotate")!
         let white = symbol.withSymbolConfiguration(.init(paletteColors: [.white]))!
         let black = symbol.withSymbolConfiguration(.init(paletteColors: [.black]))!

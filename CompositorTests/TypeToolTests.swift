@@ -105,6 +105,29 @@ struct TypeToolTests {
         #expect(session.document?.layers.first(where: { $0.id == id })?.liveText != nil)
     }
 
+    @Test func newTextKeepsTheRotationItWasGivenWhileEditing() throws {
+        let session = makeSession()
+        let before = try #require(session.document?.layers.count)
+        session.beginText(at: CGPoint(x: 200, y: 200))
+        session.textDraft?.style.content = "Text"
+        session.textDraft?.pointPlacement?.transform.rotation = 30
+        #expect(session.applyText(try #require(session.textDraft)))
+        #expect(session.activeLayer?.transform.rotation == 30)
+        #expect(session.activeLayer?.liveText != nil)
+        session.undo()
+        #expect(session.document?.layers.count == before)
+
+        session.beginText(in: CGRect(x: 100, y: 100, width: 300, height: 120))
+        session.textDraft?.style.content = "Box"
+        let draftTransform = LayerTransform(origin: CGPoint(x: 100, y: 100), size: CGSize(width: 300, height: 120), rotation: 45)
+        session.textDraft?.transform = draftTransform
+        #expect(session.applyText(try #require(session.textDraft)))
+        let layer = try #require(session.activeLayer)
+        #expect(layer.transform.rotation == 45)
+        #expect(abs(layer.transform.center.x - draftTransform.center.x) < 0.5)
+        #expect(abs(layer.transform.center.y - draftTransform.center.y) < 0.5)
+    }
+
     @Test func saveReopenAndRasterize() async throws {
         let session = makeSession()
         session.beginText(at: .zero)
