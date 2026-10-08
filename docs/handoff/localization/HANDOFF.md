@@ -79,7 +79,8 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project Com
    - **A. String Catalog로 한국어 추가.** `Localizable.xcstrings`에 `ko`를 추가하고, 앱은 macOS 언어 설정을 따라요. 영어 원문은 그대로 둬요.
    - **B. 영어 문자열을 한국어로 직접 교체.**
    - **C. A + 앱 안에서 한국어 강제.** (예: `AppleLanguages` 기본값)
-   - 판단 근거: 이 fork는 upstream을 주기적으로 병합해요(`d21ff29`가 upstream 1.4.7 병합). B는 upstream 병합 때마다 같은 줄에서 충돌이 나요. A나 C는 원문을 그대로 두니 충돌이 거의 없어요. **A나 C를 추천해요.**
+   - 판단 근거: 이 fork는 upstream을 주기적으로 병합해요(`d21ff29`가 upstream 1.4.7 병합). B는 upstream 병합 때마다 같은 줄에서 충돌이 나요. A나 C는 원문을 그대로 두니 충돌이 거의 없어요. **A를 추천해요.** 사용자도 이전 세션에서 "번역 기능을 만드는 게 나으려나"라며 이 방향에 동의했어요.
+   - **언어 전환 UI는 만들 필요가 없어요.** macOS에는 앱별 언어 설정이 있어요. 경로는 시스템 설정 → 일반 → 언어 및 지역 → 응용 프로그램이고, 맥 전체 언어가 영어여도 Compositor만 한국어로 지정할 수 있어요. 그래서 C(앱 안에서 강제)는 따로 만들 이유가 거의 없어요. (macOS 기능이에요. 이번 세션에서 직접 확인하지는 않았어요. 앱 번들에 `ko` 지역화가 있어야 그 목록에서 한국어를 고를 수 있다는 점은 가설이에요. 구현 후 실제로 확인하세요.)
 2. **"100%"의 범위.** 메뉴 막대, 툴바, 시트, 도움말 툴팁(`.help`), 접근성 라벨, 알림·오류 문구(`LocalizedError`), 실행 취소 이름(`beginEdit("…")` → Edit 메뉴의 "Undo …"), 명령 팔레트 항목과 검색어(한국어로 검색할지, 영어 검색도 남길지), 단축키 목록, 기본 레이어 이름("Layer 1", "Text"), PSD 가져오기 안내 문구, Sparkle 업데이트 창(서드파티).
 3. **용어집.** Photoshop 한국어판 용어를 따를지 정해요. 예: Layer=레이어, Leading=행간, Tracking=자간, Mask=마스크, Marquee=선택 윤곽.
 
