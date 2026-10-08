@@ -58,6 +58,13 @@ nonisolated enum ManualKeys {
 
     static var displayNames: [String] { displayNameTypes.flatMap { $0.displayKeys } }
 
+    /// Keyboard Shortcuts keeps titles and groups in English as ids; the list shows them translated.
+    static var shortcutNames: [String] {
+        Array(Set(ShortcutDefinition.all.flatMap { [$0.title, $0.group] } + ["Menus", "Canvas & Layers", "Text Editing"])).sorted()
+    }
+
+    @MainActor static var canvasExtensionChoices: [String] { CanvasSizeSheet.extensionChoices }
+
     /// Camera Raw's color mixer rows, named from a static list.
     static var cameraRawMixerNames: [String] { CameraRawMixerSettings.names }
 }

@@ -267,9 +267,7 @@ extension EditorSession {
 
     func nextLayerName() -> String {
         let names = Set(document?.layers.map(\.name) ?? [])
-        var number = 1
-        while names.contains("Layer \(number)") { number += 1 }
-        return "Layer \(number)"
+        return L10n.firstFreeName({ String(localized: "Layer \($0)") }, avoiding: names)
     }
 
     /// Normalizes an image from another app to the working sRGB RGBA format.

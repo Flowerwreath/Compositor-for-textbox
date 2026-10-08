@@ -49,6 +49,8 @@ struct CanvasSizeSheet: View {
     private func bytes(_ width: Int, _ height: Int) -> String {
         ByteCountFormatter.string(fromByteCount: Int64(width) * Int64(height) * 4, countStyle: .memory)
     }
+    /// What fills the added canvas. These English names are the picker's tags and what `fill` switches on.
+    static let extensionChoices = ["Transparent", "Foreground", "Background", "Black", "White", "Custom"]
     private var fill: CanvasExtensionColor? {
         let color: NSColor
         switch extensionChoice {
@@ -123,7 +125,7 @@ struct CanvasSizeSheet: View {
                 }.padding(.top, 28)
             }
             Picker("Canvas extension", selection: $extensionChoice) {
-                ForEach(["Transparent", "Foreground", "Background", "Black", "White", "Custom"], id: \.self) { Text($0) }
+                ForEach(Self.extensionChoices, id: \.self) { Text(L10n.text($0)) }
             }
             if extensionChoice == "Custom" {
                 HStack(spacing: 8) {
