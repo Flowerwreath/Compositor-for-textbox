@@ -71,8 +71,10 @@ struct CommandPaletteView: View {
 @MainActor
 final class CommandPaletteController {
     static let shared = CommandPaletteController()
-    /// Left out of the palette: the palette itself and the system menus.
-    static let skipped: Set<String> = ["Search Commands…", "Window", "Help", "Services"]
+    /// Left out of the palette: the palette itself and the system menus, by title in English and in the app's language.
+    /// The Window and Help menus are also left out by identity (`skippedMenus`), since AppKit translates their titles.
+    static var skipped: Set<String> { ["Search Commands…", String(localized: "Search Commands…"), "Window", "Help", "Services"] }
+    static var skippedMenus: [NSMenu] { [NSApp.windowsMenu, NSApp.helpMenu, NSApp.servicesMenu].compactMap { $0 } }
 
     private(set) var panel: PalettePanel?
     private weak var window: NSWindow?
@@ -84,7 +86,8 @@ final class CommandPaletteController {
         if isOpen { close(); return }
         self.window = window
         let bar = menu ?? NSApp.mainMenu
-        let entries = (bar.map { CommandPaletteMenu.entries(in: $0, skipping: Self.skipped) } ?? []) + CommandPaletteEntry.layerCommands(for: session)
+        let entries = (bar.map { CommandPaletteMenu.entries(in: $0, skipping: Self.skipped, skippingMenus: Self.skippedMenus,
+                                                            english: EnglishTitles()) } ?? []) + CommandPaletteEntry.layerCommands(for: session)
             + CommandPaletteEntry.tools(for: session)
         let model = CommandPaletteModel(entries: entries)
         let panel = self.panel ?? makePanel()

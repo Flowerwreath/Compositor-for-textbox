@@ -75,4 +75,48 @@ struct CommandPaletteTests {
         grid.perform() // Put it back.
         try await Task.sleep(for: .milliseconds(300))
     }
+
+    /// A Korean menu is still found by its English: "blur" finds 가우시안 흐림 효과, and so does "흐림".
+    @Test func translatedEntriesAreFoundInEitherLanguage() {
+        let english = EnglishTitles(table: ["Filter": "필터", "Gaussian Blur": "가우시안 흐림 효과",
+                                            "Layer": "레이어", "Duplicate Layer": "레이어 복제"])
+        #expect(english.english(forPath: ["필터", "가우시안 흐림 효과…"]) == "Filter › Gaussian Blur…")
+        let blur = CommandPaletteEntry(id: "필터 › 가우시안 흐림 효과…",
+                                       englishTitle: english.english(forPath: ["필터", "가우시안 흐림 효과…"]),
+                                       shortcut: nil, isEnabled: true, perform: {})
+        let duplicate = CommandPaletteEntry(id: "레이어 › 레이어 복제",
+                                            englishTitle: english.english(forPath: ["레이어", "레이어 복제"]),
+                                            shortcut: nil, isEnabled: true, perform: {})
+        #expect(CommandPaletteSearch.rank([duplicate, blur], query: "blur").map(\.id) == [blur.id])
+        #expect(CommandPaletteSearch.rank([duplicate, blur], query: "흐림").map(\.id) == [blur.id])
+        #expect(CommandPaletteSearch.rank([blur, duplicate], query: "dup").first?.id == duplicate.id)
+    }
+
+    /// Running in English there's nothing to translate back, and search is as it was.
+    @Test func withoutTranslationsThereIsNoEnglishPath() {
+        let english = EnglishTitles(table: [:])
+        #expect(english.english(forPath: ["Filter", "Gaussian Blur…"]) == nil)
+        #expect(EnglishTitles(table: ["Same": "Same"]).english(for: "Same") == nil)
+    }
+
+    /// Window and Help are left out by menu, not by title, so they stay out once AppKit translates their titles.
+    @Test func skippedMenusAreLeftOutWhateverTheirTitle() {
+        let bar = NSMenu()
+        for title in ["App", "편집", "윈도우"] {
+            let item = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+            let submenu = NSMenu(title: title)
+            submenu.addItem(NSMenuItem(title: "\(title) item", action: #selector(NSText.copy(_:)), keyEquivalent: ""))
+            item.submenu = submenu
+            bar.addItem(item)
+        }
+        let window = bar.items[2].submenu!
+        let ids = CommandPaletteMenu.entries(in: bar, skipping: [], skippingMenus: [window]).map(\.id)
+        #expect(ids == ["편집 › 편집 item"])
+    }
+
+    /// The menus skipped by identity are known to AppKit in the running app.
+    @Test func appKitKnowsTheWindowAndHelpMenus() {
+        #expect(NSApp.windowsMenu != nil)
+        #expect(NSApp.helpMenu != nil)
+    }
 }
