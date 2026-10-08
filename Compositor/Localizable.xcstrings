@@ -4,6 +4,16 @@
     "" : {
       "shouldTranslate" : false
     },
+    " · %lld DPI: %lld × %lld pixels" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " · %1$lld DPI: %2$lld × %3$lld pixels"
+          }
+        }
+      }
+    },
     "·" : {
       "shouldTranslate" : false
     },
@@ -23,9 +33,31 @@
         }
       }
     },
-    "%@ color" : {},
-    "%@ the selection by this many pixels" : {},
-    "%@ uncompressed RGBA canvas" : {},
+    "%@ color" : {
+
+    },
+    "%@ effect" : {
+
+    },
+    "%@ of %@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ of %2$@."
+          }
+        }
+      }
+    },
+    "%@ the selection by this many pixels" : {
+
+    },
+    "%@ uncompressed RGBA canvas" : {
+
+    },
+    "%@. Double-click to reset." : {
+
+    },
     "%@…" : {
       "shouldTranslate" : false
     },
@@ -42,7 +74,9 @@
         }
       }
     },
-    "%lld degrees" : {},
+    "%lld degrees" : {
+
+    },
     "%lld%%" : {
       "shouldTranslate" : false
     },
@@ -60,41 +94,192 @@
     "100%" : {
       "shouldTranslate" : false
     },
-    "A subdivision every %@ pixels." : {},
-    "ABC" : {},
-    "Actual Pixels" : {},
-    "Actual pixels (⌘1)" : {},
-    "Add layer effect" : {},
-    "Add layer mask" : {},
-    "Add layer mask (Option-click for a black mask)" : {},
-    "Add layer mask revealing the selection (Option-click to hide it)" : {},
-    "Aligned" : {},
-    "All" : {},
-    "All Layers" : {},
-    "Amount" : {},
-    "Analyze the active layer only, or every visible layer as shown" : {},
-    "Anchor" : {},
-    "Angle" : {},
-    "Anti-alias" : {},
-    "Applies generic profile strength when camera metadata is not available." : {},
-    "Apply" : {},
-    "Apply Crop" : {},
-    "Apply outside this range instead" : {},
-    "Applying…" : {},
-    "Auto" : {},
-    "Auto balances the average color. Custom follows Temperature and Tint." : {},
-    "Auto Select" : {},
-    "Background for transparency" : {},
-    "Based On" : {},
-    "Basic is quick; Advanced refines the mask against the layer's own detail, for hair and fur" : {},
-    "Black · Hide" : {},
-    "Blend" : {},
-    "Blend the chosen color into the edges while keeping the center unchanged" : {},
-    "Blue" : {},
-    "Blue Primary" : {},
-    "Bottom" : {},
-    "Break the lines into glowing beads" : {},
-    "Brush" : {},
+    "A subdivision every %@ pixels." : {
+
+    },
+    "ABC" : {
+
+    },
+    "Actual Pixels" : {
+
+    },
+    "Actual pixels (⌘1)" : {
+
+    },
+    "Add %@" : {
+
+    },
+    "Add Hide-All Mask" : {
+
+    },
+    "Add layer effect" : {
+
+    },
+    "Add layer mask" : {
+
+    },
+    "Add layer mask (Option-click for a black mask)" : {
+
+    },
+    "Add layer mask revealing the selection (Option-click to hide it)" : {
+
+    },
+    "Add Reveal-All Mask" : {
+
+    },
+    "Adds film grain, strongest in the middle tones." : {
+
+    },
+    "Adds green or magenta to the darkest tones." : {
+
+    },
+    "Adds or softens contrast along broader shapes." : {
+
+    },
+    "Adds or softens small detail." : {
+
+    },
+    "Adjusts the bright parts of the picture. Hold Option to see clipped highlights." : {
+
+    },
+    "Adjusts the dark parts of the picture. Hold Option to see clipped shadows." : {
+
+    },
+    "Align bottom" : {
+
+    },
+    "Align center" : {
+
+    },
+    "Align left" : {
+
+    },
+    "Align right" : {
+
+    },
+    "Align top" : {
+
+    },
+    "Aligned" : {
+
+    },
+    "All" : {
+
+    },
+    "All Layers" : {
+
+    },
+    "Amount" : {
+
+    },
+    "Analyze the active layer only, or every visible layer as shown" : {
+
+    },
+    "Anchor" : {
+
+    },
+    "Angle" : {
+
+    },
+    "Anti-alias" : {
+
+    },
+    "Applies generic profile strength when camera metadata is not available." : {
+
+    },
+    "Apply" : {
+
+    },
+    "Apply Crop" : {
+
+    },
+    "Apply outside this range instead" : {
+
+    },
+    "Applying…" : {
+
+    },
+    "Aspect" : {
+
+    },
+    "Auto" : {
+
+    },
+    "Auto balances the average color. Custom follows Temperature and Tint." : {
+
+    },
+    "Auto Select" : {
+
+    },
+    "B" : {
+
+    },
+    "Background for transparency" : {
+
+    },
+    "Balance" : {
+
+    },
+    "Based On" : {
+
+    },
+    "Basic is quick; Advanced refines the mask against the layer's own detail, for hair and fur" : {
+
+    },
+    "Black · Hide" : {
+
+    },
+    "Black canvas" : {
+
+    },
+    "Blacks" : {
+
+    },
+    "Blend" : {
+
+    },
+    "Blend the chosen color into the edges while keeping the center unchanged" : {
+
+    },
+    "Blending" : {
+
+    },
+    "Blue" : {
+
+    },
+    "Blue Primary" : {
+
+    },
+    "Blues" : {
+
+    },
+    "Blur" : {
+
+    },
+    "Boost" : {
+
+    },
+    "Bottom" : {
+
+    },
+    "Break the lines into glowing beads" : {
+
+    },
+    "Brightens or darkens the corners to counter lens falloff." : {
+
+    },
+    "Brightens or darkens the whole picture, in stops of light. Hold Option to see clipped highlights." : {
+
+    },
+    "Brightness added by this wheel." : {
+
+    },
+    "Brush" : {
+
+    },
+    "Brush Stroke" : {
+
+    },
     "Cancel" : {
       "localizations" : {
         "ko" : {
@@ -105,59 +290,276 @@
         }
       }
     },
-    "Canvas extension" : {},
-    "Canvas Size" : {},
-    "Canvas Size…" : {},
-    "Channel" : {},
-    "Characters" : {},
-    "Check for Updates…" : {},
-    "Choose a custom grid color" : {},
-    "Choose the %@ color" : {},
-    "Choose the vignette color" : {},
-    "Chooses how strongly the calibration sliders below are applied. Version 6 is the current default." : {},
-    "Clear Guides" : {},
-    "Clear Menu" : {},
-    "Clear Selection Pixels" : {},
-    "Clear the haze that leaves background showing through thin areas" : {},
-    "Click a pixel that should be neutral." : {},
-    "Click a purple or green fringe to set its hue range." : {},
-    "Click a shortcut, then press its new key combination. Changes apply when you save." : {},
-    "Click the canvas to sample" : {},
-    "Click the fringe on the layer. Click the eyedropper again to stop." : {},
-    "Click the image to pick the color to select." : {},
-    "Click the original layer to set %@. Click the eyedropper again to stop." : {},
-    "Click the original layer. Click the eyedropper again to stop." : {},
-    "Click the picture to save a color. Up to eight colors." : {},
-    "Click to add a point. Drag to adjust." : {},
-    "Clone Stamp" : {},
-    "Close %@" : {},
-    "Close Project" : {},
-    "Color" : {},
-    "Color for the added canvas" : {},
-    "Color Overlay" : {},
-    "Color Range…" : {},
-    "Color that fills transparent areas" : {},
-    "Color the result while keeping its tones, for a sepia or a cyanotype" : {},
-    "Colorize" : {},
-    "Colors" : {},
-    "Component" : {},
-    "Compositor" : {},
-    "Compositor will convert these Photoshop features. Nothing is applied until you continue." : {},
-    "Constrain Crop" : {},
-    "Content-Aware Fill…" : {},
-    "Contextual keys & mouse gestures" : {},
-    "Contiguous" : {},
-    "Contract…" : {},
-    "Copy" : {},
-    "Copy from the active layer only, or from every visible layer as shown" : {},
-    "Copy Merged" : {},
-    "Couldn’t crop" : {},
-    "Couldn’t paint" : {},
-    "Create a canvas or import an image." : {},
-    "Create canvas" : {},
-    "Create Clipping Mask" : {},
-    "Crop" : {},
-    "Crops empty edges after the transform and fits the result back into the frame." : {},
+    "Cancel %@" : {
+
+    },
+    "Canvas extension" : {
+
+    },
+    "Canvas Size" : {
+
+    },
+    "Canvas Size…" : {
+
+    },
+    "Cell Size" : {
+
+    },
+    "Channel" : {
+
+    },
+    "Characters" : {
+
+    },
+    "Check for Updates…" : {
+
+    },
+    "Choose a custom grid color" : {
+
+    },
+    "Choose the %@ color" : {
+
+    },
+    "Choose the dark color" : {
+
+    },
+    "Choose the light color" : {
+
+    },
+    "Choose the vignette color" : {
+
+    },
+    "Chooses how bright an area must be to glow. Has no effect until Glow is raised." : {
+
+    },
+    "Chooses how strongly the calibration sliders below are applied. Version 6 is the current default." : {
+
+    },
+    "Clarity" : {
+
+    },
+    "Clear" : {
+
+    },
+    "Clear Guides" : {
+
+    },
+    "Clear Menu" : {
+
+    },
+    "Clear Selection Pixels" : {
+
+    },
+    "Clear the haze that leaves background showing through thin areas" : {
+
+    },
+    "Clears haze when raised, and adds haze when lowered." : {
+
+    },
+    "Click a pixel that should be neutral." : {
+
+    },
+    "Click a purple or green fringe to set its hue range." : {
+
+    },
+    "Click a shortcut, then press its new key combination. Changes apply when you save." : {
+
+    },
+    "Click the canvas to sample" : {
+
+    },
+    "Click the fringe on the layer. Click the eyedropper again to stop." : {
+
+    },
+    "Click the image to pick the color to select." : {
+
+    },
+    "Click the original layer to set %@. Click the eyedropper again to stop." : {
+
+    },
+    "Click the original layer. Click the eyedropper again to stop." : {
+
+    },
+    "Click the picture to save a color. Up to eight colors." : {
+
+    },
+    "Click to add a point. Drag to adjust." : {
+
+    },
+    "Click to select; double-click to edit; Option-drag to copy %@" : {
+
+    },
+    "Clone Stamp" : {
+
+    },
+    "Close %@" : {
+
+    },
+    "Close Project" : {
+
+    },
+    "Color" : {
+
+    },
+    "Color Detail" : {
+
+    },
+    "Color for the added canvas" : {
+
+    },
+    "Color Overlay" : {
+
+    },
+    "Color Picker (%@ Color)" : {
+
+    },
+    "Color Picker (%@)" : {
+
+    },
+    "Color Picker (Background Color)" : {
+
+    },
+    "Color Picker (Dither Dark Color)" : {
+
+    },
+    "Color Picker (Dither Light Color)" : {
+
+    },
+    "Color Picker (Foreground Color)" : {
+
+    },
+    "Color Picker (Gradient Map Highlights)" : {
+
+    },
+    "Color Picker (Gradient Map Shadows)" : {
+
+    },
+    "Color Picker (Text Color)" : {
+
+    },
+    "Color Picker (Vignette Color)" : {
+
+    },
+    "Color Range" : {
+
+    },
+    "Color Range…" : {
+
+    },
+    "Color Smoothness" : {
+
+    },
+    "Color that fills transparent areas" : {
+
+    },
+    "Color the result while keeping its tones, for a sepia or a cyanotype" : {
+
+    },
+    "Colorize" : {
+
+    },
+    "Colors" : {
+
+    },
+    "Component" : {
+
+    },
+    "Compositor" : {
+
+    },
+    "Compositor will convert these Photoshop features. Nothing is applied until you continue." : {
+
+    },
+    "Constrain Crop" : {
+
+    },
+    "Content-Aware Fill…" : {
+
+    },
+    "Contextual keys & mouse gestures" : {
+
+    },
+    "Contiguous" : {
+
+    },
+    "Contract" : {
+
+    },
+    "Contract Selection" : {
+
+    },
+    "Contract…" : {
+
+    },
+    "Contrast" : {
+
+    },
+    "Controls how much the three tonal wheels overlap." : {
+
+    },
+    "Controls how strong the sharpening is." : {
+
+    },
+    "Copy" : {
+
+    },
+    "Copy %@" : {
+
+    },
+    "Copy from the active layer only, or from every visible layer as shown" : {
+
+    },
+    "Copy Layer Mask" : {
+
+    },
+    "Copy Layers from Project" : {
+
+    },
+    "Copy Merged" : {
+
+    },
+    "Couldn’t change canvas size" : {
+
+    },
+    "Couldn’t crop" : {
+
+    },
+    "Couldn’t export JPEG" : {
+
+    },
+    "Couldn’t export PNG" : {
+
+    },
+    "Couldn’t open the project" : {
+
+    },
+    "Couldn’t paint" : {
+
+    },
+    "Couldn’t resize the image" : {
+
+    },
+    "Couldn’t save the project" : {
+
+    },
+    "Couldn’t trim image" : {
+
+    },
+    "Create a canvas or import an image." : {
+
+    },
+    "Create canvas" : {
+
+    },
+    "Create Clipping Mask" : {
+
+    },
+    "Crop" : {
+
+    },
+    "Crops empty edges after the transform and fits the result back into the frame." : {
+
+    },
     "Current: %lld × %lld pixels" : {
       "localizations" : {
         "en" : {
@@ -168,130 +570,561 @@
         }
       }
     },
-    "Curve" : {},
-    "Curves…" : {},
-    "Custom" : {},
-    "Cut" : {},
-    "Dark" : {},
-    "Default colors" : {},
-    "Default colors (D)" : {},
-    "Defringe" : {},
-    "Delete layer mask" : {},
-    "Delete selected effect" : {},
-    "Delete selected layer" : {},
-    "Delete selected layers" : {},
-    "Deselect" : {},
-    "Develop “%@”" : {},
-    "Diffusion is soft and wide, Bloom is tighter, and Halation is a red fringe." : {},
-    "Dims the picture outside this color's range. It is not kept when you press OK." : {},
-    "Distribution" : {},
-    "Document Bounds" : {},
-    "Done" : {},
-    "Drag a color in the picture. Nearby color families move together." : {},
-    "Drag a point. Click to add one. Double-click a point to remove it." : {},
-    "Drag inside the wheel. Angle sets hue, distance sets saturation." : {},
-    "Drag on the layer to place a guide. Draw at least two lines." : {},
-    "Drag or scroll to move around; double-click switches between Fit and 100%" : {},
-    "Drag to resize the panel" : {},
-    "Drag to set hue and saturation. Double-click to reset this wheel." : {},
-    "Drag up or down to lift or lower those tones. Drag a divider along the bottom to change which tones each region covers." : {},
-    "Draw each chunky pixel as a solid square, or as a round dot like a dot-matrix screen" : {},
-    "Draw Guides" : {},
-    "Draw the marks for the light tones on the dark color, like a glowing screen" : {},
-    "Draw two or more lines on the preview that should be level or vertical." : {},
-    "Drop into new canvas" : {},
-    "Drop Shadow" : {},
-    "Drop to open in a new canvas" : {},
-    "Duplicate Layer" : {},
-    "Edge" : {},
-    "Edit %@." : {},
-    "Edit Adjustment…" : {},
-    "Edit Text" : {},
-    "Empty selection" : {},
-    "Enable Lens Profile Corrections" : {},
-    "End of the hue range, in degrees." : {},
-    "Enter a size up to %@ pixels at this DPI." : {},
-    "Enter a whole number from 1 to %lld px." : {},
-    "Enter whole numbers from 1 to %@ pixels." : {},
-    "Eraser" : {},
-    "Expand…" : {},
-    "Export JPEG" : {},
-    "Export JPEG…" : {},
-    "Export PNG…" : {},
-    "Export…" : {},
-    "Extension color" : {},
-    "Eyedropper" : {},
-    "Fade the edge of the selection by this many pixels" : {},
-    "Feather" : {},
-    "Feather…" : {},
-    "Fill" : {},
-    "Fill the selection using surrounding pixels from this layer." : {},
-    "Fill with Background Color" : {},
-    "Fill with Foreground Color" : {},
-    "Filter" : {},
-    "Final dimensions must be 1–%@ pixels per side." : {},
-    "Fit" : {},
-    "Fit Canvas" : {},
-    "Fit canvas in window (⌘0)" : {},
-    "Flip Canvas Horizontal" : {},
-    "Flip Canvas Vertical" : {},
-    "Flip H" : {},
-    "Flip Layer Horizontal" : {},
-    "Flip Layer Vertical" : {},
-    "Flip V" : {},
-    "Font face, including bold and italic variants" : {},
-    "Foreground color" : {},
-    "Fuzziness" : {},
-    "Gaussian" : {},
-    "Glow" : {},
-    "Gradient" : {},
-    "Grading" : {},
-    "Grain" : {},
-    "Green" : {},
-    "Green Primary" : {},
-    "Grid" : {},
-    "Grid Settings…" : {},
-    "Gridline every" : {},
-    "Group Selected Layers" : {},
-    "Group selected layers (⌘G)" : {},
-    "Guides" : {},
-    "Hardness" : {},
-    "Height" : {},
-    "Hex" : {},
-    "Hex color" : {},
-    "Hide %@" : {},
-    "Hide %@ in the preview" : {},
-    "Hide Compositor" : {},
-    "Hide Layer" : {},
-    "Hide Others" : {},
-    "Hide the background behind a layer mask, keeping the foreground subjects. The pixels stay, so the background can be painted back at any time." : {},
-    "High" : {},
-    "Highlight Clipping Indicator" : {},
-    "Highlight Priority protects bright edges. Color Priority also reduces color. Paint Overlay covers the edges evenly." : {},
-    "Highlights" : {},
-    "Histogram" : {},
-    "Hold Shift to add or Option to subtract for one outline" : {},
-    "How far a color may be from the picked ones and still be selected" : {},
-    "How far apart the screen's lines are" : {},
-    "How far each color channel (0–255) can differ from the clicked color and still be selected" : {},
-    "How far the blur softens, in pixels" : {},
-    "How much of each pixel's error spreads to its neighbors. Less gives flatter areas" : {},
-    "HSL lists every color. Color edits one family. Point Color adjusts a color you pick." : {},
-    "Hue" : {},
-    "Hue and saturation of this wheel." : {},
-    "Hue around the wheel, saturation outward from the center. Control-click to show the histogram." : {},
-    "Hue shifts the color, Saturation its strength, and Luminance its brightness." : {},
-    "Hue/Saturation…" : {},
-    "Image" : {},
-    "Image Size" : {},
-    "Image Size…" : {},
-    "Import" : {},
-    "Import an image or add a blank layer." : {},
-    "Import couldn’t finish" : {},
-    "Import image" : {},
-    "Import Images…" : {},
-    "Importing images…" : {},
-    "Importing…" : {},
+    "Curve" : {
+
+    },
+    "Curves…" : {
+
+    },
+    "Custom" : {
+
+    },
+    "Cut" : {
+
+    },
+    "Cyan / Red" : {
+
+    },
+    "Cyans" : {
+
+    },
+    "Dark" : {
+
+    },
+    "Darkens or lightens the edges. The center does not change." : {
+
+    },
+    "Darks" : {
+
+    },
+    "Default colors" : {
+
+    },
+    "Default colors (D)" : {
+
+    },
+    "Defringe" : {
+
+    },
+    "Dehaze" : {
+
+    },
+    "Delete %@" : {
+
+    },
+    "Delete Guide" : {
+
+    },
+    "Delete Layer" : {
+
+    },
+    "Delete layer mask" : {
+
+    },
+    "Delete Layer Mask" : {
+
+    },
+    "Delete Layers" : {
+
+    },
+    "Delete selected effect" : {
+
+    },
+    "Delete selected layer" : {
+
+    },
+    "Delete selected layers" : {
+
+    },
+    "Density" : {
+
+    },
+    "Deselect" : {
+
+    },
+    "Detail" : {
+
+    },
+    "Develop “%@”" : {
+
+    },
+    "Diffusion" : {
+
+    },
+    "Diffusion is soft and wide, Bloom is tighter, and Halation is a red fringe." : {
+
+    },
+    "Dims the picture outside this color's range. It is not kept when you press OK." : {
+
+    },
+    "Disable Layer Mask" : {
+
+    },
+    "Distance" : {
+
+    },
+    "Distort" : {
+
+    },
+    "Distort Layer Mask" : {
+
+    },
+    "Distort Layers" : {
+
+    },
+    "Distortion" : {
+
+    },
+    "Distribution" : {
+
+    },
+    "Document Bounds" : {
+
+    },
+    "Done" : {
+
+    },
+    "Dots" : {
+
+    },
+    "Drag a color in the picture. Nearby color families move together." : {
+
+    },
+    "Drag a point. Click to add one. Double-click a point to remove it." : {
+
+    },
+    "Drag inside the wheel. Angle sets hue, distance sets saturation." : {
+
+    },
+    "Drag on the layer to place a guide. Draw at least two lines." : {
+
+    },
+    "Drag on the picture to move the curve for the tone under the pointer." : {
+
+    },
+    "Drag or scroll to move around; double-click switches between Fit and 100%" : {
+
+    },
+    "Drag to resize the panel" : {
+
+    },
+    "Drag to set hue and saturation. Double-click to reset this wheel." : {
+
+    },
+    "Drag up or down to lift or lower those tones. Drag a divider along the bottom to change which tones each region covers." : {
+
+    },
+    "Draw each chunky pixel as a solid square, or as a round dot like a dot-matrix screen" : {
+
+    },
+    "Draw Guides" : {
+
+    },
+    "Draw the marks for the light tones on the dark color, like a glowing screen" : {
+
+    },
+    "Draw two or more lines on the preview that should be level or vertical." : {
+
+    },
+    "Drop into new canvas" : {
+
+    },
+    "Drop Shadow" : {
+
+    },
+    "Drop to open in a new canvas" : {
+
+    },
+    "Duplicate Layer" : {
+
+    },
+    "Duplicate Layers" : {
+
+    },
+    "Duplicate Pixels" : {
+
+    },
+    "Edge" : {
+
+    },
+    "Edit %@" : {
+
+    },
+    "Edit %@ Adjustment" : {
+
+    },
+    "Edit %@." : {
+
+    },
+    "Edit Adjustment…" : {
+
+    },
+    "Edit Text" : {
+
+    },
+    "Elliptical Marquee" : {
+
+    },
+    "Emphasizes fine texture over broader edges." : {
+
+    },
+    "Empty selection" : {
+
+    },
+    "Enable Layer Mask" : {
+
+    },
+    "Enable Lens Profile Corrections" : {
+
+    },
+    "End of the hue range, in degrees." : {
+
+    },
+    "Enter a size up to %@ pixels at this DPI." : {
+
+    },
+    "Enter a whole number from 1 to %lld px." : {
+
+    },
+    "Enter whole numbers from 1 to %@ pixels." : {
+
+    },
+    "Erase" : {
+
+    },
+    "Eraser" : {
+
+    },
+    "Expand" : {
+
+    },
+    "Expand Selection" : {
+
+    },
+    "Expand…" : {
+
+    },
+    "Export JPEG" : {
+
+    },
+    "Export JPEG…" : {
+
+    },
+    "Export PNG…" : {
+
+    },
+    "Export…" : {
+
+    },
+    "Exposure" : {
+
+    },
+    "Extension color" : {
+
+    },
+    "Eyedropper" : {
+
+    },
+    "Fade the edge of the selection by this many pixels" : {
+
+    },
+    "Feather" : {
+
+    },
+    "Feather Selection" : {
+
+    },
+    "Feather…" : {
+
+    },
+    "Fill" : {
+
+    },
+    "Fill Mask" : {
+
+    },
+    "Fill Text" : {
+
+    },
+    "Fill the selection using surrounding pixels from this layer." : {
+
+    },
+    "Fill with Background Color" : {
+
+    },
+    "Fill with Foreground Color" : {
+
+    },
+    "Filter" : {
+
+    },
+    "Final dimensions must be 1–%@ pixels per side." : {
+
+    },
+    "Fit" : {
+
+    },
+    "Fit Canvas" : {
+
+    },
+    "Fit canvas in window (⌘0)" : {
+
+    },
+    "Flip Canvas Horizontal" : {
+
+    },
+    "Flip Canvas Vertical" : {
+
+    },
+    "Flip H" : {
+
+    },
+    "Flip Horizontal" : {
+
+    },
+    "Flip Layer Horizontal" : {
+
+    },
+    "Flip Layer Vertical" : {
+
+    },
+    "Flip V" : {
+
+    },
+    "Flip Vertical" : {
+
+    },
+    "Font face, including bold and italic variants" : {
+
+    },
+    "Foreground color" : {
+
+    },
+    "Fuzziness" : {
+
+    },
+    "G" : {
+
+    },
+    "Gamma" : {
+
+    },
+    "Gaussian" : {
+
+    },
+    "Glow" : {
+
+    },
+    "Gradient" : {
+
+    },
+    "Gradient Mask" : {
+
+    },
+    "Grading" : {
+
+    },
+    "Grain" : {
+
+    },
+    "Green" : {
+
+    },
+    "Green Amount" : {
+
+    },
+    "Green Hue" : {
+
+    },
+    "Green Primary" : {
+
+    },
+    "Greens" : {
+
+    },
+    "Grid" : {
+
+    },
+    "Grid Settings…" : {
+
+    },
+    "Gridline every" : {
+
+    },
+    "Group Layers" : {
+
+    },
+    "Group Selected Layers" : {
+
+    },
+    "Group selected layers (⌘G)" : {
+
+    },
+    "Guides" : {
+
+    },
+    "Hardness" : {
+
+    },
+    "Height" : {
+
+    },
+    "Hex" : {
+
+    },
+    "Hex color" : {
+
+    },
+    "Hide %@" : {
+
+    },
+    "Hide %@ in the preview" : {
+
+    },
+    "Hide Compositor" : {
+
+    },
+    "Hide Layer" : {
+
+    },
+    "Hide Others" : {
+
+    },
+    "Hide Selection" : {
+
+    },
+    "Hide the background behind a layer mask, keeping the foreground subjects. The pixels stay, so the background can be painted back at any time." : {
+
+    },
+    "High" : {
+
+    },
+    "Highlight Clipping Indicator" : {
+
+    },
+    "Highlight Priority protects bright edges. Color Priority also reduces color. Paint Overlay covers the edges evenly." : {
+
+    },
+    "Highlights" : {
+
+    },
+    "Histogram" : {
+
+    },
+    "Hold Shift to add or Option to subtract for one outline" : {
+
+    },
+    "Horizontal" : {
+
+    },
+    "How far a color may be from the picked ones and still be selected" : {
+
+    },
+    "How far apart the screen's lines are" : {
+
+    },
+    "How far each color channel (0–255) can differ from the clicked color and still be selected" : {
+
+    },
+    "How far from each edge the sharpening reaches, in pixels." : {
+
+    },
+    "How far in brightness the adjustment reaches." : {
+
+    },
+    "How far in hue the adjustment reaches." : {
+
+    },
+    "How far in saturation the adjustment reaches." : {
+
+    },
+    "How far the blur softens, in pixels" : {
+
+    },
+    "How much of each pixel's error spreads to its neighbors. Less gives flatter areas" : {
+
+    },
+    "How much of the profile distortion correction is applied." : {
+
+    },
+    "How much of the profile vignetting correction is applied." : {
+
+    },
+    "How much the curve also changes color strength. Zero matches Photoshop; lower keeps it to brightness, higher adds more color." : {
+
+    },
+    "HSL lists every color. Color edits one family. Point Color adjusts a color you pick." : {
+
+    },
+    "Hue" : {
+
+    },
+    "Hue and saturation of this wheel." : {
+
+    },
+    "Hue around the wheel, saturation outward from the center. Control-click to show the histogram." : {
+
+    },
+    "Hue Range" : {
+
+    },
+    "Hue range where green defringe runs." : {
+
+    },
+    "Hue range where purple defringe runs." : {
+
+    },
+    "Hue Shift" : {
+
+    },
+    "Hue shifts the color, Saturation its strength, and Luminance its brightness." : {
+
+    },
+    "Hue/Saturation" : {
+
+    },
+    "Hue/Saturation…" : {
+
+    },
+    "Image" : {
+
+    },
+    "Image Size" : {
+
+    },
+    "Image Size…" : {
+
+    },
+    "Import" : {
+
+    },
+    "Import an image or add a blank layer." : {
+
+    },
+    "Import couldn’t finish" : {
+
+    },
+    "Import image" : {
+
+    },
+    "Import Image" : {
+
+    },
+    "Import Images" : {
+
+    },
+    "Import Images…" : {
+
+    },
+    "Import Photoshop File" : {
+
+    },
+    "Importing images…" : {
+
+    },
+    "Importing…" : {
+
+    },
     "In %lld   Out %lld" : {
       "localizations" : {
         "en" : {
@@ -302,8 +1135,12 @@
         }
       }
     },
-    "Inner Glow" : {},
-    "Inner Shadow" : {},
+    "Inner Glow" : {
+
+    },
+    "Inner Shadow" : {
+
+    },
     "Input %lld · Output %lld" : {
       "localizations" : {
         "en" : {
@@ -314,69 +1151,363 @@
         }
       }
     },
-    "Input and output of the selected curve point." : {},
-    "Inside" : {},
-    "Inverse" : {},
-    "Invert" : {},
-    "Invert Mask" : {},
-    "Keep the source moving with the brush between strokes; off starts every stroke at the source point" : {},
-    "Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas." : {},
-    "Keyboard Shortcuts…" : {},
-    "Lasso" : {},
-    "Layer" : {},
-    "Layer effects" : {},
-    "Layer via Copy" : {},
-    "Layer's Pixels" : {},
-    "Layers" : {},
-    "Leading" : {},
-    "Left" : {},
-    "Levels…" : {},
-    "Light" : {},
-    "Light blooming around the lines, like a CRT's phosphors" : {},
-    "Light on Dark" : {},
-    "Limited to the selection" : {},
-    "Line height, baseline to baseline. Empty or 0 is Auto: 120% of the font size." : {},
-    "Linear" : {},
-    "Linear histogram with automatic vertical scaling. Tall spikes may extend beyond the graph; all tones from 0 to 255 remain included." : {},
-    "Linear runs along the line; Radial spreads out from the start point" : {},
-    "Liquify pushes pixels · Blur softens · Smudge drags color along" : {},
-    "Loading histogram…" : {},
-    "Lock aspect ratio" : {},
-    "Lock aspect ratio. Hold Shift while dragging a handle to turn it the other way." : {},
-    "Lock Guides" : {},
-    "Lock original aspect ratio" : {},
-    "Low" : {},
-    "Magic" : {},
-    "Make each dithered pixel this many pixels across, for a chunky old-screen look" : {},
-    "Make the lines waver sideways down the screen, like a CRT losing sync" : {},
-    "Manual" : {},
-    "Marquee" : {},
-    "Mask" : {},
-    "Mask background" : {},
-    "Mask foreground" : {},
-    "Mask's Black Areas" : {},
-    "Match the clicked pixel, or the average of the pixels around it" : {},
-    "Medium Contrast" : {},
-    "Midtones" : {},
-    "Mixer" : {},
-    "Mode" : {},
-    "Monochromatic" : {},
-    "More ink (darker) or less before dithering" : {},
-    "Move Layer Down" : {},
-    "Move Layer Up" : {},
-    "Move Out of Folder" : {},
-    "New" : {},
-    "New adjustment layer" : {},
-    "New Adjustment Layer" : {},
-    "New blank layer" : {},
-    "New Blank Layer" : {},
-    "New blank layer (⇧⌘N)" : {},
-    "New canvas" : {},
-    "New canvas (⌘N)" : {},
-    "New canvas (⌘N) · Drop images here for new tabs" : {},
-    "New Canvas…" : {},
-    "New color" : {},
-    "New folder" : {},
+    "Input and output of the selected curve point." : {
+
+    },
+    "Input black" : {
+
+    },
+    "Input white" : {
+
+    },
+    "Inside" : {
+
+    },
+    "Inverse" : {
+
+    },
+    "Invert" : {
+
+    },
+    "Invert Mask" : {
+
+    },
+    "Keep the source moving with the brush between strokes; off starts every stroke at the source point" : {
+
+    },
+    "Keeps local contrast after luminance smoothing." : {
+
+    },
+    "Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas." : {
+
+    },
+    "Keyboard Shortcuts" : {
+
+    },
+    "Keyboard Shortcuts…" : {
+
+    },
+    "Lasso" : {
+
+    },
+    "Last Filter" : {
+
+    },
+    "Last Filter: %@" : {
+
+    },
+    "Layer" : {
+
+    },
+    "Layer Blend Mode" : {
+
+    },
+    "Layer effects" : {
+
+    },
+    "Layer Effects" : {
+
+    },
+    "Layer Opacity" : {
+
+    },
+    "Layer via Copy" : {
+
+    },
+    "Layer's Pixels" : {
+
+    },
+    "Layers" : {
+
+    },
+    "Leading" : {
+
+    },
+    "Left" : {
+
+    },
+    "Levels" : {
+
+    },
+    "Levels…" : {
+
+    },
+    "Lifts or lowers the brightest tones." : {
+
+    },
+    "Lifts or lowers the dark tones." : {
+
+    },
+    "Lifts or lowers the darkest tones." : {
+
+    },
+    "Lifts or lowers the light tones." : {
+
+    },
+    "Light" : {
+
+    },
+    "Light blooming around the lines, like a CRT's phosphors" : {
+
+    },
+    "Light on Dark" : {
+
+    },
+    "Lightness" : {
+
+    },
+    "Lights" : {
+
+    },
+    "Limited to the selection" : {
+
+    },
+    "Limits sharpening to stronger edges. Hold Option to see the mask." : {
+
+    },
+    "Line height, baseline to baseline. Empty or 0 is Auto: 120% of the font size." : {
+
+    },
+    "Line Spacing" : {
+
+    },
+    "Linear" : {
+
+    },
+    "Linear histogram with automatic vertical scaling. Tall spikes may extend beyond the graph; all tones from 0 to 255 remain included." : {
+
+    },
+    "Linear runs along the line; Radial spreads out from the start point" : {
+
+    },
+    "Link Layer Mask" : {
+
+    },
+    "Liquify pushes pixels · Blur softens · Smudge drags color along" : {
+
+    },
+    "Load Layer Selection" : {
+
+    },
+    "Load Mask Selection" : {
+
+    },
+    "Loading histogram…" : {
+
+    },
+    "Lock aspect ratio" : {
+
+    },
+    "Lock aspect ratio. Hold Shift while dragging a handle to turn it the other way." : {
+
+    },
+    "Lock Guides" : {
+
+    },
+    "Lock original aspect ratio" : {
+
+    },
+    "Low" : {
+
+    },
+    "Luminance" : {
+
+    },
+    "Luminance Contrast" : {
+
+    },
+    "Luminance Detail" : {
+
+    },
+    "Luminance Range" : {
+
+    },
+    "Luminance Shift" : {
+
+    },
+    "Magenta / Green" : {
+
+    },
+    "Magentas" : {
+
+    },
+    "Magic" : {
+
+    },
+    "Magic Wand" : {
+
+    },
+    "Make each dithered pixel this many pixels across, for a chunky old-screen look" : {
+
+    },
+    "Make the lines waver sideways down the screen, like a CRT losing sync" : {
+
+    },
+    "Makes light and dark tones more or less different, mostly around the middle." : {
+
+    },
+    "Makes the color smoothing softer or tighter." : {
+
+    },
+    "Makes the grain coarser or finer." : {
+
+    },
+    "Makes the grain smoother or more uneven." : {
+
+    },
+    "Makes the picked color lighter or darker." : {
+
+    },
+    "Makes the picked color stronger or quieter." : {
+
+    },
+    "Makes the selected color family lighter or darker." : {
+
+    },
+    "Makes the selected color family stronger or quieter." : {
+
+    },
+    "Makes the vignette rounder or more square." : {
+
+    },
+    "Manual" : {
+
+    },
+    "Marquee" : {
+
+    },
+    "Mask" : {
+
+    },
+    "Mask background" : {
+
+    },
+    "Mask foreground" : {
+
+    },
+    "Mask's Black Areas" : {
+
+    },
+    "Masking" : {
+
+    },
+    "Match the clicked pixel, or the average of the pixels around it" : {
+
+    },
+    "Medium Contrast" : {
+
+    },
+    "Merge Down" : {
+
+    },
+    "Merge Group" : {
+
+    },
+    "Merge Layers" : {
+
+    },
+    "Midpoint" : {
+
+    },
+    "Midtones" : {
+
+    },
+    "Mixer" : {
+
+    },
+    "Mode" : {
+
+    },
+    "Monochromatic" : {
+
+    },
+    "More ink (darker) or less before dithering" : {
+
+    },
+    "Move Guide" : {
+
+    },
+    "Move Layer" : {
+
+    },
+    "Move Layer Down" : {
+
+    },
+    "Move Layer Up" : {
+
+    },
+    "Move Layers" : {
+
+    },
+    "Move Out of Folder" : {
+
+    },
+    "Move Pixels" : {
+
+    },
+    "Move Selection" : {
+
+    },
+    "Moves the picture left or right." : {
+
+    },
+    "Moves the picture up or down." : {
+
+    },
+    "Moves the vignette correction inward or outward." : {
+
+    },
+    "New" : {
+
+    },
+    "New %@ Adjustment" : {
+
+    },
+    "New adjustment layer" : {
+
+    },
+    "New Adjustment Layer" : {
+
+    },
+    "New blank layer" : {
+
+    },
+    "New Blank Layer" : {
+
+    },
+    "New blank layer (⇧⌘N)" : {
+
+    },
+    "New canvas" : {
+
+    },
+    "New Canvas" : {
+
+    },
+    "New canvas (⌘N)" : {
+
+    },
+    "New canvas (⌘N) · Drop images here for new tabs" : {
+
+    },
+    "New Canvas…" : {
+
+    },
+    "New color" : {
+
+    },
+    "New folder" : {
+
+    },
+    "New Folder" : {
+
+    },
+    "New Guide" : {
+
+    },
+    "New Text Layer" : {
+
+    },
     "New: %lld × %lld pixels · %@ uncompressed" : {
       "localizations" : {
         "en" : {
@@ -387,82 +1518,312 @@
         }
       }
     },
-    "No commands match" : {},
-    "No layers yet" : {},
-    "No lens metadata on this layer. Profile sliders set generic correction strength." : {},
-    "Noise Reduction" : {},
-    "Off leaves the picture as it is. Guided straightens from lines you draw on the picture." : {},
-    "OK" : {},
-    "Only print dimensions and resolution change. Pixels stay unchanged." : {},
-    "Opacity" : {},
-    "Opacity percent" : {},
-    "Open in a new project tab" : {},
-    "Open project" : {},
-    "Open Project…" : {},
-    "Open Recent" : {},
-    "Option temporarily selects the eyedropper in painting tools. Shift constrains shapes/movement or adds to a selection; Option subtracts from selections or draws from center. Command-drag moves selected pixels; Command-Option-drag copies them. Option-drag duplicates layers/folders/effects; Option-click at a layer boundary toggles clipping. Command-click a thumbnail loads its selection. Control bypasses snapping. Right-drag adjusts brush size. Modifier-and-mouse gestures are fixed." : {},
-    "Option-click to set the source" : {},
-    "Original %@ histogram" : {},
-    "Original pixels · alpha-weighted histogram" : {},
-    "Original pixels · selection and alpha-weighted histogram" : {},
-    "Outer Glow" : {},
-    "Outside" : {},
-    "Paint" : {},
-    "Paint with the foreground color (B), or erase pixels away (E)" : {},
-    "Pan" : {},
-    "Parametric lifts tonal regions. Point places anchors on the curve." : {},
-    "Paste" : {},
-    "Perspective allows stronger keystone. Rectilinear keeps the warp gentler." : {},
-    "Pixel Grid (800% and above)" : {},
-    "Pixel Shape" : {},
-    "pixels" : {},
-    "pixels/inch" : {},
-    "Position" : {},
-    "Positive straightens lines that bow outward (barrel); negative, lines that bow inward (pincushion)." : {},
-    "Positive values tighten the detected mask inward; negative values expand it outward" : {},
-    "Preserve Luminosity" : {},
-    "Preset" : {},
-    "Preset sizes" : {},
-    "Preset sizes for screens and common formats" : {},
-    "Press 1–9 for 10–90%, 0 for 100%" : {},
-    "Press L to switch between Freehand and Polygonal" : {},
-    "Press M to switch between Rectangle and Ellipse" : {},
-    "Press Tab to switch between Wand and Object" : {},
-    "Preview" : {},
-    "Process" : {},
-    "Project tabs" : {},
-    "Projection" : {},
-    "Protect bright areas near the edge" : {},
-    "Pull the mask onto the image's own edges, which recovers hair and fur" : {},
-    "Pulls red and blue fringes apart toward the center to reduce color edging." : {},
-    "Put each pixel's brightness back afterwards, so only the color moves" : {},
-    "Quality" : {},
-    "Radius" : {},
-    "Range" : {},
-    "Ratio" : {},
-    "Read colors from the active layer only, or from every visible layer as shown" : {},
-    "Reading the file to see what needs converting." : {},
-    "Reading the Photoshop file…" : {},
-    "Ready when you are" : {},
-    "Red" : {},
-    "Red Primary" : {},
-    "Red, green, and blue of the pixel under the pointer." : {},
-    "Redo" : {},
-    "Redo %@" : {},
-    "Relative to current dimensions" : {},
-    "Release Clipping Mask" : {},
-    "Remove Chromatic Aberration" : {},
-    "Remove every guide line." : {},
-    "Remove point" : {},
-    "Rename Layer…" : {},
-    "Replaces this curve with a straight line or a contrast curve." : {},
-    "Resample" : {},
-    "Reset" : {},
-    "Reset curve" : {},
-    "Resize" : {},
-    "Resizes layer pixels and applies existing transforms. Undo restores the originals." : {},
-    "Resolution" : {},
-    "Restore Defaults" : {},
+    "No commands match" : {
+
+    },
+    "No layers yet" : {
+
+    },
+    "No lens metadata on this layer. Profile sliders set generic correction strength." : {
+
+    },
+    "Noise Reduction" : {
+
+    },
+    "Object Selection" : {
+
+    },
+    "Off leaves the picture as it is. Guided straightens from lines you draw on the picture." : {
+
+    },
+    "Offset" : {
+
+    },
+    "Offset X" : {
+
+    },
+    "Offset Y" : {
+
+    },
+    "OK" : {
+
+    },
+    "Only print dimensions and resolution change. Pixels stay unchanged." : {
+
+    },
+    "Opacity" : {
+
+    },
+    "Opacity percent" : {
+
+    },
+    "Open in a new project tab" : {
+
+    },
+    "Open one project at a time" : {
+
+    },
+    "Open project" : {
+
+    },
+    "Open Project…" : {
+
+    },
+    "Open Recent" : {
+
+    },
+    "Option temporarily selects the eyedropper in painting tools. Shift constrains shapes/movement or adds to a selection; Option subtracts from selections or draws from center. Command-drag moves selected pixels; Command-Option-drag copies them. Option-drag duplicates layers/folders/effects; Option-click at a layer boundary toggles clipping. Command-click a thumbnail loads its selection. Control bypasses snapping. Right-drag adjusts brush size. Modifier-and-mouse gestures are fixed." : {
+
+    },
+    "Option-click to set the source" : {
+
+    },
+    "Original %@ histogram" : {
+
+    },
+    "Original pixels · alpha-weighted histogram" : {
+
+    },
+    "Original pixels · selection and alpha-weighted histogram" : {
+
+    },
+    "Outer Glow" : {
+
+    },
+    "Output black" : {
+
+    },
+    "Output white" : {
+
+    },
+    "Outside" : {
+
+    },
+    "Paint" : {
+
+    },
+    "Paint Mask" : {
+
+    },
+    "Paint with the foreground color (B), or erase pixels away (E)" : {
+
+    },
+    "Pan" : {
+
+    },
+    "Parametric lifts tonal regions. Point places anchors on the curve." : {
+
+    },
+    "Paste" : {
+
+    },
+    "Perspective allows stronger keystone. Rectilinear keeps the warp gentler." : {
+
+    },
+    "Pixel Grid (800% and above)" : {
+
+    },
+    "Pixel Shape" : {
+
+    },
+    "Pixel Size" : {
+
+    },
+    "pixels" : {
+
+    },
+    "pixels/inch" : {
+
+    },
+    "Polygonal Lasso" : {
+
+    },
+    "Position" : {
+
+    },
+    "Positive straightens lines that bow outward (barrel); negative, lines that bow inward (pincushion)." : {
+
+    },
+    "Positive values tighten the detected mask inward; negative values expand it outward" : {
+
+    },
+    "Preserve Luminosity" : {
+
+    },
+    "Preserves colored edges while color noise is reduced." : {
+
+    },
+    "Preserves fine texture while luminance noise is reduced." : {
+
+    },
+    "Preset" : {
+
+    },
+    "Preset sizes" : {
+
+    },
+    "Preset sizes for screens and common formats" : {
+
+    },
+    "Press 1–9 for 10–90%, 0 for 100%" : {
+
+    },
+    "Press L to switch between Freehand and Polygonal" : {
+
+    },
+    "Press M to switch between Rectangle and Ellipse" : {
+
+    },
+    "Press Tab to switch between Wand and Object" : {
+
+    },
+    "Preview" : {
+
+    },
+    "Process" : {
+
+    },
+    "Project tabs" : {
+
+    },
+    "Projection" : {
+
+    },
+    "Protect bright areas near the edge" : {
+
+    },
+    "Protects bright pixels while a dark vignette is applied. Used by Highlight Priority." : {
+
+    },
+    "Pull the mask onto the image's own edges, which recovers hair and fur" : {
+
+    },
+    "Pulls red and blue fringes apart toward the center to reduce color edging." : {
+
+    },
+    "Purple Amount" : {
+
+    },
+    "Purple Hue" : {
+
+    },
+    "Put each pixel's brightness back afterwards, so only the color moves" : {
+
+    },
+    "Quality" : {
+
+    },
+    "R" : {
+
+    },
+    "Radius" : {
+
+    },
+    "Range" : {
+
+    },
+    "Ratio" : {
+
+    },
+    "Read colors from the active layer only, or from every visible layer as shown" : {
+
+    },
+    "Reading the file to see what needs converting." : {
+
+    },
+    "Reading the Photoshop file…" : {
+
+    },
+    "Ready when you are" : {
+
+    },
+    "Rectangular Marquee" : {
+
+    },
+    "Red" : {
+
+    },
+    "Red Primary" : {
+
+    },
+    "Red, green, and blue of the pixel under the pointer." : {
+
+    },
+    "Redo" : {
+
+    },
+    "Redo %@" : {
+
+    },
+    "Reds" : {
+
+    },
+    "Refine" : {
+
+    },
+    "Refine Saturation" : {
+
+    },
+    "Relative to current dimensions" : {
+
+    },
+    "Release Clipping Mask" : {
+
+    },
+    "Remove %@" : {
+
+    },
+    "Remove Chromatic Aberration" : {
+
+    },
+    "Remove Distortion" : {
+
+    },
+    "Remove every guide line." : {
+
+    },
+    "Remove point" : {
+
+    },
+    "Rename Layer" : {
+
+    },
+    "Rename Layer…" : {
+
+    },
+    "Reorder Layers" : {
+
+    },
+    "Replace Layer Mask" : {
+
+    },
+    "Replaces this curve with a straight line or a contrast curve." : {
+
+    },
+    "Resample" : {
+
+    },
+    "Reset" : {
+
+    },
+    "Reset curve" : {
+
+    },
+    "Resize" : {
+
+    },
+    "Resizes layer pixels and applies existing transforms. Undo restores the originals." : {
+
+    },
+    "Resolution" : {
+
+    },
+    "Resolution: 72 for screens, 300 for print. Click to switch." : {
+
+    },
+    "Restore Defaults" : {
+
+    },
     "Result: %lld × %lld pixels" : {
       "localizations" : {
         "en" : {
@@ -473,107 +1834,456 @@
         }
       }
     },
-    "Reverse" : {},
-    "RGB changes brightness. Red, green, and blue also shift the color." : {},
-    "RGB histogram" : {},
-    "Right" : {},
-    "Rotate Canvas 90° Clockwise" : {},
-    "Rotate Canvas 90° Counterclockwise" : {},
-    "Rotation, in degrees clockwise" : {},
-    "Round the rectangle's corners by this many pixels; 0 keeps them square" : {},
-    "Rulers" : {},
-    "Sample" : {},
-    "Sample Ring" : {},
-    "Sample Size" : {},
-    "Sampling" : {},
-    "Saturation and brightness" : {},
-    "Save" : {},
-    "Save As…" : {},
-    "Scale width and height together, about the center" : {},
-    "Search commands and tools" : {},
-    "Search Commands…" : {},
-    "Search shortcuts" : {},
-    "Select" : {},
-    "Select a tool" : {},
-    "Select everything except those colors, such as all but a green screen" : {},
-    "Select layers by clicking the canvas. Hold Command to turn it the other way while you click." : {},
-    "Select only similar pixels connected to the one you click; off selects them everywhere" : {},
-    "Select this picked color." : {},
-    "Selected" : {},
-    "Shadow Clipping Indicator" : {},
-    "Shadows" : {},
-    "Shape" : {},
-    "Shapes fill with the foreground color; click to change it" : {},
-    "Sharpening" : {},
-    "Shift-click adds a color, Option-click takes one away." : {},
-    "Shift-U (or Tab) steps through Rectangle, Ellipse and Line" : {},
-    "Show" : {},
-    "Show %@" : {},
-    "Show %@ in the preview" : {},
-    "Show All" : {},
-    "Show clipped highlights in red on the preview." : {},
-    "Show clipped shadows in blue on the preview." : {},
-    "Show Controls" : {},
-    "Show Layer" : {},
-    "Show the transform box and handles (⌘H). When hidden, drag anywhere to move the layer." : {},
-    "Show the whole image (⌘0)" : {},
-    "Show Transform Controls" : {},
-    "Shrink the mask to drop the rim of background color around the subject, or grow it" : {},
-    "Size" : {},
-    "Smear" : {},
-    "Smooth selection edges; turn off for hard pixel edges" : {},
-    "Smooth the detected object outline; turn off for the raw pixel mask" : {},
-    "Smoothing" : {},
-    "Snap" : {},
-    "Snap To" : {},
-    "Spot Healing" : {},
-    "sRGB · Transparent" : {},
-    "Start of the hue range, in degrees." : {},
-    "Strength" : {},
-    "Stroke" : {},
-    "Strong Contrast" : {},
-    "Style" : {},
-    "Subdivisions" : {},
-    "Subject" : {},
-    "Swap colors" : {},
-    "Swap foreground and background (X)" : {},
-    "Switches between horizontal and vertical text" : {},
-    "Targeted adjustment" : {},
-    "Targeted Adjustment" : {},
-    "Targeted adjustment: drag on the image to change that color's saturation, or its hue with Command held" : {},
-    "Text color" : {},
-    "Text fields keep standard macOS editing keys. Dialogs share the Apply/Cancel assignments above. Numeric fields use Up/Down, with Shift for larger steps. Standard macOS commands include ⌘Q to quit and ⌃⌘F for full screen. The shortcut editor itself always uses Return to save and Esc to cancel when not recording." : {},
-    "Text orientation: Horizontal" : {},
-    "Text orientation: Vertical" : {},
-    "The brush trails the pointer on a string this long, so a shaky hand still draws a smooth line" : {},
-    "The characters to draw with, in any order: each spot gets the one whose ink best matches its tone" : {},
-    "The height of each line of characters" : {},
-    "This Layer" : {},
-    "Three-Way shows shadows, midtones, and highlights. The other choices show one wheel." : {},
-    "Tint" : {},
-    "Toggle Fullscreen" : {},
-    "Tolerance" : {},
-    "Tones from black on the left to white on the right: blacks, shadows, midtones, highlights, whites. Control-click to show the vectorscope." : {},
-    "Tones per channel: 2 is pure black and white" : {},
-    "Top" : {},
-    "Tracking" : {},
-    "Transform" : {},
-    "Transform Layer" : {},
-    "Transform Mask" : {},
-    "Transform Selection" : {},
-    "Trim" : {},
-    "Trim Away" : {},
-    "Trim…" : {},
-    "Type" : {},
-    "Underlying pixels · alpha-weighted histogram" : {},
-    "Undo" : {},
-    "Undo %@" : {},
-    "Ungroup Layers" : {},
-    "Uniform" : {},
-    "Units" : {},
-    "Unsaved changes" : {},
-    "Updating…" : {},
-    "Upright" : {},
+    "Reveal Selection" : {
+
+    },
+    "Reverse" : {
+
+    },
+    "RGB changes brightness. Red, green, and blue also shift the color." : {
+
+    },
+    "RGB histogram" : {
+
+    },
+    "Right" : {
+
+    },
+    "Rotate" : {
+
+    },
+    "Rotate Canvas 90° Clockwise" : {
+
+    },
+    "Rotate Canvas 90° Counterclockwise" : {
+
+    },
+    "Rotates the picture around its center." : {
+
+    },
+    "Rotation, in degrees clockwise" : {
+
+    },
+    "Roughness" : {
+
+    },
+    "Round the rectangle's corners by this many pixels; 0 keeps them square" : {
+
+    },
+    "Roundness" : {
+
+    },
+    "Rulers" : {
+
+    },
+    "Sample" : {
+
+    },
+    "Sample Ring" : {
+
+    },
+    "Sample Size" : {
+
+    },
+    "Sampling" : {
+
+    },
+    "Saturation" : {
+
+    },
+    "Saturation and brightness" : {
+
+    },
+    "Saturation Range" : {
+
+    },
+    "Saturation Shift" : {
+
+    },
+    "Save" : {
+
+    },
+    "Save As…" : {
+
+    },
+    "Scale" : {
+
+    },
+    "Scale width and height together, about the center" : {
+
+    },
+    "Search commands and tools" : {
+
+    },
+    "Search Commands…" : {
+
+    },
+    "Search shortcuts" : {
+
+    },
+    "Select" : {
+
+    },
+    "Select a tool" : {
+
+    },
+    "Select All" : {
+
+    },
+    "Select everything except those colors, such as all but a green screen" : {
+
+    },
+    "Select layers by clicking the canvas. Hold Command to turn it the other way while you click." : {
+
+    },
+    "Select only similar pixels connected to the one you click; off selects them everywhere" : {
+
+    },
+    "Select Subject" : {
+
+    },
+    "Select this picked color." : {
+
+    },
+    "Selected" : {
+
+    },
+    "Sets how far the glow reaches. Has no effect until Glow is raised." : {
+
+    },
+    "Sets the brightest point. Hold Option to see clipped highlights." : {
+
+    },
+    "Sets the darkest point. Hold Option to see clipped shadows." : {
+
+    },
+    "Sets where the vignette begins, from the center outward." : {
+
+    },
+    "Shadow Clipping Indicator" : {
+
+    },
+    "Shadows" : {
+
+    },
+    "Shape" : {
+
+    },
+    "Shapes fill with the foreground color; click to change it" : {
+
+    },
+    "Sharpening" : {
+
+    },
+    "Shift Edge" : {
+
+    },
+    "Shift-click adds a color, Option-click takes one away." : {
+
+    },
+    "Shift-U (or Tab) steps through Rectangle, Ellipse and Line" : {
+
+    },
+    "Shifts how blue is interpreted." : {
+
+    },
+    "Shifts how green is interpreted." : {
+
+    },
+    "Shifts how red is interpreted." : {
+
+    },
+    "Shifts the glow from cool to warm. Halation stays red. Has no effect until Glow is raised." : {
+
+    },
+    "Shifts the picked color around the color wheel." : {
+
+    },
+    "Shifts the picture from blue to yellow." : {
+
+    },
+    "Shifts the picture from green to mauve." : {
+
+    },
+    "Shifts the selected color family around the wheel." : {
+
+    },
+    "Shifts the wheels toward shadows or highlights." : {
+
+    },
+    "Show" : {
+
+    },
+    "Show %@" : {
+
+    },
+    "Show %@ in the preview" : {
+
+    },
+    "Show All" : {
+
+    },
+    "Show clipped highlights in red on the preview." : {
+
+    },
+    "Show clipped shadows in blue on the preview." : {
+
+    },
+    "Show Controls" : {
+
+    },
+    "Show Layer" : {
+
+    },
+    "Show the transform box and handles (⌘H). When hidden, drag anywhere to move the layer." : {
+
+    },
+    "Show the whole image (⌘0)" : {
+
+    },
+    "Show Transform Controls" : {
+
+    },
+    "Shrink the mask to drop the rim of background color around the subject, or grow it" : {
+
+    },
+    "Size" : {
+
+    },
+    "Smear" : {
+
+    },
+    "Smooth selection edges; turn off for hard pixel edges" : {
+
+    },
+    "Smooth the detected object outline; turn off for the raw pixel mask" : {
+
+    },
+    "Smoothing" : {
+
+    },
+    "Smooths colored speckles." : {
+
+    },
+    "Smooths grain and noise in brightness." : {
+
+    },
+    "Snap" : {
+
+    },
+    "Snap To" : {
+
+    },
+    "Softens the edge of the vignette." : {
+
+    },
+    "Spot Healing" : {
+
+    },
+    "Spread" : {
+
+    },
+    "Spreads a glow from the bright areas." : {
+
+    },
+    "sRGB · Transparent" : {
+
+    },
+    "Start of the hue range, in degrees." : {
+
+    },
+    "Start see-through, or with a white or black Background layer. Click to switch." : {
+
+    },
+    "Straightens barrel or pincushion bending." : {
+
+    },
+    "Straightens horizontal lines toward the center." : {
+
+    },
+    "Straightens vertical lines toward the center." : {
+
+    },
+    "Strength" : {
+
+    },
+    "Strengthens or weakens every color by the same amount." : {
+
+    },
+    "Strengthens or weakens the blue primary." : {
+
+    },
+    "Strengthens or weakens the green primary." : {
+
+    },
+    "Strengthens or weakens the red primary." : {
+
+    },
+    "Strengthens quiet colors more than colors that are already strong, and protects skin tones." : {
+
+    },
+    "Stretches width relative to height." : {
+
+    },
+    "Stroke" : {
+
+    },
+    "Strong Contrast" : {
+
+    },
+    "Style" : {
+
+    },
+    "Subdivisions" : {
+
+    },
+    "Subject" : {
+
+    },
+    "Swap colors" : {
+
+    },
+    "Swap foreground and background (X)" : {
+
+    },
+    "Switches between horizontal and vertical text" : {
+
+    },
+    "Targeted adjustment" : {
+
+    },
+    "Targeted Adjustment" : {
+
+    },
+    "Targeted adjustment: drag on the image to change that color's saturation, or its hue with Command held" : {
+
+    },
+    "Temperature" : {
+
+    },
+    "Text color" : {
+
+    },
+    "Text fields keep standard macOS editing keys. Dialogs share the Apply/Cancel assignments above. Numeric fields use Up/Down, with Shift for larger steps. Standard macOS commands include ⌘Q to quit and ⌃⌘F for full screen. The shortcut editor itself always uses Return to save and Esc to cancel when not recording." : {
+
+    },
+    "Text orientation: Horizontal" : {
+
+    },
+    "Text orientation: Vertical" : {
+
+    },
+    "Text Size" : {
+
+    },
+    "Texture" : {
+
+    },
+    "The brush trails the pointer on a string this long, so a shaky hand still draws a smooth line" : {
+
+    },
+    "The characters to draw with, in any order: each spot gets the one whose ink best matches its tone" : {
+
+    },
+    "The height of each line of characters" : {
+
+    },
+    "This Layer" : {
+
+    },
+    "Three-Way shows shadows, midtones, and highlights. The other choices show one wheel." : {
+
+    },
+    "Tint" : {
+
+    },
+    "Toggle Fullscreen" : {
+
+    },
+    "Tolerance" : {
+
+    },
+    "Tones" : {
+
+    },
+    "Tones from black on the left to white on the right: blacks, shadows, midtones, highlights, whites. Control-click to show the vectorscope." : {
+
+    },
+    "Tones per channel: 2 is pure black and white" : {
+
+    },
+    "Top" : {
+
+    },
+    "Tracking" : {
+
+    },
+    "Transform" : {
+
+    },
+    "Transform Layer" : {
+
+    },
+    "Transform Layer Mask" : {
+
+    },
+    "Transform Layers" : {
+
+    },
+    "Transform Mask" : {
+
+    },
+    "Transform Selection" : {
+
+    },
+    "Transparent canvas" : {
+
+    },
+    "Trim" : {
+
+    },
+    "Trim Away" : {
+
+    },
+    "Trim…" : {
+
+    },
+    "Type" : {
+
+    },
+    "Underlying pixels · alpha-weighted histogram" : {
+
+    },
+    "Undo" : {
+
+    },
+    "Undo %@" : {
+
+    },
+    "Ungroup Layers" : {
+
+    },
+    "Uniform" : {
+
+    },
+    "Units" : {
+
+    },
+    "Units: pixels, inches, centimeters or millimeters. Click to switch." : {
+
+    },
+    "Unlink Layer Mask" : {
+
+    },
+    "Unsaved changes" : {
+
+    },
+    "Updating…" : {
+
+    },
+    "Upright" : {
+
+    },
     "Use 1–%@ pixels per side, up to %lld megapixels, and 1–9,600 pixels/inch." : {
       "localizations" : {
         "en" : {
@@ -594,24 +2304,96 @@
         }
       }
     },
-    "Vectorscope" : {},
-    "Vignette" : {},
-    "Visualize Range" : {},
-    "White · Reveal" : {},
-    "White Balance" : {},
-    "White Balance Selector" : {},
-    "Width" : {},
-    "Working…" : {},
-    "Zoom" : {},
-    "Zoom In" : {},
-    "Zoom in (⌘+)" : {},
-    "Zoom in (⌘+), now %@. At 100%% each pixel of the JPEG is one pixel of the screen, as on the canvas" : {},
-    "Zoom Out" : {},
-    "Zoom out (⌘−)" : {},
-    "Zoom out (⌘−), now %@" : {},
-    "Zoom percentage" : {},
-    "Zoom percentage (0.1–3200%). Press Return to apply." : {},
-    "가나다" : {}
+    "Vectorscope" : {
+
+    },
+    "Vertical" : {
+
+    },
+    "Vibrance" : {
+
+    },
+    "Vignette" : {
+
+    },
+    "Vignetting" : {
+
+    },
+    "Visualize Range" : {
+
+    },
+    "Warmth" : {
+
+    },
+    "Weakens green fringes inside the green hue range." : {
+
+    },
+    "Weakens purple fringes inside the purple hue range." : {
+
+    },
+    "White · Reveal" : {
+
+    },
+    "White Balance" : {
+
+    },
+    "White Balance Selector" : {
+
+    },
+    "White canvas" : {
+
+    },
+    "Whites" : {
+
+    },
+    "Width" : {
+
+    },
+    "Wobble" : {
+
+    },
+    "Working…" : {
+
+    },
+    "Yellow / Blue" : {
+
+    },
+    "Yellows" : {
+
+    },
+    "Zoom" : {
+
+    },
+    "Zoom In" : {
+
+    },
+    "Zoom in (⌘+)" : {
+
+    },
+    "Zoom in (⌘+), now %@. At 100%% each pixel of the JPEG is one pixel of the screen, as on the canvas" : {
+
+    },
+    "Zoom Out" : {
+
+    },
+    "Zoom out (⌘−)" : {
+
+    },
+    "Zoom out (⌘−), now %@" : {
+
+    },
+    "Zoom percentage" : {
+
+    },
+    "Zoom percentage (0.1–3200%). Press Return to apply." : {
+
+    },
+    "Zooms the transformed picture within the frame." : {
+
+    },
+    "가나다" : {
+
+    }
   },
   "version" : "1.0"
 }

@@ -57,4 +57,7 @@ nonisolated enum ManualKeys {
     ]
 
     static var displayNames: [String] { displayNameTypes.flatMap { $0.displayKeys } }
+
+    /// Camera Raw's color mixer rows, named from a static list.
+    static var cameraRawMixerNames: [String] { CameraRawMixerSettings.names }
 }

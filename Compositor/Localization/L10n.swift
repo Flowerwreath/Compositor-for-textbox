@@ -32,5 +32,7 @@ nonisolated protocol LocalizedDisplayName: RawRepresentable, CaseIterable where 
 
 nonisolated extension LocalizedDisplayName {
     var displayName: String { L10n.text(rawValue) }
+    /// The display name as a catalog resource, for names taken as `LocalizedStringResource` (undo names).
+    var displayResource: LocalizedStringResource { LocalizedStringResource(String.LocalizationValue(rawValue)) }
     static var displayKeys: [String] { allCases.map(\.rawValue) }
 }

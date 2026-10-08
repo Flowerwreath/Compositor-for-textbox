@@ -62,21 +62,21 @@ struct CameraRawGeometryControls: View {
         Binding(get: { raw.geometry[keyPath: key] }, set: { value in update { $0.cameraRaw.geometry[keyPath: key] = value } })
     }
 
-    private func geometrySlider(_ title: String, _ key: WritableKeyPath<CameraRawGeometrySettings, Double>,
-                                range: ClosedRange<Double> = CameraRawGeometrySettings.toneRange, help: String) -> some View {
+    private func geometrySlider(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawGeometrySettings, Double>,
+                                range: ClosedRange<Double> = CameraRawGeometrySettings.toneRange, help: LocalizedStringResource) -> some View {
         let value = raw.geometry[keyPath: key]
         return HStack(spacing: 10) {
-            Text(title).frame(minWidth: CameraRawControls.labelWidth, alignment: .leading).help(help)
+            Text(title).frame(minWidth: CameraRawControls.labelWidth, alignment: .leading).help(Text(help))
                 .scrubbable(sensitivity: 1,
                             value: Binding(get: { raw.geometry[keyPath: key] },
                                            set: { newValue in update { $0.cameraRaw.geometry[keyPath: key] = newValue } }), range: range)
             CameraRawSlider(value: value, range: range, track: .plain, help: help,
                             onChange: { rawValue in update { $0.cameraRaw.geometry[keyPath: key] = rawValue.rounded() } },
                             onReset: { update { $0.cameraRaw.geometry[keyPath: key] = 0 } })
-            TextField(title, value: Binding(get: { raw.geometry[keyPath: key] },
+            TextField(String(localized: title), value: Binding(get: { raw.geometry[keyPath: key] },
                                             set: { newValue in update { $0.cameraRaw.geometry[keyPath: key] = newValue } }),
                       format: .number.precision(.fractionLength(0)))
-                .frame(width: 56).textFieldStyle(.roundedBorder).multilineTextAlignment(.trailing).help(help)
+                .frame(width: 56).textFieldStyle(.roundedBorder).multilineTextAlignment(.trailing).help(Text(help))
         }
     }
 
@@ -121,10 +121,10 @@ struct CameraRawCalibrationControls: View {
         Binding(get: { raw.calibration[keyPath: key] }, set: { value in update { $0.cameraRaw.calibration[keyPath: key] = value } })
     }
 
-    private func calibrationSlider(_ title: String, _ key: WritableKeyPath<CameraRawCalibrationSettings, Double>, help: String) -> some View {
+    private func calibrationSlider(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawCalibrationSettings, Double>, help: LocalizedStringResource) -> some View {
         let value = raw.calibration[keyPath: key]
         return HStack(spacing: 10) {
-            Text(title).frame(minWidth: CameraRawControls.labelWidth, alignment: .leading).help(help)
+            Text(title).frame(minWidth: CameraRawControls.labelWidth, alignment: .leading).help(Text(help))
                 .scrubbable(sensitivity: 1,
                             value: Binding(get: { raw.calibration[keyPath: key] },
                                            set: { newValue in update { $0.cameraRaw.calibration[keyPath: key] = newValue } }),
@@ -132,10 +132,10 @@ struct CameraRawCalibrationControls: View {
             CameraRawSlider(value: value, range: CameraRawCalibrationSettings.toneRange, track: .plain, help: help,
                             onChange: { rawValue in update { $0.cameraRaw.calibration[keyPath: key] = rawValue.rounded() } },
                             onReset: { update { $0.cameraRaw.calibration[keyPath: key] = 0 } })
-            TextField(title, value: Binding(get: { raw.calibration[keyPath: key] },
+            TextField(String(localized: title), value: Binding(get: { raw.calibration[keyPath: key] },
                                             set: { newValue in update { $0.cameraRaw.calibration[keyPath: key] = newValue } }),
                       format: .number.precision(.fractionLength(0)))
-                .frame(width: 56).textFieldStyle(.roundedBorder).multilineTextAlignment(.trailing).help(help)
+                .frame(width: 56).textFieldStyle(.roundedBorder).multilineTextAlignment(.trailing).help(Text(help))
         }
     }
 

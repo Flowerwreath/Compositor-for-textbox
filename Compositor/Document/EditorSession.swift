@@ -665,8 +665,14 @@ final class EditorSession {
         if changedCanvas, let document { viewport.fit(documentSize: document.size) }
     }
 
-    /// Nestable transaction boundary; future tools can group a complete gesture.
-    func beginEdit(_ name: String) {
+    /// Nestable transaction boundary; future tools can group a complete gesture. The name shows in Edit › Undo, so it's
+    /// translated here, and literals passed in are extracted into the string catalog.
+    func beginEdit(_ name: LocalizedStringResource) {
+        beginEdit(named: String(localized: name))
+    }
+
+    /// For a name that's already translated, such as a filter's `displayName`.
+    func beginEdit(named name: String) {
         history.begin(name, document: document, selection: activeLayerID)
     }
 

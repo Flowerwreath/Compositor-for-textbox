@@ -340,10 +340,10 @@ final class ProjectController {
         return response == .alertThirdButtonReturn
     }
 
-    private func showError(_ title: String, error: Error) async {
+    private func showError(_ title: LocalizedStringResource, error: Error) async {
         let alert = NSAlert()
         alert.alertStyle = .warning
-        alert.messageText = title
+        alert.messageText = String(localized: title)
         alert.informativeText = error.localizedDescription
         alert.addButton(withTitle: "OK")
         _ = await show(alert)

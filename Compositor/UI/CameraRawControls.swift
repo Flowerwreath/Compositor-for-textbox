@@ -292,14 +292,14 @@ struct CameraRawControls: View {
         .accessibilityLabel(shown ? "Hide \(name)" : "Show \(name)")
     }
 
-    private func slider(_ title: String, _ key: WritableKeyPath<CameraRawSettings, Double>, range: ClosedRange<Double>,
+    private func slider(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawSettings, Double>, range: ClosedRange<Double>,
                         decimals: Int, clipping: CameraRawClipping?, track: CameraRawSliderTrack = .plain,
-                        reset resetValue: Double = 0, help: String) -> some View {
+                        reset resetValue: Double = 0, help: LocalizedStringResource) -> some View {
         let step = pow(10, Double(decimals))
         return HStack(spacing: 10) {
             Text(title)
                 .frame(minWidth: Self.labelWidth, alignment: .leading)
-                .help(help)
+                .help(Text(help))
                 .onTapGesture(count: 2) { reset(key, to: resetValue) }
                 .scrubbable(sensitivity: 1 / step,
                             value: Binding(get: { raw[keyPath: key] }, set: { assign(key, $0, clipping: nil) }),
@@ -307,10 +307,10 @@ struct CameraRawControls: View {
             CameraRawSlider(value: raw[keyPath: key], range: range, track: track, help: help,
                             onChange: { rawValue in assign(key, (rawValue * step).rounded() / step, clipping: clipping) },
                             onReset: { reset(key, to: resetValue) })
-            TextField(title, value: Binding(get: { raw[keyPath: key] }, set: { assign(key, $0, clipping: nil) }),
+            TextField(String(localized: title), value: Binding(get: { raw[keyPath: key] }, set: { assign(key, $0, clipping: nil) }),
                       format: .number.precision(.fractionLength(0...decimals)))
                 .frame(width: 56).textFieldStyle(.roundedBorder).multilineTextAlignment(.trailing)
-                .help(help)
+                .help(Text(help))
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel(title)

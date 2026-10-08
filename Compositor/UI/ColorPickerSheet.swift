@@ -121,7 +121,7 @@ struct ColorPickerSheet: View {
         }
     }
 
-    private func channelRow(_ label: String, _ channel: WritableKeyPath<PaletteColor, CGFloat>) -> some View {
+    private func channelRow(_ label: LocalizedStringResource, _ channel: WritableKeyPath<PaletteColor, CGFloat>) -> some View {
         let channelValue = Binding<Int>(
             get: { Int((color[keyPath: channel] * 255).rounded()) },
             set: { newValue in
@@ -132,7 +132,7 @@ struct ColorPickerSheet: View {
         return GridRow {
             Text(label).frame(width: 14, alignment: .leading)
                 .scrubbable(sensitivity: 1, value: channelValue, range: 0...255)
-            TextField(label, value: channelValue, format: .number)
+            TextField(String(localized: label), value: channelValue, format: .number)
                 .frame(width: 52)
                 .arrowSteps(value: { Double(Int((color[keyPath: channel] * 255).rounded())) },
                             change: { newValue in
@@ -140,7 +140,7 @@ struct ColorPickerSheet: View {
                                 rgb[keyPath: channel] = CGFloat(min(255, max(0, newValue.rounded()))) / 255
                                 hsb.setRGB(rgb)
                             })
-                .accessibilityLabel(label == "R" ? "Red" : label == "G" ? "Green" : "Blue")
+                .accessibilityLabel(label.key == "R" ? "Red" : label.key == "G" ? "Green" : "Blue")
         }
     }
 

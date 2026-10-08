@@ -117,22 +117,22 @@ struct CameraRawCurveControls: View {
 
     private var selectedPoint: CurvePoint? { selected.flatMap { currentPoints.indices.contains($0) ? currentPoints[$0] : nil } }
 
-    private func amount(_ title: String, _ key: WritableKeyPath<CameraRawCurveSettings, Double>, _ help: String) -> some View {
+    private func amount(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawCurveSettings, Double>, _ help: LocalizedStringResource) -> some View {
         slider(title, key, -100...100, 0, help)
     }
 
-    private func slider(_ title: String, _ key: WritableKeyPath<CameraRawCurveSettings, Double>, _ range: ClosedRange<Double>, _ reset: Double, _ help: String) -> some View {
+    private func slider(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawCurveSettings, Double>, _ range: ClosedRange<Double>, _ reset: Double, _ help: LocalizedStringResource) -> some View {
         HStack {
-            Text(title).frame(width: 88, alignment: .leading).help(help)
+            Text(title).frame(width: 88, alignment: .leading).help(Text(help))
                 .scrubbable(sensitivity: 1,
                             value: Binding(get: { raw.curve[keyPath: key] },
                                            set: { value in update { $0.curve[keyPath: key] = value } }), range: range)
             CameraRawSlider(value: raw.curve[keyPath: key], range: range, track: .plain, help: help,
                             onChange: { value in update { $0.curve[keyPath: key] = value } },
                             onReset: { update { $0.curve[keyPath: key] = reset } })
-            TextField(title, value: Binding(get: { raw.curve[keyPath: key] }, set: { value in update { $0.curve[keyPath: key] = value } }),
+            TextField(String(localized: title), value: Binding(get: { raw.curve[keyPath: key] }, set: { value in update { $0.curve[keyPath: key] = value } }),
                       format: .number.precision(.fractionLength(0...0)))
-                .frame(width: 48).help(help)
+                .frame(width: 48).help(Text(help))
         }
     }
 
@@ -227,11 +227,11 @@ struct CameraRawCurveControls: View {
         store(points)
     }
 
-    private func targetButton(armed: Bool, help: String, action: @escaping () -> Void) -> some View {
+    private func targetButton(armed: Bool, help: LocalizedStringResource, action: @escaping () -> Void) -> some View {
         Button(action: action) { Label("Targeted Adjustment", systemImage: "scope") }
             .buttonStyle(.bordered)
             .tint(armed ? Color.accentColor : Color.secondary)
-            .help(help)
+            .help(Text(help))
     }
 
     private func update(_ change: (inout CameraRawSettings) -> Void) {
@@ -303,10 +303,10 @@ struct CameraRawMixerControls: View {
         }
     }
 
-    private func colorSlider(_ title: String, _ key: WritableKeyPath<CameraRawMixerSettings, [Double]>, _ help: String) -> some View {
+    private func colorSlider(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawMixerSettings, [Double]>, _ help: LocalizedStringResource) -> some View {
         let index = min(7, edit?.cameraRawMixerSwatch ?? 0)
         return HStack {
-            Text(title).frame(width: 88, alignment: .leading).help(help)
+            Text(title).frame(width: 88, alignment: .leading).help(Text(help))
             CameraRawSlider(value: raw.mixer[keyPath: key][index], range: -100...100, track: familyTrack(index, key), help: help,
                             onChange: { value in update { $0.mixer[keyPath: key][index] = value } },
                             onReset: { update { $0.mixer[keyPath: key][index] = 0 } })
@@ -315,9 +315,9 @@ struct CameraRawMixerControls: View {
 
     private func familySlider(_ index: Int) -> some View {
         let key = mixerKey
-        let help = "\((edit?.cameraRawMixerTab ?? .hue).displayName) of \(CameraRawMixerSettings.names[index])."
+        let help: LocalizedStringResource = "\((edit?.cameraRawMixerTab ?? .hue).displayName) of \(L10n.text(CameraRawMixerSettings.names[index]))."
         return HStack {
-            Text(CameraRawMixerSettings.names[index]).frame(width: 78, alignment: .leading).help(help)
+            Text(L10n.text(CameraRawMixerSettings.names[index])).frame(width: 78, alignment: .leading).help(Text(help))
                 .scrubbable(sensitivity: 1,
                             value: Binding(get: { raw.mixer[keyPath: key][index] },
                                            set: { value in update { $0.mixer[keyPath: key][index] = value } }), range: -100...100)
@@ -326,7 +326,7 @@ struct CameraRawMixerControls: View {
                             onReset: { update { $0.mixer[keyPath: key][index] = 0 } })
             TextField(CameraRawMixerSettings.names[index], value: Binding(get: { raw.mixer[keyPath: key][index] }, set: { value in update { $0.mixer[keyPath: key][index] = value } }),
                       format: .number.precision(.fractionLength(0...0)))
-                .frame(width: 48).help(help)
+                .frame(width: 48).help(Text(help))
         }
     }
 
@@ -397,11 +397,11 @@ struct CameraRawMixerControls: View {
         return .hue(hue)
     }
 
-    private func pointSlider(_ title: String, _ key: WritableKeyPath<CameraRawPointColor, Double>, help: String,
+    private func pointSlider(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawPointColor, Double>, help: LocalizedStringResource,
                              range: ClosedRange<Double> = -100...100, reset: Double = 0, track: CameraRawSliderTrack = .plain) -> some View {
         let index = edit?.cameraRawPointIndex ?? 0
         return HStack {
-            Text(title).frame(width: 110, alignment: .leading).help(help)
+            Text(title).frame(width: 110, alignment: .leading).help(Text(help))
             CameraRawSlider(value: raw.mixer.points[index][keyPath: key], range: range, track: track, help: help,
                             onChange: { value in updatePoint { $0[keyPath: key] = value } },
                             onReset: { updatePoint { $0[keyPath: key] = reset } })
@@ -446,7 +446,7 @@ struct CameraRawGradingControls: View {
                     wheel("Highlights", \.highlights)
                 }
             } else {
-                wheel(page.displayName, pageKey)
+                wheel(page.displayResource, pageKey)
             }
             slider("Blending", raw.grading.blending, 0...100, 50, "Controls how much the three tonal wheels overlap.") { value in
                 update { $0.grading.blending = value }
@@ -466,7 +466,7 @@ struct CameraRawGradingControls: View {
         }
     }
 
-    private func wheel(_ title: String, _ key: WritableKeyPath<CameraRawGradingSettings, CameraRawGradeWheel>) -> some View {
+    private func wheel(_ title: LocalizedStringResource, _ key: WritableKeyPath<CameraRawGradingSettings, CameraRawGradeWheel>) -> some View {
         let wheel = raw.grading[keyPath: key]
         return VStack(spacing: 4) {
             Text(title).font(.caption).help("Drag inside the wheel. Angle sets hue, distance sets saturation.")
@@ -485,9 +485,9 @@ struct CameraRawGradingControls: View {
         }
     }
 
-    private func slider(_ title: String, _ value: Double, _ range: ClosedRange<Double>, _ reset: Double, _ help: String, set: @escaping (Double) -> Void) -> some View {
+    private func slider(_ title: LocalizedStringResource, _ value: Double, _ range: ClosedRange<Double>, _ reset: Double, _ help: LocalizedStringResource, set: @escaping (Double) -> Void) -> some View {
         HStack {
-            Text(title).frame(width: 78, alignment: .leading).help(help)
+            Text(title).frame(width: 78, alignment: .leading).help(Text(help))
             CameraRawSlider(value: value, range: range, track: .plain, help: help, onChange: set, onReset: { set(reset) })
         }
     }
