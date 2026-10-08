@@ -4,12 +4,8 @@
     "" : {
       "shouldTranslate" : false
     },
-    " · [ ] size · Shift-[ ] hardness · 1–0 opacity · Escape cancel · Space to pan" : {
-
-    },
-    " · [ ] size · Shift-[ ] hardness · 1–0 strength · Space to pan" : {
-
-    },
+    " · [ ] size · Shift-[ ] hardness · 1–0 opacity · Escape cancel · Space to pan" : {},
+    " · [ ] size · Shift-[ ] hardness · 1–0 strength · Space to pan" : {},
     " · %lld DPI: %lld × %lld pixels" : {
       "localizations" : {
         "en" : {
@@ -23,21 +19,11 @@
     "·" : {
       "shouldTranslate" : false
     },
-    "“%@” is a folder, which has no pixels of its own. Paint on a layer inside it, or on the folder’s mask." : {
-
-    },
-    "“%@” is an adjustment layer, with no pixels to paint. Paint on its mask instead." : {
-
-    },
-    "“%@” is hidden, or inside a hidden folder. Show it to paint on it." : {
-
-    },
-    "“%@” was changed on disk." : {
-
-    },
-    "(Multiple)" : {
-
-    },
+    "“%@” is a folder, which has no pixels of its own. Paint on a layer inside it, or on the folder’s mask." : {},
+    "“%@” is an adjustment layer, with no pixels to paint. Paint on its mask instead." : {},
+    "“%@” is hidden, or inside a hidden folder. Show it to paint on it." : {},
+    "“%@” was changed on disk." : {},
+    "(Multiple)" : {},
     "#" : {
       "shouldTranslate" : false
     },
@@ -54,12 +40,8 @@
         }
       }
     },
-    "%@ color" : {
-
-    },
-    "%@ effect" : {
-
-    },
+    "%@ color" : {},
+    "%@ effect" : {},
     "%@ is assigned to both %@ and %@." : {
       "localizations" : {
         "en" : {
@@ -67,11 +49,24 @@
             "state" : "new",
             "value" : "%1$@ is assigned to both %2$@ and %3$@."
           }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ 키가 %2$@와(과) %3$@에 모두 지정되어 있습니다."
+          }
         }
       }
     },
     "%@ is reserved by macOS." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 키는 macOS에서 예약되어 있습니다."
+          }
+        }
+      }
     },
     "%@ of %@." : {
       "localizations" : {
@@ -83,15 +78,9 @@
         }
       }
     },
-    "%@ the selection by this many pixels" : {
-
-    },
-    "%@ uncompressed RGBA canvas" : {
-
-    },
-    "%@. Double-click to reset." : {
-
-    },
+    "%@ the selection by this many pixels" : {},
+    "%@ uncompressed RGBA canvas" : {},
+    "%@. Double-click to reset." : {},
     "%@…" : {
       "shouldTranslate" : false
     },
@@ -108,12 +97,8 @@
         }
       }
     },
-    "%lld degrees" : {
-
-    },
-    "%lld more tabs" : {
-
-    },
+    "%lld degrees" : {},
+    "%lld more tabs" : {},
     "%lld%%" : {
       "shouldTranslate" : false
     },
@@ -128,273 +113,179 @@
       },
       "shouldTranslate" : false
     },
-    "1 more tab" : {
-
-    },
-    "3 by 3 Average" : {
-
-    },
-    "5 by 5 Average" : {
-
-    },
+    "1 more tab" : {},
+    "3 by 3 Average" : {},
+    "5 by 5 Average" : {},
     "100%" : {
       "shouldTranslate" : false
     },
-    "A little stronger than Version 1. The sliders below still fall well short of the current look." : {
-
-    },
-    "A subdivision every %@ pixels." : {
-
-    },
-    "ABC" : {
-
-    },
+    "A little stronger than Version 1. The sliders below still fall well short of the current look." : {},
+    "A subdivision every %@ pixels." : {},
+    "ABC" : {},
     "Actual Pixels" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실제 픽셀"
+          }
+        }
+      }
     },
-    "Actual pixels (⌘1)" : {
-
-    },
-    "Add %@" : {
-
-    },
-    "Add Hide-All Mask" : {
-
-    },
-    "Add layer effect" : {
-
-    },
-    "Add layer mask" : {
-
-    },
+    "Actual pixels (⌘1)" : {},
+    "Add %@" : {},
+    "Add Hide-All Mask" : {},
+    "Add layer effect" : {},
+    "Add layer mask" : {},
     "Add Layer Mask" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 마스크 추가"
+          }
+        }
+      }
     },
     "Add Layer Mask (Hide All)" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 마스크 추가(모두 숨기기)"
+          }
+        }
+      }
     },
-    "Add layer mask (Option-click for a black mask)" : {
-
-    },
+    "Add layer mask (Option-click for a black mask)" : {},
     "Add Layer Mask from Selection" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 영역으로 레이어 마스크 추가"
+          }
+        }
+      }
     },
     "Add Layer Mask Hiding Selection" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 영역을 숨기는 레이어 마스크 추가"
+          }
+        }
+      }
     },
-    "Add layer mask revealing the selection (Option-click to hide it)" : {
-
-    },
-    "Add Mask" : {
-
-    },
-    "Add Reveal-All Mask" : {
-
-    },
+    "Add layer mask revealing the selection (Option-click to hide it)" : {},
+    "Add Mask" : {},
+    "Add Reveal-All Mask" : {},
     "Add to %@" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@에 추가"
+          }
+        }
+      }
     },
-    "Adds film grain, strongest in the middle tones." : {
-
-    },
-    "Adds green or magenta to the darkest tones." : {
-
-    },
-    "Adds or softens contrast along broader shapes." : {
-
-    },
-    "Adds or softens small detail." : {
-
-    },
-    "Adjustment · Double-click to edit" : {
-
-    },
-    "Adjustment parameters may not match Photoshop exactly." : {
-
-    },
-    "Adjusts the bright parts of the picture. Hold Option to see clipped highlights." : {
-
-    },
-    "Adjusts the dark parts of the picture. Hold Option to see clipped shadows." : {
-
-    },
-    "Align bottom" : {
-
-    },
-    "Align center" : {
-
-    },
-    "Align left" : {
-
-    },
-    "Align right" : {
-
-    },
-    "Align top" : {
-
-    },
-    "Aligned" : {
-
-    },
+    "Adds film grain, strongest in the middle tones." : {},
+    "Adds green or magenta to the darkest tones." : {},
+    "Adds or softens contrast along broader shapes." : {},
+    "Adds or softens small detail." : {},
+    "Adjustment · Double-click to edit" : {},
+    "Adjustment parameters may not match Photoshop exactly." : {},
+    "Adjusts the bright parts of the picture. Hold Option to see clipped highlights." : {},
+    "Adjusts the dark parts of the picture. Hold Option to see clipped shadows." : {},
+    "Align bottom" : {},
+    "Align center" : {},
+    "Align left" : {},
+    "Align right" : {},
+    "Align top" : {},
+    "Aligned" : {},
     "All" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모두"
+          }
+        }
+      }
     },
-    "All Layers" : {
-
-    },
-    "Amount" : {
-
-    },
-    "An image could not be saved. The previous project has not been replaced." : {
-
-    },
-    "An image inside the project is missing or damaged. The current document has not been replaced." : {
-
-    },
-    "Analyze the active layer only, or every visible layer as shown" : {
-
-    },
-    "Anchor" : {
-
-    },
-    "Angle" : {
-
-    },
-    "Another app changed this project. You can revert to the version on disk, losing your unsaved changes, or keep what you have." : {
-
-    },
-    "Anti-alias" : {
-
-    },
-    "Applies generic profile strength when camera metadata is not available." : {
-
-    },
-    "Apply" : {
-
-    },
-    "Apply Crop" : {
-
-    },
-    "Apply outside this range instead" : {
-
-    },
-    "Applying…" : {
-
-    },
-    "Aspect" : {
-
-    },
-    "Auto" : {
-
-    },
-    "Auto balances the average color. Custom follows Temperature and Tint." : {
-
-    },
-    "Auto Select" : {
-
-    },
-    "B" : {
-
-    },
-    "Background" : {
-
-    },
-    "Background color" : {
-
-    },
-    "Background for transparency" : {
-
-    },
-    "Bake and Delete" : {
-
-    },
-    "Bake keeps the current masked appearance in the dependent layers’ pixels. Remove Links reveals their pixels. You can undo either choice." : {
-
-    },
-    "Balance" : {
-
-    },
-    "Based On" : {
-
-    },
-    "Basic is quick; Advanced refines the mask against the layer's own detail, for hair and fur" : {
-
-    },
-    "Black · Hide" : {
-
-    },
-    "Black canvas" : {
-
-    },
-    "Blacks" : {
-
-    },
-    "Blend" : {
-
-    },
-    "Blend mode" : {
-
-    },
-    "Blend mode “%@” isn’t supported and will be applied as Normal." : {
-
-    },
-    "Blend the chosen color into the edges while keeping the center unchanged" : {
-
-    },
-    "Blending" : {
-
-    },
-    "Blue" : {
-
-    },
-    "Blue Primary" : {
-
-    },
-    "Blues" : {
-
-    },
+    "All Layers" : {},
+    "Amount" : {},
+    "An image could not be saved. The previous project has not been replaced." : {},
+    "An image inside the project is missing or damaged. The current document has not been replaced." : {},
+    "Analyze the active layer only, or every visible layer as shown" : {},
+    "Anchor" : {},
+    "Angle" : {},
+    "Another app changed this project. You can revert to the version on disk, losing your unsaved changes, or keep what you have." : {},
+    "Anti-alias" : {},
+    "Applies generic profile strength when camera metadata is not available." : {},
+    "Apply" : {},
+    "Apply Crop" : {},
+    "Apply outside this range instead" : {},
+    "Applying…" : {},
+    "Aspect" : {},
+    "Auto" : {},
+    "Auto balances the average color. Custom follows Temperature and Tint." : {},
+    "Auto Select" : {},
+    "B" : {},
+    "Background" : {},
+    "Background color" : {},
+    "Background for transparency" : {},
+    "Bake and Delete" : {},
+    "Bake keeps the current masked appearance in the dependent layers’ pixels. Remove Links reveals their pixels. You can undo either choice." : {},
+    "Balance" : {},
+    "Based On" : {},
+    "Basic is quick; Advanced refines the mask against the layer's own detail, for hair and fur" : {},
+    "Black · Hide" : {},
+    "Black canvas" : {},
+    "Blacks" : {},
+    "Blend" : {},
+    "Blend mode" : {},
+    "Blend mode “%@” isn’t supported and will be applied as Normal." : {},
+    "Blend the chosen color into the edges while keeping the center unchanged" : {},
+    "Blending" : {},
+    "Blue" : {},
+    "Blue Primary" : {},
+    "Blues" : {},
     "Blur" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "흐림 효과"
+          }
+        }
+      }
     },
-    "Boost" : {
-
-    },
-    "Bottom" : {
-
-    },
-    "Bottom center" : {
-
-    },
-    "Bottom left" : {
-
-    },
-    "Bottom right" : {
-
-    },
-    "Break the lines into glowing beads" : {
-
-    },
-    "Brightens or darkens the corners to counter lens falloff." : {
-
-    },
-    "Brightens or darkens the whole picture, in stops of light. Hold Option to see clipped highlights." : {
-
-    },
-    "Brightness added by this wheel." : {
-
-    },
+    "Boost" : {},
+    "Bottom" : {},
+    "Bottom center" : {},
+    "Bottom left" : {},
+    "Bottom right" : {},
+    "Break the lines into glowing beads" : {},
+    "Brightens or darkens the corners to counter lens falloff." : {},
+    "Brightens or darkens the whole picture, in stops of light. Hold Option to see clipped highlights." : {},
+    "Brightness added by this wheel." : {},
     "Brush" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브러시"
+          }
+        }
+      }
     },
-    "Brush (B) · Eraser (E)" : {
-
-    },
-    "Brush Stroke" : {
-
-    },
-    "Calibration" : {
-
-    },
+    "Brush (B) · Eraser (E)" : {},
+    "Brush Stroke" : {},
+    "Calibration" : {},
     "Cancel" : {
       "localizations" : {
         "ko" : {
@@ -405,360 +296,302 @@
         }
       }
     },
-    "Cancel %@" : {
-
-    },
-    "Canvas" : {
-
-    },
-    "Canvas extension" : {
-
-    },
-    "Canvas Extension" : {
-
-    },
+    "Cancel %@" : {},
+    "Canvas" : {},
+    "Canvas extension" : {},
+    "Canvas Extension" : {},
     "Canvas Size" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 크기"
+          }
+        }
+      }
     },
     "Canvas Size…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 크기…"
+          }
+        }
+      }
     },
-    "Canvas text" : {
-
-    },
-    "Cell Size" : {
-
-    },
-    "Center" : {
-
-    },
-    "Centimeters" : {
-
-    },
-    "Channel" : {
-
-    },
-    "Characters" : {
-
-    },
+    "Canvas text" : {},
+    "Cell Size" : {},
+    "Center" : {},
+    "Centimeters" : {},
+    "Channel" : {},
+    "Characters" : {},
     "Check for Updates…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "업데이트 확인…"
+          }
+        }
+      }
     },
-    "Choose a custom grid color" : {
-
-    },
-    "Choose a JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) file." : {
-
-    },
+    "Choose a custom grid color" : {},
+    "Choose a JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) file." : {},
     "Choose a single key with optional modifiers." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "수정 키를 함께 쓸 수 있는 단일 키를 선택하십시오."
+          }
+        }
+      }
     },
-    "Choose the %@ color" : {
-
-    },
-    "Choose the dark color" : {
-
-    },
-    "Choose the light color" : {
-
-    },
-    "Choose the vignette color" : {
-
-    },
-    "Chooses how bright an area must be to glow. Has no effect until Glow is raised." : {
-
-    },
-    "Chooses how strongly the calibration sliders below are applied. Version 6 is the current default." : {
-
-    },
-    "circle" : {
-
-    },
-    "Clarity" : {
-
-    },
-    "Clear" : {
-
-    },
+    "Choose the %@ color" : {},
+    "Choose the dark color" : {},
+    "Choose the light color" : {},
+    "Choose the vignette color" : {},
+    "Chooses how bright an area must be to glow. Has no effect until Glow is raised." : {},
+    "Chooses how strongly the calibration sliders below are applied. Version 6 is the current default." : {},
+    "circle" : {},
+    "Clarity" : {},
+    "Clear" : {},
     "Clear Guides" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안내선 지우기"
+          }
+        }
+      }
     },
     "Clear Menu" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메뉴 지우기"
+          }
+        }
+      }
     },
     "Clear Selection Pixels" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 영역 픽셀 지우기"
+          }
+        }
+      }
     },
-    "Clear the haze that leaves background showing through thin areas" : {
-
-    },
-    "Clears haze when raised, and adds haze when lowered." : {
-
-    },
-    "Click a pixel that should be neutral." : {
-
-    },
-    "Click a purple or green fringe to set its hue range." : {
-
-    },
+    "Clear the haze that leaves background showing through thin areas" : {},
+    "Clears haze when raised, and adds haze when lowered." : {},
+    "Click a pixel that should be neutral." : {},
+    "Click a purple or green fringe to set its hue range." : {},
     "Click a shortcut, then press its new key combination. Changes apply when you save." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "단축키를 클릭한 다음 새 키 조합을 누르십시오. 변경 사항은 저장할 때 적용됩니다."
+          }
+        }
+      }
     },
-    "Click an object to select its outline · Tab for Wand · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {
-
-    },
-    "Click corners · Click start, double-click or Enter to close · Delete removes corner · Escape cancel" : {
-
-    },
-    "Click the canvas to sample" : {
-
-    },
-    "Click the fringe on the layer. Click the eyedropper again to stop." : {
-
-    },
-    "Click the image to add that color to the selection" : {
-
-    },
-    "Click the image to center this range on that color" : {
-
-    },
-    "Click the image to narrow this range to exclude that color" : {
-
-    },
-    "Click the image to pick the color to select." : {
-
-    },
-    "Click the image to select that color" : {
-
-    },
-    "Click the image to take that color out of the selection" : {
-
-    },
-    "Click the image to widen this range to include that color" : {
-
-    },
-    "Click the original layer to set %@. Click the eyedropper again to stop." : {
-
-    },
-    "Click the original layer. Click the eyedropper again to stop." : {
-
-    },
-    "Click the picture to save a color. Up to eight colors." : {
-
-    },
-    "Click to add a point. Drag to adjust." : {
-
-    },
-    "Click to select similar colors · Tab for Object · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {
-
-    },
-    "Click to select; double-click to edit; Option-drag to copy %@" : {
-
-    },
-    "Click to zoom in · Option-click to zoom out · Drag right or left to zoom smoothly · Space to pan" : {
-
-    },
-    "Clipped to %@" : {
-
-    },
-    "Clipping mask based on %@. Option-click the bottom of its row to release." : {
-
-    },
+    "Click an object to select its outline · Tab for Wand · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {},
+    "Click corners · Click start, double-click or Enter to close · Delete removes corner · Escape cancel" : {},
+    "Click the canvas to sample" : {},
+    "Click the fringe on the layer. Click the eyedropper again to stop." : {},
+    "Click the image to add that color to the selection" : {},
+    "Click the image to center this range on that color" : {},
+    "Click the image to narrow this range to exclude that color" : {},
+    "Click the image to pick the color to select." : {},
+    "Click the image to select that color" : {},
+    "Click the image to take that color out of the selection" : {},
+    "Click the image to widen this range to include that color" : {},
+    "Click the original layer to set %@. Click the eyedropper again to stop." : {},
+    "Click the original layer. Click the eyedropper again to stop." : {},
+    "Click the picture to save a color. Up to eight colors." : {},
+    "Click to add a point. Drag to adjust." : {},
+    "Click to select similar colors · Tab for Object · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {},
+    "Click to select; double-click to edit; Option-drag to copy %@" : {},
+    "Click to zoom in · Option-click to zoom out · Drag right or left to zoom smoothly · Space to pan" : {},
+    "Clipped to %@" : {},
+    "Clipping mask based on %@. Option-click the bottom of its row to release." : {},
     "Clone Stamp" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "복제 도장"
+          }
+        }
+      }
     },
-    "Clone Stamp (S) · Option-click sets the source" : {
-
-    },
+    "Clone Stamp (S) · Option-click sets the source" : {},
     "Close %@" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 닫기"
+          }
+        }
+      }
     },
     "Close Project" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트 닫기"
+          }
+        }
+      }
     },
-    "Close to the current process, with slightly softer primary and shadow shifts." : {
-
-    },
-    "Color" : {
-
-    },
-    "Color Detail" : {
-
-    },
-    "Color for the added canvas" : {
-
-    },
-    "Color Grading" : {
-
-    },
-    "Color Mixer" : {
-
-    },
-    "Color Overlay" : {
-
-    },
-    "Color Picker (%@ Color)" : {
-
-    },
-    "Color Picker (%@)" : {
-
-    },
-    "Color Picker (Background Color)" : {
-
-    },
-    "Color Picker (Dither Dark Color)" : {
-
-    },
-    "Color Picker (Dither Light Color)" : {
-
-    },
-    "Color Picker (Foreground Color)" : {
-
-    },
-    "Color Picker (Gradient Map Highlights)" : {
-
-    },
-    "Color Picker (Gradient Map Shadows)" : {
-
-    },
-    "Color Picker (Text Color)" : {
-
-    },
-    "Color Picker (Vignette Color)" : {
-
-    },
-    "Color Range" : {
-
-    },
+    "Close to the current process, with slightly softer primary and shadow shifts." : {},
+    "Color" : {},
+    "Color Detail" : {},
+    "Color for the added canvas" : {},
+    "Color Grading" : {},
+    "Color Mixer" : {},
+    "Color Overlay" : {},
+    "Color Picker (%@ Color)" : {},
+    "Color Picker (%@)" : {},
+    "Color Picker (Background Color)" : {},
+    "Color Picker (Dither Dark Color)" : {},
+    "Color Picker (Dither Light Color)" : {},
+    "Color Picker (Foreground Color)" : {},
+    "Color Picker (Gradient Map Highlights)" : {},
+    "Color Picker (Gradient Map Shadows)" : {},
+    "Color Picker (Text Color)" : {},
+    "Color Picker (Vignette Color)" : {},
+    "Color Range" : {},
     "Color Range…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색상 범위…"
+          }
+        }
+      }
     },
-    "Color Smoothness" : {
-
-    },
-    "Color that fills transparent areas" : {
-
-    },
-    "Color the result while keeping its tones, for a sepia or a cyanotype" : {
-
-    },
-    "Colorize" : {
-
-    },
-    "Colors" : {
-
-    },
-    "Component" : {
-
-    },
+    "Color Smoothness" : {},
+    "Color that fills transparent areas" : {},
+    "Color the result while keeping its tones, for a sepia or a cyanotype" : {},
+    "Colorize" : {},
+    "Colors" : {},
+    "Component" : {},
     "Compositor" : {
-
+      "shouldTranslate" : false
     },
-    "Compositor will convert these Photoshop features. Nothing is applied until you continue." : {
-
-    },
-    "Constrain Crop" : {
-
-    },
+    "Compositor will convert these Photoshop features. Nothing is applied until you continue." : {},
+    "Constrain Crop" : {},
     "Content-Aware Fill…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내용 인식 채우기…"
+          }
+        }
+      }
     },
     "Contextual keys & mouse gestures" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "상황별 키와 마우스 제스처"
+          }
+        }
+      }
     },
-    "Contiguous" : {
-
-    },
-    "Contract" : {
-
-    },
-    "Contract Selection" : {
-
-    },
+    "Contiguous" : {},
+    "Contract" : {},
+    "Contract Selection" : {},
     "Contract…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "축소…"
+          }
+        }
+      }
     },
-    "Contrast" : {
-
-    },
-    "Controls how much the three tonal wheels overlap." : {
-
-    },
-    "Controls how strong the sharpening is." : {
-
-    },
+    "Contrast" : {},
+    "Controls how much the three tonal wheels overlap." : {},
+    "Controls how strong the sharpening is." : {},
     "Copy" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "복사"
+          }
+        }
+      }
     },
-    "Copy %@" : {
-
-    },
-    "Copy from the active layer only, or from every visible layer as shown" : {
-
-    },
-    "Copy Layer Mask" : {
-
-    },
-    "Copy Layers from Project" : {
-
-    },
+    "Copy %@" : {},
+    "Copy from the active layer only, or from every visible layer as shown" : {},
+    "Copy Layer Mask" : {},
+    "Copy Layers from Project" : {},
     "Copy Merged" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "병합하여 복사"
+          }
+        }
+      }
     },
-    "Couldn’t change canvas size" : {
-
-    },
-    "Couldn’t crop" : {
-
-    },
-    "Couldn’t export JPEG" : {
-
-    },
-    "Couldn’t export PNG" : {
-
-    },
-    "Couldn’t open the project" : {
-
-    },
-    "Couldn’t paint" : {
-
-    },
-    "Couldn’t resize the image" : {
-
-    },
-    "Couldn’t save the project" : {
-
-    },
-    "Couldn’t trim image" : {
-
-    },
-    "Create a canvas or import an image." : {
-
-    },
-    "Create canvas" : {
-
-    },
-    "Create clipping mask" : {
-
-    },
+    "Couldn’t change canvas size" : {},
+    "Couldn’t crop" : {},
+    "Couldn’t export JPEG" : {},
+    "Couldn’t export PNG" : {},
+    "Couldn’t open the project" : {},
+    "Couldn’t paint" : {},
+    "Couldn’t resize the image" : {},
+    "Couldn’t save the project" : {},
+    "Couldn’t trim image" : {},
+    "Create a canvas or import an image." : {},
+    "Create canvas" : {},
+    "Create clipping mask" : {},
     "Create Clipping Mask" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "클리핑 마스크 만들기"
+          }
+        }
+      }
     },
     "Crop" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자르기"
+          }
+        }
+      }
     },
-    "Crop (C)" : {
-
-    },
-    "Cropped to the canvas so the file fits in memory. Pixels outside the canvas weren't imported." : {
-
-    },
-    "Crops empty edges after the transform and fits the result back into the frame." : {
-
-    },
-    "Current default. The calibration sliders below apply at full strength." : {
-
-    },
+    "Crop (C)" : {},
+    "Cropped to the canvas so the file fits in memory. Pixels outside the canvas weren't imported." : {},
+    "Crops empty edges after the transform and fits the result back into the frame." : {},
+    "Current default. The calibration sliders below apply at full strength." : {},
     "Current: %lld × %lld pixels" : {
       "localizations" : {
         "en" : {
@@ -769,653 +602,617 @@
         }
       }
     },
-    "Curve" : {
-
-    },
+    "Curve" : {},
     "Curves…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡선…"
+          }
+        }
+      }
     },
-    "Custom" : {
-
-    },
+    "Custom" : {},
     "Cut" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잘라내기"
+          }
+        }
+      }
     },
-    "Cyan / Red" : {
-
-    },
-    "Cyans" : {
-
-    },
-    "Dark" : {
-
-    },
-    "Darkens or lightens the edges. The center does not change." : {
-
-    },
-    "Darks" : {
-
-    },
-    "Default colors" : {
-
-    },
-    "Default colors (D)" : {
-
-    },
-    "Defringe" : {
-
-    },
-    "Dehaze" : {
-
-    },
+    "Cyan / Red" : {},
+    "Cyans" : {},
+    "Dark" : {},
+    "Darkens or lightens the edges. The center does not change." : {},
+    "Darks" : {},
+    "Default colors" : {},
+    "Default colors (D)" : {},
+    "Defringe" : {},
+    "Dehaze" : {},
     "Delete %@" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 삭제"
+          }
+        }
+      }
     },
-    "Delete Guide" : {
-
-    },
+    "Delete Guide" : {},
     "Delete Layer" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 삭제"
+          }
+        }
+      }
     },
-    "Delete layer mask" : {
-
-    },
+    "Delete layer mask" : {},
     "Delete Layer Mask" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 마스크 삭제"
+          }
+        }
+      }
     },
     "Delete Layers" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 삭제"
+          }
+        }
+      }
     },
-    "Delete Mask" : {
-
-    },
-    "Delete selected effect" : {
-
-    },
-    "Delete selected layer" : {
-
-    },
-    "Delete selected layers" : {
-
-    },
-    "Delete Selected Layers" : {
-
-    },
-    "Density" : {
-
-    },
+    "Delete Mask" : {},
+    "Delete selected effect" : {},
+    "Delete selected layer" : {},
+    "Delete selected layers" : {},
+    "Delete Selected Layers" : {},
+    "Density" : {},
     "Deselect" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 해제"
+          }
+        }
+      }
     },
-    "Detail" : {
-
-    },
-    "Develop “%@”" : {
-
-    },
-    "Diffusion" : {
-
-    },
-    "Diffusion is soft and wide, Bloom is tighter, and Halation is a red fringe." : {
-
-    },
-    "Dims the picture outside this color's range. It is not kept when you press OK." : {
-
-    },
-    "Disable Layer Mask" : {
-
-    },
-    "Disable Mask" : {
-
-    },
-    "Distance" : {
-
-    },
-    "Distort" : {
-
-    },
-    "Distort Layer Mask" : {
-
-    },
-    "Distort Layers" : {
-
-    },
-    "Distortion" : {
-
-    },
-    "Distribution" : {
-
-    },
+    "Detail" : {},
+    "Develop “%@”" : {},
+    "Diffusion" : {},
+    "Diffusion is soft and wide, Bloom is tighter, and Halation is a red fringe." : {},
+    "Dims the picture outside this color's range. It is not kept when you press OK." : {},
+    "Disable Layer Mask" : {},
+    "Disable Mask" : {},
+    "Distance" : {},
+    "Distort" : {},
+    "Distort Layer Mask" : {},
+    "Distort Layers" : {},
+    "Distortion" : {},
+    "Distribution" : {},
     "Document Bounds" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "문서 경계"
+          }
+        }
+      }
     },
-    "Don’t Save" : {
-
-    },
-    "Done" : {
-
-    },
-    "Dots" : {
-
-    },
-    "Drag a color in the picture. Nearby color families move together." : {
-
-    },
-    "Drag a point. Click to add one. Double-click a point to remove it." : {
-
-    },
-    "Drag a rectangle · Shift add · Option subtract · Shift again mid-drag square · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {
-
-    },
-    "Drag a text box · Click text to edit · Drag box handles to resize · ⌘Return finish · Escape cancel" : {
-
-    },
-    "Drag an ellipse · Shift add · Option subtract · Shift again mid-drag circle · Drag inside to move · Delete clears · ⌘D deselect" : {
-
-    },
-    "Drag inside the wheel. Angle sets hue, distance sets saturation." : {
-
-    },
-    "Drag on the layer to place a guide. Draw at least two lines." : {
-
-    },
-    "Drag on the picture to move the curve for the tone under the pointer." : {
-
-    },
-    "Drag or scroll to move around; double-click switches between Fit and 100%" : {
-
-    },
-    "Drag over blemishes to heal · [ ] size · Shift-[ ] hardness · Escape cancel · Space to pan" : {
-
-    },
-    "Drag to crop · Enter apply · Escape cancel · Space to pan" : {
-
-    },
-    "Drag to draw · Drag ends to adjust · Shift 45° · 1–0 opacity · Enter apply · Escape cancel" : {
-
-    },
-    "Drag to draw a shape on a new layer · Shift %@ · Option from center · Shift-U or Tab for the next shape · Escape cancel · Space to pan" : {
-
-    },
-    "Drag to erase" : {
-
-    },
-    "Drag to move · Handles to resize · Circle to rotate · 1–0 layer opacity · Space to pan" : {
-
-    },
-    "Drag to paint" : {
-
-    },
-    "Drag to pan · Pinch to zoom" : {
-
-    },
-    "Drag to push pixels" : {
-
-    },
-    "Drag to resize the panel" : {
-
-    },
-    "Drag to select · Drag inside to move · Shift add · Option subtract · Delete clears · ⌥⌫/⌘⌫ fill · ⌘D deselect" : {
-
-    },
-    "Drag to set hue and saturation. Double-click to reset this wheel." : {
-
-    },
-    "Drag to smudge" : {
-
-    },
-    "Drag to soften" : {
-
-    },
-    "Drag up or down to lift or lower those tones. Drag a divider along the bottom to change which tones each region covers." : {
-
-    },
-    "Draw each chunky pixel as a solid square, or as a round dot like a dot-matrix screen" : {
-
-    },
-    "Draw Guides" : {
-
-    },
-    "Draw the marks for the light tones on the dark color, like a glowing screen" : {
-
-    },
-    "Draw two or more lines on the preview that should be level or vertical." : {
-
-    },
+    "Don’t Save" : {},
+    "Done" : {},
+    "Dots" : {},
+    "Drag a color in the picture. Nearby color families move together." : {},
+    "Drag a point. Click to add one. Double-click a point to remove it." : {},
+    "Drag a rectangle · Shift add · Option subtract · Shift again mid-drag square · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : {},
+    "Drag a text box · Click text to edit · Drag box handles to resize · ⌘Return finish · Escape cancel" : {},
+    "Drag an ellipse · Shift add · Option subtract · Shift again mid-drag circle · Drag inside to move · Delete clears · ⌘D deselect" : {},
+    "Drag inside the wheel. Angle sets hue, distance sets saturation." : {},
+    "Drag on the layer to place a guide. Draw at least two lines." : {},
+    "Drag on the picture to move the curve for the tone under the pointer." : {},
+    "Drag or scroll to move around; double-click switches between Fit and 100%" : {},
+    "Drag over blemishes to heal · [ ] size · Shift-[ ] hardness · Escape cancel · Space to pan" : {},
+    "Drag to crop · Enter apply · Escape cancel · Space to pan" : {},
+    "Drag to draw · Drag ends to adjust · Shift 45° · 1–0 opacity · Enter apply · Escape cancel" : {},
+    "Drag to draw a shape on a new layer · Shift %@ · Option from center · Shift-U or Tab for the next shape · Escape cancel · Space to pan" : {},
+    "Drag to erase" : {},
+    "Drag to move · Handles to resize · Circle to rotate · 1–0 layer opacity · Space to pan" : {},
+    "Drag to paint" : {},
+    "Drag to pan · Pinch to zoom" : {},
+    "Drag to push pixels" : {},
+    "Drag to resize the panel" : {},
+    "Drag to select · Drag inside to move · Shift add · Option subtract · Delete clears · ⌥⌫/⌘⌫ fill · ⌘D deselect" : {},
+    "Drag to set hue and saturation. Double-click to reset this wheel." : {},
+    "Drag to smudge" : {},
+    "Drag to soften" : {},
+    "Drag up or down to lift or lower those tones. Drag a divider along the bottom to change which tones each region covers." : {},
+    "Draw each chunky pixel as a solid square, or as a round dot like a dot-matrix screen" : {},
+    "Draw Guides" : {},
+    "Draw the marks for the light tones on the dark color, like a glowing screen" : {},
+    "Draw two or more lines on the preview that should be level or vertical." : {},
     "Drop into new canvas" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 캔버스로 놓기"
+          }
+        }
+      }
     },
-    "Drop Shadow" : {
-
-    },
+    "Drop Shadow" : {},
     "Drop to open in a new canvas" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "놓으면 새 캔버스로 엽니다"
+          }
+        }
+      }
     },
     "Duplicate Layer" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 복제"
+          }
+        }
+      }
     },
-    "Duplicate Layers" : {
-
-    },
-    "Duplicate Pixels" : {
-
-    },
-    "Earliest response. Hue, saturation, and shadow tint move about half as far as Version 6." : {
-
-    },
-    "Edge" : {
-
-    },
-    "Edit %@" : {
-
-    },
-    "Edit %@ Adjustment" : {
-
-    },
-    "Edit %@." : {
-
-    },
+    "Duplicate Layers" : {},
+    "Duplicate Pixels" : {},
+    "Earliest response. Hue, saturation, and shadow tint move about half as far as Version 6." : {},
+    "Edge" : {},
+    "Edit %@" : {},
+    "Edit %@ Adjustment" : {},
+    "Edit %@." : {},
     "Edit Adjustment…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "조정 편집…"
+          }
+        }
+      }
     },
-    "Edit Text" : {
-
-    },
-    "Editable Photoshop text becomes pixels and can’t be retyped." : {
-
-    },
-    "Editable text" : {
-
-    },
-    "Editable text layer" : {
-
-    },
-    "Effects" : {
-
-    },
+    "Edit Text" : {},
+    "Editable Photoshop text becomes pixels and can’t be retyped." : {},
+    "Editable text" : {},
+    "Editable text layer" : {},
+    "Effects" : {},
     "Ellipse" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "타원"
+          }
+        }
+      }
     },
     "Elliptical Marquee" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "원형 선택 윤곽"
+          }
+        }
+      }
     },
-    "Emphasizes fine texture over broader edges." : {
-
-    },
-    "Empty selection" : {
-
-    },
-    "Enable Layer Mask" : {
-
-    },
-    "Enable Lens Profile Corrections" : {
-
-    },
-    "Enable Mask" : {
-
-    },
-    "End of the hue range, in degrees." : {
-
-    },
-    "Enter a size up to %@ pixels at this DPI." : {
-
-    },
-    "Enter a whole number from 1 to %lld px." : {
-
-    },
-    "Enter whole numbers from 1 to %@ pixels." : {
-
-    },
-    "Erase" : {
-
-    },
+    "Emphasizes fine texture over broader edges." : {},
+    "Empty selection" : {},
+    "Enable Layer Mask" : {},
+    "Enable Lens Profile Corrections" : {},
+    "Enable Mask" : {},
+    "End of the hue range, in degrees." : {},
+    "Enter a size up to %@ pixels at this DPI." : {},
+    "Enter a whole number from 1 to %lld px." : {},
+    "Enter whole numbers from 1 to %@ pixels." : {},
+    "Erase" : {},
     "Eraser" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "지우개"
+          }
+        }
+      }
     },
-    "Expand" : {
-
-    },
-    "Expand or collapse folder" : {
-
-    },
-    "Expand Selection" : {
-
-    },
+    "Expand" : {},
+    "Expand or collapse folder" : {},
+    "Expand Selection" : {},
     "Expand…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확장…"
+          }
+        }
+      }
     },
     "Export JPEG" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JPEG로 내보내기"
+          }
+        }
+      }
     },
     "Export JPEG…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JPEG로 내보내기…"
+          }
+        }
+      }
     },
     "Export PNG" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PNG로 내보내기"
+          }
+        }
+      }
     },
     "Export PNG…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PNG로 내보내기…"
+          }
+        }
+      }
     },
-    "Export…" : {
-
-    },
-    "Exposure" : {
-
-    },
-    "Extension color" : {
-
-    },
+    "Export…" : {},
+    "Exposure" : {},
+    "Extension color" : {},
     "Eyedropper" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스포이드"
+          }
+        }
+      }
     },
-    "Eyedropper (I)" : {
-
-    },
-    "Fade the edge of the selection by this many pixels" : {
-
-    },
-    "Faux bold or faux italic was omitted." : {
-
-    },
-    "Feather" : {
-
-    },
-    "Feather Selection" : {
-
-    },
+    "Eyedropper (I)" : {},
+    "Fade the edge of the selection by this many pixels" : {},
+    "Faux bold or faux italic was omitted." : {},
+    "Feather" : {},
+    "Feather Selection" : {},
     "Feather…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페더…"
+          }
+        }
+      }
     },
-    "Fill" : {
-
-    },
-    "Fill Mask" : {
-
-    },
-    "Fill Text" : {
-
-    },
-    "Fill the selection using surrounding pixels from this layer." : {
-
-    },
+    "Fill" : {},
+    "Fill Mask" : {},
+    "Fill Text" : {},
+    "Fill the selection using surrounding pixels from this layer." : {},
     "Fill with Background Color" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배경색으로 칠"
+          }
+        }
+      }
     },
     "Fill with Foreground Color" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전경색으로 칠"
+          }
+        }
+      }
     },
     "Filter" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필터"
+          }
+        }
+      }
     },
-    "Final dimensions must be 1–%@ pixels per side." : {
-
-    },
-    "Firmer color than Version 2. Primary shifts stay gentler than the current process." : {
-
-    },
-    "Fit" : {
-
-    },
+    "Final dimensions must be 1–%@ pixels per side." : {},
+    "Firmer color than Version 2. Primary shifts stay gentler than the current process." : {},
+    "Fit" : {},
     "Fit Canvas" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "화면 크기에 맞추기"
+          }
+        }
+      }
     },
-    "Fit canvas in window (⌘0)" : {
-
-    },
+    "Fit canvas in window (⌘0)" : {},
     "Flip Canvas Horizontal" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 가로로 뒤집기"
+          }
+        }
+      }
     },
     "Flip Canvas Vertical" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 세로로 뒤집기"
+          }
+        }
+      }
     },
-    "Flip H" : {
-
-    },
-    "Flip Horizontal" : {
-
-    },
+    "Flip H" : {},
+    "Flip Horizontal" : {},
     "Flip Layer Horizontal" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 가로로 뒤집기"
+          }
+        }
+      }
     },
     "Flip Layer Vertical" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 세로로 뒤집기"
+          }
+        }
+      }
     },
-    "Flip V" : {
-
-    },
-    "Flip Vertical" : {
-
-    },
-    "Floating Selection" : {
-
-    },
-    "Folder" : {
-
-    },
-    "Folder %lld" : {
-
-    },
-    "Folder blend mode “%@” isn’t supported. The folder will be pass-through." : {
-
-    },
-    "Font" : {
-
-    },
-    "Font face, including bold and italic variants" : {
-
-    },
-    "Foreground color" : {
-
-    },
-    "Full justification was imported as left alignment." : {
-
-    },
-    "Fuzziness" : {
-
-    },
-    "G" : {
-
-    },
-    "Gamma" : {
-
-    },
-    "Gaussian" : {
-
-    },
-    "Geometry" : {
-
-    },
-    "Glow" : {
-
-    },
+    "Flip V" : {},
+    "Flip Vertical" : {},
+    "Floating Selection" : {},
+    "Folder" : {},
+    "Folder %lld" : {},
+    "Folder blend mode “%@” isn’t supported. The folder will be pass-through." : {},
+    "Font" : {},
+    "Font face, including bold and italic variants" : {},
+    "Foreground color" : {},
+    "Full justification was imported as left alignment." : {},
+    "Fuzziness" : {},
+    "G" : {},
+    "Gamma" : {},
+    "Gaussian" : {},
+    "Geometry" : {},
+    "Glow" : {},
     "Gradient" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그레이디언트"
+          }
+        }
+      }
     },
-    "Gradient (G)" : {
-
-    },
-    "Gradient Mask" : {
-
-    },
-    "Grading" : {
-
-    },
-    "Grain" : {
-
-    },
-    "Green" : {
-
-    },
-    "Green Amount" : {
-
-    },
-    "Green Hue" : {
-
-    },
-    "Green Primary" : {
-
-    },
-    "Greens" : {
-
-    },
+    "Gradient (G)" : {},
+    "Gradient Mask" : {},
+    "Grading" : {},
+    "Grain" : {},
+    "Green" : {},
+    "Green Amount" : {},
+    "Green Hue" : {},
+    "Green Primary" : {},
+    "Greens" : {},
     "Grid" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "격자"
+          }
+        }
+      }
     },
     "Grid Settings…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "격자 설정…"
+          }
+        }
+      }
     },
-    "Gridline every" : {
-
-    },
+    "Gridline every" : {},
     "Group Layers" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 그룹화"
+          }
+        }
+      }
     },
     "Group Selected Layers" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 레이어 그룹화"
+          }
+        }
+      }
     },
-    "Group selected layers (⌘G)" : {
-
-    },
+    "Group selected layers (⌘G)" : {},
     "Guides" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안내선"
+          }
+        }
+      }
     },
     "Hand" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "손"
+          }
+        }
+      }
     },
-    "Hand (H)" : {
-
-    },
-    "Hardness" : {
-
-    },
-    "Height" : {
-
-    },
-    "Hex" : {
-
-    },
-    "Hex color" : {
-
-    },
-    "Hide %@" : {
-
-    },
-    "Hide %@ in the preview" : {
-
-    },
-    "Hide All (Black)" : {
-
-    },
+    "Hand (H)" : {},
+    "Hardness" : {},
+    "Height" : {},
+    "Hex" : {},
+    "Hex color" : {},
+    "Hide %@" : {},
+    "Hide %@ in the preview" : {},
+    "Hide All (Black)" : {},
     "Hide Compositor" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compositor 가리기"
+          }
+        }
+      }
     },
     "Hide Layer" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 숨기기"
+          }
+        }
+      }
     },
     "Hide Others" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기타 가리기"
+          }
+        }
+      }
     },
-    "Hide Selection" : {
-
-    },
-    "Hide the background behind a layer mask, keeping the foreground subjects. The pixels stay, so the background can be painted back at any time." : {
-
-    },
-    "High" : {
-
-    },
-    "Highlight Clipping Indicator" : {
-
-    },
-    "Highlight Priority protects bright edges. Color Priority also reduces color. Paint Overlay covers the edges evenly." : {
-
-    },
-    "Highlights" : {
-
-    },
-    "Histogram" : {
-
-    },
-    "Hold Shift to add or Option to subtract for one outline" : {
-
-    },
-    "Horizontal" : {
-
-    },
-    "Horizontal ruler" : {
-
-    },
-    "How far a color may be from the picked ones and still be selected" : {
-
-    },
-    "How far apart the screen's lines are" : {
-
-    },
-    "How far each color channel (0–255) can differ from the clicked color and still be selected" : {
-
-    },
-    "How far from each edge the sharpening reaches, in pixels." : {
-
-    },
-    "How far in brightness the adjustment reaches." : {
-
-    },
-    "How far in hue the adjustment reaches." : {
-
-    },
-    "How far in saturation the adjustment reaches." : {
-
-    },
-    "How far the blur softens, in pixels" : {
-
-    },
-    "How much of each pixel's error spreads to its neighbors. Less gives flatter areas" : {
-
-    },
-    "How much of the profile distortion correction is applied." : {
-
-    },
-    "How much of the profile vignetting correction is applied." : {
-
-    },
-    "How much the curve also changes color strength. Zero matches Photoshop; lower keeps it to brightness, higher adds more color." : {
-
-    },
-    "HSL lists every color. Color edits one family. Point Color adjusts a color you pick." : {
-
-    },
-    "Hue" : {
-
-    },
-    "Hue and saturation of this wheel." : {
-
-    },
-    "Hue around the wheel, saturation outward from the center. Control-click to show the histogram." : {
-
-    },
-    "Hue Range" : {
-
-    },
-    "Hue range where green defringe runs." : {
-
-    },
-    "Hue range where purple defringe runs." : {
-
-    },
-    "Hue Shift" : {
-
-    },
-    "Hue shifts the color, Saturation its strength, and Luminance its brightness." : {
-
-    },
+    "Hide Selection" : {},
+    "Hide the background behind a layer mask, keeping the foreground subjects. The pixels stay, so the background can be painted back at any time." : {},
+    "High" : {},
+    "Highlight Clipping Indicator" : {},
+    "Highlight Priority protects bright edges. Color Priority also reduces color. Paint Overlay covers the edges evenly." : {},
+    "Highlights" : {},
+    "Histogram" : {},
+    "Hold Shift to add or Option to subtract for one outline" : {},
+    "Horizontal" : {},
+    "Horizontal ruler" : {},
+    "How far a color may be from the picked ones and still be selected" : {},
+    "How far apart the screen's lines are" : {},
+    "How far each color channel (0–255) can differ from the clicked color and still be selected" : {},
+    "How far from each edge the sharpening reaches, in pixels." : {},
+    "How far in brightness the adjustment reaches." : {},
+    "How far in hue the adjustment reaches." : {},
+    "How far in saturation the adjustment reaches." : {},
+    "How far the blur softens, in pixels" : {},
+    "How much of each pixel's error spreads to its neighbors. Less gives flatter areas" : {},
+    "How much of the profile distortion correction is applied." : {},
+    "How much of the profile vignetting correction is applied." : {},
+    "How much the curve also changes color strength. Zero matches Photoshop; lower keeps it to brightness, higher adds more color." : {},
+    "HSL lists every color. Color edits one family. Point Color adjusts a color you pick." : {},
+    "Hue" : {},
+    "Hue and saturation of this wheel." : {},
+    "Hue around the wheel, saturation outward from the center. Control-click to show the histogram." : {},
+    "Hue Range" : {},
+    "Hue range where green defringe runs." : {},
+    "Hue range where purple defringe runs." : {},
+    "Hue Shift" : {},
+    "Hue shifts the color, Saturation its strength, and Luminance its brightness." : {},
     "Hue/Saturation" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색조/채도"
+          }
+        }
+      }
     },
     "Hue/Saturation…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "색조/채도…"
+          }
+        }
+      }
     },
     "Image" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지"
+          }
+        }
+      }
     },
     "Image export supports canvases up to %lld megapixels and %@ pixels per side." : {
       "localizations" : {
@@ -1428,41 +1225,45 @@
       }
     },
     "Image Size" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 크기"
+          }
+        }
+      }
     },
     "Image Size…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 크기…"
+          }
+        }
+      }
     },
-    "Import" : {
-
-    },
-    "Import an image or add a blank layer." : {
-
-    },
-    "Import couldn’t finish" : {
-
-    },
-    "Import image" : {
-
-    },
-    "Import Image" : {
-
-    },
-    "Import Images" : {
-
-    },
+    "Import" : {},
+    "Import an image or add a blank layer." : {},
+    "Import couldn’t finish" : {},
+    "Import image" : {},
+    "Import Image" : {},
+    "Import Images" : {},
     "Import Images…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 가져오기…"
+          }
+        }
+      }
     },
-    "Import Photoshop File" : {
-
-    },
-    "Importing images…" : {
-
-    },
-    "Importing…" : {
-
-    },
+    "Import Photoshop File" : {},
+    "Importing images…" : {},
+    "Importing…" : {},
     "In %lld   Out %lld" : {
       "localizations" : {
         "en" : {
@@ -1473,15 +1274,9 @@
         }
       }
     },
-    "Inches" : {
-
-    },
-    "Inner Glow" : {
-
-    },
-    "Inner Shadow" : {
-
-    },
+    "Inches" : {},
+    "Inner Glow" : {},
+    "Inner Shadow" : {},
     "Input %lld · Output %lld" : {
       "localizations" : {
         "en" : {
@@ -1492,423 +1287,433 @@
         }
       }
     },
-    "Input and output of the selected curve point." : {
-
-    },
-    "Input black" : {
-
-    },
-    "Input white" : {
-
-    },
-    "Inside" : {
-
-    },
+    "Input and output of the selected curve point." : {},
+    "Input black" : {},
+    "Input white" : {},
+    "Inside" : {},
     "Inverse" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "반전"
+          }
+        }
+      }
     },
     "Invert" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "반전"
+          }
+        }
+      }
     },
     "Invert Mask" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마스크 반전"
+          }
+        }
+      }
     },
-    "Keep Mine" : {
-
-    },
-    "Keep the source moving with the brush between strokes; off starts every stroke at the source point" : {
-
-    },
-    "Keeps local contrast after luminance smoothing." : {
-
-    },
-    "Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas." : {
-
-    },
+    "Keep Mine" : {},
+    "Keep the source moving with the brush between strokes; off starts every stroke at the source point" : {},
+    "Keeps local contrast after luminance smoothing." : {},
+    "Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas." : {},
     "Keyboard Shortcuts" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "키보드 단축키"
+          }
+        }
+      }
     },
     "Keyboard Shortcuts…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "키보드 단축키…"
+          }
+        }
+      }
     },
     "Lasso" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "올가미"
+          }
+        }
+      }
     },
-    "Lasso (L)" : {
-
-    },
+    "Lasso (L)" : {},
     "Last Filter" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마지막 필터"
+          }
+        }
+      }
     },
     "Last Filter: %@" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마지막 필터: %@"
+          }
+        }
+      }
     },
     "Layer" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어"
+          }
+        }
+      }
     },
-    "Layer %lld" : {
-
-    },
-    "Layer Blend Mode" : {
-
-    },
-    "Layer effects" : {
-
-    },
-    "Layer Effects" : {
-
-    },
-    "Layer effects were discarded, so the appearance may differ." : {
-
-    },
-    "Layer Mask" : {
-
-    },
-    "Layer Opacity" : {
-
-    },
+    "Layer %lld" : {},
+    "Layer Blend Mode" : {},
+    "Layer effects" : {},
+    "Layer Effects" : {},
+    "Layer effects were discarded, so the appearance may differ." : {},
+    "Layer Mask" : {},
+    "Layer Opacity" : {},
     "Layer via Copy" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "복사한 레이어"
+          }
+        }
+      }
     },
     "Layer's Pixels" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 픽셀"
+          }
+        }
+      }
     },
     "Layers" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어"
+          }
+        }
+      }
     },
-    "Leading" : {
-
-    },
-    "Left" : {
-
-    },
+    "Leading" : {},
+    "Left" : {},
     "Levels" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레벨"
+          }
+        }
+      }
     },
     "Levels…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레벨…"
+          }
+        }
+      }
     },
-    "Lifts or lowers the brightest tones." : {
-
-    },
-    "Lifts or lowers the dark tones." : {
-
-    },
-    "Lifts or lowers the darkest tones." : {
-
-    },
-    "Lifts or lowers the light tones." : {
-
-    },
-    "Light" : {
-
-    },
-    "Light blooming around the lines, like a CRT's phosphors" : {
-
-    },
-    "Light on Dark" : {
-
-    },
-    "Lightness" : {
-
-    },
-    "Lights" : {
-
-    },
-    "Limited to the selection" : {
-
-    },
-    "Limits sharpening to stronger edges. Hold Option to see the mask." : {
-
-    },
+    "Lifts or lowers the brightest tones." : {},
+    "Lifts or lowers the dark tones." : {},
+    "Lifts or lowers the darkest tones." : {},
+    "Lifts or lowers the light tones." : {},
+    "Light" : {},
+    "Light blooming around the lines, like a CRT's phosphors" : {},
+    "Light on Dark" : {},
+    "Lightness" : {},
+    "Lights" : {},
+    "Limited to the selection" : {},
+    "Limits sharpening to stronger edges. Hold Option to see the mask." : {},
     "Line" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선"
+          }
+        }
+      }
     },
-    "Line height, baseline to baseline. Empty or 0 is Auto: 120% of the font size." : {
-
-    },
-    "Line Spacing" : {
-
-    },
-    "Linear" : {
-
-    },
-    "Linear histogram with automatic vertical scaling. Tall spikes may extend beyond the graph; all tones from 0 to 255 remain included." : {
-
-    },
-    "Linear runs along the line; Radial spreads out from the start point" : {
-
-    },
-    "Link layer and mask so they move together" : {
-
-    },
-    "Link Layer Mask" : {
-
-    },
-    "Link Mask" : {
-
-    },
-    "Link mask: %@" : {
-
-    },
-    "Linked" : {
-
-    },
+    "Line height, baseline to baseline. Empty or 0 is Auto: 120% of the font size." : {},
+    "Line Spacing" : {},
+    "Linear" : {},
+    "Linear histogram with automatic vertical scaling. Tall spikes may extend beyond the graph; all tones from 0 to 255 remain included." : {},
+    "Linear runs along the line; Radial spreads out from the start point" : {},
+    "Link layer and mask so they move together" : {},
+    "Link Layer Mask" : {},
+    "Link Mask" : {},
+    "Link mask: %@" : {},
+    "Linked" : {},
     "Liquify" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "픽셀 유동화"
+          }
+        }
+      }
     },
-    "Liquify pushes pixels · Blur softens · Smudge drags color along" : {
-
-    },
-    "Load Layer Selection" : {
-
-    },
-    "Load Mask Selection" : {
-
-    },
-    "Loading histogram…" : {
-
-    },
-    "Lock aspect ratio" : {
-
-    },
-    "Lock aspect ratio. Hold Shift while dragging a handle to turn it the other way." : {
-
-    },
+    "Liquify pushes pixels · Blur softens · Smudge drags color along" : {},
+    "Load Layer Selection" : {},
+    "Load Mask Selection" : {},
+    "Loading histogram…" : {},
+    "Lock aspect ratio" : {},
+    "Lock aspect ratio. Hold Shift while dragging a handle to turn it the other way." : {},
     "Lock Guides" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안내선 잠그기"
+          }
+        }
+      }
     },
-    "Lock original aspect ratio" : {
-
-    },
-    "Low" : {
-
-    },
-    "Luminance" : {
-
-    },
-    "Luminance Contrast" : {
-
-    },
-    "Luminance Detail" : {
-
-    },
-    "Luminance Range" : {
-
-    },
-    "Luminance Shift" : {
-
-    },
-    "Magenta / Green" : {
-
-    },
-    "Magentas" : {
-
-    },
+    "Lock original aspect ratio" : {},
+    "Low" : {},
+    "Luminance" : {},
+    "Luminance Contrast" : {},
+    "Luminance Detail" : {},
+    "Luminance Range" : {},
+    "Luminance Shift" : {},
+    "Magenta / Green" : {},
+    "Magentas" : {},
     "Magic" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매직"
+          }
+        }
+      }
     },
-    "Magic (W) · Tab switches Wand and Object" : {
-
-    },
+    "Magic (W) · Tab switches Wand and Object" : {},
     "Magic Wand" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동 선택"
+          }
+        }
+      }
     },
-    "Make each dithered pixel this many pixels across, for a chunky old-screen look" : {
-
-    },
-    "Make the lines waver sideways down the screen, like a CRT losing sync" : {
-
-    },
-    "Makes light and dark tones more or less different, mostly around the middle." : {
-
-    },
-    "Makes the color smoothing softer or tighter." : {
-
-    },
-    "Makes the grain coarser or finer." : {
-
-    },
-    "Makes the grain smoother or more uneven." : {
-
-    },
-    "Makes the picked color lighter or darker." : {
-
-    },
-    "Makes the picked color stronger or quieter." : {
-
-    },
-    "Makes the selected color family lighter or darker." : {
-
-    },
-    "Makes the selected color family stronger or quieter." : {
-
-    },
-    "Makes the vignette rounder or more square." : {
-
-    },
-    "Manual" : {
-
-    },
-    "Marquee" : {
-
-    },
-    "Marquee (M)" : {
-
-    },
-    "Mask" : {
-
-    },
-    "Mask background" : {
-
-    },
-    "Mask foreground" : {
-
-    },
+    "Make each dithered pixel this many pixels across, for a chunky old-screen look" : {},
+    "Make the lines waver sideways down the screen, like a CRT losing sync" : {},
+    "Makes light and dark tones more or less different, mostly around the middle." : {},
+    "Makes the color smoothing softer or tighter." : {},
+    "Makes the grain coarser or finer." : {},
+    "Makes the grain smoother or more uneven." : {},
+    "Makes the picked color lighter or darker." : {},
+    "Makes the picked color stronger or quieter." : {},
+    "Makes the selected color family lighter or darker." : {},
+    "Makes the selected color family stronger or quieter." : {},
+    "Makes the vignette rounder or more square." : {},
+    "Manual" : {},
+    "Marquee" : {},
+    "Marquee (M)" : {},
+    "Mask" : {},
+    "Mask background" : {},
+    "Mask foreground" : {},
     "Mask's Black Areas" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마스크의 검정 영역"
+          }
+        }
+      }
     },
-    "Masking" : {
-
-    },
-    "Match the clicked pixel, or the average of the pixels around it" : {
-
-    },
-    "Medium Contrast" : {
-
-    },
-    "Merge Down" : {
-
-    },
-    "Merge Group" : {
-
-    },
+    "Masking" : {},
+    "Match the clicked pixel, or the average of the pixels around it" : {},
+    "Medium Contrast" : {},
+    "Merge Down" : {},
+    "Merge Group" : {},
     "Merge Layers" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 병합"
+          }
+        }
+      }
     },
-    "Middle left" : {
-
-    },
-    "Middle right" : {
-
-    },
-    "Midpoint" : {
-
-    },
-    "Midtones" : {
-
-    },
-    "Millimeters" : {
-
-    },
-    "Missing source" : {
-
-    },
-    "Mixer" : {
-
-    },
-    "Mode" : {
-
-    },
-    "Monochromatic" : {
-
-    },
-    "More ink (darker) or less before dithering" : {
-
-    },
+    "Middle left" : {},
+    "Middle right" : {},
+    "Midpoint" : {},
+    "Midtones" : {},
+    "Millimeters" : {},
+    "Missing source" : {},
+    "Mixer" : {},
+    "Mode" : {},
+    "Monochromatic" : {},
+    "More ink (darker) or less before dithering" : {},
     "Move / Transform" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이동 / 변형"
+          }
+        }
+      }
     },
-    "Move / Transform (V)" : {
-
-    },
-    "Move Guide" : {
-
-    },
-    "Move Layer" : {
-
-    },
+    "Move / Transform (V)" : {},
+    "Move Guide" : {},
+    "Move Layer" : {},
     "Move Layer Down" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어를 아래로 이동"
+          }
+        }
+      }
     },
     "Move Layer Up" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어를 위로 이동"
+          }
+        }
+      }
     },
-    "Move Layers" : {
-
-    },
+    "Move Layers" : {},
     "Move Out of Folder" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "폴더 밖으로 이동"
+          }
+        }
+      }
     },
-    "Move pixels" : {
-
-    },
-    "Move Pixels" : {
-
-    },
-    "Move Selection" : {
-
-    },
-    "Moves the picture left or right." : {
-
-    },
-    "Moves the picture up or down." : {
-
-    },
-    "Moves the vignette correction inward or outward." : {
-
-    },
+    "Move pixels" : {},
+    "Move Pixels" : {},
+    "Move Selection" : {},
+    "Moves the picture left or right." : {},
+    "Moves the picture up or down." : {},
+    "Moves the vignette correction inward or outward." : {},
     "New" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새로 만들기"
+          }
+        }
+      }
     },
-    "New %@ Adjustment" : {
-
-    },
-    "New adjustment layer" : {
-
-    },
+    "New %@ Adjustment" : {},
+    "New adjustment layer" : {},
     "New Adjustment Layer" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 조정 레이어"
+          }
+        }
+      }
     },
-    "New blank layer" : {
-
-    },
+    "New blank layer" : {},
     "New Blank Layer" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 빈 레이어"
+          }
+        }
+      }
     },
-    "New blank layer (⇧⌘N)" : {
-
-    },
-    "New canvas" : {
-
-    },
+    "New blank layer (⇧⌘N)" : {},
+    "New canvas" : {},
     "New Canvas" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 캔버스"
+          }
+        }
+      }
     },
-    "New canvas (⌘N)" : {
-
-    },
+    "New canvas (⌘N)" : {},
     "New canvas (⌘N) · Drop images here for new tabs" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 캔버스(⌘N) · 여기에 이미지를 놓으면 새 탭으로 엽니다"
+          }
+        }
+      }
     },
     "New Canvas…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 캔버스…"
+          }
+        }
+      }
     },
-    "New color" : {
-
-    },
-    "New folder" : {
-
-    },
-    "New Folder" : {
-
-    },
-    "New Guide" : {
-
-    },
-    "New Text Layer" : {
-
-    },
+    "New color" : {},
+    "New folder" : {},
+    "New Folder" : {},
+    "New Guide" : {},
+    "New Text Layer" : {},
     "New: %lld × %lld pixels · %@ uncompressed" : {
       "localizations" : {
         "en" : {
@@ -1920,373 +1725,310 @@
       }
     },
     "No commands match" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일치하는 명령이 없습니다"
+          }
+        }
+      }
     },
-    "No content remained after trimming." : {
-
-    },
-    "No foreground subject was detected in this layer. Try an image with a more distinct subject." : {
-
-    },
-    "No layers yet" : {
-
-    },
-    "No lens metadata on this layer. Profile sliders set generic correction strength." : {
-
-    },
-    "No tool selected · Press a tool's key to pick one · Space to pan" : {
-
-    },
-    "Noise Reduction" : {
-
-    },
-    "Not enough unselected, opaque image pixels to synthesize a fill. Use a smaller selection with some surrounding image." : {
-
-    },
-    "Nothing is selected, so there’s nowhere to paint. Choose Select › Deselect (⌘D) to paint anywhere." : {
-
-    },
+    "No content remained after trimming." : {},
+    "No foreground subject was detected in this layer. Try an image with a more distinct subject." : {},
+    "No layers yet" : {},
+    "No lens metadata on this layer. Profile sliders set generic correction strength." : {},
+    "No tool selected · Press a tool's key to pick one · Space to pan" : {},
+    "Noise Reduction" : {},
+    "Not enough unselected, opaque image pixels to synthesize a fill. Use a smaller selection with some surrounding image." : {},
+    "Nothing is selected, so there’s nowhere to paint. Choose Select › Deselect (⌘D) to paint anywhere." : {},
     "Object Selection" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개체 선택"
+          }
+        }
+      }
     },
-    "Object Selection requires macOS 14 or later." : {
-
-    },
-    "Off leaves the picture as it is. Guided straightens from lines you draw on the picture." : {
-
-    },
-    "Offset" : {
-
-    },
-    "Offset X" : {
-
-    },
-    "Offset Y" : {
-
-    },
-    "OK" : {
-
-    },
-    "Only 8-bit RGB Photoshop files can be imported." : {
-
-    },
-    "Only print dimensions and resolution change. Pixels stay unchanged." : {
-
-    },
-    "Only the first text style was kept." : {
-
-    },
-    "Opacity" : {
-
-    },
-    "Opacity percent" : {
-
-    },
-    "Open “%@”?" : {
-
-    },
+    "Object Selection requires macOS 14 or later." : {},
+    "Off leaves the picture as it is. Guided straightens from lines you draw on the picture." : {},
+    "Offset" : {},
+    "Offset X" : {},
+    "Offset Y" : {},
+    "OK" : {},
+    "Only 8-bit RGB Photoshop files can be imported." : {},
+    "Only print dimensions and resolution change. Pixels stay unchanged." : {},
+    "Only the first text style was kept." : {},
+    "Opacity" : {},
+    "Opacity percent" : {},
+    "Open “%@”?" : {},
     "Open in a new project tab" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 프로젝트 탭에서 열기"
+          }
+        }
+      }
     },
-    "Open one project at a time" : {
-
-    },
-    "Open project" : {
-
-    },
+    "Open one project at a time" : {},
+    "Open project" : {},
     "Open Project" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트 열기"
+          }
+        }
+      }
     },
     "Open Project…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트 열기…"
+          }
+        }
+      }
     },
     "Open Recent" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최근 항목 열기"
+          }
+        }
+      }
     },
-    "Optics" : {
-
-    },
+    "Optics" : {},
     "Option temporarily selects the eyedropper in painting tools. Shift constrains shapes/movement or adds to a selection; Option subtracts from selections or draws from center. Command-drag moves selected pixels; Command-Option-drag copies them. Option-drag duplicates layers/folders/effects; Option-click at a layer boundary toggles clipping. Command-click a thumbnail loads its selection. Control bypasses snapping. Right-drag adjusts brush size. Modifier-and-mouse gestures are fixed." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페인팅 도구에서 Option 키를 누르면 일시적으로 스포이드가 선택됩니다. Shift는 모양과 이동을 제한하거나 선택 영역에 추가하고, Option은 선택 영역에서 빼거나 중심에서부터 그립니다. Command-드래그는 선택한 픽셀을 이동하고 Command-Option-드래그는 복사합니다. Option-드래그는 레이어/폴더/효과를 복제하고, 레이어 경계를 Option-클릭하면 클리핑이 전환됩니다. 축소판을 Command-클릭하면 해당 선택 영역을 불러옵니다. Control은 스냅을 무시합니다. 오른쪽 버튼으로 드래그하면 브러시 크기가 조정됩니다. 수정 키와 마우스를 조합한 제스처는 변경할 수 없습니다."
+          }
+        }
+      }
     },
-    "Option-click to set the source" : {
-
-    },
-    "Option-click to set the source · Drag to clone · [ ] size · Shift-[ ] hardness · 1–0 opacity · Space to pan" : {
-
-    },
-    "Option-click where Clone Stamp should copy from first." : {
-
-    },
-    "Original %@ histogram" : {
-
-    },
-    "Original pixels · alpha-weighted histogram" : {
-
-    },
-    "Original pixels · selection and alpha-weighted histogram" : {
-
-    },
-    "Outer Glow" : {
-
-    },
-    "Output black" : {
-
-    },
-    "Output white" : {
-
-    },
-    "Outside" : {
-
-    },
-    "Paint" : {
-
-    },
-    "Paint Mask" : {
-
-    },
-    "Paint with the foreground color (B), or erase pixels away (E)" : {
-
-    },
-    "Pan" : {
-
-    },
-    "Parametric lifts tonal regions. Point places anchors on the curve." : {
-
-    },
+    "Option-click to set the source" : {},
+    "Option-click to set the source · Drag to clone · [ ] size · Shift-[ ] hardness · 1–0 opacity · Space to pan" : {},
+    "Option-click where Clone Stamp should copy from first." : {},
+    "Original %@ histogram" : {},
+    "Original pixels · alpha-weighted histogram" : {},
+    "Original pixels · selection and alpha-weighted histogram" : {},
+    "Outer Glow" : {},
+    "Output black" : {},
+    "Output white" : {},
+    "Outside" : {},
+    "Paint" : {},
+    "Paint Mask" : {},
+    "Paint with the foreground color (B), or erase pixels away (E)" : {},
+    "Pan" : {},
+    "Parametric lifts tonal regions. Point places anchors on the curve." : {},
     "Paste" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "붙여넣기"
+          }
+        }
+      }
     },
-    "Perspective allows stronger keystone. Rectilinear keeps the warp gentler." : {
-
-    },
+    "Perspective allows stronger keystone. Rectilinear keeps the warp gentler." : {},
     "Pixel Grid (800% and above)" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "픽셀 격자(800% 이상)"
+          }
+        }
+      }
     },
-    "Pixel Shape" : {
-
-    },
-    "Pixel Size" : {
-
-    },
-    "pixels" : {
-
-    },
-    "Pixels" : {
-
-    },
-    "pixels/inch" : {
-
-    },
-    "Point Sample" : {
-
-    },
+    "Pixel Shape" : {},
+    "Pixel Size" : {},
+    "pixels" : {},
+    "Pixels" : {},
+    "pixels/inch" : {},
+    "Point Sample" : {},
     "Polygonal Lasso" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다각형 올가미"
+          }
+        }
+      }
     },
-    "Position" : {
-
-    },
-    "Positive straightens lines that bow outward (barrel); negative, lines that bow inward (pincushion)." : {
-
-    },
-    "Positive values tighten the detected mask inward; negative values expand it outward" : {
-
-    },
-    "Preserve Luminosity" : {
-
-    },
-    "Preserves colored edges while color noise is reduced." : {
-
-    },
-    "Preserves fine texture while luminance noise is reduced." : {
-
-    },
-    "Preset" : {
-
-    },
-    "Preset sizes" : {
-
-    },
-    "Preset sizes for screens and common formats" : {
-
-    },
-    "Press 1–9 for 10–90%, 0 for 100%" : {
-
-    },
+    "Position" : {},
+    "Positive straightens lines that bow outward (barrel); negative, lines that bow inward (pincushion)." : {},
+    "Positive values tighten the detected mask inward; negative values expand it outward" : {},
+    "Preserve Luminosity" : {},
+    "Preserves colored edges while color noise is reduced." : {},
+    "Preserves fine texture while luminance noise is reduced." : {},
+    "Preset" : {},
+    "Preset sizes" : {},
+    "Preset sizes for screens and common formats" : {},
+    "Press 1–9 for 10–90%, 0 for 100%" : {},
     "Press a shortcut" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "단축키를 누르십시오"
+          }
+        }
+      }
     },
     "Press keys…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "키를 누르십시오…"
+          }
+        }
+      }
     },
-    "Press L to switch between Freehand and Polygonal" : {
-
-    },
-    "Press M to switch between Rectangle and Ellipse" : {
-
-    },
-    "Press Tab to switch between Wand and Object" : {
-
-    },
-    "Preview" : {
-
-    },
-    "Process" : {
-
-    },
+    "Press L to switch between Freehand and Polygonal" : {},
+    "Press M to switch between Rectangle and Ellipse" : {},
+    "Press Tab to switch between Wand and Object" : {},
+    "Preview" : {},
+    "Process" : {},
     "Project tabs" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로젝트 탭"
+          }
+        }
+      }
     },
-    "Projection" : {
-
-    },
-    "Protect bright areas near the edge" : {
-
-    },
-    "Protects bright pixels while a dark vignette is applied. Used by Highlight Priority." : {
-
-    },
-    "Pull the mask onto the image's own edges, which recovers hair and fur" : {
-
-    },
-    "Pulls red and blue fringes apart toward the center to reduce color edging." : {
-
-    },
-    "Purple Amount" : {
-
-    },
-    "Purple Hue" : {
-
-    },
-    "Put each pixel's brightness back afterwards, so only the color moves" : {
-
-    },
-    "Quality" : {
-
-    },
-    "R" : {
-
-    },
-    "Radius" : {
-
-    },
-    "Range" : {
-
-    },
-    "Ratio" : {
-
-    },
-    "Read colors from the active layer only, or from every visible layer as shown" : {
-
-    },
-    "Reading the file to see what needs converting." : {
-
-    },
-    "Reading the Photoshop file…" : {
-
-    },
-    "Ready when you are" : {
-
-    },
+    "Projection" : {},
+    "Protect bright areas near the edge" : {},
+    "Protects bright pixels while a dark vignette is applied. Used by Highlight Priority." : {},
+    "Pull the mask onto the image's own edges, which recovers hair and fur" : {},
+    "Pulls red and blue fringes apart toward the center to reduce color edging." : {},
+    "Purple Amount" : {},
+    "Purple Hue" : {},
+    "Put each pixel's brightness back afterwards, so only the color moves" : {},
+    "Quality" : {},
+    "R" : {},
+    "Radius" : {},
+    "Range" : {},
+    "Ratio" : {},
+    "Read colors from the active layer only, or from every visible layer as shown" : {},
+    "Reading the file to see what needs converting." : {},
+    "Reading the Photoshop file…" : {},
+    "Ready when you are" : {},
     "Rectangle" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사각형"
+          }
+        }
+      }
     },
     "Rectangular Marquee" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사각형 선택 윤곽"
+          }
+        }
+      }
     },
-    "Red" : {
-
-    },
-    "Red Primary" : {
-
-    },
-    "Red, green, and blue of the pixel under the pointer." : {
-
-    },
+    "Red" : {},
+    "Red Primary" : {},
+    "Red, green, and blue of the pixel under the pointer." : {},
     "Redo" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다시 실행"
+          }
+        }
+      }
     },
     "Redo %@" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 다시 실행"
+          }
+        }
+      }
     },
-    "Reds" : {
-
-    },
-    "Refine" : {
-
-    },
-    "Refine Saturation" : {
-
-    },
-    "Relative to current dimensions" : {
-
-    },
-    "Release clipping mask" : {
-
-    },
+    "Reds" : {},
+    "Refine" : {},
+    "Refine Saturation" : {},
+    "Relative to current dimensions" : {},
+    "Release clipping mask" : {},
     "Release Clipping Mask" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "클리핑 마스크 해제"
+          }
+        }
+      }
     },
-    "Remove %@" : {
-
-    },
-    "Remove Chromatic Aberration" : {
-
-    },
-    "Remove Distortion" : {
-
-    },
-    "Remove every guide line." : {
-
-    },
-    "Remove Links and Delete" : {
-
-    },
-    "Remove point" : {
-
-    },
-    "Rename Layer" : {
-
-    },
+    "Remove %@" : {},
+    "Remove Chromatic Aberration" : {},
+    "Remove Distortion" : {},
+    "Remove every guide line." : {},
+    "Remove Links and Delete" : {},
+    "Remove point" : {},
+    "Rename Layer" : {},
     "Rename Layer…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 이름 바꾸기…"
+          }
+        }
+      }
     },
-    "Rename…" : {
-
-    },
-    "Reorder Layers" : {
-
-    },
-    "Replace Layer Mask" : {
-
-    },
-    "Replaces this curve with a straight line or a contrast curve." : {
-
-    },
-    "Resample" : {
-
-    },
-    "Reset" : {
-
-    },
-    "Reset curve" : {
-
-    },
-    "Resize" : {
-
-    },
-    "Resizes layer pixels and applies existing transforms. Undo restores the originals." : {
-
-    },
-    "Resolution" : {
-
-    },
-    "Resolution: 72 for screens, 300 for print. Click to switch." : {
-
-    },
+    "Rename…" : {},
+    "Reorder Layers" : {},
+    "Replace Layer Mask" : {},
+    "Replaces this curve with a straight line or a contrast curve." : {},
+    "Resample" : {},
+    "Reset" : {},
+    "Reset curve" : {},
+    "Resize" : {},
+    "Resizes layer pixels and applies existing transforms. Undo restores the originals." : {},
+    "Resolution" : {},
+    "Resolution: 72 for screens, 300 for print. Click to switch." : {},
     "Restore Defaults" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본값 복원"
+          }
+        }
+      }
     },
     "Result: %lld × %lld pixels" : {
       "localizations" : {
@@ -2298,438 +2040,363 @@
         }
       }
     },
-    "Reveal All (White)" : {
-
-    },
-    "Reveal Selection" : {
-
-    },
-    "Reverse" : {
-
-    },
-    "Revert" : {
-
-    },
-    "RGB changes brightness. Red, green, and blue also shift the color." : {
-
-    },
-    "RGB histogram" : {
-
-    },
-    "Right" : {
-
-    },
-    "Rotate" : {
-
-    },
+    "Reveal All (White)" : {},
+    "Reveal Selection" : {},
+    "Reverse" : {},
+    "Revert" : {},
+    "RGB changes brightness. Red, green, and blue also shift the color." : {},
+    "RGB histogram" : {},
+    "Right" : {},
+    "Rotate" : {},
     "Rotate Canvas 90° Clockwise" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 90° 시계 방향 회전"
+          }
+        }
+      }
     },
     "Rotate Canvas 90° Counterclockwise" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 90° 반시계 방향 회전"
+          }
+        }
+      }
     },
-    "Rotates the picture around its center." : {
-
-    },
-    "Rotation, in degrees clockwise" : {
-
-    },
-    "Roughness" : {
-
-    },
-    "Round the rectangle's corners by this many pixels; 0 keeps them square" : {
-
-    },
-    "Roundness" : {
-
-    },
+    "Rotates the picture around its center." : {},
+    "Rotation, in degrees clockwise" : {},
+    "Roughness" : {},
+    "Round the rectangle's corners by this many pixels; 0 keeps them square" : {},
+    "Roundness" : {},
     "Rulers" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "눈금자"
+          }
+        }
+      }
     },
-    "Sample" : {
-
-    },
-    "Sample color" : {
-
-    },
-    "Sample Ring" : {
-
-    },
-    "Sample Size" : {
-
-    },
-    "Sampling" : {
-
-    },
-    "Saturation" : {
-
-    },
-    "Saturation and brightness" : {
-
-    },
-    "Saturation Range" : {
-
-    },
-    "Saturation Shift" : {
-
-    },
+    "Sample" : {},
+    "Sample color" : {},
+    "Sample Ring" : {},
+    "Sample Size" : {},
+    "Sampling" : {},
+    "Saturation" : {},
+    "Saturation and brightness" : {},
+    "Saturation Range" : {},
+    "Saturation Shift" : {},
     "Save" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장"
+          }
+        }
+      }
     },
     "Save As…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다른 이름으로 저장…"
+          }
+        }
+      }
     },
-    "Save changes to %@?" : {
-
-    },
-    "Save Project" : {
-
-    },
-    "Save Project As" : {
-
-    },
-    "Scale" : {
-
-    },
-    "Scale width and height together, about the center" : {
-
-    },
+    "Save changes to %@?" : {},
+    "Save Project" : {},
+    "Save Project As" : {},
+    "Scale" : {},
+    "Scale width and height together, about the center" : {},
     "Search commands and tools" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "명령 및 도구 검색"
+          }
+        }
+      }
     },
     "Search Commands…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "명령 검색…"
+          }
+        }
+      }
     },
     "Search shortcuts" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "단축키 검색"
+          }
+        }
+      }
     },
     "Select" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택"
+          }
+        }
+      }
     },
-    "Select a tool" : {
-
-    },
+    "Select a tool" : {},
     "Select All" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모두 선택"
+          }
+        }
+      }
     },
-    "Select everything except those colors, such as all but a green screen" : {
-
-    },
-    "Select image pixels" : {
-
-    },
-    "Select image: %@" : {
-
-    },
-    "Select layer mask; Option-click to view it alone; Shift-click to enable/disable; Cmd-click to select its black areas (Cmd-Shift adds, Cmd-Option subtracts)" : {
-
-    },
-    "Select layer; Cmd-click to select its pixels (Cmd-Shift adds, Cmd-Option subtracts)" : {
-
-    },
-    "Select layers by clicking the canvas. Hold Command to turn it the other way while you click." : {
-
-    },
-    "Select mask: %@" : {
-
-    },
-    "Select only similar pixels connected to the one you click; off selects them everywhere" : {
-
-    },
+    "Select everything except those colors, such as all but a green screen" : {},
+    "Select image pixels" : {},
+    "Select image: %@" : {},
+    "Select layer mask; Option-click to view it alone; Shift-click to enable/disable; Cmd-click to select its black areas (Cmd-Shift adds, Cmd-Option subtracts)" : {},
+    "Select layer; Cmd-click to select its pixels (Cmd-Shift adds, Cmd-Option subtracts)" : {},
+    "Select layers by clicking the canvas. Hold Command to turn it the other way while you click." : {},
+    "Select mask: %@" : {},
+    "Select only similar pixels connected to the one you click; off selects them everywhere" : {},
     "Select Subject" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피사체 선택"
+          }
+        }
+      }
     },
-    "Select text: %@" : {
-
-    },
-    "Select this picked color." : {
-
-    },
-    "Selected" : {
-
-    },
-    "Sets how far the glow reaches. Has no effect until Glow is raised." : {
-
-    },
-    "Sets the brightest point. Hold Option to see clipped highlights." : {
-
-    },
-    "Sets the darkest point. Hold Option to see clipped shadows." : {
-
-    },
-    "Sets where the vignette begins, from the center outward." : {
-
-    },
-    "Several layers are selected. Select just one to paint on it." : {
-
-    },
-    "Shadow Clipping Indicator" : {
-
-    },
-    "Shadows" : {
-
-    },
-    "Shape" : {
-
-    },
-    "Shape (U) · Shift-U switches Rectangle/Ellipse" : {
-
-    },
-    "Shapes fill with the foreground color; click to change it" : {
-
-    },
-    "Sharpening" : {
-
-    },
-    "Shift Edge" : {
-
-    },
-    "Shift-click adds a color, Option-click takes one away." : {
-
-    },
-    "Shift-U (or Tab) steps through Rectangle, Ellipse and Line" : {
-
-    },
-    "Shifts how blue is interpreted." : {
-
-    },
-    "Shifts how green is interpreted." : {
-
-    },
-    "Shifts how red is interpreted." : {
-
-    },
-    "Shifts the glow from cool to warm. Halation stays red. Has no effect until Glow is raised." : {
-
-    },
-    "Shifts the picked color around the color wheel." : {
-
-    },
-    "Shifts the picture from blue to yellow." : {
-
-    },
-    "Shifts the picture from green to mauve." : {
-
-    },
-    "Shifts the selected color family around the wheel." : {
-
-    },
-    "Shifts the wheels toward shadows or highlights." : {
-
-    },
+    "Select text: %@" : {},
+    "Select this picked color." : {},
+    "Selected" : {},
+    "Sets how far the glow reaches. Has no effect until Glow is raised." : {},
+    "Sets the brightest point. Hold Option to see clipped highlights." : {},
+    "Sets the darkest point. Hold Option to see clipped shadows." : {},
+    "Sets where the vignette begins, from the center outward." : {},
+    "Several layers are selected. Select just one to paint on it." : {},
+    "Shadow Clipping Indicator" : {},
+    "Shadows" : {},
+    "Shape" : {},
+    "Shape (U) · Shift-U switches Rectangle/Ellipse" : {},
+    "Shapes fill with the foreground color; click to change it" : {},
+    "Sharpening" : {},
+    "Shift Edge" : {},
+    "Shift-click adds a color, Option-click takes one away." : {},
+    "Shift-U (or Tab) steps through Rectangle, Ellipse and Line" : {},
+    "Shifts how blue is interpreted." : {},
+    "Shifts how green is interpreted." : {},
+    "Shifts how red is interpreted." : {},
+    "Shifts the glow from cool to warm. Halation stays red. Has no effect until Glow is raised." : {},
+    "Shifts the picked color around the color wheel." : {},
+    "Shifts the picture from blue to yellow." : {},
+    "Shifts the picture from green to mauve." : {},
+    "Shifts the selected color family around the wheel." : {},
+    "Shifts the wheels toward shadows or highlights." : {},
     "Show" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "표시"
+          }
+        }
+      }
     },
-    "Show %@" : {
-
-    },
-    "Show %@ in the preview" : {
-
-    },
+    "Show %@" : {},
+    "Show %@ in the preview" : {},
     "Show All" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모두 보기"
+          }
+        }
+      }
     },
-    "Show clipped highlights in red on the preview." : {
-
-    },
-    "Show clipped shadows in blue on the preview." : {
-
-    },
-    "Show Controls" : {
-
-    },
+    "Show clipped highlights in red on the preview." : {},
+    "Show clipped shadows in blue on the preview." : {},
+    "Show Controls" : {},
     "Show Layer" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 표시"
+          }
+        }
+      }
     },
-    "Show mask alone" : {
-
-    },
-    "Show the image again (or Option-click the mask thumbnail)" : {
-
-    },
-    "Show the transform box and handles (⌘H). When hidden, drag anywhere to move the layer." : {
-
-    },
-    "Show the whole image (⌘0)" : {
-
-    },
+    "Show mask alone" : {},
+    "Show the image again (or Option-click the mask thumbnail)" : {},
+    "Show the transform box and handles (⌘H). When hidden, drag anywhere to move the layer." : {},
+    "Show the whole image (⌘0)" : {},
     "Show Transform Controls" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "변형 컨트롤 표시"
+          }
+        }
+      }
     },
-    "Shrink the mask to drop the rim of background color around the subject, or grow it" : {
-
-    },
-    "Size" : {
-
-    },
-    "Smear" : {
-
-    },
-    "Smear (R)" : {
-
-    },
-    "Smooth selection edges; turn off for hard pixel edges" : {
-
-    },
-    "Smooth the detected object outline; turn off for the raw pixel mask" : {
-
-    },
-    "Smoothing" : {
-
-    },
-    "Smooths colored speckles." : {
-
-    },
-    "Smooths grain and noise in brightness." : {
-
-    },
+    "Shrink the mask to drop the rim of background color around the subject, or grow it" : {},
+    "Size" : {},
+    "Smear" : {},
+    "Smear (R)" : {},
+    "Smooth selection edges; turn off for hard pixel edges" : {},
+    "Smooth the detected object outline; turn off for the raw pixel mask" : {},
+    "Smoothing" : {},
+    "Smooths colored speckles." : {},
+    "Smooths grain and noise in brightness." : {},
     "Smudge" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "손가락"
+          }
+        }
+      }
     },
-    "Smudge and Liquify work on a layer's pixels, not its mask." : {
-
-    },
+    "Smudge and Liquify work on a layer's pixels, not its mask." : {},
     "Snap" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스냅"
+          }
+        }
+      }
     },
     "Snap To" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스냅 대상"
+          }
+        }
+      }
     },
-    "Softens the edge of the vignette." : {
-
-    },
-    "Some dropped items couldn’t be read. Drag JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) files from Finder." : {
-
-    },
+    "Softens the edge of the vignette." : {},
+    "Some dropped items couldn’t be read. Drag JPEG, PNG, HEIC, TIFF, or Photoshop (PSD) files from Finder." : {},
     "Spot Healing" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스팟 복구"
+          }
+        }
+      }
     },
     "Spot Healing Brush" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스팟 복구 브러시"
+          }
+        }
+      }
     },
-    "Spot Healing Brush (J)" : {
-
-    },
-    "Spread" : {
-
-    },
-    "Spreads a glow from the bright areas." : {
-
-    },
-    "square" : {
-
-    },
-    "sRGB · Transparent" : {
-
-    },
-    "Start of the hue range, in degrees." : {
-
-    },
-    "Start see-through, or with a white or black Background layer. Click to switch." : {
-
-    },
-    "Stop viewing the mask" : {
-
-    },
-    "Straightens barrel or pincushion bending." : {
-
-    },
-    "Straightens horizontal lines toward the center." : {
-
-    },
-    "Straightens vertical lines toward the center." : {
-
-    },
-    "Strength" : {
-
-    },
-    "Strengthens or weakens every color by the same amount." : {
-
-    },
-    "Strengthens or weakens the blue primary." : {
-
-    },
-    "Strengthens or weakens the green primary." : {
-
-    },
-    "Strengthens or weakens the red primary." : {
-
-    },
-    "Strengthens quiet colors more than colors that are already strong, and protects skin tones." : {
-
-    },
-    "Stretches width relative to height." : {
-
-    },
-    "Stroke" : {
-
-    },
-    "Strong Contrast" : {
-
-    },
-    "Style" : {
-
-    },
-    "Subdivisions" : {
-
-    },
+    "Spot Healing Brush (J)" : {},
+    "Spread" : {},
+    "Spreads a glow from the bright areas." : {},
+    "square" : {},
+    "sRGB · Transparent" : {},
+    "Start of the hue range, in degrees." : {},
+    "Start see-through, or with a white or black Background layer. Click to switch." : {},
+    "Stop viewing the mask" : {},
+    "Straightens barrel or pincushion bending." : {},
+    "Straightens horizontal lines toward the center." : {},
+    "Straightens vertical lines toward the center." : {},
+    "Strength" : {},
+    "Strengthens or weakens every color by the same amount." : {},
+    "Strengthens or weakens the blue primary." : {},
+    "Strengthens or weakens the green primary." : {},
+    "Strengthens or weakens the red primary." : {},
+    "Strengthens quiet colors more than colors that are already strong, and protects skin tones." : {},
+    "Stretches width relative to height." : {},
+    "Stroke" : {},
+    "Strong Contrast" : {},
+    "Style" : {},
+    "Subdivisions" : {},
     "Subject" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "피사체"
+          }
+        }
+      }
     },
-    "Swap colors" : {
-
-    },
-    "Swap foreground and background (X)" : {
-
-    },
-    "Switches between horizontal and vertical text" : {
-
-    },
-    "Targeted adjustment" : {
-
-    },
-    "Targeted Adjustment" : {
-
-    },
-    "Targeted adjustment: drag on the image to change that color's saturation, or its hue with Command held" : {
-
-    },
-    "Temperature" : {
-
-    },
-    "Text" : {
-
-    },
-    "Text · Double-click to edit" : {
-
-    },
-    "Text color" : {
-
-    },
+    "Swap colors" : {},
+    "Swap foreground and background (X)" : {},
+    "Switches between horizontal and vertical text" : {},
+    "Targeted adjustment" : {},
+    "Targeted Adjustment" : {},
+    "Targeted adjustment: drag on the image to change that color's saturation, or its hue with Command held" : {},
+    "Temperature" : {},
+    "Text" : {},
+    "Text · Double-click to edit" : {},
+    "Text color" : {},
     "Text fields keep standard macOS editing keys. Dialogs share the Apply/Cancel assignments above. Numeric fields use Up/Down, with Shift for larger steps. Standard macOS commands include ⌘Q to quit and ⌃⌘F for full screen. The shortcut editor itself always uses Return to save and Esc to cancel when not recording." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "텍스트 필드는 macOS 기본 편집 키를 그대로 사용합니다. 대화상자는 위의 적용/취소 지정을 함께 사용합니다. 숫자 필드는 위/아래 화살표를 사용하며 Shift를 누르면 더 크게 바뀝니다. macOS 기본 명령으로 종료는 ⌘Q, 전체 화면은 ⌃⌘F입니다. 단축키 편집기는 새 단축키를 입력받는 중이 아닐 때 항상 Return으로 저장하고 Esc로 취소합니다."
+          }
+        }
+      }
     },
-    "Text orientation: Horizontal" : {
-
-    },
-    "Text orientation: Vertical" : {
-
-    },
-    "Text Size" : {
-
-    },
+    "Text orientation: Horizontal" : {},
+    "Text orientation: Vertical" : {},
+    "Text Size" : {},
     "Text-editing shortcuts need Command, Option, or Control so they do not replace normal typing." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "텍스트 편집 단축키에는 일반 입력을 대신하지 않도록 Command, Option 또는 Control이 필요합니다."
+          }
+        }
+      }
     },
-    "Texture" : {
-
-    },
-    "That selection is too detailed to outline. Try a different Tolerance, or turn on Contiguous." : {
-
-    },
-    "That shape is too large. A shape can cover up to %lld megapixels." : {
-
-    },
+    "Texture" : {},
+    "That selection is too detailed to outline. Try a different Tolerance, or turn on Contiguous." : {},
+    "That shape is too large. A shape can cover up to %lld megapixels." : {},
     "That text box exceeds the %@-pixel or %lld-megapixel limit." : {
       "localizations" : {
         "en" : {
@@ -2740,69 +2407,27 @@
         }
       }
     },
-    "The 2012 response. Calibration reaches most of the strength used by Version 6." : {
-
-    },
-    "The brush trails the pointer on a string this long, so a shaky hand still draws a smooth line" : {
-
-    },
-    "The canvas could not be rendered. Try a smaller canvas." : {
-
-    },
-    "The characters to draw with, in any order: each spot gets the one whose ink best matches its tone" : {
-
-    },
-    "The copied layers exceed this project’s %lld-megapixel limit." : {
-
-    },
-    "The font “%@” isn’t installed, so the text was drawn with the system font." : {
-
-    },
-    "The height of each line of characters" : {
-
-    },
-    "The image could not be encoded." : {
-
-    },
-    "The image could not be read. It may be damaged or unavailable." : {
-
-    },
-    "The layer mask couldn’t be converted to 8-bit grayscale and was skipped." : {
-
-    },
-    "The layer mask is turned off. Shift-click its thumbnail to turn it on, then paint." : {
-
-    },
-    "The object mask could not be rendered." : {
-
-    },
-    "The Photoshop file could not be read. It may be damaged or incomplete." : {
-
-    },
-    "The Photoshop stroke isn’t supported on shape layers and was omitted." : {
-
-    },
-    "The Photoshop text warp was omitted." : {
-
-    },
-    "The smart object was rasterized. Linked contents can’t be edited." : {
-
-    },
-    "The trimmed image dimensions are invalid." : {
-
-    },
-    "There isn’t enough memory to make that selection." : {
-
-    },
-    "These layers supply live masks" : {
-
-    },
-    "This adjustment type isn’t supported and was skipped." : {
-
-    },
-    "This clipping mask’s base isn’t supported, so clipping was skipped." : {
-
-    },
+    "The 2012 response. Calibration reaches most of the strength used by Version 6." : {},
+    "The brush trails the pointer on a string this long, so a shaky hand still draws a smooth line" : {},
+    "The canvas could not be rendered. Try a smaller canvas." : {},
+    "The characters to draw with, in any order: each spot gets the one whose ink best matches its tone" : {},
+    "The copied layers exceed this project’s %lld-megapixel limit." : {},
+    "The font “%@” isn’t installed, so the text was drawn with the system font." : {},
+    "The height of each line of characters" : {},
+    "The image could not be encoded." : {},
+    "The image could not be read. It may be damaged or unavailable." : {},
+    "The layer mask couldn’t be converted to 8-bit grayscale and was skipped." : {},
+    "The layer mask is turned off. Shift-click its thumbnail to turn it on, then paint." : {},
+    "The object mask could not be rendered." : {},
+    "The Photoshop file could not be read. It may be damaged or incomplete." : {},
+    "The Photoshop stroke isn’t supported on shape layers and was omitted." : {},
+    "The Photoshop text warp was omitted." : {},
+    "The smart object was rasterized. Linked contents can’t be edited." : {},
+    "The trimmed image dimensions are invalid." : {},
+    "There isn’t enough memory to make that selection." : {},
+    "These layers supply live masks" : {},
+    "This adjustment type isn’t supported and was skipped." : {},
+    "This clipping mask’s base isn’t supported, so clipping was skipped." : {},
     "This import exceeds the current %lld-megapixel document budget or %@-pixel side limit." : {
       "localizations" : {
         "en" : {
@@ -2813,27 +2438,13 @@
         }
       }
     },
-    "This is not a valid Compositor project, or its metadata is damaged." : {
-
-    },
-    "This Layer" : {
-
-    },
-    "This layer supplies a live mask" : {
-
-    },
-    "This Photoshop file uses a format version Compositor can’t read." : {
-
-    },
-    "This Photoshop file uses a layer compression method that isn’t supported." : {
-
-    },
-    "This Photoshop layer type isn’t supported and was imported as pixels." : {
-
-    },
-    "This project exceeds the supported canvas, layer, file-size, or %lld-megapixel document limit." : {
-
-    },
+    "This is not a valid Compositor project, or its metadata is damaged." : {},
+    "This Layer" : {},
+    "This layer supplies a live mask" : {},
+    "This Photoshop file uses a format version Compositor can’t read." : {},
+    "This Photoshop file uses a layer compression method that isn’t supported." : {},
+    "This Photoshop layer type isn’t supported and was imported as pixels." : {},
+    "This project exceeds the supported canvas, layer, file-size, or %lld-megapixel document limit." : {},
     "This project uses format version %lld. This app supports versions %lld–%lld." : {
       "localizations" : {
         "en" : {
@@ -2844,129 +2455,139 @@
         }
       }
     },
-    "Three-Way shows shadows, midtones, and highlights. The other choices show one wheel." : {
-
-    },
-    "Tint" : {
-
-    },
+    "Three-Way shows shadows, midtones, and highlights. The other choices show one wheel." : {},
+    "Tint" : {},
     "Toggle Fullscreen" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체 화면 전환"
+          }
+        }
+      }
     },
-    "Tolerance" : {
-
-    },
-    "Tones" : {
-
-    },
-    "Tones from black on the left to white on the right: blacks, shadows, midtones, highlights, whites. Control-click to show the vectorscope." : {
-
-    },
-    "Tones per channel: 2 is pure black and white" : {
-
-    },
+    "Tolerance" : {},
+    "Tones" : {},
+    "Tones from black on the left to white on the right: blacks, shadows, midtones, highlights, whites. Control-click to show the vectorscope." : {},
+    "Tones per channel: 2 is pure black and white" : {},
     "Tool" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "도구"
+          }
+        }
+      }
     },
-    "Top" : {
-
-    },
-    "Top center" : {
-
-    },
-    "Top left" : {
-
-    },
-    "Top right" : {
-
-    },
-    "Tracking" : {
-
-    },
-    "Transform" : {
-
-    },
+    "Top" : {},
+    "Top center" : {},
+    "Top left" : {},
+    "Top right" : {},
+    "Tracking" : {},
+    "Transform" : {},
     "Transform Layer" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 변형"
+          }
+        }
+      }
     },
-    "Transform Layer Mask" : {
-
-    },
-    "Transform Layers" : {
-
-    },
-    "Transform Mask" : {
-
-    },
+    "Transform Layer Mask" : {},
+    "Transform Layers" : {},
+    "Transform Mask" : {},
     "Transform Selection" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 영역 변형"
+          }
+        }
+      }
     },
-    "Transparent canvas" : {
-
-    },
-    "Trim" : {
-
-    },
-    "Trim Away" : {
-
-    },
+    "Transparent canvas" : {},
+    "Trim" : {},
+    "Trim Away" : {},
     "Trim…" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재단…"
+          }
+        }
+      }
     },
     "Type" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "문자"
+          }
+        }
+      }
     },
-    "Type (T)" : {
-
-    },
-    "Underlying pixels · alpha-weighted histogram" : {
-
-    },
+    "Type (T)" : {},
+    "Underlying pixels · alpha-weighted histogram" : {},
     "Undo" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실행 취소"
+          }
+        }
+      }
     },
     "Undo %@" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 실행 취소"
+          }
+        }
+      }
     },
     "Ungroup Layers" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 그룹 해제"
+          }
+        }
+      }
     },
-    "Uniform" : {
-
-    },
-    "Units" : {
-
-    },
-    "Units: pixels, inches, centimeters or millimeters. Click to switch." : {
-
-    },
-    "Unlink layer and mask to move or transform them separately" : {
-
-    },
-    "Unlink Layer Mask" : {
-
-    },
-    "Unlink Mask" : {
-
-    },
-    "Unlink mask: %@" : {
-
-    },
+    "Uniform" : {},
+    "Units" : {},
+    "Units: pixels, inches, centimeters or millimeters. Click to switch." : {},
+    "Unlink layer and mask to move or transform them separately" : {},
+    "Unlink Layer Mask" : {},
+    "Unlink Mask" : {},
+    "Unlink mask: %@" : {},
     "Unsaved changes" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장하지 않은 변경 사항"
+          }
+        }
+      }
     },
-    "Untitled" : {
-
-    },
-    "Untitled %lld" : {
-
-    },
-    "Updating…" : {
-
-    },
-    "Upright" : {
-
-    },
+    "Untitled" : {},
+    "Untitled %lld" : {},
+    "Updating…" : {},
+    "Upright" : {},
     "Use 1–%@ pixels per side, up to %lld megapixels, and 1–9,600 pixels/inch." : {
       "localizations" : {
         "en" : {
@@ -2987,113 +2608,961 @@
         }
       }
     },
-    "Vector shape was rasterized to pixels." : {
-
-    },
-    "Vectorscope" : {
-
-    },
-    "Vertical" : {
-
-    },
-    "Vertical ruler" : {
-
-    },
-    "Vibrance" : {
-
-    },
-    "Vignette" : {
-
-    },
-    "Vignetting" : {
-
-    },
-    "Visualize Range" : {
-
-    },
-    "Warmth" : {
-
-    },
-    "Weakens green fringes inside the green hue range." : {
-
-    },
-    "Weakens purple fringes inside the purple hue range." : {
-
-    },
-    "White · Reveal" : {
-
-    },
-    "White Balance" : {
-
-    },
-    "White Balance Selector" : {
-
-    },
-    "White canvas" : {
-
-    },
-    "Whites" : {
-
-    },
-    "Width" : {
-
-    },
-    "Wobble" : {
-
-    },
-    "Working…" : {
-
-    },
-    "Yellow / Blue" : {
-
-    },
-    "Yellows" : {
-
-    },
-    "Your changes will be lost if you don’t save them." : {
-
-    },
+    "Vector shape was rasterized to pixels." : {},
+    "Vectorscope" : {},
+    "Vertical" : {},
+    "Vertical ruler" : {},
+    "Vibrance" : {},
+    "Vignette" : {},
+    "Vignetting" : {},
+    "Visualize Range" : {},
+    "Warmth" : {},
+    "Weakens green fringes inside the green hue range." : {},
+    "Weakens purple fringes inside the purple hue range." : {},
+    "White · Reveal" : {},
+    "White Balance" : {},
+    "White Balance Selector" : {},
+    "White canvas" : {},
+    "Whites" : {},
+    "Width" : {},
+    "Wobble" : {},
+    "Working…" : {},
+    "Yellow / Blue" : {},
+    "Yellows" : {},
+    "Your changes will be lost if you don’t save them." : {},
     "Zoom" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "돋보기"
+          }
+        }
+      }
     },
-    "Zoom (Z)" : {
-
-    },
-    "Zoom in" : {
-
-    },
+    "Zoom (Z)" : {},
+    "Zoom in" : {},
     "Zoom In" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확대"
+          }
+        }
+      }
     },
-    "Zoom in (⌘+)" : {
-
-    },
-    "Zoom in (⌘+), now %@. At 100%% each pixel of the JPEG is one pixel of the screen, as on the canvas" : {
-
-    },
-    "Zoom out" : {
-
-    },
+    "Zoom in (⌘+)" : {},
+    "Zoom in (⌘+), now %@. At 100%% each pixel of the JPEG is one pixel of the screen, as on the canvas" : {},
+    "Zoom out" : {},
     "Zoom Out" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "축소"
+          }
+        }
+      }
     },
-    "Zoom out (⌘−)" : {
-
+    "Zoom out (⌘−)" : {},
+    "Zoom out (⌘−), now %@" : {},
+    "Zoom percentage" : {},
+    "Zoom percentage (0.1–3200%). Press Return to apply." : {},
+    "Zooms the transformed picture within the frame." : {},
+    "가나다" : {},
+    "Apply current canvas operation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 캔버스 작업 적용"
+          }
+        }
+      }
     },
-    "Zoom out (⌘−), now %@" : {
-
+    "Blur / Smudge / Liquify" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "흐림 효과 / 손가락 / 픽셀 유동화"
+          }
+        }
+      }
     },
-    "Zoom percentage" : {
-
+    "Brush tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브러시 도구"
+          }
+        }
+      }
     },
-    "Zoom percentage (0.1–3200%). Press Return to apply." : {
-
+    "Cancel current canvas operation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 캔버스 작업 취소"
+          }
+        }
+      }
     },
-    "Zooms the transformed picture within the frame." : {
-
+    "Canvas & Layers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캔버스 및 레이어"
+          }
+        }
+      }
     },
-    "가나다" : {
-
+    "Content-Aware Fill" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내용 인식 채우기"
+          }
+        }
+      }
+    },
+    "Crop tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자르기 도구"
+          }
+        }
+      }
+    },
+    "Curves" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡선"
+          }
+        }
+      }
+    },
+    "Cycle shape kind" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모양 종류 순환"
+          }
+        }
+      }
+    },
+    "Cycle tool mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "도구 모드 순환"
+          }
+        }
+      }
+    },
+    "Decrease brush hardness" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브러시 경도 줄이기"
+          }
+        }
+      }
+    },
+    "Decrease brush size" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브러시 크기 줄이기"
+          }
+        }
+      }
+    },
+    "Decrease leading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "행간 줄이기"
+          }
+        }
+      }
+    },
+    "Decrease leading by 10" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "행간 10 줄이기"
+          }
+        }
+      }
+    },
+    "Decrease tracking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자간 줄이기"
+          }
+        }
+      }
+    },
+    "Decrease tracking by 10" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자간 10 줄이기"
+          }
+        }
+      }
+    },
+    "Delete selection / layer / effect / lasso point" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 영역 / 레이어 / 효과 / 올가미 점 삭제"
+          }
+        }
+      }
+    },
+    "Duplicate / Layer via Copy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "복제 / 복사한 레이어"
+          }
+        }
+      }
+    },
+    "Eyedropper tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스포이드 도구"
+          }
+        }
+      }
+    },
+    "Fill with Background" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배경색으로 칠"
+          }
+        }
+      }
+    },
+    "Fill with Foreground" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전경색으로 칠"
+          }
+        }
+      }
+    },
+    "Finish editing text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "텍스트 편집 완료"
+          }
+        }
+      }
+    },
+    "Gradient tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "그레이디언트 도구"
+          }
+        }
+      }
+    },
+    "Hand tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "손 도구"
+          }
+        }
+      }
+    },
+    "Increase brush hardness" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브러시 경도 늘리기"
+          }
+        }
+      }
+    },
+    "Increase brush size" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "브러시 크기 늘리기"
+          }
+        }
+      }
+    },
+    "Increase leading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "행간 늘리기"
+          }
+        }
+      }
+    },
+    "Increase leading by 10" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "행간 10 늘리기"
+          }
+        }
+      }
+    },
+    "Increase tracking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자간 늘리기"
+          }
+        }
+      }
+    },
+    "Increase tracking by 10" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자간 10 늘리기"
+          }
+        }
+      }
+    },
+    "Inverse Selection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 반전"
+          }
+        }
+      }
+    },
+    "Invert Pixels / Mask" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "픽셀 / 마스크 반전"
+          }
+        }
+      }
+    },
+    "Lasso / cycle mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "올가미 / 모드 순환"
+          }
+        }
+      }
+    },
+    "Marquee / cycle shape" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 윤곽 / 모양 순환"
+          }
+        }
+      }
+    },
+    "Menus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메뉴"
+          }
+        }
+      }
+    },
+    "Move / Transform tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이동 / 변형 도구"
+          }
+        }
+      }
+    },
+    "Move selected pixels Down 1 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 픽셀을 아래로 1px 이동"
+          }
+        }
+      }
+    },
+    "Move selected pixels Down 10 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 픽셀을 아래로 10px 이동"
+          }
+        }
+      }
+    },
+    "Move selected pixels Left 1 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 픽셀을 왼쪽으로 1px 이동"
+          }
+        }
+      }
+    },
+    "Move selected pixels Left 10 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 픽셀을 왼쪽으로 10px 이동"
+          }
+        }
+      }
+    },
+    "Move selected pixels Right 1 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 픽셀을 오른쪽으로 1px 이동"
+          }
+        }
+      }
+    },
+    "Move selected pixels Right 10 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 픽셀을 오른쪽으로 10px 이동"
+          }
+        }
+      }
+    },
+    "Move selected pixels Up 1 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 픽셀을 위로 1px 이동"
+          }
+        }
+      }
+    },
+    "Move selected pixels Up 10 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 픽셀을 위로 10px 이동"
+          }
+        }
+      }
+    },
+    "Next blend mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음 혼합 모드"
+          }
+        }
+      }
+    },
+    "Nudge Down 1 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아래로 1px 밀기"
+          }
+        }
+      }
+    },
+    "Nudge Down 10 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아래로 10px 밀기"
+          }
+        }
+      }
+    },
+    "Nudge Left 1 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "왼쪽으로 1px 밀기"
+          }
+        }
+      }
+    },
+    "Nudge Left 10 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "왼쪽으로 10px 밀기"
+          }
+        }
+      }
+    },
+    "Nudge Right 1 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오른쪽으로 1px 밀기"
+          }
+        }
+      }
+    },
+    "Nudge Right 10 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오른쪽으로 10px 밀기"
+          }
+        }
+      }
+    },
+    "Nudge Up 1 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위로 1px 밀기"
+          }
+        }
+      }
+    },
+    "Nudge Up 10 px" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위로 10px 밀기"
+          }
+        }
+      }
+    },
+    "Opacity digit 0 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 0(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 1 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 1(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 2 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 2(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 3 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 3(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 4 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 4(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 5 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 5(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 6 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 6(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 7 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 7(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 8 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 8(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Opacity digit 9 (type two for exact %)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불투명도 숫자 9(두 자리를 입력하면 정확한 %)"
+          }
+        }
+      }
+    },
+    "Previous blend mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이전 혼합 모드"
+          }
+        }
+      }
+    },
+    "Reset colors" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 색상"
+          }
+        }
+      }
+    },
+    "Save As" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다른 이름으로 저장"
+          }
+        }
+      }
+    },
+    "Search Commands" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "명령 검색"
+          }
+        }
+      }
+    },
+    "Select tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택 도구"
+          }
+        }
+      }
+    },
+    "Shape tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모양 도구"
+          }
+        }
+      }
+    },
+    "Show Grid" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "격자 표시"
+          }
+        }
+      }
+    },
+    "Show Guides" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안내선 표시"
+          }
+        }
+      }
+    },
+    "Show Rulers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "눈금자 표시"
+          }
+        }
+      }
+    },
+    "Swap foreground/background" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전경색/배경색 전환"
+          }
+        }
+      }
+    },
+    "Temporary Hand tool (hold)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "임시 손 도구(누르고 있기)"
+          }
+        }
+      }
+    },
+    "Text Editing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "텍스트 편집"
+          }
+        }
+      }
+    },
+    "Toggle Clipping Mask" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "클리핑 마스크 전환"
+          }
+        }
+      }
+    },
+    "Toggle Fullscreen: the canvas alone on black (Esc also leaves)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체 화면 전환: 검정 배경에 캔버스만 표시(Esc로도 나감)"
+          }
+        }
+      }
+    },
+    "Toggle Levels preview" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레벨 미리 보기 전환"
+          }
+        }
+      }
+    },
+    "Transform Layer / Selection" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레이어 / 선택 영역 변형"
+          }
+        }
+      }
+    },
+    "Type tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "문자 도구"
+          }
+        }
+      }
+    },
+    "Zoom tool" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "돋보기 도구"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

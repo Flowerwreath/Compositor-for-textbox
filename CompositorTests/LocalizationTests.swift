@@ -22,4 +22,11 @@ struct LocalizationTests {
         #expect(L10n.firstFreeName({ "레이어 \($0)" }, avoiding: ["레이어 1", "Layer 2"]) == "레이어 2")
         #expect(L10n.firstFreeName({ "Layer \($0)" }, avoiding: []) == "Layer 1")
     }
+
+    /// Keyboard Shortcuts shows its English ids translated; every one needs Korean.
+    @MainActor @Test func everyShortcutNameHasKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        let missing = ManualKeys.shortcutNames.filter { L10n.text($0, bundle: korean) == $0 }
+        #expect(missing.isEmpty, "add with scripts/l10n.py manual, then translate: \(missing)")
+    }
 }
