@@ -67,16 +67,25 @@ struct TypeControls: View {
                     HStack(spacing: 2) {
                         let vertical = session.currentTextStyle.isVertical
                         Button { toggleOrientation() } label: {
-                            Image(systemName: "arrow.up.and.down.text.horizontal")
-                                .frame(width: 30, height: 26)
-                                .background(vertical ? Color.white.opacity(0.14) : .clear,
-                                            in: RoundedRectangle(cornerRadius: 4))
-                                .contentShape(RoundedRectangle(cornerRadius: 4))
+                            Group {
+                                if vertical {
+                                    VStack(spacing: 0) {
+                                        Text("A").frame(height: 8)
+                                        Text("B").frame(height: 8)
+                                        Text("C").frame(height: 8)
+                                    }
+                                } else {
+                                    Text("ABC")
+                                }
+                            }
+                            .font(.system(size: 9, weight: .semibold))
+                            .frame(width: 30, height: 26)
+                            .contentShape(RoundedRectangle(cornerRadius: 4))
                         }
                         .buttonStyle(.plain)
-                        .help("Toggle text orientation")
-                        .accessibilityLabel("Toggle text orientation")
-                        .accessibilityAddTraits(vertical ? .isSelected : [])
+                        .help(vertical ? "Text orientation: Vertical" : "Text orientation: Horizontal")
+                        .accessibilityLabel(vertical ? "Text orientation: Vertical" : "Text orientation: Horizontal")
+                        .accessibilityHint("Switches between horizontal and vertical text")
                         ForEach(TextAlignment.allCases, id: \.self) { alignment in
                             let selected = session.currentTextStyle.alignment == alignment
                             Button {
