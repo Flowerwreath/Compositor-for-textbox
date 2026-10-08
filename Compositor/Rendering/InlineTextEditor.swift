@@ -189,6 +189,21 @@ final class CanvasTextView: NSTextView {
         holdsSelection = false
         super.mouseDown(with: event)
     }
+    /// Keep AppKit's editing commands while offering placement changes for the open text draft.
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let menu = super.menu(for: event) ?? NSMenu()
+        menu.addItem(.separator())
+        for (title, horizontal) in [("Flip Horizontal", true), ("Flip Vertical", false)] {
+            let item = NSMenuItem(title: title, action: #selector(flipTextFromMenu(_:)), keyEquivalent: "")
+            item.target = self
+            item.tag = horizontal ? 1 : 0
+            menu.addItem(item)
+        }
+        return menu
+    }
+    @objc private func flipTextFromMenu(_ sender: NSMenuItem) {
+        editor?.canvas?.session.flipText(horizontally: sender.tag == 1)
+    }
     override func keyDown(with event: NSEvent) {
         guard let event = ShortcutSettings.shared.textEvent(event) else { return }
         // While an input method is composing, Esc is its own: it gives up the conversion, not the whole text box.

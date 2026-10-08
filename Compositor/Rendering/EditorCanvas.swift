@@ -1702,6 +1702,37 @@ final class CanvasView: NSView {
         if picks, autoSelect, let underPointer { return (underPointer, true) }
         return active.map { ($0.id, false) }
     }
+    /// Target the text under the pointer, independently of the current selection; brushes keep their right-drag.
+    override func menu(for event: NSEvent) -> NSMenu? {
+        // Mirror the menu bar's Flip commands, which require editable layers.
+        guard session.canEditLayers, session.textDraft == nil, !session.tool.isBrushTool,
+              let document = session.document else {
+            return super.menu(for: event)
+        }
+        let point = convert(event.locationInWindow, from: nil)
+        let pixel = session.viewport.documentPoint(from: point, documentSize: document.size)
+        let visible = document.effectiveVisibleIDs
+        guard let layer = document.layers.reversed().first(where: {
+            visible.contains($0.id) && $0.liveText != nil && $0.transform.contains(pixel)
+        }) else { return super.menu(for: event) }
+        let menu = NSMenu()
+        for (title, horizontal) in [("Flip Horizontal", true), ("Flip Vertical", false)] {
+            let item = NSMenuItem(title: title, action: #selector(flipTextLayerFromMenu(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = layer.id
+            item.tag = horizontal ? 1 : 0
+            menu.addItem(item)
+        }
+        return menu
+    }
+    @objc private func flipTextLayerFromMenu(_ sender: NSMenuItem) {
+        guard session.textDraft == nil, let id = sender.representedObject as? UUID,
+              session.document?.layers.contains(where: { $0.id == id && $0.liveText != nil }) == true else { return }
+        session.selectLayers([id], primary: id)
+        guard session.selectedLayerIDs == [id], session.activeLayerID == id else { return }
+        session.flipLayers(horizontally: sender.tag == 1)
+    }
+
     /// Right-drag with a brush tool: left and right resize the brush from its size at the press, or with Shift
     /// change its hardness. The brush circle stays where the press was.
     private var brushTipDrag: (start: CGPoint, diameter: CGFloat, hardness: CGFloat, hardnessShown: Bool)?

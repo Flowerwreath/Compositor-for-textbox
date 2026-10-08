@@ -524,6 +524,17 @@ extension EditorSession {
         textDraft = draft
     }
 
+    /// Keep the flip in the draft so committing or discarding text also commits or discards its placement.
+    func flipText(horizontally: Bool) {
+        guard var draft = textDraft else { return }
+        let placement = refreshTextPlacement(&draft)
+        let center = placement.transform.center
+        let transform = placement.transform.mirrored(horizontally: horizontally,
+                                                     across: horizontally ? center.x : center.y)
+        draft.place(transform, size: placement.size)
+        textDraft = draft
+    }
+
     /// While the font menu is open, the text being edited shows the face under the pointer; `endFontPreview` puts it
     /// back. Only text already being edited: a selected text layer isn't opened for a preview.
     func previewFont(_ name: String) {
