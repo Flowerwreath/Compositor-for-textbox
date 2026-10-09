@@ -126,7 +126,7 @@ struct CanvasSizeSheet: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(anchorNames[anchor]).font(.callout.bold())
                     Text("Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas.")
-                        .font(.callout).foregroundStyle(.secondary)
+                        .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 }.padding(.top, 28)
             }
             Picker("Canvas extension", selection: $extensionChoice) {

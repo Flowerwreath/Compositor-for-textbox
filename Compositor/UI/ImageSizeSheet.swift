@@ -150,13 +150,14 @@ struct ImageSizeSheet: View {
                     ForEach(LayerSampling.allCases, id: \.self) { Text($0.displayName).tag($0) }
                 }
                 Text("Resizes layer pixels and applies existing transforms. Undo restores the originals.")
-                    .font(.callout).foregroundStyle(.secondary)
+                    .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             } else {
                 Text("Only print dimensions and resolution change. Pixels stay unchanged.")
                     .font(.callout).foregroundStyle(.secondary)
             }
             Text(valid ? "Result: \(Int(width.rounded())) × \(Int(height.rounded())) pixels" : "Use 1–\(DocumentLimits.maxSide.formatted()) pixels per side, up to \(DocumentLimits.maxSurfaceMegapixels) megapixels, and 1–9,600 pixels/inch.")
                 .foregroundStyle(valid ? Color.secondary : Color.orange).font(.callout)
+                .fixedSize(horizontal: false, vertical: true)
             HStack {
                 Button("Cancel") { finish(nil) }.configuredNativeShortcut(.escape)
                 Spacer()
