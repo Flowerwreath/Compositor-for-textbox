@@ -130,7 +130,7 @@ final class CanvasView: NSView {
     static let hiddenCursor = NSCursor(image: NSImage(size: NSSize(width: 1, height: 1)), hotSpot: .zero)
     static let movePixelsCursor: NSCursor = {
         let base = NSCursor.arrow
-        let symbol = NSImage(systemSymbolName: "scissors", accessibilityDescription: "Move pixels")!
+        let symbol = NSImage(systemSymbolName: "scissors", accessibilityDescription: String(localized: "Move pixels"))!
         let white = symbol.withSymbolConfiguration(.init(paletteColors: [.white]))!
         let black = symbol.withSymbolConfiguration(.init(paletteColors: [.black]))!
         let image = NSImage(size: NSSize(width: 36, height: 36), flipped: true) { _ in
@@ -406,7 +406,7 @@ final class CanvasView: NSView {
     private var displayedTransformGeometry: TransformOverlayGeometry?
     private var hoverTrackingArea: NSTrackingArea?
     private static let rotationCursor: NSCursor = {
-        let symbol = NSImage(systemSymbolName: "arrow.triangle.2.circlepath", accessibilityDescription: "Rotate")!
+        let symbol = NSImage(systemSymbolName: "arrow.triangle.2.circlepath", accessibilityDescription: String(localized: "Rotate"))!
         let white = symbol.withSymbolConfiguration(.init(paletteColors: [.white]))!
         let black = symbol.withSymbolConfiguration(.init(paletteColors: [.black]))!
         let image = NSImage(size: NSSize(width: 24, height: 24), flipped: false) { _ in
@@ -426,7 +426,7 @@ final class CanvasView: NSView {
     private static let eyedropperAddCursor = makeEyedropperCursor(badge: "plus")
     private static let eyedropperRemoveCursor = makeEyedropperCursor(badge: "minus")
     private static func makeEyedropperCursor(badge: String?) -> NSCursor {
-        let symbol = NSImage(systemSymbolName: "eyedropper", accessibilityDescription: "Sample color")!
+        let symbol = NSImage(systemSymbolName: "eyedropper", accessibilityDescription: String(localized: "Sample color"))!
         let white = symbol.withSymbolConfiguration(.init(paletteColors: [.white]))!
         let black = symbol.withSymbolConfiguration(.init(paletteColors: [.black]))!
         let mark = badge.flatMap { NSImage(systemSymbolName: $0, accessibilityDescription: nil) }?
@@ -479,7 +479,7 @@ final class CanvasView: NSView {
     /// The Zoom tool's cursors: a magnifier with a plus, or a minus while Option is held.
     private static func zoomCursor(out: Bool) -> NSCursor {
         let symbol = NSImage(systemSymbolName: out ? "minus.magnifyingglass" : "plus.magnifyingglass",
-                             accessibilityDescription: out ? "Zoom out" : "Zoom in")!
+                             accessibilityDescription: out ? String(localized: "Zoom out") : String(localized: "Zoom in"))!
         let white = symbol.withSymbolConfiguration(.init(paletteColors: [.white]))!
         let black = symbol.withSymbolConfiguration(.init(paletteColors: [.black]))!
         let image = NSImage(size: NSSize(width: 24, height: 24), flipped: false) { _ in
@@ -663,7 +663,7 @@ final class CanvasView: NSView {
         clipsToBounds = true
         setAccessibilityElement(true)
         setAccessibilityRole(.image)
-        setAccessibilityLabel("Canvas")
+        setAccessibilityLabel(String(localized: "Canvas"))
         setAccessibilityIdentifier("editorCanvas")
     }
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -1702,6 +1702,37 @@ final class CanvasView: NSView {
         if picks, autoSelect, let underPointer { return (underPointer, true) }
         return active.map { ($0.id, false) }
     }
+    /// Target the text under the pointer, independently of the current selection; brushes keep their right-drag.
+    override func menu(for event: NSEvent) -> NSMenu? {
+        // Mirror the menu bar's Flip commands, which require editable layers.
+        guard session.canEditLayers, session.textDraft == nil, !session.tool.isBrushTool,
+              let document = session.document else {
+            return super.menu(for: event)
+        }
+        let point = convert(event.locationInWindow, from: nil)
+        let pixel = session.viewport.documentPoint(from: point, documentSize: document.size)
+        let visible = document.effectiveVisibleIDs
+        guard let layer = document.layers.reversed().first(where: {
+            visible.contains($0.id) && $0.liveText != nil && $0.transform.contains(pixel)
+        }) else { return super.menu(for: event) }
+        let menu = NSMenu()
+        for (title, horizontal) in [(String(localized: "Flip Horizontal"), true), (String(localized: "Flip Vertical"), false)] {
+            let item = NSMenuItem(title: title, action: #selector(flipTextLayerFromMenu(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = layer.id
+            item.tag = horizontal ? 1 : 0
+            menu.addItem(item)
+        }
+        return menu
+    }
+    @objc private func flipTextLayerFromMenu(_ sender: NSMenuItem) {
+        guard session.textDraft == nil, let id = sender.representedObject as? UUID,
+              session.document?.layers.contains(where: { $0.id == id && $0.liveText != nil }) == true else { return }
+        session.selectLayers([id], primary: id)
+        guard session.selectedLayerIDs == [id], session.activeLayerID == id else { return }
+        session.flipLayers(horizontally: sender.tag == 1)
+    }
+
     /// Right-drag with a brush tool: left and right resize the brush from its size at the press, or with Shift
     /// change its hardness. The brush circle stays where the press was.
     private var brushTipDrag: (start: CGPoint, diameter: CGFloat, hardness: CGFloat, hardnessShown: Bool)?

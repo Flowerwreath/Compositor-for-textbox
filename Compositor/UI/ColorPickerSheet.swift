@@ -121,7 +121,7 @@ struct ColorPickerSheet: View {
         }
     }
 
-    private func channelRow(_ label: String, _ channel: WritableKeyPath<PaletteColor, CGFloat>) -> some View {
+    private func channelRow(_ label: LocalizedStringResource, _ channel: WritableKeyPath<PaletteColor, CGFloat>) -> some View {
         let channelValue = Binding<Int>(
             get: { Int((color[keyPath: channel] * 255).rounded()) },
             set: { newValue in
@@ -132,7 +132,7 @@ struct ColorPickerSheet: View {
         return GridRow {
             Text(label).frame(width: 14, alignment: .leading)
                 .scrubbable(sensitivity: 1, value: channelValue, range: 0...255)
-            TextField(label, value: channelValue, format: .number)
+            TextField(String(localized: label), value: channelValue, format: .number)
                 .frame(width: 52)
                 .arrowSteps(value: { Double(Int((color[keyPath: channel] * 255).rounded())) },
                             change: { newValue in
@@ -140,7 +140,7 @@ struct ColorPickerSheet: View {
                                 rgb[keyPath: channel] = CGFloat(min(255, max(0, newValue.rounded()))) / 255
                                 hsb.setRGB(rgb)
                             })
-                .accessibilityLabel(label == "R" ? "Red" : label == "G" ? "Green" : "Blue")
+                .accessibilityLabel(label.key == "R" ? "Red" : label.key == "G" ? "Green" : "Blue")
         }
     }
 
@@ -192,12 +192,12 @@ final class ColorPickerPanelController: NSObject {
 /// A dialog's color swatch, drawn as the brush's: clicking it opens the app's picker on `color`, which follows the
 /// working color as it moves and keeps the one chosen. `closePicker()` puts the picker away with the dialog.
 struct DialogColorSwatch: View {
-    let title: String
+    let title: LocalizedStringResource
     @Binding var color: PaletteColor
     let session: EditorSession
     var body: some View {
         Button {
-            session.openDialogColorPicker(title: title, color: color) { color = $0 }
+            session.openDialogColorPicker(title: String(localized: title), color: color) { color = $0 }
         } label: {
             let shape = RoundedRectangle(cornerRadius: 4, style: .continuous)
             shape.fill(color.swiftUI)
@@ -207,7 +207,7 @@ struct DialogColorSwatch: View {
                 .contentShape(shape)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(title)
+        .accessibilityLabel(Text(title))
         .onChange(of: session.colorPicker?.color) { _, _ in session.previewDialogColor() }
         .onDisappear { Self.closePicker(session) }
     }

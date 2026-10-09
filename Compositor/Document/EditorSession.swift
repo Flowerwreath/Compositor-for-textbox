@@ -96,7 +96,8 @@ enum NavigationTool: String, CaseIterable {
     /// Tools that draw and edit selections, sharing modifiers, moving, and nudging.
     var isSelectionTool: Bool { self == .marquee || self == .lasso || self == .wand }
     var symbol: String { self == .type ? "textformat" : self == .eyedropper ? "eyedropper" : self == .marquee ? "rectangle.dashed" : self == .lasso ? "lasso" : self == .wand ? "wand.and.stars" : self == .brush ? "paintbrush.pointed" : self == .spotHealing ? "bandage" : self == .cloneStamp ? "seal" : self == .blur ? "drop" : self == .gradient ? "square.bottomhalf.filled" : self == .shape ? "square.on.circle" : self == .crop ? "crop" : self == .move ? "arrow.up.left.and.arrow.down.right" : self == .hand ? "hand.draw" : "magnifyingglass" }
-    var label: String { self == .type ? "Type (T)" : self == .eyedropper ? "Eyedropper (I)" : self == .marquee ? "Marquee (M)" : self == .lasso ? "Lasso (L)" : self == .wand ? "Magic (W) · Tab switches Wand and Object" : self == .brush ? "Brush (B) · Eraser (E)" : self == .spotHealing ? "Spot Healing Brush (J)" : self == .cloneStamp ? "Clone Stamp (S) · Option-click sets the source" : self == .blur ? "Smear (R)" : self == .gradient ? "Gradient (G)" : self == .shape ? "Shape (U) · Shift-U switches Rectangle/Ellipse" : self == .crop ? "Crop (C)" : self == .move ? "Move / Transform (V)" : self == .hand ? "Hand (H)" : "Zoom (Z)" }
+    var label: String { String(localized: labelResource) }
+    private var labelResource: LocalizedStringResource { self == .type ? "Type (T)" : self == .eyedropper ? "Eyedropper (I)" : self == .marquee ? "Marquee (M)" : self == .lasso ? "Lasso (L)" : self == .wand ? "Magic (W) · Tab switches Wand and Object" : self == .brush ? "Brush (B) · Eraser (E)" : self == .spotHealing ? "Spot Healing Brush (J)" : self == .cloneStamp ? "Clone Stamp (S) · Option-click sets the source" : self == .blur ? "Smear (R)" : self == .gradient ? "Gradient (G)" : self == .shape ? "Shape (U) · Shift-U switches Rectangle/Ellipse" : self == .crop ? "Crop (C)" : self == .move ? "Move / Transform (V)" : self == .hand ? "Hand (H)" : "Zoom (Z)" }
 }
 
 @Observable
@@ -665,8 +666,14 @@ final class EditorSession {
         if changedCanvas, let document { viewport.fit(documentSize: document.size) }
     }
 
-    /// Nestable transaction boundary; future tools can group a complete gesture.
-    func beginEdit(_ name: String) {
+    /// Nestable transaction boundary; future tools can group a complete gesture. The name shows in Edit › Undo, so it's
+    /// translated here, and literals passed in are extracted into the string catalog.
+    func beginEdit(_ name: LocalizedStringResource) {
+        beginEdit(named: String(localized: name))
+    }
+
+    /// For a name that's already translated, such as a filter's `displayName`.
+    func beginEdit(named name: String) {
         history.begin(name, document: document, selection: activeLayerID)
     }
 
@@ -680,9 +687,7 @@ final class EditorSession {
     func addBlankLayer() {
         guard canEditLayers, let document else { return }
         let names = Set(document.layers.map(\.name))
-        var number = 1
-        while names.contains("Layer \(number)") { number += 1 }
-        var layer = ImageLayer(name: "Layer \(number)", blankSize: document.size)
+        var layer = ImageLayer(name: L10n.firstFreeName({ String(localized: "Layer \($0)") }, avoiding: names), blankSize: document.size)
         layer.parentID = activeLayer?.isGroup == true ? activeLayerID : activeLayer?.parentID
         if let parent = layer.parentID { collapsedGroupIDs.remove(parent) }
         var insertion = document.layers.firstIndex { $0.id == activeLayerID }.map { $0 + 1 } ?? document.layers.count
@@ -898,10 +903,11 @@ final class EditorSession {
 
     /// Puts the sheet up before the file is read, so a big PSD doesn't leave the click unanswered.
     /// `finishPSDReading` fills it in, or takes it away when there is nothing to report.
-    func beginPSDReading(title: String, confirmTitle: String) {
+    func beginPSDReading(title: LocalizedStringResource, confirmTitle: LocalizedStringResource) {
         guard confirmConversions == nil else { return }
         conversionCancelled = false
-        conversionRequest = PSDConversionRequest(title: title, confirmTitle: confirmTitle, conversions: [], isReading: true)
+        conversionRequest = PSDConversionRequest(title: String(localized: title), confirmTitle: String(localized: confirmTitle),
+                                                 conversions: [], isReading: true)
         showsConversionSheet = true
     }
     func finishPSDReading(_ conversions: [PSDConversion]) async -> Bool {
@@ -923,11 +929,13 @@ final class EditorSession {
         showsConversionSheet = false
         conversionRequest = nil
     }
-    func confirmPSDConversions(_ conversions: [PSDConversion], title: String, confirmTitle: String) async -> Bool {
+    func confirmPSDConversions(_ conversions: [PSDConversion], title: LocalizedStringResource,
+                               confirmTitle: LocalizedStringResource) async -> Bool {
         if let confirmConversions { return await confirmConversions(conversions) }
         return await withCheckedContinuation { continuation in
             conversionContinuation = continuation
-            conversionRequest = PSDConversionRequest(title: title, confirmTitle: confirmTitle, conversions: conversions)
+            conversionRequest = PSDConversionRequest(title: String(localized: title), confirmTitle: String(localized: confirmTitle),
+                                                     conversions: conversions)
             showsConversionSheet = true
         }
     }
@@ -999,13 +1007,13 @@ final class EditorSession {
     /// every pixel's detail.
     private static func firstLayer(size: CGSize, background: CGColor?) -> ImageLayer {
         guard let background, let context = try? BrushRaster.context(width: Int(size.width), height: Int(size.height), mask: false)
-        else { return ImageLayer(name: "Layer 1", blankSize: size) }
+        else { return ImageLayer(name: String(localized: "Layer \(1)"), blankSize: size) }
         context.setFillColor(background)
         context.fill(CGRect(origin: .zero, size: size))
         guard let image = context.makeImage(), let thumbnail = try? PixelAdjust.thumbnail(of: image)
-        else { return ImageLayer(name: "Layer 1", blankSize: size) }
-        var layer = ImageLayer(name: "Background", blankSize: size)
-        layer.asset = ImportedImage(image: image, thumbnail: thumbnail, name: "Background")
+        else { return ImageLayer(name: String(localized: "Layer \(1)"), blankSize: size) }
+        var layer = ImageLayer(name: String(localized: "Background"), blankSize: size)
+        layer.asset = ImportedImage(image: image, thumbnail: thumbnail, name: String(localized: "Background"))
         return layer
     }
 

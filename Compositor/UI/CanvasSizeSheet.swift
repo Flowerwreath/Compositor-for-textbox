@@ -9,7 +9,7 @@ struct CanvasSizeSheet: View {
     @State private var anchor = 4
     @State private var extensionChoice = "Transparent"
     @State private var customColor = PaletteColor.white
-    private let anchorNames = ["Top left", "Top center", "Top right", "Middle left", "Center", "Middle right", "Bottom left", "Bottom center", "Bottom right"]
+    private let anchorNames: [LocalizedStringResource] = ["Top left", "Top center", "Top right", "Middle left", "Center", "Middle right", "Bottom left", "Bottom center", "Bottom right"]
 
     init(document: CanvasDocument, session: EditorSession, finish: @escaping (CanvasSizeOptions?) -> Void) {
         self.foreground = session.foregroundColor
@@ -49,6 +49,13 @@ struct CanvasSizeSheet: View {
     private func bytes(_ width: Int, _ height: Int) -> String {
         ByteCountFormatter.string(fromByteCount: Int64(width) * Int64(height) * 4, countStyle: .memory)
     }
+    /// What fills the added canvas. These English names are the picker's tags and what `fill` switches on.
+    static let extensionChoices = ["Transparent", "Foreground", "Background", "Black", "White", "Custom"]
+    /// The catalog key a choice shows as. The two colors read as colors ("Background color"), since a lone
+    /// "Background" is the Background layer's name.
+    static func choiceKey(_ choice: String) -> String {
+        choice == "Foreground" || choice == "Background" ? "\(choice) color" : choice
+    }
     private var fill: CanvasExtensionColor? {
         let color: NSColor
         switch extensionChoice {
@@ -72,7 +79,7 @@ struct CanvasSizeSheet: View {
                 .font(.callout).foregroundStyle(.secondary)
             Divider()
             Picker("Units", selection: $draft.unit) {
-                ForEach(CanvasUnit.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                ForEach(CanvasUnit.allCases, id: \.self) { Text($0.displayName).tag($0) }
             }
             HStack {
                 Text("Width").frame(width: 60, alignment: .leading)
@@ -109,7 +116,7 @@ struct CanvasSizeSheet: View {
                                             .frame(width: 25, height: 25)
                                     }
                                     .tint(index == anchor ? .accentColor : .secondary)
-                                    .help(anchorNames[index]).accessibilityLabel(anchorNames[index])
+                                    .help(Text(anchorNames[index])).accessibilityLabel(Text(anchorNames[index]))
                                     .accessibilityValue(index == anchor ? "Selected" : "")
                                 }
                             }
@@ -119,11 +126,11 @@ struct CanvasSizeSheet: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(anchorNames[anchor]).font(.callout.bold())
                     Text("Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas.")
-                        .font(.callout).foregroundStyle(.secondary)
+                        .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                 }.padding(.top, 28)
             }
             Picker("Canvas extension", selection: $extensionChoice) {
-                ForEach(["Transparent", "Foreground", "Background", "Black", "White", "Custom"], id: \.self) { Text($0) }
+                ForEach(Self.extensionChoices, id: \.self) { Text(L10n.text(Self.choiceKey($0))) }
             }
             if extensionChoice == "Custom" {
                 HStack(spacing: 8) {

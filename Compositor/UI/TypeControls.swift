@@ -13,6 +13,23 @@ struct TypeControls: View {
             session.changeTextStyle { $0[keyPath: key] = CGFloat(value) }
         })
     }
+    private var rotation: Binding<Double> {
+        Binding(get: { Double(session.textRotation ?? 0) }, set: { value in
+            session.setTextRotation(CGFloat(value.truncatingRemainder(dividingBy: 360)))
+        })
+    }
+    func toggleOrientation() {
+        session.changeTextStyle { $0.orientation = $0.isVertical ? nil : .vertical }
+    }
+
+    static func alignmentLabel(_ alignment: TextAlignment, vertical: Bool) -> String {
+        switch alignment {
+        case .left: return vertical ? String(localized: "Align top") : String(localized: "Align left")
+        case .center: return String(localized: "Align center")
+        case .right: return vertical ? String(localized: "Align bottom") : String(localized: "Align right")
+        }
+    }
+
     var body: some View {
         HStack(spacing: 12) {
             Text("Type").font(ToolHeaderStyle.titleFont)
@@ -50,12 +67,42 @@ struct TypeControls: View {
                     }
                     .buttonStyle(.plain).help("Text color").accessibilityLabel("Text color")
                     HStack(spacing: 2) {
+                        let vertical = session.currentTextStyle.isVertical
+                        Button { toggleOrientation() } label: {
+                            Group {
+                                if vertical {
+                                    HStack(spacing: 1) {
+                                        VStack(spacing: 0) {
+                                            ForEach(["A", "B", "C"], id: \.self) { Text($0).frame(height: 7.5) }
+                                        }
+                                        VStack(spacing: 0) {
+                                            ForEach(["가", "나", "다"], id: \.self) { Text($0).frame(height: 7.5) }
+                                        }
+                                    }
+                                } else {
+                                    VStack(spacing: 0) {
+                                        Text("ABC")
+                                        Text("가나다")
+                                    }
+                                }
+                            }
+                            .font(.system(size: 8, weight: .semibold))
+                            .frame(width: 30, height: 26)
+                            .contentShape(RoundedRectangle(cornerRadius: 4))
+                        }
+                        .buttonStyle(.plain)
+                        .help(vertical ? "Text orientation: Vertical" : "Text orientation: Horizontal")
+                        .accessibilityLabel(vertical ? "Text orientation: Vertical" : "Text orientation: Horizontal")
+                        .accessibilityHint("Switches between horizontal and vertical text")
                         ForEach(TextAlignment.allCases, id: \.self) { alignment in
                             let selected = session.currentTextStyle.alignment == alignment
                             Button {
                                 session.changeTextStyle { $0.alignment = alignment }
                             } label: {
-                                Image(systemName: alignment == .left ? "text.alignleft" : alignment == .center ? "text.aligncenter" : "text.alignright")
+                                let symbol = vertical
+                                    ? (alignment == .left ? "align.vertical.top" : alignment == .center ? "align.vertical.center" : "align.vertical.bottom")
+                                    : (alignment == .left ? "text.alignleft" : alignment == .center ? "text.aligncenter" : "text.alignright")
+                                Image(systemName: symbol)
                                     .frame(width: 30, height: 26)
                                     .background(selected ? Color.white.opacity(0.14) : .clear,
                                                 in: RoundedRectangle(cornerRadius: 4))
@@ -63,8 +110,8 @@ struct TypeControls: View {
                                     .contentShape(RoundedRectangle(cornerRadius: 4))
                             }
                             .buttonStyle(.plain)
-                            .help("Align " + alignment.rawValue.lowercased())
-                            .accessibilityLabel("Align " + alignment.rawValue.lowercased())
+                            .help(Self.alignmentLabel(alignment, vertical: vertical))
+                            .accessibilityLabel(Self.alignmentLabel(alignment, vertical: vertical))
                             .accessibilityAddTraits(selected ? .isSelected : [])
                         }
                     }
@@ -85,6 +132,13 @@ struct TypeControls: View {
                         .arrowSteps(value: { Double(session.currentTextStyle.lineHeight) },
                                     change: { stepped in session.changeTextStyle { $0.leading = CGFloat(max(0, stepped)) } })
                         .help("Line height, baseline to baseline. Empty or 0 is Auto: 120% of the font size.")
+                    TextField("Angle", value: rotation, format: .number).frame(width: 52)
+                        .unitSuffix("°", scrubValue: rotation, sensitivity: 1, range: -360...360, step: 1)
+                        .arrowSteps(value: { rotation.wrappedValue },
+                                    change: { rotation.wrappedValue = $0 })
+                        .disabled(session.textRotation == nil)
+                        .help("Rotation, in degrees clockwise")
+                        .accessibilityLabel("Angle")
                 }
             }.scrollIndicators(.hidden)
             if session.textDraft != nil {
@@ -119,7 +173,7 @@ private struct TypeFontPicker: NSViewRepresentable {
         button.cell?.lineBreakMode = .byTruncatingTail
         button.cell?.usesSingleLineMode = true
         button.cell?.alignment = .left
-        button.setAccessibilityLabel("Font")
+        button.setAccessibilityLabel(String(localized: "Font"))
         button.target = context.coordinator
         button.action = #selector(Coordinator.choose(_:))
         button.menu?.delegate = context.coordinator
@@ -145,7 +199,7 @@ private struct TypeFontPicker: NSViewRepresentable {
     private static func isMultiple(_ item: NSMenuItem?) -> Bool { item?.representedObject as? String == multiple }
     static func showMultiple(in button: NSPopUpButton) {
         if !isMultiple(button.item(at: 0)) {
-            let item = NSMenuItem(title: multiple, action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: String(localized: "(Multiple)"), action: nil, keyEquivalent: "")
             item.representedObject = multiple
             button.menu?.insertItem(item, at: 0)
         }

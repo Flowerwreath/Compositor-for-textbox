@@ -56,7 +56,7 @@ struct ColorPaletteControls: View {
         }
     }
     private func swatch(background: Bool) -> some View {
-        let label = background ? "Background color" : "Foreground color"
+        let label: LocalizedStringResource = background ? "Background color" : "Foreground color"
         let shape = RoundedRectangle(cornerRadius: 6, style: .continuous)
         return Button {
             if session.isMaskSelected { choosingMaskBackground = background }
@@ -69,7 +69,7 @@ struct ColorPaletteControls: View {
                 .frame(width: swatchSize, height: swatchSize)
                 .contentShape(shape)
         }
-        .buttonStyle(.plain).help(label).accessibilityLabel(label)
+        .buttonStyle(.plain).help(Text(label)).accessibilityLabel(Text(label))
     }
     private func chooseMask(_ color: PaletteColor) {
         guard let background = choosingMaskBackground else { return }

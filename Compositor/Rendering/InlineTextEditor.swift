@@ -4,13 +4,117 @@ import AppKit
 /// stay with NSTextView. Its logical bounds are layer pixels; the containing view supplies zoom.
 /// Its glyphs are clear: the canvas draws the text as the layer's own pixels underneath, as Photoshop does, so
 /// what is typed looks the same at any zoom as it will once it is committed.
-/// Draws text selections translucent, focused or not.
-private final class SeeThroughSelectionLayout: NSLayoutManager {
+/// Selection and insertion geometry use the letters' ascent and descent, independent of leading.
+private nonisolated final class SeeThroughSelectionLayout: VerticalEmLayoutManager {
+    var columnSpacing: CGFloat = 0
+    /// The letters on a laid-out line, including all its faces. A blank line uses the typing face.
+    private func letters(on line: NSRange, fragment: CGRect, typingFont: NSFont?) -> CGRect? {
+        guard let storage = textStorage else { return nil }
+        let characters = characterRange(forGlyphRange: line, actualGlyphRange: nil)
+        let content = (storage.string as NSString).substring(with: characters)
+        if textContainers.first?.layoutOrientation == .vertical {
+            let measured = measureEmBounds(for: line)
+            if !measured.isNull { return measured }
+            guard let font = typingFont else { return nil }
+            return CGRect(x: fragment.minX, y: fragment.minY + columnSpacing - font.pointSize,
+                          width: fragment.width, height: font.pointSize)
+        }
+        var ascent: CGFloat = 0, descent: CGFloat = 0
+        if content.trimmingCharacters(in: .newlines).isEmpty, let font = typingFont {
+            ascent = font.ascender
+            descent = abs(font.descender)
+        } else {
+            storage.enumerateAttribute(.font, in: characters, options: []) { value, _, _ in
+                if let font = value as? NSFont {
+                    ascent = max(ascent, font.ascender)
+                    descent = max(descent, abs(font.descender))
+                }
+            }
+        }
+        guard ascent + descent > 0 else { return nil }
+        let baseline = fragment.minY + location(forGlyphAt: line.location).y
+        return CGRect(x: fragment.minX, y: baseline - ascent, width: fragment.width, height: ascent + descent)
+    }
+
+    private func letterBounds(atY y: CGFloat, typingFont: NSFont?) -> CGRect? {
+        guard let container = textContainers.first else { return nil }
+        ensureLayout(for: container)
+        if extraLineFragmentTextContainer === container, numberOfGlyphs == 0 || y >= extraLineFragmentRect.minY {
+            guard let font = typingFont else { return nil }
+            let fragment = extraLineFragmentRect
+            if container.layoutOrientation == .vertical {
+                return CGRect(x: fragment.minX, y: fragment.minY + columnSpacing - font.pointSize,
+                              width: fragment.width, height: font.pointSize)
+            }
+            return CGRect(x: fragment.minX, y: fragment.maxY - abs(font.descender) - font.ascender,
+                          width: fragment.width, height: font.ascender + abs(font.descender))
+        }
+        guard numberOfGlyphs > 0 else { return nil }
+        var line = NSRange()
+        let glyph = glyphIndex(for: CGPoint(x: 0, y: y), in: container)
+        let fragment = lineFragmentRect(forGlyphAt: glyph, effectiveRange: &line)
+        return letters(on: line, fragment: fragment, typingFont: typingFont)
+    }
+
+    func coveringLetters(_ rect: CGRect, origin: CGPoint, typingFont: NSFont?) -> CGRect {
+        // AppKit's caret position distinguishes both sides of a soft wrap at the same character index.
+        let y = rect.minY + min(1, rect.height / 2) - origin.y
+        guard let letters = letterBounds(atY: y, typingFont: typingFont) else { return rect }
+        return CGRect(x: rect.minX, y: letters.minY + origin.y, width: rect.width, height: letters.height)
+    }
+
+    /// NSTextView clips its layout manager's background drawing to the line fragments. A short leading's letters
+    /// stand above that clip, so the selection is painted by the text view before it enters that drawing stage.
+    func selectionRects(_ ranges: [NSRange], origin: CGPoint, typingFont: NSFont?) -> [CGRect] {
+        guard let container = textContainers.first else { return [] }
+        ensureLayout(for: container)
+        var rects: [CGRect] = []
+        for range in ranges where range.length > 0 {
+            let selected = glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+            enumerateLineFragments(forGlyphRange: selected) { fragment, _, _, line, _ in
+                guard let letters = self.letters(on: line, fragment: fragment, typingFont: typingFont) else { return }
+                self.enumerateEnclosingRects(forGlyphRange: NSIntersectionRange(line, selected),
+                    withinSelectedGlyphRange: selected, in: container) { rect, _ in
+                    rects.append(CGRect(x: rect.minX + origin.x, y: letters.minY + origin.y,
+                                        width: rect.width, height: letters.height))
+                }
+            }
+        }
+        return rects
+    }
+
+    /// What `drawSelection` last painted, which AppKit's own selection fill then leaves alone.
+    private var paintedSelection: [NSRange] = []
+
+    func drawSelection(_ ranges: [NSRange], origin: CGPoint, typingFont: NSFont?, color: NSColor) {
+        paintedSelection = ranges.filter { $0.length > 0 }
+        guard let context = NSGraphicsContext.current?.cgContext else { return }
+        let rects = selectionRects(ranges, origin: origin, typingFont: typingFont)
+        context.saveGState()
+        defer { context.restoreGState() }
+        color.withAlphaComponent(min(color.alphaComponent, 0.45)).setFill()
+        // One nonzero-winding fill keeps overlapping lines at the same opacity.
+        context.addRects(rects)
+        context.fillPath()
+    }
+
+    // The selection is painted above, focused or not. AppKit would paint it again, as tall as the leading, and once
+    // the text loses the focus — to the font size field, or the color picker — in solid gray over the letters.
+    // Any other background stays see-through to the letters too.
     override func fillBackgroundRectArray(_ rectArray: UnsafePointer<NSRect>, count rectCount: Int,
                                           forCharacterRange charRange: NSRange, color: NSColor) {
+        if paintedSelection.contains(where: { NSIntersectionRange($0, charRange).length > 0 }) { return }
         color.withAlphaComponent(min(color.alphaComponent, 0.45)).setFill()
         super.fillBackgroundRectArray(rectArray, count: rectCount, forCharacterRange: charRange, color: color)
     }
+}
+
+/// The native insertion callback supplies position and blinking, but its graphics clip is only as tall as leading.
+/// A separate view can cover the letters outside that clip, and lets clicks reach the text beneath it.
+private final class CanvasTextCaret: NSView {
+    var color = NSColor.textColor { didSet { needsDisplay = true } }
+    override func draw(_ dirtyRect: NSRect) { color.setFill(); bounds.fill() }
+    override func hitTest(_ point: NSPoint) -> NSView? { nil }
 }
 
 final class CanvasTextView: NSTextView {
@@ -18,6 +122,52 @@ final class CanvasTextView: NSTextView {
     private let textUndo = UndoManager()
     /// Set when the font menu takes the focus, so a collapsed caret does not replace the letters that were selected.
     var holdsSelection = false
+    /// How far letters stand out of the top of their line, at most, which a leading shorter than they are tall leaves
+    /// them doing. In a vertical view native y points left, so this same reach extends toward the right.
+    var letterReach: CGFloat = 0
+    private let caretView = CanvasTextCaret(frame: .zero)
+    private func installCaret() {
+        guard caretView.superview == nil else { return }
+        caretView.wantsLayer = true
+        caretView.isHidden = true
+        caretView.setAccessibilityElement(false)
+        caretView.identifier = NSUserInterfaceItemIdentifier("canvasTextCaret")
+        addSubview(caretView)
+    }
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        if window != nil { installCaret() }
+    }
+    var selectionRects: [CGRect] {
+        (layoutManager as? SeeThroughSelectionLayout)?.selectionRects(selectedRanges.map(\.rangeValue),
+            origin: textContainerOrigin, typingFont: typingAttributes[.font] as? NSFont) ?? []
+    }
+    override func draw(_ dirtyRect: NSRect) {
+        (layoutManager as? SeeThroughSelectionLayout)?.drawSelection(selectedRanges.map(\.rangeValue),
+            origin: textContainerOrigin, typingFont: typingAttributes[.font] as? NSFont,
+            color: NSColor.selectedTextBackgroundColor)
+        super.draw(dirtyRect)
+    }
+    override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn flag: Bool) {
+        installCaret()
+        let caret = (layoutManager as? SeeThroughSelectionLayout)?.coveringLetters(rect, origin: textContainerOrigin,
+            typingFont: typingAttributes[.font] as? NSFont) ?? rect
+        if caretView.frame != caret { caretView.frame = caret }
+        caretView.color = color
+        // AppKit owns the on/off clock. Paint in a child view instead of its line-height graphics clip.
+        caretView.isHidden = !flag || selectedRange().length > 0 || window?.firstResponder !== self || window?.isKeyWindow != true
+    }
+    override func setSelectedRanges(_ ranges: [NSValue], affinity: NSSelectionAffinity, stillSelecting flag: Bool) {
+        super.setSelectedRanges(ranges, affinity: affinity, stillSelecting: flag)
+        if selectedRange().length > 0 { caretView.isHidden = true }
+        // A native selection invalidates only its line fragments, leaving a short leading's highlights above them.
+        needsDisplay = true
+    }
+    override func setNeedsDisplay(_ rect: NSRect, avoidAdditionalLayout flag: Bool) {
+        var rect = rect
+        if letterReach > 0, !rect.isEmpty { rect.origin.y -= letterReach; rect.size.height += letterReach }
+        super.setNeedsDisplay(rect, avoidAdditionalLayout: flag)
+    }
     override var undoManager: UndoManager? { textUndo }
     // Undo and Redo reach the window, whose history isn't this one, so the text answers them itself: ⌘Z takes back
     // what was typed since the text box opened, in one step, as in Figma.
@@ -28,6 +178,7 @@ final class CanvasTextView: NSTextView {
         // applies to them.
         let range = selectedRange()
         let resigned = super.resignFirstResponder()
+        if resigned { caretView.isHidden = true; needsDisplay = true }
         if range.length > 0 {
             holdsSelection = true
             editor?.keepSelection(range)
@@ -38,9 +189,25 @@ final class CanvasTextView: NSTextView {
         holdsSelection = false
         super.mouseDown(with: event)
     }
+    /// Keep AppKit's editing commands while offering placement changes for the open text draft.
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let menu = super.menu(for: event) ?? NSMenu()
+        menu.addItem(.separator())
+        for (title, horizontal) in [(String(localized: "Flip Horizontal"), true), (String(localized: "Flip Vertical"), false)] {
+            let item = NSMenuItem(title: title, action: #selector(flipTextFromMenu(_:)), keyEquivalent: "")
+            item.target = self
+            item.tag = horizontal ? 1 : 0
+            menu.addItem(item)
+        }
+        return menu
+    }
+    @objc private func flipTextFromMenu(_ sender: NSMenuItem) {
+        editor?.canvas?.session.flipText(horizontally: sender.tag == 1)
+    }
     override func keyDown(with event: NSEvent) {
         guard let event = ShortcutSettings.shared.textEvent(event) else { return }
-        if event.keyCode == 53 { editor?.canvas?.session.cancelText(); return }
+        // While an input method is composing, Esc is its own: it gives up the conversion, not the whole text box.
+        if event.keyCode == 53, !hasMarkedText() { editor?.canvas?.session.cancelText(); return }
         // Option with the arrows sets spacing, as in Photoshop: left and right the tracking, up and down the
         // leading. Shift makes each step ten.
         if event.modifierFlags.contains(.option), [123, 124, 125, 126].contains(event.keyCode),
@@ -64,15 +231,43 @@ final class CanvasTextView: NSTextView {
         // Text views hide the pointer while typing; on the canvas it stays, so you can see where you'll click next.
         NSCursor.setHiddenUntilMouseMoves(false)
     }
+    // What an input method is still composing isn't reported as a change until it is committed, and the letters here
+    // are clear: the canvas draws only what the draft holds, so kanji and kana stayed invisible until Return.
+    override func setMarkedText(_ string: Any, selectedRange: NSRange, replacementRange: NSRange) {
+        super.setMarkedText(string, selectedRange: selectedRange, replacementRange: replacementRange)
+        editor?.takeText()
+    }
+    // Esc an input method passed back while it was composing gives up what it was composing, and the text box stays
+    // open. With nothing being composed, it closes the box, as Esc does.
+    override func cancelOperation(_ sender: Any?) {
+        guard hasMarkedText() else { editor?.canvas?.session.cancelText(); return }
+        inputContext?.discardMarkedText()
+        if hasMarkedText() { insertText("", replacementRange: markedRange()) }
+    }
     override func mouseExited(with event: NSEvent) { NSCursor.setHiddenUntilMouseMoves(false) }
     override func paste(_ sender: Any?) { pasteAsPlainText(sender) }
     // The editor sets the cursor for the whole box — the I-beam over the text, resize arrows over the edges.
     override func resetCursorRects() {}
 }
 
+/// A view transform, unlike a layer-only mirror, also maps native text hit tests and IME rectangles.
+private final class CanvasTextSurface: NSView {
+    override var isFlipped: Bool { true }
+    private var mirror = CGSize(width: 1, height: 1)
+    func place(size: CGSize, flipX: Bool, flipY: Bool) {
+        scaleUnitSquare(to: mirror)
+        frame = CGRect(origin: .zero, size: size)
+        bounds = CGRect(origin: .zero, size: size)
+        mirror = CGSize(width: flipX ? -1 : 1, height: flipY ? -1 : 1)
+        scaleUnitSquare(to: mirror)
+        translateOrigin(to: CGPoint(x: flipX ? -size.width : 0, y: flipY ? -size.height : 0))
+    }
+}
+
 final class InlineTextEditor: NSView, NSTextViewDelegate {
     weak var canvas: CanvasView?
     let textView = CanvasTextView(frame: .zero)
+    private let textSurface = CanvasTextSurface(frame: .zero)
     fileprivate var draftID: UUID?
     private var shownStyle: LayerTextStyle?
     /// The style after an edit NSTextView has accepted but not yet made, with its color and font runs moved to fit.
@@ -86,11 +281,18 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         let logicalSize: CGSize
         let anchor: CGPoint
         let scale: CGFloat
+        let overflow: CGFloat
+        let vertical: Bool
     }
     private var shownGeometry: Geometry?
     private var measuredStyle: LayerTextStyle?
     private var measuredSize: CGSize = .zero
+    /// How much lower than its padding the first line is set, as the canvas draws it (see `EditorSession.firstLine`).
+    private var measuredOverflow: CGFloat = 0
+    private var verticalLayout: VerticalTextLayout?
     private var resize: (handle: Int, draft: TextDraft, transform: LayerTransform, start: CGPoint)?
+    /// A rotation under way: the drag as the Move tool does it, its draft, and the corner its cursor follows.
+    private var turn: (drag: TransformDrag, draft: TextDraft, corner: CGPoint)?
     /// The transform the editor is actually showing. Point text grows as it is typed, so this is not always the
     /// draft's own transform, and a resize has to start from what is on screen or the text jumps.
     override var isFlipped: Bool { true }
@@ -114,16 +316,16 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         textView.isAutomaticDashSubstitutionEnabled = false
         // The selection shows through to the text the canvas draws beneath it, also while another window (the color
         // picker previewing the selected letters) has focus, where AppKit would otherwise paint it solid gray.
-        textView.selectedTextAttributes = [.backgroundColor: NSColor.selectedTextBackgroundColor.withAlphaComponent(0.45)]
+        textView.selectedTextAttributes = [.backgroundColor: NSColor.clear]
         textView.textContainer?.replaceLayoutManager(SeeThroughSelectionLayout())
-        textView.setAccessibilityLabel("Canvas text")
-        // Both backed by layers from the start. Left to AppKit, the text surface's layer is first placed in the
-        // canvas's own layer tree and only moved inside this view a frame later; with a flipped layer, whose
-        // mirroring hangs off that placement, the move is visible as a jump.
+        textView.setAccessibilityLabel(String(localized: "Canvas text"))
+        // Create backing layers before attachment so the text starts in its final layer hierarchy.
+        // synchronize reflects the view coordinates before the editor becomes visible.
         wantsLayer = true
         textView.wantsLayer = true
-        textView.layer?.anchorPoint = .zero
-        addSubview(textView)
+        addSubview(textSurface)
+        textSurface.addSubview(textView)
+        textSurface.clipsToBounds = false
         clipsToBounds = false
         // Shown once it has been placed, so a flipped layer never appears for a frame at the unmirrored spot.
         isHidden = true
@@ -136,32 +338,28 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         draftID = draft.id
         let style = draft.style
         let layer = document.layers.first { $0.id == draft.layerID }
-        // Point text has no box: it is as big as what has been typed, growing as it is typed.
-        if let boxSize = style.boxSize {
-            logicalSize = boxSize
-        } else {
-            if measuredStyle != style {
-                measuredSize = EditorSession.textBoxSize(style)
-                measuredStyle = style
-            }
-            logicalSize = measuredSize
+        if measuredStyle != style {
+            // Point text has no box: it is as big as what has been typed, growing as it is typed. A box is its own size.
+            measuredSize = EditorSession.textBoxSize(style)
+            verticalLayout = style.isVertical ? EditorSession.verticalLayout(style, size: measuredSize) : nil
+            measuredOverflow = verticalLayout?.columnOffset ?? EditorSession.firstLine(style).overflow
+            textView.letterReach = style.isVertical ? max(0, measuredOverflow)
+                : EditorSession.letterMetrics(style, in: NSRange(location: 0, length: style.content.utf16.count)).overflow
+            measuredStyle = style
         }
-        var transform = draft.transform ?? LayerTransform(origin: draft.origin, size: logicalSize)
-        // Point text already on a layer grows as it is typed too, keeping whatever scale the layer was given.
-        if style.boxSize == nil, draft.transform != nil, let asset = layer?.asset, asset.image.width > 0 {
-            let factor = transform.size.width / CGFloat(asset.image.width)
-            // A rotated layer turns about its center, so growing it swings its corner away and the text drifts as it
-            // is typed. The top-left corner is put back where it was, which is where the commit leaves it too.
-            let anchor = transform.point(.zero)
-            transform.size = CGSize(width: logicalSize.width * factor, height: logicalSize.height * factor)
-            let moved = transform.point(.zero)
-            transform.origin.x += anchor.x - moved.x
-            transform.origin.y += anchor.y - moved.y
+        logicalSize = measuredSize
+        var placed = draft
+        let transform = placed.textTransform(size: logicalSize, layer: layer)
+        if canvas.session.textDraft?.pointPlacement != placed.pointPlacement {
+            canvas.session.textDraft?.pointPlacement = placed.pointPlacement
         }
+        let orientation: NSLayoutManager.TextLayoutOrientation = style.isVertical ? .vertical : .horizontal
+        if textView.layoutOrientation != orientation { textView.setLayoutOrientation(orientation) }
+        (textView.layoutManager as? SeeThroughSelectionLayout)?.columnSpacing = style.lineHeight
         shownTransform = transform
         let scale = canvas.session.viewport.pointsPerPixel
         let anchor = canvas.session.viewport.viewPoint(from: transform.point(.zero), documentSize: document.size)
-        let geometry = Geometry(transform: transform, logicalSize: logicalSize, anchor: anchor, scale: scale)
+        let geometry = Geometry(transform: transform, logicalSize: logicalSize, anchor: anchor, scale: scale, overflow: measuredOverflow, vertical: style.isVertical)
         if fresh || shownGeometry != geometry {
             // AppKit's frame rotation participates in both drawing and event-coordinate conversion.
             frameRotation = 0
@@ -174,12 +372,30 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
             // Rotating a flipped NSView can move its logical origin. Keep the layer's top-left pinned.
             let actual = convert(CGPoint.zero, to: canvas)
             setFrameOrigin(CGPoint(x: frame.origin.x + anchor.x - actual.x, y: frame.origin.y + anchor.y - actual.y))
-            let padding = LayerTextStyle.padding
-            let textFrame = bounds.insetBy(dx: padding, dy: padding)
+            // The text is laid out where the canvas draws it, a short leading's first line lower than the padding. The
+            // text container moves down rather than the text view, which keeps the room above that line where its
+            // letters stand, and its caret and highlight with them; the inset leaves as much again past the bottom.
+            let padding = LayerTextStyle.padding, overflow = measuredOverflow
+            let textFrame: CGRect, inset: CGSize, containerSize: CGSize
+            if let verticalLayout {
+                textFrame = CGRect(x: padding, y: padding, width: max(0, bounds.width - padding * 2),
+                                   height: max(0, bounds.height - padding * 2))
+                inset = CGSize(width: 0, height: verticalLayout.columnOffset)
+                containerSize = verticalLayout.container.size
+            } else {
+                let room = max(0, bounds.height - padding * 2 - overflow)
+                textFrame = CGRect(x: padding, y: padding, width: max(0, bounds.width - padding * 2), height: room + overflow * 2)
+                inset = CGSize(width: 0, height: overflow)
+                containerSize = CGSize(width: textFrame.width, height: room)
+            }
+            textView.textContainer?.widthTracksTextView = !style.isVertical
+            textView.textContainer?.heightTracksTextView = !style.isVertical
+            if textView.textContainerInset != inset { textView.textContainerInset = inset }
             if textView.frame != textFrame { textView.frame = textFrame }
-            // Mirroring belongs to the text surface, leaving resize handles in their logical order.
-            mirror = (transform.flipX, transform.flipY)
-            applyMirror()
+            if let container = textView.textContainer, container.size != containerSize { container.size = containerSize }
+            // Reflect input and drawing together, before the first layout or visible frame. The surrounding
+            // editor keeps its border and resize handles in their unmirrored logical order.
+            textSurface.place(size: logicalSize, flipX: transform.flipX, flipY: transform.flipY)
             handleSize = max(2, 6 / max(0.01, scale * transform.size.width / logicalSize.width))
             shownGeometry = geometry
             needsDisplay = true
@@ -225,7 +441,10 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         }
     }
 
-    func textDidChange(_ notification: Notification) {
+    func textDidChange(_ notification: Notification) { takeText() }
+    /// Puts what the text view holds into the draft, which is what the canvas draws: what has been typed, and what an
+    /// input method is still composing.
+    func takeText() {
         guard !synchronizing, let session = canvas?.session, var draft = session.textDraft else { return }
         if let pendingStyle, pendingStyle.content == textView.string {
             draft.style.colorRuns = pendingStyle.colorRuns
@@ -275,42 +494,9 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     }
 
     private var handleTracking: NSTrackingArea?
-    /// Mirrors the text surface for a flipped layer, about the middle of the surface. A layer transform turns
-    /// about its anchor point, and AppKit sets that (and the layer's position) when it lays the view out, so this
-    /// runs again after every layout and once more before drawing.
-    private var mirror: (x: Bool, y: Bool) = (false, false)
-    private func applyMirror() {
-        guard let layer = textView.layer else { return }
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        defer { CATransaction.commit() }
-        guard mirror.x || mirror.y else {
-            if !layer.affineTransform().isIdentity { layer.setAffineTransform(.identity) }
-            return
-        }
-        // Placed by hand: until AppKit has laid this view out, the text surface's layer is still positioned in the
-        // canvas's coordinates, and mirroring about a layer that is somewhere else is a jump on the first frame.
-        layer.anchorPoint = .zero
-        layer.bounds = CGRect(origin: .zero, size: textView.bounds.size)
-        layer.position = textView.frame.origin
-        let shift = CGPoint(x: mirror.x ? textView.bounds.width : 0, y: mirror.y ? textView.bounds.height : 0)
-        layer.setAffineTransform(CGAffineTransform(translationX: shift.x, y: shift.y)
-            .scaledBy(x: mirror.x ? -1 : 1, y: mirror.y ? -1 : 1))
-    }
-    override func layout() {
-        super.layout()
-        applyMirror()
-    }
-    override func viewWillDraw() {
-        super.viewWillDraw()
-        // Attaching the text surface's layer into this view's layer tree clears its transform, and that happens
-        // after everything else: without this, a flipped layer's first frame is drawn unmirrored.
-        applyMirror()
-    }
-
-    /// The cursor follows the same test the mouse does: arrows over the edges and corners, the I-beam over the
-    /// text. Cursor rects are no use here — the box can be rotated, and AppKit does not map them through a
-    /// view's rotation — so this view watches the pointer itself.
+    /// The cursor follows the same test the mouse does: arrows over the edges and corners, the rotation cursor just
+    /// outside a corner, the I-beam over the text. Cursor rects are no use here — the box can be rotated, and AppKit
+    /// does not map them through a view's rotation — so this view watches the pointer itself.
     private var cursorTracking: NSTrackingArea?
     override func updateTrackingAreas() {
         super.updateTrackingAreas()
@@ -325,20 +511,31 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     override func cursorUpdate(with event: NSEvent) { showCursor(at: convert(event.locationInWindow, from: nil)) }
     override func mouseExited(with event: NSEvent) { NSCursor.setHiddenUntilMouseMoves(false) }
     private func showCursor(at point: CGPoint) {
-        guard bounds.insetBy(dx: -edgeReach, dy: -edgeReach).contains(point) else {
+        guard resize == nil, turn == nil else { return }
+        guard atBox(point) else {
             NSCursor.setHiddenUntilMouseMoves(false)
             NSCursor.arrow.set()
             return
         }
-        guard resize == nil, canvas?.session.colorPicker == nil else { return }
+        guard canvas?.session.colorPicker == nil else { return }
+        if let corner = rotationCorner(at: point) {
+            TextRotationCursor.cursor(degrees: TextRotationCursor.degrees(
+                corner: corner, boxRotation: shownTransform?.rotation ?? 0)).set()
+            return
+        }
         guard let index = handle(at: point) else { NSCursor.iBeam.set(); return }
         handleCursor(index).set()
+    }
+    /// The box, its resize band, and the rotation zone around its corners.
+    private func atBox(_ point: CGPoint) -> Bool {
+        bounds.insetBy(dx: -edgeReach, dy: -edgeReach).contains(point) || rotates(at: point)
     }
 
     /// Every mouse move while the box is open, wherever the pointer is. Tracking areas stop arriving once the text
     /// surface has the mouse, which left the cursor stuck on whatever it was last set to. Inside the box it's the
-    /// I-beam or a resize arrow; over the rest of the canvas, the Type tool's I-beam; leaving the canvas, the arrow,
-    /// set once on the way out so the toolbar's own controls keep their cursors.
+    /// I-beam or a resize arrow, just outside a corner the rotation cursor; over the rest of the canvas, the Type
+    /// tool's I-beam; leaving the canvas, the arrow, set once on the way out so the toolbar's own controls keep
+    /// their cursors.
     private var moveMonitor: Any?
     private var pointerOnCanvas = true
     override func viewDidMoveToWindow() {
@@ -356,12 +553,12 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     }
     func pointerMoved(_ event: NSEvent) {
         let point = convert(event.locationInWindow, from: nil)
-        if bounds.insetBy(dx: -edgeReach, dy: -edgeReach).contains(point) {
+        if atBox(point) {
             pointerOnCanvas = true
             showCursor(at: point)
         } else if let canvas, canvas.bounds.contains(canvas.convert(event.locationInWindow, from: nil)) {
             pointerOnCanvas = true
-            guard resize == nil, canvas.session.colorPicker == nil else { return }
+            guard resize == nil, turn == nil, canvas.session.colorPicker == nil else { return }
             NSCursor.iBeam.set()
         } else if pointerOnCanvas {
             pointerOnCanvas = false
@@ -373,7 +570,8 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     /// The arrows for the edge or corner a handle resizes, turned with the text box.
     private func handleCursor(_ index: Int) -> NSCursor {
         let positions: [NSCursor.FrameResizePosition] = [.topLeft, .top, .topRight, .right, .topLeft, .top, .topRight, .right]
-        let rotation = canvas?.session.textDraft?.transform?.rotation ?? 0
+        // What is on screen: a new point text box has no transform in its draft until it is turned or resized.
+        let rotation = shownTransform?.rotation ?? 0
         let turns = (Int((rotation / 45).rounded()) % 8 + 8) % 8
         let ordered: [NSCursor.FrameResizePosition] = [.topLeft, .top, .topRight, .right]
         let position = ordered[(ordered.firstIndex(of: positions[index])! + turns) % 4]
@@ -385,6 +583,26 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     /// The Move tool's box grabs within 10 screen points of an edge; the handles here are drawn 6 points across, so
     /// the same reach is 10/6 of one.
     private var edgeReach: CGFloat { min(handleSize * 10 / 6, min(bounds.width, bounds.height) / 3) }
+
+    /// How far past the resize band a corner still turns the box: 20 screen points, in the box's own units like the
+    /// band's reach.
+    private var rotationReach: CGFloat { handleSize * 20 / 6 }
+
+    /// Just outside a corner, past the resize band: where a drag turns the box instead of resizing it. Only the
+    /// corners, so beside an edge's middle, or farther out, the pointer is on the canvas.
+    private func rotates(at point: CGPoint) -> Bool {
+        rotationCorner(at: point) != nil
+    }
+
+    /// Share the nearest unit corner between hit testing and the cursor so overlapping zones agree.
+    private func rotationCorner(at point: CGPoint) -> CGPoint? {
+        guard handle(at: point) == nil, !bounds.contains(point) else { return nil }
+        let corner = CGPoint(x: point.x < bounds.midX ? 0 : 1, y: point.y < bounds.midY ? 0 : 1)
+        let position = CGPoint(x: bounds.minX + corner.x * bounds.width,
+                               y: bounds.minY + corner.y * bounds.height)
+        let reach = edgeReach + rotationReach
+        return hypot(point.x - position.x, point.y - position.y) <= reach ? corner : nil
+    }
 
     /// The edge or corner at a point, in handle order: a band along each edge, as the Move tool's box has, rather
     /// than only the handle squares. Nil anywhere else, which is the text.
@@ -409,7 +627,7 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
     override func hitTest(_ point: NSPoint) -> NSView? {
         if canvas?.session.colorPicker != nil { return nil }
         let local = convert(point, from: superview)
-        if handle(at: local) != nil { return self }
+        if handle(at: local) != nil || rotates(at: local) { return self }
         return super.hitTest(point)
     }
     override func draw(_ dirtyRect: NSRect) {
@@ -441,10 +659,18 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         }
     }
     override func mouseDown(with event: NSEvent) {
-        guard let canvas, let document = canvas.session.document, let draft = canvas.session.textDraft,
-              let handle = handle(at: convert(event.locationInWindow, from: nil)) else { return }
+        guard let canvas, let document = canvas.session.document, let draft = canvas.session.textDraft else { return }
+        let local = convert(event.locationInWindow, from: nil)
         let transform = shownTransform ?? draft.transform ?? LayerTransform(origin: draft.origin, size: logicalSize)
         let pixel = canvas.session.viewport.documentPoint(from: canvas.convert(event.locationInWindow, from: nil), documentSize: document.size)
+        guard let handle = handle(at: local) else {
+            if let corner = rotationCorner(at: local) {
+                turn = (TransformDrag(original: transform, start: pixel, mode: .rotate), draft, corner)
+                TextRotationCursor.cursor(degrees: TextRotationCursor.degrees(
+                    corner: corner, boxRotation: shownTransform?.rotation ?? 0)).set()
+            }
+            return
+        }
         // Dragging a handle turns point text into a box of the size it has right now, which then holds the text and
         // wraps it, rather than scaling the text. Its scale and rotation are whatever the layer already had.
         var fixed = draft
@@ -457,6 +683,7 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         resize = (handle, fixed, transform, pixel)
     }
     override func mouseDragged(with event: NSEvent) {
+        if turn != nil { turnBox(with: event); return }
         guard let resize, let canvas, let document = canvas.session.document else { return }
         let point = canvas.session.viewport.documentPoint(from: canvas.convert(event.locationInWindow, from: nil), documentSize: document.size)
         let old = resize.transform
@@ -488,7 +715,25 @@ final class InlineTextEditor: NSView, NSTextViewDelegate {
         canvas.session.textDraft = draft
         canvas.synchronizeDisplay()
     }
-    override func mouseUp(with event: NSEvent) { resize = nil; window?.makeFirstResponder(textView) }
+    /// Turns the box about its center, whole degrees, Shift in steps of 15. The rotation lives in the draft like a
+    /// resize does, so it commits and cancels with the edit.
+    private func turnBox(with event: NSEvent) {
+        guard let turn, let canvas, let document = canvas.session.document else { return }
+        let point = canvas.session.viewport.documentPoint(from: canvas.convert(event.locationInWindow, from: nil), documentSize: document.size)
+        var rotated = turn.drag.updated(to: point, lockRatio: false, shift: event.modifierFlags.contains(.shift))
+        let start = turn.drag.original.rotation
+        // Keep the shortest turn from the starting angle because the Type bar's angle field shows this value.
+        rotated.rotation = start + remainder(rotated.rotation - start, 360)
+        rotated.rotation = rotated.rotation.rounded()
+        guard rotated.isValid else { return }
+        var draft = turn.draft
+        draft.place(rotated, size: logicalSize)
+        canvas.session.textDraft = draft
+        canvas.synchronizeDisplay()
+        TextRotationCursor.cursor(degrees: TextRotationCursor.degrees(
+            corner: turn.corner, boxRotation: shownTransform?.rotation ?? rotated.rotation)).set()
+    }
+    override func mouseUp(with event: NSEvent) { resize = nil; turn = nil; window?.makeFirstResponder(textView) }
 }
 
 extension CanvasView {

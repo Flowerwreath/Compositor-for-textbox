@@ -1,0 +1,67 @@
+import Foundation
+import Testing
+@testable import Compositor
+
+struct LocalizationTests {
+    /// Tests compare English titles ("Flip Horizontal"), so they run in English even on a Mac set to Korean, while
+    /// the app itself carries Korean.
+    @Test func testsRunInEnglishWithKoreanAvailable() {
+        #expect(Bundle.main.localizations.contains("ko"))
+        #expect(Bundle.main.preferredLocalizations.first == "en")
+    }
+
+    @Test func lookupFallsBackToTheEnglishKey() throws {
+        let korean = try #require(L10n.koreanBundle)
+        #expect(L10n.text("Cancel", bundle: korean) == "취소")
+        #expect(L10n.text("Not a key in the catalog", bundle: korean) == "Not a key in the catalog")
+        #expect(L10n.text("Cancel") == "Cancel", "tests run in English")
+    }
+
+    /// Names are made and checked through one closure, so "레이어 1" is skipped in Korean as "Layer 1" is in English.
+    @Test func freeNamesSkipTakenOnesInTheSameLanguage() {
+        #expect(L10n.firstFreeName({ "레이어 \($0)" }, avoiding: ["레이어 1", "Layer 2"]) == "레이어 2")
+        #expect(L10n.firstFreeName({ "Layer \($0)" }, avoiding: []) == "Layer 1")
+    }
+
+    /// Keyboard Shortcuts shows its English ids translated; every one needs Korean.
+    @MainActor @Test func everyShortcutNameHasKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        let missing = ManualKeys.shortcutNames.filter { L10n.text($0, bundle: korean) == $0 }
+        #expect(missing.isEmpty, "add with scripts/l10n.py manual, then translate: \(missing)")
+    }
+
+    /// Canvas Size keeps its fill choices in English as tags; the picker shows them translated.
+    @MainActor @Test func everyCanvasFillChoiceHasKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        let missing = ManualKeys.canvasExtensionChoices.filter { L10n.text($0, bundle: korean) == $0 }
+        #expect(missing.isEmpty, "add with scripts/l10n.py manual, then translate: \(missing)")
+    }
+
+    /// The save panel's format menu and Finder's Kind column show the document types' names.
+    @Test func documentTypeNamesHaveKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        let name = korean.localizedString(forKey: "Compositor Project", value: nil, table: "InfoPlist")
+        #expect(name != "Compositor Project")
+    }
+
+    /// Every enum the screen shows by name, and every name read from a static list, has Korean, so a case added
+    /// upstream fails here instead of showing up in English.
+    @MainActor @Test func everyDisplayNameHasKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        // Names that read the same in Korean (marked do-not-translate in the catalog).
+        let sameInKorean: Set<String> = ["RGB", "HSL", "ASCII", "Floyd–Steinberg", "Bayer 2 × 2", "Bayer 4 × 4", "Bayer 8 × 8"]
+        let keys = ManualKeys.displayNames + ManualKeys.cameraRawMixerNames + ManualKeys.cropRatioChoices
+            + ManualKeys.canvasPresetWords
+        let missing = Array(Set(keys.filter {
+            $0.contains(where: \.isLetter) && !sameInKorean.contains($0) && L10n.text($0, bundle: korean) == $0
+        })).sorted()
+        #expect(missing.isEmpty, "add with scripts/l10n.py manual, then translate: \(missing)")
+    }
+
+    /// Dialog color swatches name their picker window and their accessibility label.
+    @Test func dialogSwatchTitlesHaveKorean() throws {
+        let korean = try #require(L10n.koreanBundle)
+        let missing = ["Grid Color", "Extension Color", "JPEG Background"].filter { L10n.text($0, bundle: korean) == $0 }
+        #expect(missing.isEmpty, "\(missing)")
+    }
+}
